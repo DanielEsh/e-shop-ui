@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Btn, BtnHover, BtnText  } from './Button-styles'
 
 export type ButtonProps  = {
-    theme: 'primary' | 'success' | 'warning' | 'danger' | 'info'
+    theme: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark'
     size: 'small' | 'medium' | 'large';
     label: string;
     outline?: boolean,

@@ -177,6 +177,52 @@ export const Btn = styled.button<{isRounded?: boolean}>`
         border-color: ${theme.colors.infoHover};
       }
     }
+    &--light {
+      color: ${theme.colors.black};
+      background-color: ${theme.colors.white};
+      border-color: ${theme.colors.white};
+      &.is-disabled {
+        color: ${theme.colors.black};
+        background-color: #207291;
+        border-color: #207291;
+      }
+      &.is-outline {
+        color: ${theme.colors.black};
+        background-color: ${theme.colors.white};
+        border-color: ${theme.colors.white};
+        &:hover {
+          color: ${theme.colors.black};
+        }
+      }
+      &:hover ${BtnHover} {
+        color: ${theme.colors.black};
+        background-color: ${theme.colors.whiteHover};
+        border-color: ${theme.colors.whiteHover};
+      }
+    }
+    &--dark {
+      color: ${theme.colors.white};
+      background-color: ${theme.colors.black};
+      border-color: ${theme.colors.black};
+      &.is-disabled {
+        color: ${theme.colors.white};
+        background-color: #207291;
+        border-color: #207291;
+      }
+      &.is-outline {
+        color: ${theme.colors.black};
+        background-color: ${theme.colors.white};
+        border-color: ${theme.colors.black};
+        &:hover {
+          color: ${theme.colors.white};
+        }
+      }
+      &:hover ${BtnHover} {
+        color: ${theme.colors.white};
+        background-color: ${theme.colors.blackHover};
+        border-color: ${theme.colors.blackHover};
+      }
+    }
   }
   &.size {
     &--medium {
