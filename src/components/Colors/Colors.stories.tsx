@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 
 import Colors from "./index";
 
@@ -8,7 +8,7 @@ export default {
     component: Colors,
 } as Meta;
 
-const Template = (args) => <Colors {...args} />;
+const Template = (args) => <Colors { ...args } />;
 
 export const All = Template.bind({});
 All.args = {};

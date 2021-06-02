@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 
-import theme from "../Theme";
+import { theme } from "../Theme";
 
 export const ColorWrapper = styled.div`
   display: flex;
@@ -88,7 +88,7 @@ export const ColorBlock = styled.div`
  * Only development mode
  * Show all colors
  */
-const Colors = () => {
+const Colors: React.FC = () => {
     return (
         <ColorWrapper>
             <ColorBlock className="_primary">
