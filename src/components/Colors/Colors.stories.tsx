@@ -8,7 +8,7 @@ export default {
     component: Colors,
 } as Meta;
 
-const Template = (args) => <Colors {...args} />;
+const Template = (args) => <Colors { ...args } />;
 
 export const All = Template.bind({});
 All.args = {};
