@@ -88,7 +88,8 @@ export const ColorBlock = styled.div`
  * Only development mode
  * Show all colors
  */
-const Colors = () => {
+const Colors: React.FC = () => {
+    console.log('123');
     return (
         <ColorWrapper>
             <ColorBlock className="_primary">
