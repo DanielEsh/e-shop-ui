@@ -4,6 +4,7 @@ import {InputRoot, InputLabel, InputNative} from "./input.styles";
 export type InputProps = {
     theme: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark',
     name: string,
+    id: string,
     label: string,
     placeholder: string,
     value: string | number,
@@ -21,6 +22,7 @@ export type InputProps = {
 const Input: React.FC<InputProps> = ({
                                         theme= 'primary',
                                         name,
+                                        id,
                                         label,
                                         placeholder,
                                         value,
@@ -70,12 +72,14 @@ const Input: React.FC<InputProps> = ({
 
     return (
         <InputRoot className={[`color--${theme}`, isFocused || value || placeholder ? 'is-focused' : '', disabled ? 'is-disabled' : '']}>
-            <InputLabel htmlFor="">
+            <InputLabel htmlFor={id}>
                 { label }
             </InputLabel>
             <InputNative
                 type="text"
+                id={id}
                 value={inputValue}
+                name={name}
                 placeholder={placeholder}
                 disabled={disabled}
                 readonly={readonly}
