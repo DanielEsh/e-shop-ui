@@ -43,6 +43,43 @@ export const InputRoot = styled.div`
         color: ${theme.colors.primary};
       }
     }
+    
+    &--success {
+      &.is-focused {
+        color: ${theme.colors.success}
+      }
+    }
+    
+    &--warning {
+      &.is-focused {
+        color: ${theme.colors.warning};
+      }
+    }
+    
+    &--danger {
+      &.is-focused {
+        color: ${theme.colors.danger};
+      }
+    }
+
+    &--info {
+      &.is-focused {
+        color: ${theme.colors.info};
+      }
+    }
+
+    &--light {
+      color: ${theme.colors.white};
+      &.is-focused {
+        color: ${theme.colors.white};
+      }
+    }
+
+    &--dark {
+      &.is-focused {
+        color: ${theme.colors.black};
+      }
+    }
   }
 `
 
@@ -57,6 +94,7 @@ export const InputLabel = styled.label`
 export const InputNative= styled.input`
   width: 100%;
   height: 40px;
+  background-color: transparent;
   border: none;
   outline: none;
   padding: 0;
