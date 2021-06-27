@@ -27,3 +27,10 @@ Readonly.args = {
     value: 'Text readonly',
     readonly: true,
 };
+
+export const Required = Template.bind({});
+Required.args = {
+    label: 'Required input',
+    value: 'Text Required',
+    required: true,
+};
