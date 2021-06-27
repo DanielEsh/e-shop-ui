@@ -25,6 +25,12 @@ export const InputRoot = styled.div`
     transition: transform .3s ease;
   }
   
+  &.is-disabled {
+    input {
+      cursor: not-allowed;
+    }
+  }
+  
   &.is-focused {
     label {
       transform: translateY(-20px) scale(.75);

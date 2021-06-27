@@ -10,7 +10,13 @@ export default {
 
 const Template = (args) => <Input { ...args } />;
 
-export const All = Template.bind({});
-All.args = {
-    label: 'Standart',
+export const Standard = Template.bind({});
+Standard.args = {
+    label: 'Standard',
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    label: 'Disabled input',
+    disabled: true,
 };
