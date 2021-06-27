@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {InputRoot, InputLabel, InputNative} from "./input.styles";
 
 export type InputProps = {
@@ -6,6 +6,7 @@ export type InputProps = {
     name: string,
     label: string,
     placeholder: string,
+    value: string | number,
     error: string,
     disabled: boolean,
     readonly: boolean,
@@ -22,6 +23,7 @@ const Input: React.FC<InputProps> = ({
                                         name,
                                         label,
                                         placeholder,
+                                        value,
                                         error,
                                         disabled,
                                         readonly,
@@ -31,39 +33,51 @@ const Input: React.FC<InputProps> = ({
                                         onChange,
                                      }) => {
     const [isFocused, setFocused] = useState<boolean>(false);
-    const [value, setValue] = useState<string | number>('')
+    const [inputValue, setInputValue] = useState<string | number>('')
+
+    useEffect(() => {
+        setInputValue(value);
+    }, []);
+
 
     const handleFocus = () => {
         if (readonly) {
             return;
         }
+
         setFocused(true);
         onFocus();
     }
 
     const handleBlur = () => {
-        if (value || readonly) {
+        if (inputValue || readonly) {
             return;
         }
+
         setFocused(false);
         onBlur();
     }
 
     const handleChange = (event) => {
-        setValue(event.target.value);
+        if (readonly) {
+            return;
+        }
+
+        setInputValue(event.target.value);
         onChange();
     }
 
 
     return (
-        <InputRoot className={[`color--${theme}`, isFocused ? 'is-focused' : '', disabled ? 'is-disabled' : '']}>
+        <InputRoot className={[`color--${theme}`, isFocused || readonly ? 'is-focused' : '', disabled ? 'is-disabled' : '']}>
             <InputLabel htmlFor="">
                 { label }
             </InputLabel>
             <InputNative
                 type="text"
-                value={value}
+                value={inputValue}
                 disabled={disabled}
+                readonly={readonly}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 onChange={handleChange}

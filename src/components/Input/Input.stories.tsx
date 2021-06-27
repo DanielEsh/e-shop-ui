@@ -20,3 +20,10 @@ Disabled.args = {
     label: 'Disabled input',
     disabled: true,
 };
+
+export const Readonly = Template.bind({});
+Readonly.args = {
+    label: 'Readonly input',
+    value: 'Text readonly',
+    readonly: true,
+};
