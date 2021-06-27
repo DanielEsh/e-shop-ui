@@ -34,3 +34,9 @@ Required.args = {
     value: 'Text Required',
     required: true,
 };
+
+export const Placeholder = Template.bind({});
+Placeholder.args = {
+    label: 'Input with placeholder',
+    placeholder: 'placeholder',
+};

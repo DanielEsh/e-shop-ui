@@ -69,13 +69,14 @@ const Input: React.FC<InputProps> = ({
 
 
     return (
-        <InputRoot className={[`color--${theme}`, isFocused || value ? 'is-focused' : '', disabled ? 'is-disabled' : '']}>
+        <InputRoot className={[`color--${theme}`, isFocused || value || placeholder ? 'is-focused' : '', disabled ? 'is-disabled' : '']}>
             <InputLabel htmlFor="">
                 { label }
             </InputLabel>
             <InputNative
                 type="text"
                 value={inputValue}
+                placeholder={placeholder}
                 disabled={disabled}
                 readonly={readonly}
                 required={required}
