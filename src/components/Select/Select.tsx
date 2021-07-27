@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import SelectIcon from "./SelectIcon";
+import ResetIcon from "./ResetIcon";
 import {
     SelectRoot,
     SelectInput,
     Icon,
+    Reset,
     SelectDropDown,
     SelectDropDownUl,
     SelectDropDownLi,
@@ -16,6 +18,8 @@ export type SelectProps = {
     options: Array<any>,
     name: string,
     multiple: boolean,
+    defaultValue: string | number | [],
+    clear: Boolean,
 }
 
 /*
@@ -37,7 +41,9 @@ const Select = ({
     theme,
     value,
     options,
-    multiple
+    multiple,
+    defaultValue,
+    clear,
                 }) => {
     const [isOpened, setOpened] = useState<boolean>(false);
     const [isSelected, setSelected] = useState<any>(multiple ? [] : '');
@@ -57,6 +63,7 @@ const Select = ({
     }
 
     const renderSelectedOption = () => {
+        if (!isSelected.length) return;
         if (multiple) {
             return isSelected.map(option => <SelectedItem>{option}</SelectedItem>);
         }
@@ -64,24 +71,48 @@ const Select = ({
         return isSelected;
     }
 
+    const reset = () => {
+        if (!defaultValue && !clear) return;
+        setSelected(defaultValue);
+        setOpened(false);
+    }
+
     return (
         <SelectRoot onClick={handleRootClick}>
             <SelectInput>
                 { renderSelectedOption() }
+                {
+                    defaultValue && clear &&
+                    <Reset onClick={(e) => {
+                        e.stopPropagation();
+                        reset();
+                    }}>
+                        <ResetIcon />
+                    </Reset>
+                }
                 <Icon>
                     <SelectIcon isOpened={isOpened} />
                 </Icon>
             </SelectInput>
-            {isOpened && <SelectOptions options={options} setSelected={handleSelectOption} setOpened={setOpened} />}
+
+            {
+                isOpened &&
+                <SelectOptions
+                    options={options}
+                    setSelected={handleSelectOption}
+                    setOpened={setOpened}
+                    multiple={multiple}
+                />
+            }
         </SelectRoot>
     );
 };
 
-const SelectOptions: React.FC<any> = ({options, setSelected, setOpened}) => {
+const SelectOptions: React.FC<any> = ({options, setSelected, setOpened, multiple}) => {
 
     const handleOptionClick = (option) => {
         setSelected(option);
-        setOpened(false);
+        multiple ? setOpened(true) : setOpened(false);
     }
 
     return (
@@ -90,6 +121,7 @@ const SelectOptions: React.FC<any> = ({options, setSelected, setOpened}) => {
                 {options.map((option, index) => (
                     <SelectDropDownLi
                         onClick={(e) => {
+                            e.stopPropagation();
                             handleOptionClick(option);
                         }}
                         key={index}

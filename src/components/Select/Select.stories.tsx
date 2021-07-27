@@ -32,3 +32,12 @@ Multiple.args = {
     options: standardValues,
     multiple : true,
 }
+
+export const Reset = Template.bind({});
+Reset.args = {
+    theme: 'primary',
+    options: standardValues,
+    multiple: true,
+    defaultValue: [],
+    clear: true,
+}

@@ -18,6 +18,16 @@ export const SelectInput = styled('div')`
 `
 
 export const Icon = styled('div')`
+  position: absolute;
+  right: 0;
+  height: 20px;
+  width: 20px;
+`
+
+export const Reset = styled('div')`
+  position: absolute;
+  right: 30px;
+  z-index: 2;
   height: 20px;
   width: 20px;
 `
