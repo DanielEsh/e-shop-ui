@@ -62,10 +62,25 @@ const Select = ({
         console.log(isSelected);
     }
 
+    const handleRemoveOption = (option) => {
+        console.log('option', option);
+        const arr = isSelected.filter((item, index) => index !== option);
+        console.log('arr', arr);
+        setSelected(arr);
+    }
+
     const renderSelectedOption = () => {
         if (!isSelected.length) return;
         if (multiple) {
-            return isSelected.map(option => <SelectedItem>{option}</SelectedItem>);
+            return isSelected.map((option, index) =>
+                <SelectedItem
+                    key={index}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemoveOption(index);
+                    }}>
+                    {option}
+                </SelectedItem>);
         }
 
         return isSelected;
