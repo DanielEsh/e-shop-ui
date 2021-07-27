@@ -14,7 +14,6 @@ export const SelectRoot = styled('div')`
 export const SelectInput = styled('div')`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
 `
 
@@ -30,7 +29,8 @@ export const SelectDropDown = styled('div')`
   width: 100%;
   padding: 10px 12px;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgb(0 0 0 / 4%), 0 0 2px rgb(0 0 0 / 6%), 0 0 1px rgb(0 0 0 / 4%);
+  //box-shadow: 0 4px 8px rgb(0 0 0 / 4%), 0 0 2px rgb(0 0 0 / 6%), 0 0 1px rgb(0 0 0 / 4%);
+  box-shadow: 3px 3px 10px 6px rgb(0 0 0 / 6%);
   transform: translateY(0);
 `
 
@@ -45,4 +45,14 @@ export const SelectDropDownLi = styled('li')`
   font-size: 14px;
   line-height: 1.52;
   font-weight: 500;
+`
+
+export const SelectedItem = styled('div')`
+    margin-top: 2px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    padding: 6px;
+    background-color: #f5f5f5;
+    border: 1px solid #f0f0f0;
+    border-radius: 2px;
 `

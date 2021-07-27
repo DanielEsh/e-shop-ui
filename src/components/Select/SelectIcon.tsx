@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Icon = styled('div')`
+  position: absolute;
+  right: 0;
   display: block;
+  width: 20px;
   transform: rotate(0deg);
   transition: transform .3s ease;
   
