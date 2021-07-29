@@ -24,6 +24,15 @@ export const Icon = styled('div')`
   width: 20px;
 `
 
+export const IconWrapper = styled('div')`
+  height: 20px;
+  width: 20px;
+
+  &:hover {
+    color: #8e8c8c;
+  }
+`
+
 export const Reset = styled('div')`
   position: absolute;
   right: 30px;
@@ -58,6 +67,7 @@ export const SelectDropDownLi = styled('li')`
 `
 
 export const SelectedItem = styled('div')`
+    display: flex;
     margin-top: 2px;
     margin-right: 10px;
     margin-bottom: 2px;

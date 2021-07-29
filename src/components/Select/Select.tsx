@@ -6,6 +6,7 @@ import {
     SelectInput,
     Icon,
     Reset,
+    IconWrapper,
     SelectDropDown,
     SelectDropDownUl,
     SelectDropDownLi,
@@ -75,11 +76,15 @@ const Select = ({
             return isSelected.map((option, index) =>
                 <SelectedItem
                     key={index}
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleRemoveOption(index);
-                    }}>
+                >
                     {option}
+                    <IconWrapper
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handleRemoveOption(index);
+                    }}>
+                        <ResetIcon />
+                    </IconWrapper>
                 </SelectedItem>);
         }
 
