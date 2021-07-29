@@ -51,6 +51,9 @@ export const SelectDropDown = styled('div')`
   //box-shadow: 0 4px 8px rgb(0 0 0 / 4%), 0 0 2px rgb(0 0 0 / 6%), 0 0 1px rgb(0 0 0 / 4%);
   box-shadow: 3px 3px 10px 6px rgb(0 0 0 / 6%);
   transform: translateY(0);
+  
+  max-height: ${props => props.maxHeight}px;
+  overflow-y: scroll;
 `
 
 export const SelectDropDownUl = styled('ul')`
@@ -60,6 +63,7 @@ export const SelectDropDownUl = styled('ul')`
 `
 
 export const SelectDropDownLi = styled('li')`
+  height: 20px;
   padding: 10px 0;
   font-size: 14px;
   line-height: 1.52;

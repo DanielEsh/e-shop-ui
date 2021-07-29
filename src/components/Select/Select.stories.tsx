@@ -40,4 +40,5 @@ Reset.args = {
     multiple: true,
     defaultValue: [],
     clear: true,
+    maxOptionsVisible: 4,
 }

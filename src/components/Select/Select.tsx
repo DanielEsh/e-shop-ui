@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SelectIcon from "./SelectIcon";
 import ResetIcon from "./ResetIcon";
 import {
@@ -11,16 +11,17 @@ import {
     SelectDropDownUl,
     SelectDropDownLi,
     SelectedItem,
-} from './Select.styles'
+} from './Select.styles';
 
 export type SelectProps = {
     theme: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark',
-    value: String,
-    options: Array<any>,
+    value: string,
+    options: [],
     name: string,
     multiple: boolean,
     defaultValue: string | number | [],
-    clear: Boolean,
+    clear: boolean,
+    maxOptionsVisible: number,
 }
 
 /*
@@ -45,6 +46,7 @@ const Select = ({
     multiple,
     defaultValue,
     clear,
+    maxOptionsVisible,
                 }) => {
     const [isOpened, setOpened] = useState<boolean>(false);
     const [isSelected, setSelected] = useState<any>(multiple ? [] : '');
@@ -102,7 +104,7 @@ const Select = ({
             <SelectInput>
                 { renderSelectedOption() }
                 {
-                    defaultValue && clear &&
+                    defaultValue && clear && isSelected.length > 1 &&
                     <Reset onClick={(e) => {
                         e.stopPropagation();
                         reset();
@@ -122,13 +124,23 @@ const Select = ({
                     setSelected={handleSelectOption}
                     setOpened={setOpened}
                     multiple={multiple}
+                    maxOptionsVisible={maxOptionsVisible}
                 />
             }
         </SelectRoot>
     );
 };
 
-const SelectOptions: React.FC<any> = ({options, setSelected, setOpened, multiple}) => {
+const SelectOptions: React.FC<any> = ({options, setSelected, setOpened, multiple, maxOptionsVisible}) => {
+    const [maxHeight, setMaxHeight] = useState(0)
+
+    useEffect(() => {
+        if (maxOptionsVisible) {
+            const height = maxOptionsVisible * 40;
+            console.log(height, 'height');
+            setMaxHeight(height);
+        }
+    }, []);
 
     const handleOptionClick = (option) => {
         setSelected(option);
@@ -136,7 +148,7 @@ const SelectOptions: React.FC<any> = ({options, setSelected, setOpened, multiple
     }
 
     return (
-        <SelectDropDown>
+        <SelectDropDown maxHeight={maxHeight}>
             <SelectDropDownUl>
                 {options.map((option, index) => (
                     <SelectDropDownLi
