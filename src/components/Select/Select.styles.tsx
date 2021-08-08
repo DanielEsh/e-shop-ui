@@ -80,3 +80,13 @@ export const SelectedItem = styled('div')`
     border: 1px solid #f0f0f0;
     border-radius: 2px;
 `
+
+export const SelectNative = styled('select')`
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid;
+  outline: none;
+`

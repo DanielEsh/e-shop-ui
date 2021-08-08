@@ -11,13 +11,34 @@ export default {
 const Template: Story<SelectProps> = (args) => <Select { ...args } />;
 
 const standardValues = [
-    'string1',
-    'string2',
-    'string3',
-    'string4',
-    'string5',
-    'string6',
-    'string7',
+    {
+        label: 'string1',
+        value: 'string1',
+    },
+    {
+        label: 'string2',
+        value: 'string2',
+    },
+    {
+        label: 'string3',
+        value: 'string3',
+    },
+    {
+        label: 'string4',
+        value: 'string4',
+    },
+    {
+        label: 'string5',
+        value: 'string5',
+    },
+    {
+        label: 'string6',
+        value: 'string6',
+    },
+    {
+        label: 'string7',
+        value: 'string7',
+    },
 ]
 
 export const Standard = Template.bind({});
@@ -41,4 +62,15 @@ Reset.args = {
     defaultValue: [],
     clear: true,
     maxOptionsVisible: 4,
+}
+
+export const Native = Template.bind({});
+Native.args = {
+    theme: 'primary',
+    options: standardValues,
+    multiple: false,
+    defaultValue: [],
+    clear: true,
+    maxOptionsVisible: 4,
+    native: true,
 }

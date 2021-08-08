@@ -11,6 +11,7 @@ import {
     SelectDropDownUl,
     SelectDropDownLi,
     SelectedItem,
+    SelectNative,
 } from './Select.styles';
 
 export type SelectProps = {
@@ -22,22 +23,8 @@ export type SelectProps = {
     defaultValue: string | number | [],
     clear: boolean,
     maxOptionsVisible: number,
+    native: boolean,
 }
-
-/*
-TODO:
-доделать функцию мультиселекта
-сделать
-сделать селект тегов
-сделать сброс на дефолтное значение
-скрол у дропдауна
-
-bordered
-clearAll
-maxOptionsCount
-
-
- */
 
 const Select = ({
     theme,
@@ -46,7 +33,8 @@ const Select = ({
     multiple,
     defaultValue,
     clear,
-    maxOptionsVisible,
+    maxOptionsVisible = 1,
+    native,
                 }) => {
     const [isOpened, setOpened] = useState<boolean>(false);
     const [isSelected, setSelected] = useState<any>(multiple ? [] : '');
@@ -56,6 +44,7 @@ const Select = ({
     }
 
     const handleSelectOption = (item) => {
+        console.log('open', item);
         if (multiple) {
             console.log('multiple',isSelected);
             setSelected([...isSelected, item])
@@ -74,12 +63,13 @@ const Select = ({
 
     const renderSelectedOption = () => {
         if (!isSelected.length) return;
+
         if (multiple) {
             return isSelected.map((option, index) =>
                 <SelectedItem
                     key={index}
                 >
-                    {option}
+                    {option.label}
                     <IconWrapper
                         onClick={(e) => {
                             e.stopPropagation();
@@ -90,7 +80,7 @@ const Select = ({
                 </SelectedItem>);
         }
 
-        return isSelected;
+        return isSelected.label;
     }
 
     const reset = () => {
@@ -99,47 +89,74 @@ const Select = ({
         setOpened(false);
     }
 
-    return (
-        <SelectRoot onClick={handleRootClick}>
-            <SelectInput>
-                { renderSelectedOption() }
-                {
-                    defaultValue && clear && isSelected.length > 1 &&
-                    <Reset onClick={(e) => {
-                        e.stopPropagation();
-                        reset();
-                    }}>
-                        <ResetIcon />
-                    </Reset>
-                }
-                <Icon>
-                    <SelectIcon isOpened={isOpened} />
-                </Icon>
-            </SelectInput>
+    const renderCustomSelect = () => {
+        return (
+            <SelectRoot onClick={handleRootClick}>
+                <SelectInput>
+                    { renderSelectedOption() }
+                    {
+                        defaultValue && clear && isSelected.length > 1 &&
+                        <Reset onClick={(e) => {
+                            e.stopPropagation();
+                            reset();
+                        }}>
+                            <ResetIcon />
+                        </Reset>
+                    }
+                    <Icon>
+                        <SelectIcon isOpened={isOpened} />
+                    </Icon>
+                </SelectInput>
 
-            {
-                isOpened &&
-                <SelectOptions
-                    options={options}
-                    setSelected={handleSelectOption}
-                    setOpened={setOpened}
-                    multiple={multiple}
-                    maxOptionsVisible={maxOptionsVisible}
-                />
-            }
-        </SelectRoot>
+                {
+                    isOpened &&
+                    <SelectOptions
+                        options={options}
+                        selected={isSelected}
+                        setSelected={handleSelectOption}
+                        setOpened={setOpened}
+                        multiple={multiple}
+                        maxOptionsVisible={maxOptionsVisible}
+                    />
+                }
+            </SelectRoot>
+        )
+    }
+
+    const renderNativeOptions = () => {
+        return (
+            options.map(({ label, value}, index) => {
+                return (
+                    <option
+                        key={index}
+                        value={value}>
+                        {label}
+                    </option>
+                );
+            })
+        );
+    }
+
+    const renderNativeSelect = () => {
+        return (
+            <SelectNative
+                name="select">
+                { renderNativeOptions() }
+            </SelectNative>
+        )
+    }
+
+    return (
+        native ? renderNativeSelect() : renderCustomSelect()
     );
 };
 
-const SelectOptions: React.FC<any> = ({options, setSelected, setOpened, multiple, maxOptionsVisible}) => {
+const SelectOptions: React.FC<any> = ({options, selected, setSelected, setOpened, multiple, maxOptionsVisible}) => {
     const [maxHeight, setMaxHeight] = useState(0)
 
     useEffect(() => {
-        if (maxOptionsVisible) {
-            const height = maxOptionsVisible * 40;
-            console.log(height, 'height');
-            setMaxHeight(height);
-        }
+        const height = maxOptionsVisible * 40;
+        setMaxHeight(height);
     }, []);
 
     const handleOptionClick = (option) => {
@@ -158,7 +175,7 @@ const SelectOptions: React.FC<any> = ({options, setSelected, setOpened, multiple
                         }}
                         key={index}
                     >
-                        {option}
+                        {option.label}
                     </SelectDropDownLi>
                 ))}
             </SelectDropDownUl>
