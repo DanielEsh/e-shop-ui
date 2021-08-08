@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SelectIcon from "./SelectIcon";
 import ResetIcon from "./ResetIcon";
 import {
@@ -155,11 +155,18 @@ const Select = ({
 };
 
 const SelectOptions: React.FC<any> = ({options, selected, setSelected, setOpened, multiple, maxOptionsVisible}) => {
+    const selectDropdown = useRef(null);
     const [maxHeight, setMaxHeight] = useState(0)
+
+    const handleClick = (e) => {
+        selectDropdown.current.contains(e.target) || setOpened(false)
+    }
 
     useEffect(() => {
         const height = maxOptionsVisible * 40;
         setMaxHeight(height);
+        document.addEventListener('click', handleClick);
+        return () => document.removeEventListener('click', handleClick);
     }, []);
 
     const handleOptionClick = (option) => {
@@ -168,7 +175,7 @@ const SelectOptions: React.FC<any> = ({options, selected, setSelected, setOpened
     }
 
     return (
-        <SelectDropDown maxHeight={maxHeight}>
+        <SelectDropDown ref={selectDropdown} maxHeight={maxHeight} onClick={handleClick}>
             <SelectDropDownUl>
                 {options.map((option, index) => (
                     <SelectDropDownLi
