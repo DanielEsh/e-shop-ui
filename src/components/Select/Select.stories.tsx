@@ -53,6 +53,7 @@ Multiple.args = {
     theme: 'primary',
     options: standardValues,
     multiple : true,
+    maxOptionsVisible: 4,
 }
 
 export const Reset = Template.bind({});

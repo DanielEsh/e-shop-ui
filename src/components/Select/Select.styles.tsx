@@ -68,6 +68,10 @@ export const SelectDropDownLi = styled('li')`
   font-size: 14px;
   line-height: 1.52;
   font-weight: 500;
+  
+  &._active {
+    color: red;
+  }
 `
 
 export const SelectedItem = styled('div')`

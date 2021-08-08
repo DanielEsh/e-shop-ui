@@ -47,11 +47,16 @@ const Select = ({
         console.log('open', item);
         if (multiple) {
             console.log('multiple',isSelected);
+            if (isSelected.includes(item)) {
+                const filteredSelected = isSelected.filter(option => option !== item)
+                setSelected(filteredSelected);
+                return;
+            }
             setSelected([...isSelected, item])
             return;
         }
+
         setSelected(item);
-        console.log(isSelected);
     }
 
     const handleRemoveOption = (option) => {
@@ -171,6 +176,7 @@ const SelectOptions: React.FC<any> = ({options, selected, setSelected, setOpened
                             e.stopPropagation();
                             handleOptionClick(option);
                         }}
+                        className={[selected.includes(option) ? '_active' : '']}
                         key={index}
                     >
                         {option.label}
