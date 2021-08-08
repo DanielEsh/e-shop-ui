@@ -69,6 +69,10 @@ export const SelectDropDownLi = styled('li')`
   line-height: 1.52;
   font-weight: 500;
   
+  &:hover {
+    color: blue;
+  }
+  
   &._active {
     color: red;
   }
