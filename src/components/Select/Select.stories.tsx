@@ -45,6 +45,7 @@ export const Standard = Template.bind({});
 Standard.args = {
     theme: 'primary',
     options: standardValues,
+    maxOptionsVisible: 8,
 };
 
 export const Multiple = Template.bind({});

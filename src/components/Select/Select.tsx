@@ -62,8 +62,6 @@ const Select = ({
     }
 
     const renderSelectedOption = () => {
-        if (!isSelected.length) return;
-
         if (multiple) {
             return isSelected.map((option, index) =>
                 <SelectedItem
