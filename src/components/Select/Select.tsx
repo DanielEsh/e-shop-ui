@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import classNames from "classnames";
+
 import SelectIcon from "./SelectIcon";
 import ResetIcon from "./ResetIcon";
 import {
@@ -37,7 +39,9 @@ const Select = ({
     native,
                 }) => {
     const [isOpened, setOpened] = useState<boolean>(false);
-    const [isSelected, setSelected] = useState<any>(multiple ? [] : '');
+    const [isSelected, setSelected] = useState<any>(multiple ? [] : []);
+
+    const rootClassName = classNames( `color-${theme}`)
 
     const handleRootClick = () => {
         setOpened(!isOpened);
@@ -56,7 +60,7 @@ const Select = ({
             return;
         }
 
-        setSelected(item);
+        setSelected([item])
     }
 
     const handleRemoveOption = (option) => {
@@ -83,7 +87,7 @@ const Select = ({
                 </SelectedItem>);
         }
 
-        return isSelected.label;
+        return isSelected.map(option => option.label);
     }
 
     const reset = () => {
@@ -94,7 +98,10 @@ const Select = ({
 
     const renderCustomSelect = () => {
         return (
-            <SelectRoot onClick={handleRootClick}>
+            <SelectRoot
+                className={rootClassName}
+                onClick={handleRootClick}
+            >
                 <SelectInput>
                     { renderSelectedOption() }
                     {

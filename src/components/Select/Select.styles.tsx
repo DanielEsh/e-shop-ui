@@ -9,6 +9,107 @@ export const SelectRoot = styled('div')`
   width: 100%;
   height: 40px;
   border-bottom: 1px solid;
+  
+  &.color {
+    &-primary {
+      color: ${theme.colors.primary};
+
+      li {
+        &:hover {
+          color: ${theme.colors.primaryHover};
+        }
+        
+        &._active {
+          color: ${theme.colors.primary};
+        }
+      }
+    }
+
+    &-success {
+      color: ${theme.colors.success};
+
+      li {
+        &:hover {
+          color: ${theme.colors.successHover};
+        }
+
+        &._active {
+          color: ${theme.colors.success};
+        }
+      }
+    }
+
+    &-warning {
+      color: ${theme.colors.warning};
+
+      li {
+        &:hover {
+          color: ${theme.colors.warningHover};
+        }
+
+        &._active {
+          color: ${theme.colors.warning};
+        }
+      }
+    }
+
+    &-danger {
+      color: ${theme.colors.danger};
+
+      li {
+        &:hover {
+          color: ${theme.colors.dangerHover};
+        }
+
+        &._active {
+          color: ${theme.colors.danger};
+        }
+      }
+    }
+
+    &-info {
+      color: ${theme.colors.info};
+
+      li {
+        &:hover {
+          color: ${theme.colors.infoHover};
+        }
+
+        &._active {
+          color: ${theme.colors.info};
+        }
+      }
+    }
+
+    &-light {
+      color: ${theme.colors.white};
+
+      li {
+        &:hover {
+          color: ${theme.colors.whiteHover};
+        }
+
+        &._active {
+          color: ${theme.colors.white};
+        }
+      }
+    }
+
+    &-dark {
+      color: ${theme.colors.black};
+
+      li {
+        &:hover {
+          color: ${theme.colors.blackHover};
+        }
+
+        &._active {
+          color: ${theme.colors.black};
+        }
+      }
+    }
+    
+  }
 `;
 
 export const SelectInput = styled('div')`
@@ -65,17 +166,10 @@ export const SelectDropDownUl = styled('ul')`
 export const SelectDropDownLi = styled('li')`
   height: 20px;
   padding: 10px 0;
+  color: ${theme.colors.black};
   font-size: 14px;
   line-height: 1.52;
   font-weight: 500;
-  
-  &:hover {
-    color: blue;
-  }
-  
-  &._active {
-    color: red;
-  }
 `
 
 export const SelectedItem = styled('div')`
