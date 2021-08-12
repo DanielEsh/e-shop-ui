@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import classNames from "classnames";
 
+import SelectOptions from './SelectOptions';
 import SelectIcon from "./SelectIcon";
 import ResetIcon from "./ResetIcon";
 import {
@@ -9,26 +10,29 @@ import {
     Icon,
     Reset,
     IconWrapper,
-    SelectDropDown,
-    SelectDropDownUl,
-    SelectDropDownLi,
     SelectedItem,
     SelectNative,
 } from './Select.styles';
 
+type Option = {
+    label: String,
+    value: string,
+}
+
 export type SelectProps = {
     theme: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark',
     value: string,
-    options: [],
+    options: Array<Option>,
     name: string,
     multiple: boolean,
-    defaultValue: string | number | [],
+    defaultValue: Array<Option>,
     clear: boolean,
     maxOptionsVisible: number,
     native: boolean,
 }
 
-const Select = ({
+
+const Select: React.FC<SelectProps> = ({
     theme,
     value,
     options,
@@ -39,7 +43,7 @@ const Select = ({
     native,
                 }) => {
     const [isOpened, setOpened] = useState<boolean>(false);
-    const [isSelected, setSelected] = useState<any>(multiple ? [] : []);
+    const [isSelected, setSelected] = useState([]);
 
     const rootClassName = classNames( `color-${theme}`)
 
@@ -48,9 +52,7 @@ const Select = ({
     }
 
     const handleSelectOption = (item) => {
-        console.log('open', item);
         if (multiple) {
-            console.log('multiple',isSelected);
             if (isSelected.includes(item)) {
                 const filteredSelected = isSelected.filter(option => option !== item)
                 setSelected(filteredSelected);
@@ -64,9 +66,7 @@ const Select = ({
     }
 
     const handleRemoveOption = (option) => {
-        console.log('option', option);
         const arr = isSelected.filter((item, index) => index !== option);
-        console.log('arr', arr);
         setSelected(arr);
     }
 
@@ -161,44 +161,6 @@ const Select = ({
     );
 };
 
-const SelectOptions: React.FC<any> = ({options, selected, setSelected, setOpened, multiple, maxOptionsVisible}) => {
-    const selectDropdown = useRef(null);
-    const [maxHeight, setMaxHeight] = useState(0)
 
-    const handleClick = (e) => {
-        selectDropdown.current.contains(e.target) || setOpened(false)
-    }
-
-    useEffect(() => {
-        const height = maxOptionsVisible * 40;
-        setMaxHeight(height);
-        document.addEventListener('click', handleClick);
-        return () => document.removeEventListener('click', handleClick);
-    }, []);
-
-    const handleOptionClick = (option) => {
-        setSelected(option);
-        multiple ? setOpened(true) : setOpened(false);
-    }
-
-    return (
-        <SelectDropDown ref={selectDropdown} maxHeight={maxHeight} onClick={handleClick}>
-            <SelectDropDownUl>
-                {options.map((option, index) => (
-                    <SelectDropDownLi
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            handleOptionClick(option);
-                        }}
-                        className={[selected.includes(option) ? '_active' : '']}
-                        key={index}
-                    >
-                        {option.label}
-                    </SelectDropDownLi>
-                ))}
-            </SelectDropDownUl>
-        </SelectDropDown>
-    )
-}
 
 export default Select;

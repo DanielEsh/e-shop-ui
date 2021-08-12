@@ -8,7 +8,7 @@ export default {
     component: Select,
 } as Meta;
 
-const Template: Story<SelectProps> = (args) => <Select { ...args } />;
+const Template = (args) => <Select { ...args } />;
 
 const standardValues = [
     {
