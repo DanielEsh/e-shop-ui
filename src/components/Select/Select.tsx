@@ -21,7 +21,6 @@ type Option = {
 
 export type SelectProps = {
     theme: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark',
-    value: string,
     options: Array<Option>,
     name: string,
     multiple: boolean,
@@ -34,7 +33,6 @@ export type SelectProps = {
 
 const Select: React.FC<SelectProps> = ({
     theme,
-    value,
     options,
     multiple,
     defaultValue,
