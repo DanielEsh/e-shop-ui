@@ -46,6 +46,7 @@ Standard.args = {
     theme: 'primary',
     options: standardValues,
     maxOptionsVisible: 8,
+    onSelect: (value) => console.log('value',value),
 };
 
 export const Multiple = Template.bind({});
@@ -54,6 +55,7 @@ Multiple.args = {
     options: standardValues,
     multiple : true,
     maxOptionsVisible: 4,
+    onSelect: (value) => console.log('value',value),
 }
 
 export const Reset = Template.bind({});
@@ -64,6 +66,7 @@ Reset.args = {
     defaultValue: [],
     clear: true,
     maxOptionsVisible: 4,
+    onSelect: (value) => console.log('value',value),
 }
 
 export const Native = Template.bind({});
@@ -75,4 +78,5 @@ Native.args = {
     clear: true,
     maxOptionsVisible: 4,
     native: true,
+    onSelect: (value) => console.log('value',value),
 }

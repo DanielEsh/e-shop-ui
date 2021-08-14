@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from "classnames";
 
 import SelectOptions from './SelectOptions';
@@ -28,6 +28,7 @@ export type SelectProps = {
     clear: boolean,
     maxOptionsVisible: number,
     native: boolean,
+    onSelect: (item) => void,
 }
 
 
@@ -39,11 +40,18 @@ const Select: React.FC<SelectProps> = ({
     clear,
     maxOptionsVisible = 1,
     native,
+    onSelect,
                 }) => {
     const [isOpened, setOpened] = useState<boolean>(false);
     const [isSelected, setSelected] = useState([]);
 
     const rootClassName = classNames( `color-${theme}`)
+
+    useEffect(() => {
+        if (isSelected.length) {
+            onSelect(isSelected);
+        }
+    }, [isSelected])
 
     const handleRootClick = () => {
         setOpened(!isOpened);
@@ -56,7 +64,8 @@ const Select: React.FC<SelectProps> = ({
                 setSelected(filteredSelected);
                 return;
             }
-            setSelected([...isSelected, item])
+            const test = [...isSelected, item];
+            setSelected(test)
             return;
         }
 
@@ -92,6 +101,7 @@ const Select: React.FC<SelectProps> = ({
         if (!defaultValue && !clear) return;
         setSelected(defaultValue);
         setOpened(false);
+        onSelect(defaultValue);
     }
 
     const renderCustomSelect = () => {
@@ -148,7 +158,8 @@ const Select: React.FC<SelectProps> = ({
     const renderNativeSelect = () => {
         return (
             <SelectNative
-                name="select">
+                name="select"
+                onChange={(e) => onSelect(e.target.value)}>
                 { renderNativeOptions() }
             </SelectNative>
         )
