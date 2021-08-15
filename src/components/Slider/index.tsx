@@ -1,19 +1,43 @@
 import React from 'react';
 
-export type RangeSliderOptions = {
+import {
+    SliderRoot,
+    Rail,
+    Track,
+    Progress,
+    Dot
+} from "./Slider.styles";
 
+export type RangeSliderOptions = {
+    theme: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark',
+    min: number,
+    max: number,
+    disabled: boolean,
+    mode: 'vertical' | 'horizontal',
+    label: string,
+    showCurrent: boolean,
 }
 
-const RangeSlider = () => {
+const RangeSlider: React.FC<RangeSliderOptions> = ({
+    theme = 'primary',
+    min,
+    max,
+    disabled = false,
+    mode = 'horizontal',
+    label,
+    showCurrent,
+                                                   }) => {
     return (
-        <div>
-            <input
-                type="range"
-                min="0"
-                max="1000"
-                className="thumb thumb--right"
-            />
-        </div>
+        <SliderRoot role='slider'>
+           <Rail>
+               <Track>
+                   <Progress>
+                       <Dot />
+                       <Dot />
+                   </Progress>
+               </Track>
+           </Rail>
+        </SliderRoot>
     );
 };
 
