@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+
+import SliderDot from "./SliderDot";
 
 import {
     SliderRoot,
@@ -27,13 +29,47 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     label,
     showCurrent,
                                                    }) => {
+
+    const [firstValue, setFirstValue] = useState(min);
+    const [secondValue, setSecondValue] = useState(max);
+
+    useEffect(() => {
+        setFirstValue(min);
+        setSecondValue(max);
+    }, [firstValue, secondValue]);
+
+    const handleDragStart = () => {
+        console.log('dragStart');
+        setFirstValue(min);
+        setSecondValue(max);
+    }
+
+    const handleDragEnd = () => {
+        console.log('dragEnd');
+    }
+
     return (
         <SliderRoot role='slider'>
            <Rail>
                <Track>
                    <Progress>
-                       <Dot />
-                       <Dot />
+
+                       <SliderDot
+                           value={firstValue}
+                           max={max}
+                           min={min}
+                           onDragStart={handleDragStart}
+                           onDragEnd={handleDragEnd}
+                       />
+
+                       <SliderDot
+                           value={secondValue}
+                           max={max}
+                           min={min}
+                           onDragStart={handleDragStart}
+                           onDragEnd={handleDragEnd}
+                       />
+
                    </Progress>
                </Track>
            </Rail>

@@ -20,7 +20,7 @@ export const Track = styled('div')`
 `
 
 export const Progress = styled('div')`
-  position: absolute;
+  position: relative;
   bottom: 0;
   height: 2px;
 `
@@ -28,7 +28,7 @@ export const Progress = styled('div')`
 export const Dot = styled('div')`
   position: absolute;
   top: 50%;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
