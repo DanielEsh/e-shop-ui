@@ -30,22 +30,22 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     showCurrent,
                                                    }) => {
 
-    const [firstValue, setFirstValue] = useState(min);
-    const [secondValue, setSecondValue] = useState(max);
+    const [firstValue, setFirstValue] = useState<number>(min);
+    const [secondValue, setSecondValue] = useState<number>(max);
+    const [isDragged, setIsDragged] = useState<boolean>(false);
 
     useEffect(() => {
-        setFirstValue(min);
-        setSecondValue(max);
+        // setFirstValue(min);
+        // setSecondValue(max);
     }, [firstValue, secondValue]);
 
     const handleDragStart = () => {
-        console.log('dragStart');
-        setFirstValue(min);
-        setSecondValue(max);
+        setIsDragged(true);
     }
 
     const handleDragEnd = () => {
-        console.log('dragEnd');
+        setIsDragged(false);
+        // setFirstValue(20)
     }
 
     return (
@@ -58,16 +58,22 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                            value={firstValue}
                            max={max}
                            min={min}
+                           isDragged={isDragged}
                            onDragStart={handleDragStart}
                            onDragEnd={handleDragEnd}
+                           onChangeValue={(value) => {
+                               setFirstValue(value)
+                           }}
                        />
 
                        <SliderDot
                            value={secondValue}
                            max={max}
                            min={min}
+                           isDragged={isDragged}
                            onDragStart={handleDragStart}
                            onDragEnd={handleDragEnd}
+                           onChangeValue={(value) => setSecondValue(value)}
                        />
 
                    </Progress>
