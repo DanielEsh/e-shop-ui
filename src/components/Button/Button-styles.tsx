@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { theme }  from "../Theme";
+import { theme } from "../Theme";
 
 export const BtnHover = styled.span`
   position: absolute;
@@ -95,17 +95,17 @@ export const Btn = styled.button<{isRounded?: boolean}>`
         border-color: #25ad5b;
       }
       &.is-outline {
-        color: ${theme.colors.success};;
+        color: ${theme.colors.success};
         background-color: ${theme.colors.white};
-        border-color: ${theme.colors.success};;
+        border-color: ${theme.colors.success};
         &:hover {
           color: ${theme.colors.white};
         }
       }
       &:hover ${BtnHover} {
         color: ${theme.colors.white};
-        background-color: ${theme.colors.successHover};;
-        border-color: ${theme.colors.successHover};;
+        background-color: ${theme.colors.successHover};
+        border-color: ${theme.colors.successHover};
       }
     }
     &--warning {
