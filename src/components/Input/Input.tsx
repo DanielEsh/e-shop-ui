@@ -20,20 +20,20 @@ export type InputProps = {
 }
 
 const Input: React.FC<InputProps> = ({
-                                        theme= 'primary',
-                                        name,
-                                        id,
-                                        label,
-                                        placeholder,
-                                        value,
-                                        error,
-                                        disabled,
-                                        readonly,
-                                        required,
-                                        onFocus,
-                                        onBlur,
-                                        onChange,
-                                     }) => {
+    theme= 'primary',
+    name,
+    id,
+    label,
+    placeholder,
+    value,
+    error,
+    disabled,
+    readonly,
+    required,
+    onFocus,
+    onBlur,
+    onChange,
+}) => {
     const [isFocused, setFocused] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState<string | number>('')
 
@@ -71,22 +71,22 @@ const Input: React.FC<InputProps> = ({
 
 
     return (
-        <InputRoot className={[`color--${theme}`, isFocused || value || placeholder ? 'is-focused' : '', disabled ? 'is-disabled' : '']}>
-            <InputLabel htmlFor={id}>
+        <InputRoot className={ [`color--${theme}`, isFocused || value || placeholder ? 'is-focused' : '', disabled ? 'is-disabled' : ''] }>
+            <InputLabel htmlFor={ id }>
                 { label }
             </InputLabel>
             <InputNative
+                disabled={ disabled }
+                id={ id }
+                name={ name }
+                onBlur={ handleBlur }
+                onChange={ handleChange }
+                onFocus={ handleFocus }
+                placeholder={ placeholder }
+                readonly={ readonly }
+                required={ required }
                 type="text"
-                id={id}
-                value={inputValue}
-                name={name}
-                placeholder={placeholder}
-                disabled={disabled}
-                readonly={readonly}
-                required={required}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                onChange={handleChange}
+                value={ inputValue }
             />
         </InputRoot>
     );

@@ -2,15 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import {SelectDropDown, SelectDropDownLi, SelectDropDownUl} from "./Select.styles";
 
 type Option = {
-    label: String | Number,
-    value: String | Number,
+    label: string | number,
+    value: string | number,
 }
 
 export type SelectOptions = {
     options: Array<Option>,
     selected: Array<Object>,
     setSelected: React.Dispatch<Object>,
-    setOpened:  React.Dispatch<boolean>,
+    setOpened: React.Dispatch<boolean>,
     multiple: boolean,
     maxOptionsVisible: number,
 }
@@ -36,16 +36,16 @@ const SelectOptions: React.FC<SelectOptions> = ({options, selected, setSelected,
     }
 
     return (
-        <SelectDropDown ref={selectDropdown} maxHeight={maxHeight} onClick={handleClick}>
+        <SelectDropDown maxHeight={ maxHeight } onClick={ handleClick } ref={ selectDropdown }>
             <SelectDropDownUl>
                 {options.map((option, index) => (
                     <SelectDropDownLi
-                        onClick={(e) => {
+                        className={ [selected.includes(option) ? '_active' : ''] }
+                        key={ index }
+                        onClick={ (e) => {
                             e.stopPropagation();
                             handleOptionClick(option);
-                        }}
-                        className={[selected.includes(option) ? '_active' : '']}
-                        key={index}
+                        } }
                     >
                         {option.label}
                     </SelectDropDownLi>
