@@ -33,7 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
         const container = button.current;
         const event = e.nativeEvent;
 
-        if (!container) return;
+        if (!container) {return;}
 
         const x = event.offsetX / container.offsetWidth;
         const y = (event.offsetY + ((container.offsetWidth - container.offsetHeight) / 2)) / container.offsetWidth;

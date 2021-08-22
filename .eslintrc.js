@@ -1,23 +1,23 @@
-{
+module.exports = {
     "root": true,
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
+    "ecmaFeatures": {
+        "jsx": true
     },
+    "ecmaVersion": 12,
+        "sourceType": "module"
+},
     "plugins": ["prettier", "react", "@typescript-eslint"],
     "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended"
-    ],
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended"
+],
     "rules": {
-        //Best Practices
-        "no-console": "warn",
+    //Best Practices
+    "no-console": "warn",
         "array-callback-return": "warn",
         "class-methods-use-this": "warn",
         "curly": ["warn", "all"],
@@ -106,5 +106,5 @@
         "react/jsx-pascal-case": "error",
         "react/jsx-sort-props": "error",
         "react/jsx-space-before-closing": "error"
-    }
+}
 }
