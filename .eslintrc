@@ -78,6 +78,7 @@
         "rest-spread-spacing": ["warn", "never"],
         "template-curly-spacing": ["warn", "never"],
         // React
+        "react/prop-types": 0,
         "react/forbid-prop-types": "error",
         "react/no-multi-comp": ["error", {"ignoreStateless": true}],
         "react/no-set-state": "error",

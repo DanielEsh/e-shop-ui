@@ -29,13 +29,11 @@ export const Button: React.FC<ButtonProps> = ({
     const button = useRef<HTMLButtonElement>(null);
 
 
-    const handleMouseListener = (e:any) => {
+    const handleMouseListener = (e:React.MouseEvent) => {
         const container = button.current;
         const event = e.nativeEvent;
 
-        if (!container) {
-            return;
-        }
+        if (!container) return;
 
         const x = event.offsetX / container.offsetWidth;
         const y = (event.offsetY + ((container.offsetWidth - container.offsetHeight) / 2)) / container.offsetWidth;
@@ -50,7 +48,8 @@ export const Button: React.FC<ButtonProps> = ({
             className={ [`color--${theme}`, `size--${size}`, disabled ? 'is-disabled' : '', outline ? 'is-outline' : ''].join(' ') }
             disabled={ disabled }
             isRounded={ rounded }
-            onMouseEnter={ handleMouseListener }
+            onClick={ onClick }
+            onMouseEnter={ () => handleMouseListener }
             onMouseLeave={ handleMouseListener }
             ref={ button }
             type={ type }
