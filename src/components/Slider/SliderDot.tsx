@@ -54,7 +54,8 @@ const SliderDot = ({value, max, min, isDragged, onDragStart, onDragEnd, onChange
         // console.log('handleDragged');
         let diff = 0;
         setCurrentX(event.clientX);
-        diff = (event.clientX - startPosition) / 100;
+        console.log('start', startPosition);
+        diff = (event.clientX - startPosition) / 1016 * 100;
         console.log('event', event.clientX);
         console.log('current', currentX);
         console.log('DIFF', diff);
