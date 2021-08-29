@@ -6,6 +6,8 @@
         "build": "rollup -c",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook",
+        "eslint": "eslint ./src",
+        "lint:css":"stylelint './src/**/*.tsx'"
         "lint:eslint": "eslint ./src",
         "lint:eslint:fix": "eslint ./src --fix"
     },
@@ -42,6 +44,10 @@
         "pretty-quick": "^3.1.0",
         "rollup": "^2.49.0",
         "rollup-plugin-typescript2": "^0.30.0",
+        "stylelint": "^13.13.1",
+        "stylelint-config-recommended": "^5.0.0",
+        "stylelint-config-styled-components": "^0.1.1",
+        "stylelint-processor-styled-components": "^1.10.0",
         "typescript": "^4.2.4"
     }
 }
