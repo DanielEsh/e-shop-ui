@@ -19,13 +19,15 @@ export const HorizontalTabs = () => {
         <>
             <TabsBar>
                 <Tab
-                    isActive={activeTab === 'cards'}
-                    onClick={() => handleTabClick('cards')}>
+                    isActive={ activeTab === 'cards' }
+                    onClick={ () => handleTabClick('cards') }
+                >
                     Cards
                 </Tab>
                 <Tab
-                    isActive={activeTab === 'list'}
-                    onClick={() => handleTabClick('list')}>
+                    isActive={ activeTab === 'list' }
+                    onClick={ () => handleTabClick('list') }
+                >
                     List
                 </Tab>
             </TabsBar>
@@ -45,20 +47,23 @@ export const VerticalTabs = () => {
 
     return (
         <>
-            <TabsBar direction={"vertical"}>
+            <TabsBar direction={ "vertical" }>
                 <Tab
-                    isActive={activeTab === 'cards'}
-                    onClick={() => handleTabClick('cards')}>
+                    isActive={ activeTab === 'cards' }
+                    onClick={ () => handleTabClick('cards') }
+                >
                     Cards
                 </Tab>
                 <Tab
-                    isActive={activeTab === 'list'}
-                    onClick={() => handleTabClick('list')}>
+                    isActive={ activeTab === 'list' }
+                    onClick={ () => handleTabClick('list') }
+                >
                     List
                 </Tab>
                 <Tab
-                    isActive={activeTab === 'viewOnMap'}
-                    onClick={() => handleTabClick('viewOnMap')}>
+                    isActive={ activeTab === 'viewOnMap' }
+                    onClick={ () => handleTabClick('viewOnMap') }
+                >
                     View on Map
                 </Tab>
             </TabsBar>
@@ -79,21 +84,24 @@ export const DisabledTabs = () => {
 
     return (
         <>
-            <TabsBar direction={"vertical"}>
+            <TabsBar direction={ "vertical" }>
                 <Tab
-                    isActive={activeTab === 'cards'}
-                    onClick={() => handleTabClick('cards')}>
+                    isActive={ activeTab === 'cards' }
+                    onClick={ () => handleTabClick('cards') }
+                >
                     Cards
                 </Tab>
                 <Tab
-                    isActive={activeTab === 'list'}
-                    onClick={() => handleTabClick('list')}>
+                    isActive={ activeTab === 'list' }
+                    onClick={ () => handleTabClick('list') }
+                >
                     List
                 </Tab>
                 <Tab
-                    isActive={activeTab === 'viewOnMap'}
-                    onClick={() => handleTabClick('viewOnMap')}
-                    isDisabled>
+                    isActive={ activeTab === 'viewOnMap' }
+                    isDisabled
+                    onClick={ () => handleTabClick('viewOnMap') }
+                >
                     View on Map
                 </Tab>
             </TabsBar>
@@ -114,22 +122,27 @@ export const SuccessTabs = () => {
 
     return (
         <>
-            <TabsBar direction='vertical'
-                     theme='success'>
+            <TabsBar
+                direction="vertical"
+                theme="success"
+            >
                 <Tab
-                    isActive={activeTab === 'cards'}
-                    onClick={() => handleTabClick('cards')}>
+                    isActive={ activeTab === 'cards' }
+                    onClick={ () => handleTabClick('cards') }
+                >
                     Cards
                 </Tab>
                 <Tab
-                    isActive={activeTab === 'list'}
-                    onClick={() => handleTabClick('list')}>
+                    isActive={ activeTab === 'list' }
+                    onClick={ () => handleTabClick('list') }
+                >
                     List
                 </Tab>
                 <Tab
-                    isActive={activeTab === 'viewOnMap'}
-                    onClick={() => handleTabClick('viewOnMap')}
-                    isDisabled>
+                    isActive={ activeTab === 'viewOnMap' }
+                    isDisabled
+                    onClick={ () => handleTabClick('viewOnMap') }
+                >
                     View on Map
                 </Tab>
             </TabsBar>

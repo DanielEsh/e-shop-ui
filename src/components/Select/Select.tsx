@@ -15,7 +15,7 @@ import {
 } from './Select.styles';
 
 type Option = {
-    label: String,
+    label: string,
     value: string,
 }
 
@@ -41,7 +41,7 @@ const Select: React.FC<SelectProps> = ({
     maxOptionsVisible = 1,
     native,
     onSelect,
-                }) => {
+}) => {
     const [isOpened, setOpened] = useState<boolean>(false);
     const [isSelected, setSelected] = useState([]);
 
@@ -79,26 +79,26 @@ const Select: React.FC<SelectProps> = ({
 
     const renderSelectedOption = () => {
         if (multiple) {
-            return isSelected.map((option, index) =>
-                <SelectedItem
-                    key={index}
+            return isSelected.map((option, index) => <SelectedItem
+                key={ index }
+                                                     >
+                {option.label}
+                <IconWrapper
+                    onClick={ (e) => {
+                        e.stopPropagation();
+                        handleRemoveOption(index);
+                    } }
                 >
-                    {option.label}
-                    <IconWrapper
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            handleRemoveOption(index);
-                    }}>
-                        <ResetIcon />
-                    </IconWrapper>
-                </SelectedItem>);
+                    <ResetIcon />
+                </IconWrapper>
+            </SelectedItem>);
         }
 
         return isSelected.map(option => option.label);
     }
 
     const reset = () => {
-        if (!defaultValue && !clear) return;
+        if (!defaultValue && !clear) {return;}
         setSelected(defaultValue);
         setOpened(false);
         onSelect(defaultValue);
@@ -107,34 +107,35 @@ const Select: React.FC<SelectProps> = ({
     const renderCustomSelect = () => {
         return (
             <SelectRoot
-                className={rootClassName}
-                onClick={handleRootClick}
+                className={ rootClassName }
+                onClick={ handleRootClick }
             >
                 <SelectInput>
                     { renderSelectedOption() }
                     {
                         defaultValue && clear && isSelected.length > 1 &&
-                        <Reset onClick={(e) => {
+                        <Reset onClick={ (e) => {
                             e.stopPropagation();
                             reset();
-                        }}>
+                        } }
+                        >
                             <ResetIcon />
                         </Reset>
                     }
                     <Icon>
-                        <SelectIcon isOpened={isOpened} />
+                        <SelectIcon isOpened={ isOpened } />
                     </Icon>
                 </SelectInput>
 
                 {
                     isOpened &&
                     <SelectOptions
-                        options={options}
-                        selected={isSelected}
-                        setSelected={handleSelectOption}
-                        setOpened={setOpened}
-                        multiple={multiple}
-                        maxOptionsVisible={maxOptionsVisible}
+                        maxOptionsVisible={ maxOptionsVisible }
+                        multiple={ multiple }
+                        options={ options }
+                        selected={ isSelected }
+                        setOpened={ setOpened }
+                        setSelected={ handleSelectOption }
                     />
                 }
             </SelectRoot>
@@ -146,8 +147,9 @@ const Select: React.FC<SelectProps> = ({
             options.map(({ label, value}, index) => {
                 return (
                     <option
-                        key={index}
-                        value={value}>
+                        key={ index }
+                        value={ value }
+                    >
                         {label}
                     </option>
                 );
@@ -159,7 +161,8 @@ const Select: React.FC<SelectProps> = ({
         return (
             <SelectNative
                 name="select"
-                onChange={(e) => onSelect(e.target.value)}>
+                onChange={ (e) => onSelect(e.target.value) }
+            >
                 { renderNativeOptions() }
             </SelectNative>
         )
