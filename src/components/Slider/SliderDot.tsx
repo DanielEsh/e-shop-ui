@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import {Dot} from "./Slider.styles";
 
-const SliderDot = ({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue},) => {
+const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue}, ref) => {
     const [position, setPosition] = useState(null);
     const [isClick, setClick] = useState<boolean>(false)
     const [startX, setStartX] = useState(0);
@@ -54,11 +54,7 @@ const SliderDot = ({value, max, min, isDragged, onDragStart, onDragEnd, onChange
         // console.log('handleDragged');
         let diff = 0;
         setCurrentX(event.clientX);
-        console.log('start', startPosition);
-        diff = (event.clientX - startPosition) / 1016 * 100;
-        console.log('event', event.clientX);
-        console.log('current', currentX);
-        console.log('DIFF', diff);
+        diff = (event.clientX - startPosition) / ref.current.clientWidth * 100;
         rposition(startPosition + diff);
     }
 
@@ -87,7 +83,6 @@ const SliderDot = ({value, max, min, isDragged, onDragStart, onDragEnd, onChange
     }
 
     const bindEvents = () => {
-        // console.log('bind');
         window.addEventListener('mousemove', handleDragged);
         window.addEventListener('touchmove', handleDragged);
         window.addEventListener('mouseup', handleDragEnd);
@@ -96,7 +91,6 @@ const SliderDot = ({value, max, min, isDragged, onDragStart, onDragEnd, onChange
     }
 
     const unbindEvents = () => {
-        console.log('unbind');
         window.removeEventListener('mousemove', handleDragged);
         window.removeEventListener('touchmove', handleDragged);
         window.removeEventListener('mouseup', handleDragEnd);
@@ -108,15 +102,15 @@ const SliderDot = ({value, max, min, isDragged, onDragStart, onDragEnd, onChange
 
     return (
         <Dot
-            tabindex={0}
-            style={position}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onMouseDown={handleMouseDown}
+            onDragEnd={ handleDragEnd }
+            onDragStart={ handleDragStart }
+            onMouseDown={ handleMouseDown }
+            onMouseEnter={ handleMouseEnter }
+            onMouseLeave={ handleMouseLeave }
+            style={ position }
+            tabindex={ 0 }
         />
     );
-};
+});
 
 export default SliderDot;

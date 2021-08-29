@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import SliderDot from "./SliderDot";
 
@@ -28,11 +28,13 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     mode = 'horizontal',
     label,
     showCurrent,
-                                                   }) => {
+}) => {
 
     const [firstValue, setFirstValue] = useState<number>(min);
     const [secondValue, setSecondValue] = useState<number>(max);
     const [isDragged, setIsDragged] = useState<boolean>(false);
+    
+    const el = useRef(null);
 
     useEffect(() => {
         // setFirstValue(min);
@@ -49,36 +51,38 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     }
 
     return (
-        <SliderRoot role='slider'>
-           <Rail>
-               <Track>
-                   <Progress>
+        <SliderRoot ref={ el } role="slider">
+            <Rail>
+                <Track>
+                    <Progress>
 
-                       <SliderDot
-                           value={firstValue}
-                           max={max}
-                           min={min}
-                           isDragged={isDragged}
-                           onDragStart={handleDragStart}
-                           onDragEnd={handleDragEnd}
-                           onChangeValue={(value) => {
-                               setFirstValue(value)
-                           }}
-                       />
+                        <SliderDot
+                            isDragged={ isDragged }
+                            max={ max }
+                            min={ min }
+                            onChangeValue={ (value) => {
+                                setFirstValue(value)
+                            } }
+                            onDragEnd={ handleDragEnd }
+                            onDragStart={ handleDragStart }
+                            ref={ el }
+                            value={ firstValue }
+                        />
 
-                       <SliderDot
-                           value={secondValue}
-                           max={max}
-                           min={min}
-                           isDragged={isDragged}
-                           onDragStart={handleDragStart}
-                           onDragEnd={handleDragEnd}
-                           onChangeValue={(value) => setSecondValue(value)}
-                       />
+                        <SliderDot
+                            isDragged={ isDragged }
+                            max={ max }
+                            min={ min }
+                            onChangeValue={ (value) => setSecondValue(value) }
+                            onDragEnd={ handleDragEnd }
+                            onDragStart={ handleDragStart }
+                            ref={ el }
+                            value={ secondValue }
+                        />
 
-                   </Progress>
-               </Track>
-           </Rail>
+                    </Progress>
+                </Track>
+            </Rail>
         </SliderRoot>
     );
 };
