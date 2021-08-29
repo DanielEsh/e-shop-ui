@@ -24,8 +24,9 @@ const TabsBar: React.FC<TabsBarProps> = ({
     return (
         <TabsRoot>
             <TabsContainer
-                className={rootClassName}
-                direction={direction}>
+                className={ rootClassName }
+                direction={ direction }
+            >
                 {children}
             </TabsContainer>
         </TabsRoot>

@@ -9,15 +9,15 @@ export type TabProps = {
     isActive?: boolean,
     onClick?: () => void,
     children: React.ReactNode,
-    isDisabled?: Boolean,
+    isDisabled?: boolean,
 }
 
 const Tab: React.FC<TabProps> = ({
-                 children,
-                 isActive,
-                 onClick,
-                 isDisabled= false,
-             }) => {
+    children,
+    isActive,
+    onClick,
+    isDisabled= false,
+}) => {
 
     const classes = classNames({
         '_active': isActive,
@@ -33,8 +33,9 @@ const Tab: React.FC<TabProps> = ({
     return (
         <li>
             <TabLabel
-                className={classes}
-                onClick={handleClick}>
+                className={ classes }
+                onClick={ handleClick }
+            >
                 {children}
             </TabLabel>
         </li>

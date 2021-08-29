@@ -8,7 +8,7 @@ export default {
     component: Button,
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+const Template: Story<ButtonProps> = (args) => <Button { ...args } />;
 
 export const PrimaryMedium = Template.bind({});
 PrimaryMedium.args = {

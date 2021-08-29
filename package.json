@@ -6,7 +6,8 @@
         "build": "rollup -c",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook",
-        "eslint": "eslint ./src"
+        "lint:eslint": "eslint ./src",
+        "lint:eslint:fix": "eslint ./src --fix"
     },
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
