@@ -23,6 +23,8 @@ export const Progress = styled('div')`
   position: relative;
   bottom: 0;
   height: 2px;
+  width: ${(props) => props.width};
+  background-color: red;
 `
 
 export const Dot = styled('div')`

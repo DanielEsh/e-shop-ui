@@ -13,6 +13,6 @@ const Template: Story<RangeSliderOptions> = (args) => <RangeSlider { ...args } /
 export const Standard = Template.bind({});
 Standard.args = {
     min: 0,
-    max: 100,
+    max: 80,
 };
 
