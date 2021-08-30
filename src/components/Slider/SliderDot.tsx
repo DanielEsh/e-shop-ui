@@ -77,8 +77,6 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
         const steps = Math.round(percent / lengthPerStep);
         let value = steps * lengthPerStep * (max - min) * 0.01 + min;
         value = parseFloat(value.toFixed(1));
-
-        console.log('VALUE', value);
         onChangeValue(value);
     }
 

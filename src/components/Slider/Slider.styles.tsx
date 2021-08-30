@@ -19,8 +19,9 @@ export const Track = styled('div')`
   height: 1px;
 `
 
-export const Progress = styled('div')`
-  position: relative;
+export const ProgressBar = styled('div')`
+  position: absolute;
+  left: ${(props) => props.left};
   bottom: 0;
   height: 2px;
   width: ${(props) => props.width};

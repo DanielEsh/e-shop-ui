@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useMemo} from 'react';
 
 import SliderDot from "./SliderDot";
 
@@ -6,8 +6,7 @@ import {
     SliderRoot,
     Rail,
     Track,
-    Progress,
-    Dot
+    ProgressBar,
 } from "./Slider.styles";
 
 export type RangeSliderOptions = {
@@ -33,17 +32,28 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     const [firstValue, setFirstValue] = useState<number>(min);
     const [secondValue, setSecondValue] = useState<number>(max);
     const [isDragged, setIsDragged] = useState<boolean>(false);
-    const [progressSize, setProgressSize] = useState('');
     
     const el = useRef(null);
 
     useEffect(() => {
-        // setFirstValue(min);
-        // setSecondValue(max);
-        setProgressSize(`${100 * (max - min) / (max - min)}%`)
+        //
     }, [firstValue, secondValue]);
 
+    const minValue = useMemo(() => {
+        return Math.min(firstValue, secondValue);
+    }, [firstValue, secondValue]);
 
+    const maxValue = useMemo(() => {
+        return Math.max(firstValue, secondValue)
+    }, [firstValue, secondValue]);
+
+    const progressSize = useMemo(() => {
+        return `${100 * (maxValue - minValue) / (max - min)}%`;
+    }, [maxValue, minValue]);
+
+    const progressStart = useMemo(() => {
+        return `${100 * (minValue - min) / (max - min)}%`;
+    }, [minValue]);
 
     const handleDragStart = () => {
         setIsDragged(true);
@@ -51,7 +61,6 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
 
     const handleDragEnd = () => {
         setIsDragged(false);
-        // setFirstValue(20)
     }
 
     return (
@@ -82,7 +91,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                         value={ secondValue }
                     />
 
-                    <Progress width={ progressSize } />
+                    <ProgressBar left={ progressStart } width={ progressSize } />
                 </Track>
             </Rail>
         </SliderRoot>
