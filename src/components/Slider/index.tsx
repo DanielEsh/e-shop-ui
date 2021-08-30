@@ -17,6 +17,7 @@ export type RangeSliderOptions = {
     mode: 'vertical' | 'horizontal',
     label: string,
     showCurrent: boolean,
+    transition: boolean,
 }
 
 const RangeSlider: React.FC<RangeSliderOptions> = ({
@@ -27,6 +28,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     mode = 'horizontal',
     label,
     showCurrent,
+    transition = true,
 }) => {
 
     const [firstValue, setFirstValue] = useState<number>(min);
@@ -47,10 +49,6 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
 
     useEffect(() => {
         console.log('Mounted');
-        // if (railEl?.current?.clientWidth !== sliderSize) {
-        //     handleResetSize();
-        //     window.addEventListener('resize', handleResetSize);
-        // }
         handleResetSize();
         window.addEventListener('resize', handleResetSize);
         return () => {
@@ -74,6 +72,13 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     const progressStart = useMemo(() => {
         return `${100 * (minValue - min) / (max - min)}%`;
     }, [minValue]);
+
+    const progressStyle = useMemo(() => {
+        return {
+            width: progressSize,
+            left: progressStart,
+        }
+    }, [maxValue, minValue]);
 
     const handleDragStart = () => {
         setIsDragged(true);
@@ -111,7 +116,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                         value={ secondValue }
                     />
 
-                    <ProgressBar left={ progressStart } width={ progressSize } />
+                    <ProgressBar progressStyle={ progressStyle } />
                 </Track>
             </Rail>
         </SliderRoot>

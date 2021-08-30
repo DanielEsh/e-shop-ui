@@ -21,10 +21,10 @@ export const Track = styled('div')`
 
 export const ProgressBar = styled('div')`
   position: absolute;
-  left: ${(props) => props.left};
+  left: ${({progressStyle}) => progressStyle.left};
   bottom: 0;
   height: 2px;
-  width: ${(props) => props.width};
+  width: ${({progressStyle}) => progressStyle.width};
   background-color: red;
 `
 
