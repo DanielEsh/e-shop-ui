@@ -7,6 +7,7 @@ import {
     Rail,
     Track,
     ProgressBar,
+    SliderInfo,
 } from "./Slider.styles";
 
 export type RangeSliderOptions = {
@@ -90,6 +91,10 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
 
     return (
         <SliderRoot role="slider">
+            <SliderInfo>
+                <span>{ min }</span>
+                <span>{ max }</span>
+            </SliderInfo>
             <Rail ref={ railEl }>
                 <Track>
                     <SliderDot
