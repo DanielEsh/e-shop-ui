@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import {Dot} from "./Slider.styles";
 
-const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue}, ref) => {
+const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, railSize}, ref) => {
     const [position, setPosition] = useState(null);
     const [isClick, setClick] = useState<boolean>(false)
     const [startX, setStartX] = useState(0);
@@ -54,7 +54,7 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
         // console.log('handleDragged');
         let diff = 0;
         setCurrentX(event.clientX);
-        diff = (event.clientX - startPosition) / ref.current.clientWidth * 100;
+        diff = (event.clientX - startPosition) / railSize * 100;
         rposition(startPosition + diff);
     }
 

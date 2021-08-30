@@ -32,11 +32,31 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     const [firstValue, setFirstValue] = useState<number>(min);
     const [secondValue, setSecondValue] = useState<number>(max);
     const [isDragged, setIsDragged] = useState<boolean>(false);
+    const [sliderSize, setSliderSize] = useState(1);
     
-    const el = useRef(null);
+    const railEl = useRef(null);
+
+
+    const handleResetSize = () => {
+        if (railEl.current) {
+            console.log('rail', railEl.current.clientWidth);
+            setSliderSize(railEl.current.clientWidth);
+        }
+    }
+
 
     useEffect(() => {
-        //
+        console.log('Mounted');
+        // if (railEl?.current?.clientWidth !== sliderSize) {
+        //     handleResetSize();
+        //     window.addEventListener('resize', handleResetSize);
+        // }
+        handleResetSize();
+        window.addEventListener('resize', handleResetSize);
+        return () => {
+            console.log('Destroy');
+            window.removeEventListener('resize', handleResetSize);
+        }
     }, [firstValue, secondValue]);
 
     const minValue = useMemo(() => {
@@ -64,8 +84,8 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     }
 
     return (
-        <SliderRoot ref={ el } role="slider">
-            <Rail>
+        <SliderRoot role="slider">
+            <Rail ref={ railEl }>
                 <Track>
                     <SliderDot
                         isDragged={ isDragged }
@@ -76,7 +96,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                         } }
                         onDragEnd={ handleDragEnd }
                         onDragStart={ handleDragStart }
-                        ref={ el }
+                        railSize={ sliderSize }
                         value={ firstValue }
                     />
 
@@ -87,7 +107,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                         onChangeValue={ (value) => setSecondValue(value) }
                         onDragEnd={ handleDragEnd }
                         onDragStart={ handleDragStart }
-                        ref={ el }
+                        railSize={ sliderSize }
                         value={ secondValue }
                     />
 
