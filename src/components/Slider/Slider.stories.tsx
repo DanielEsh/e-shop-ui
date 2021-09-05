@@ -14,5 +14,8 @@ export const Standard = Template.bind({});
 Standard.args = {
     min: 0,
     max: 80,
+    value: [
+        30, 60
+    ]
 };
 

@@ -7,7 +7,7 @@ import {
     Rail,
     Track,
     ProgressBar,
-    SliderInfo,
+    SliderCurrentValue,
 } from "./Slider.styles";
 
 export type RangeSliderOptions = {
@@ -19,12 +19,14 @@ export type RangeSliderOptions = {
     label: string,
     showCurrent: boolean,
     transition: boolean,
+    value: any;
 }
 
 const RangeSlider: React.FC<RangeSliderOptions> = ({
     theme = 'primary',
     min,
     max,
+    value,
     disabled = false,
     mode = 'horizontal',
     label,
@@ -36,22 +38,31 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     const [secondValue, setSecondValue] = useState<number>(max);
     const [isDragged, setIsDragged] = useState<boolean>(false);
     const [sliderSize, setSliderSize] = useState(1);
-    
+    const [oldValue, setOldValue] = useState([]);
+
+    const sliderEl = useRef(true);
     const railEl = useRef(null);
 
 
     const handleResetSize = () => {
         if (railEl.current) {
-            console.log('rail', railEl.current.clientWidth);
             setSliderSize(railEl.current.clientWidth);
         }
-    }
+    };
 
 
     useEffect(() => {
-        console.log('Mounted');
-        handleResetSize();
-        window.addEventListener('resize', handleResetSize);
+        if (sliderEl.current) {
+            sliderEl.current = false;
+            console.log('MOUNT');
+            handleResetSize();
+            window.addEventListener('resize', handleResetSize);
+            setValues(value);
+            return;
+        }
+        console.log('Update', sliderEl);
+        //const newValue = [firstValue, secondValue];
+
         return () => {
             console.log('Destroy');
             window.removeEventListener('resize', handleResetSize);
@@ -81,6 +92,20 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
         }
     }, [maxValue, minValue]);
 
+    const setValues = (value) => {
+        console.log('value', value);
+        if (min > max) {
+            return;
+        }
+
+        if (value.length) {
+            setOldValue(value);
+            setFirstValue(value[0]);
+            setSecondValue(value[1]);
+            return;
+        }
+    }
+
     const handleDragStart = () => {
         setIsDragged(true);
     }
@@ -90,11 +115,14 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     }
 
     return (
-        <SliderRoot role="slider">
-            <SliderInfo>
+        <SliderRoot
+            ref={ sliderEl }
+            role="slider"
+        >
+            <SliderCurrentValue>
                 <span>{ min }</span>
                 <span>{ max }</span>
-            </SliderInfo>
+            </SliderCurrentValue>
             <Rail ref={ railEl }>
                 <Track>
                     <SliderDot

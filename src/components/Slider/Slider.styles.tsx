@@ -6,11 +6,11 @@ export const SliderRoot = styled('div')`
     height: 20px;
 `
 
-export const SliderInfo = styled('div')`
+export const SliderCurrentValue = styled('div')`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 10px;
+    margin: 0 4px 10px;
 `
 
 export const Rail = styled('div')`
