@@ -20,7 +20,7 @@ export type RangeSliderOptions = {
     tooltip: 'never' | 'always' | 'focus',
     transition: boolean,
     value: any;
-    onChange: (item) => void,
+    onChange?: (item) => void,
     range: boolean,
 }
 
@@ -43,6 +43,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     const [isDragged, setIsDragged] = useState<boolean>(false);
     const [sliderSize, setSliderSize] = useState(1);
     const [oldValue, setOldValue] = useState([]);
+    const [focusDot, setFocusDot] = useState(0);
 
     const sliderEl = useRef(true);
     const railEl = useRef(null);
@@ -64,10 +65,12 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
             return;
         }
 
-        if (range) {
-            onChange([firstValue, secondValue]);
-        } else {
-            onChange(firstValue);
+        if (onChange) {
+            if (range) {
+                onChange([firstValue, secondValue]);
+            } else {
+                onChange(firstValue);
+            }
         }
 
         return () => {
@@ -118,11 +121,13 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
         setFirstValue(value);
     }
 
-    const handleDragStart = () => {
+    const handleDragStart = (index) => {
+        setFocusDot(index);
         setIsDragged(true);
     }
 
     const handleDragEnd = () => {
+        setFocusDot(0);
         setIsDragged(false);
     }
 
@@ -138,6 +143,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
             <Rail ref={ railEl }>
                 <Track>
                     <SliderDot
+                        focus={ focusDot === 1 }
                         isDragged={ isDragged }
                         max={ max }
                         min={ min }
@@ -145,7 +151,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                             setFirstValue(value)
                         } }
                         onDragEnd={ handleDragEnd }
-                        onDragStart={ handleDragStart }
+                        onDragStart={ () => handleDragStart(1) }
                         railSize={ sliderSize }
                         tooltip={ tooltip }
                         value={ firstValue }
@@ -154,12 +160,13 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                     {
                         range &&
                         <SliderDot
+                            focus={ focusDot === 2 }
                             isDragged={ isDragged }
                             max={ max }
                             min={ min }
                             onChangeValue={ (value) => setSecondValue(value) }
                             onDragEnd={ handleDragEnd }
-                            onDragStart={ handleDragStart }
+                            onDragStart={ () => handleDragStart(2) }
                             railSize={ sliderSize }
                             tooltip={ tooltip }
                             value={ secondValue }

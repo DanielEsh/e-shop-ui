@@ -2,7 +2,7 @@ import React, {useState, useEffect, useMemo} from 'react';
 
 import {Dot, DotTooltip} from "./Slider.styles";
 
-const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, tooltip, railSize}, ref) => {
+const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, tooltip, focus, railSize}, ref) => {
     const [position, setPosition] = useState(null);
     const [isClick, setClick] = useState<boolean>(false)
     const [startX, setStartX] = useState(0);
@@ -30,11 +30,11 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
         case 'never':
             return false;
         case 'focus':
-            return true;
+            return focus || isDragged;
         default:
             return false;
         }
-    }, [tooltip])
+    }, [tooltip, focus, isDragged])
 
     useEffect(() => {
         setPosition(style());
