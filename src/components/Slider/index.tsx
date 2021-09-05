@@ -17,7 +17,7 @@ export type RangeSliderOptions = {
     disabled: boolean,
     mode: 'vertical' | 'horizontal',
     label: string,
-    showCurrent: boolean,
+    tooltip: 'never' | 'always' | 'focus',
     transition: boolean,
     value: any;
     onChange: (item) => void,
@@ -32,7 +32,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     disabled = false,
     mode = 'horizontal',
     label,
-    showCurrent,
+    tooltip='never',
     transition = true,
     onChange,
     range= false,
@@ -147,6 +147,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                         onDragEnd={ handleDragEnd }
                         onDragStart={ handleDragStart }
                         railSize={ sliderSize }
+                        tooltip={ tooltip }
                         value={ firstValue }
                     />
 
@@ -160,6 +161,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                             onDragEnd={ handleDragEnd }
                             onDragStart={ handleDragStart }
                             railSize={ sliderSize }
+                            tooltip={ tooltip }
                             value={ secondValue }
                         />
                     }

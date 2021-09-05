@@ -50,3 +50,19 @@ export const Dot = styled('div')`
   text-align: center;
   transform: translate(-50%, -50%);
 `
+
+export const DotTooltip = styled('div')`
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    padding: 4px 4px 12px;
+    font-size: 16px;
+    color: red;
+    transform: translateX(-50%);
+    font-weight: 500;
+    pointer-events: none;
+`

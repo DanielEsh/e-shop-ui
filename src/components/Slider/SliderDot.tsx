@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 
-import {Dot} from "./Slider.styles";
+import {Dot, DotTooltip} from "./Slider.styles";
 
-const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, railSize}, ref) => {
+const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, tooltip, railSize}, ref) => {
     const [position, setPosition] = useState(null);
     const [isClick, setClick] = useState<boolean>(false)
     const [startX, setStartX] = useState(0);
@@ -22,6 +22,19 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
             transition: 'left 0s ease'
         }
     }
+    
+    const showTooltip = useMemo(() => {
+        switch (tooltip) {
+        case 'always':
+            return true;
+        case 'never':
+            return false;
+        case 'focus':
+            return true;
+        default:
+            return false;
+        }
+    }, [tooltip])
 
     useEffect(() => {
         setPosition(style());
@@ -99,15 +112,24 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
 
 
     return (
-        <Dot
-            onDragEnd={ handleDragEnd }
-            onDragStart={ handleDragStart }
-            onMouseDown={ handleMouseDown }
-            onMouseEnter={ handleMouseEnter }
-            onMouseLeave={ handleMouseLeave }
-            style={ position }
-            tabindex={ 0 }
-        />
+        <>
+            <Dot
+                onDragEnd={ handleDragEnd }
+                onDragStart={ handleDragStart }
+                onMouseDown={ handleMouseDown }
+                onMouseEnter={ handleMouseEnter }
+                onMouseLeave={ handleMouseLeave }
+                style={ position }
+                tabindex={ 0 }
+            >
+                {
+                    showTooltip &&
+                    <DotTooltip>
+                        { value }
+                    </DotTooltip>
+                }
+            </Dot>
+        </>
     );
 });
 
