@@ -20,6 +20,7 @@ export type RangeSliderOptions = {
     showCurrent: boolean,
     transition: boolean,
     value: any;
+    onChange: (item) => void,
 }
 
 const RangeSlider: React.FC<RangeSliderOptions> = ({
@@ -32,6 +33,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     label,
     showCurrent,
     transition = true,
+    onChange
 }) => {
 
     const [firstValue, setFirstValue] = useState<number>(min);
@@ -54,17 +56,14 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     useEffect(() => {
         if (sliderEl.current) {
             sliderEl.current = false;
-            console.log('MOUNT');
             handleResetSize();
             window.addEventListener('resize', handleResetSize);
             setValues(value);
             return;
         }
-        console.log('Update', sliderEl);
-        //const newValue = [firstValue, secondValue];
 
+        onChange([firstValue, secondValue]);
         return () => {
-            console.log('Destroy');
             window.removeEventListener('resize', handleResetSize);
         }
     }, [firstValue, secondValue]);
@@ -93,7 +92,6 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     }, [maxValue, minValue]);
 
     const setValues = (value) => {
-        console.log('value', value);
         if (min > max) {
             return;
         }
@@ -102,7 +100,6 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
             setOldValue(value);
             setFirstValue(value[0]);
             setSecondValue(value[1]);
-            return;
         }
     }
 

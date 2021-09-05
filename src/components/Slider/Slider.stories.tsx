@@ -16,6 +16,7 @@ Standard.args = {
     max: 80,
     value: [
         30, 60
-    ]
+    ],
+    onChange: (value) => console.log('value', value),
 };
 
