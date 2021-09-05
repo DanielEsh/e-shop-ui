@@ -21,6 +21,7 @@ export type RangeSliderOptions = {
     transition: boolean,
     value: any;
     onChange: (item) => void,
+    range: boolean,
 }
 
 const RangeSlider: React.FC<RangeSliderOptions> = ({
@@ -33,7 +34,8 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     label,
     showCurrent,
     transition = true,
-    onChange
+    onChange,
+    range= false,
 }) => {
 
     const [firstValue, setFirstValue] = useState<number>(min);
@@ -62,7 +64,12 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
             return;
         }
 
-        onChange([firstValue, secondValue]);
+        if (range) {
+            onChange([firstValue, secondValue]);
+        } else {
+            onChange(firstValue);
+        }
+
         return () => {
             window.removeEventListener('resize', handleResetSize);
         }
@@ -77,11 +84,15 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     }, [firstValue, secondValue]);
 
     const progressSize = useMemo(() => {
-        return `${100 * (maxValue - minValue) / (max - min)}%`;
+        return range
+            ? `${100 * (maxValue - minValue) / (max - min)}%`
+            : `${100 * (firstValue - min) / (max - min)}%`
     }, [maxValue, minValue]);
 
     const progressStart = useMemo(() => {
-        return `${100 * (minValue - min) / (max - min)}%`;
+        return range
+            ? `${100 * (minValue - min) / (max - min)}%`
+            : '0%'
     }, [minValue]);
 
     const progressStyle = useMemo(() => {
@@ -96,11 +107,15 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
             return;
         }
 
-        if (value.length) {
+        if (value.length && range) {
             setOldValue(value);
             setFirstValue(value[0]);
             setSecondValue(value[1]);
+            return;
         }
+
+        setOldValue(value);
+        setFirstValue(value);
     }
 
     const handleDragStart = () => {
@@ -135,16 +150,19 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                         value={ firstValue }
                     />
 
-                    <SliderDot
-                        isDragged={ isDragged }
-                        max={ max }
-                        min={ min }
-                        onChangeValue={ (value) => setSecondValue(value) }
-                        onDragEnd={ handleDragEnd }
-                        onDragStart={ handleDragStart }
-                        railSize={ sliderSize }
-                        value={ secondValue }
-                    />
+                    {
+                        range &&
+                        <SliderDot
+                            isDragged={ isDragged }
+                            max={ max }
+                            min={ min }
+                            onChangeValue={ (value) => setSecondValue(value) }
+                            onDragEnd={ handleDragEnd }
+                            onDragStart={ handleDragStart }
+                            railSize={ sliderSize }
+                            value={ secondValue }
+                        />
+                    }
 
                     <ProgressBar progressStyle={ progressStyle } />
                 </Track>

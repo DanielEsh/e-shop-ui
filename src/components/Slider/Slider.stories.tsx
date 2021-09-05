@@ -10,13 +10,21 @@ export default {
 
 const Template: Story<RangeSliderOptions> = (args) => <RangeSlider { ...args } />;
 
-export const Standard = Template.bind({});
-Standard.args = {
+export const Range = Template.bind({});
+Range.args = {
     min: 0,
     max: 80,
     value: [
         30, 60
     ],
     onChange: (value) => console.log('value', value),
+    range: true,
 };
 
+export const Standart = Template.bind({});
+Standart.args = {
+    min: 0,
+    max: 80,
+    value: 30,
+    onChange: (value) => console.log('value', value),
+};
