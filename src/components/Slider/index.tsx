@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef, useMemo} from 'react';
+import cn from 'classnames';
 
 import SliderDot from "./SliderDot";
 
@@ -15,8 +16,7 @@ export type RangeSliderOptions = {
     min: number,
     max: number,
     disabled: boolean,
-    mode: 'vertical' | 'horizontal',
-    label: string,
+    direction: 'vertical' | 'horizontal',
     tooltip: 'never' | 'always' | 'focus',
     transition: boolean,
     value: any;
@@ -30,8 +30,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     max,
     value,
     disabled = false,
-    mode = 'horizontal',
-    label,
+    direction = 'horizontal',
     tooltip='never',
     transition = true,
     onChange,
@@ -47,6 +46,10 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
 
     const sliderEl = useRef(true);
     const railEl = useRef(null);
+
+    const classes = cn({
+        '_vertical': direction === 'vertical',
+    })
 
 
     const handleResetSize = () => {
@@ -133,6 +136,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
 
     return (
         <SliderRoot
+            className={ classes }
             ref={ sliderEl }
             role="slider"
         >
