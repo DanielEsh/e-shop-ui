@@ -35,6 +35,15 @@ export const ProgressBar = styled('div')`
   background-color: red;
 `
 
+export const DotHandle = styled('div')`
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: red;
+    transition: transform .3s ease-in-out;
+`
+
 export const Dot = styled('div')`
   position: absolute;
   top: 50%;
@@ -42,13 +51,21 @@ export const Dot = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
   outline: none;
-  background-color: red;
   text-align: center;
   transform: translate(-50%, -50%);
+  
+  &.is-hovering {
+    ${DotHandle} {
+      transform: scale(1.3);
+    }
+  }
+  
+  &:hover {
+    ${DotHandle} {
+      transform: scale(1.3);
+    }
+  }
 `
 
 export const DotTooltip = styled('div')`

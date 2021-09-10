@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useMemo} from 'react';
+import cn from 'classnames';
 
-import {Dot, DotTooltip} from "./Slider.styles";
+import {Dot, DotTooltip, DotHandle} from "./Slider.styles";
 
 const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, tooltip, focus, railSize}, ref) => {
     const [position, setPosition] = useState(null);
@@ -9,6 +10,10 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
     const [startPosition, setStartPosition] = useState(0)
     const [currentX, setCurrentX] = useState(0);
     const [isHovering, setIsHovering] = useState(false);
+
+    const classes = cn({
+        'is-hovering': isHovering || isDragged,
+    })
 
     const calculateCurrentPosition = (value) => {
         return `${(value - min) / (max - min) * 100}%`;
@@ -114,6 +119,7 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
     return (
         <>
             <Dot
+                className={ classes }
                 onDragEnd={ handleDragEnd }
                 onDragStart={ handleDragStart }
                 onMouseDown={ handleMouseDown }
@@ -128,6 +134,7 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
                         { value }
                     </DotTooltip>
                 }
+                <DotHandle />
             </Dot>
         </>
     );
