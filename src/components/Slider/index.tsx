@@ -134,6 +134,37 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
         setIsDragged(false);
     }
 
+    const setPosition = (percent) => {
+        let dot = 'dot1';
+        const targetValue = min + percent * (max - min) / 100;
+        if (range) {
+            if (Math.abs(minValue - targetValue) < Math.abs(maxValue - targetValue)) {
+                dot = firstValue < secondValue ? 'dot1' : 'dot2';
+            } else {
+                dot = firstValue > secondValue ? 'dot1' : 'dot2';
+            }
+
+            if (dot === 'dot1') {
+                setValues([targetValue, secondValue])
+            } else {
+                setValues([firstValue, targetValue])
+            }
+            return;
+        }
+
+        setValues(targetValue);
+    }
+
+    const handleRailClick = (e) => {
+        if (isDragged) {
+            return;
+        }
+
+        const sliderOffsetLeft = railEl.current.getBoundingClientRect().left;
+        const currentValue = (e.clientX - sliderOffsetLeft) / sliderSize * 100;
+        setPosition(currentValue);
+    }
+
     return (
         <SliderRoot
             className={ classes }
@@ -144,7 +175,10 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                 <span>{ min }</span>
                 <span>{ max }</span>
             </SliderCurrentValue>
-            <Rail ref={ railEl }>
+            <Rail
+                ref={ railEl }
+                onClick={ handleRailClick }
+            >
                 <Track>
                     <SliderDot
                         focus={ focusDot === 1 }
