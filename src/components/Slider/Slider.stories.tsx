@@ -82,3 +82,12 @@ Steps.args = {
     showMaxMin: true,
     tooltip: 'focus',
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    min: 0,
+    max: 80,
+    step: 10,
+    value: 0,
+    disabled: true,
+};

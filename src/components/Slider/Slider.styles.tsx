@@ -4,6 +4,12 @@ import {theme} from "../Theme";
 export const SliderRoot = styled('div')`
     width: 100%;
     height: 20px;
+  
+    &.is-disabled {
+      z-index: 10;
+      opacity: .5;
+      cursor: not-allowed;
+    }
 `
 
 export const SliderCurrentValue = styled('div')`
@@ -67,6 +73,14 @@ export const Dot = styled('div')`
   text-align: center;
   transform: translate(-50%, -50%);
   
+  &.is-disabled {
+    ${DotHandle} {
+      opacity: .5;
+      transform: scale(1);
+      cursor: not-allowed;
+    }
+  }
+  
   &.is-hovering {
     ${DotHandle} {
       transform: scale(1.3);
@@ -76,6 +90,12 @@ export const Dot = styled('div')`
   &:hover {
     ${DotHandle} {
       transform: scale(1.3);
+    }
+    
+    &.is-disabled {
+      ${DotHandle} {
+        transform: scale(1);
+      }
     }
   }
 `

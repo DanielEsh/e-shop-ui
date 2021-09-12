@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import {Dot, DotTooltip, DotHandle} from "./Slider.styles";
 
-const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, tooltip, focus, railSize, step}, ref) => {
+const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, tooltip, focus, railSize, step, disabled}, ref) => {
     const [position, setPosition] = useState(null);
     const [isClick, setClick] = useState<boolean>(false)
     const [startX, setStartX] = useState(0);
@@ -12,7 +12,8 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
     const [isHovering, setIsHovering] = useState(false);
 
     const classes = cn({
-        'is-hovering': isHovering || isDragged,
+        'is-hovering': isHovering || isDragged && !disabled,
+        'is-disabled': disabled,
     })
 
     const calculateCurrentPosition = (value) => {
@@ -84,6 +85,10 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
 
     const rposition = (percent) => {
         // console.log('rpos', percent);
+        if (disabled) {
+            return;
+        }
+
         if (percent < 0) {
             percent = 0;
         }

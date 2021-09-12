@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef, useMemo} from 'react';
+import cn from 'classnames';
 
 import SliderDot from "./SliderDot";
 
@@ -48,6 +49,10 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
 
     const sliderEl = useRef(true);
     const railEl = useRef(null);
+
+    const classes = cn({
+        'is-disabled': disabled,
+    })
 
 
     const handleResetSize = () => {
@@ -123,7 +128,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     }, [step, firstValue, max, min, range]);
 
     const setValues = (value) => {
-        if (min > max) {
+        if (min > max || disabled) {
             return;
         }
 
@@ -181,6 +186,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
 
     return (
         <SliderRoot
+            className={ classes }
             ref={ sliderEl }
             role="slider"
         >
@@ -197,6 +203,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
             >
                 <Track>
                     <SliderDot
+                        disabled={ disabled }
                         focus={ focusDot === 1 }
                         isDragged={ isDragged }
                         max={ max }
@@ -215,6 +222,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                     {
                         range &&
                         <SliderDot
+                            disabled={ disabled }
                             focus={ focusDot === 2 }
                             isDragged={ isDragged }
                             max={ max }
