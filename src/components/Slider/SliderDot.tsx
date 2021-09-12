@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import {Dot, DotTooltip, DotHandle} from "./Slider.styles";
 
-const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, tooltip, focus, railSize}, ref) => {
+const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, tooltip, focus, railSize, step}, ref) => {
     const [position, setPosition] = useState(null);
     const [isClick, setClick] = useState<boolean>(false)
     const [startX, setStartX] = useState(0);
@@ -91,7 +91,7 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
             percent = 100;
         }
 
-        const lengthPerStep = 100 / ((max - min) / 1);
+        const lengthPerStep = 100 / ((max - min) / step);
         const steps = Math.round(percent / lengthPerStep);
         let value = steps * lengthPerStep * (max - min) * 0.01 + min;
         value = parseFloat(value.toFixed(1));

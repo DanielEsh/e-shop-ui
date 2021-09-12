@@ -8,12 +8,14 @@ import {
     Track,
     ProgressBar,
     SliderCurrentValue,
+    Step,
 } from "./Slider.styles";
 
 export type RangeSliderOptions = {
     theme: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark',
     min: number,
     max: number,
+    step: number,
     disabled: boolean,
     tooltip: 'never' | 'always' | 'focus',
     transition: boolean,
@@ -27,6 +29,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     min,
     max,
     value,
+    step= 1,
     disabled = false,
     tooltip='never',
     transition = true,
@@ -101,6 +104,22 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
         }
     }, [maxValue, minValue]);
 
+    const stops = useMemo(() => {
+        if (step === 0) {
+            return [];
+        }
+
+        const stopCount = (max - min) / step;
+        const stepWidth = 100 * step / (max - min);
+        const result = [];
+
+        for (let i = 1; i < stopCount; i++) {
+            result.push(i * stepWidth);
+        }
+
+        return result;
+    }, [step, firstValue, max, min, range]);
+
     const setValues = (value) => {
         if (min > max) {
             return;
@@ -149,7 +168,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     }
 
     const handleRailClick = (e) => {
-        if (isDragged) {
+        if (isDragged || step > 1) {
             return;
         }
 
@@ -168,8 +187,8 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                 <span>{ max }</span>
             </SliderCurrentValue>
             <Rail
-                ref={ railEl }
                 onClick={ handleRailClick }
+                ref={ railEl }
             >
                 <Track>
                     <SliderDot
@@ -183,6 +202,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                         onDragEnd={ handleDragEnd }
                         onDragStart={ () => handleDragStart(1) }
                         railSize={ sliderSize }
+                        step={ step }
                         tooltip={ tooltip }
                         value={ firstValue }
                     />
@@ -198,12 +218,23 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                             onDragEnd={ handleDragEnd }
                             onDragStart={ () => handleDragStart(2) }
                             railSize={ sliderSize }
+                            step={ step }
                             tooltip={ tooltip }
                             value={ secondValue }
                         />
                     }
 
                     <ProgressBar progressStyle={ progressStyle } />
+
+                    {
+                        stops.length &&
+                        stops.map((stop, index) => (
+                            <Step
+                                key={ index }
+                                left={ stop }
+                            />
+                        ))
+                    }
                 </Track>
             </Rail>
         </SliderRoot>

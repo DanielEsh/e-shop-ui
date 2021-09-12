@@ -35,6 +35,18 @@ export const ProgressBar = styled('div')`
   background-color: red;
 `
 
+export const Step = styled('div')`
+  position: absolute;
+  top: 50%;
+  left: ${({left}) => left}%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: red;
+  border: 1px solid red;
+  transform: translate(-50%, -50%);
+`
+
 export const DotHandle = styled('div')`
     position: absolute;
     width: 16px;

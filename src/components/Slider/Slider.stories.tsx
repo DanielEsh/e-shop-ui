@@ -69,10 +69,11 @@ RangeFocusTooltip.args = {
     range: true,
 };
 
-export const Horizontal = Template.bind({});
-Horizontal.args = {
+export const Steps = Template.bind({});
+Steps.args = {
     min: 0,
     max: 80,
-    value: 30,
-    direction: 'vertical',
+    step: 10,
+    value: 0,
+    tooltip: 'focus',
 };
