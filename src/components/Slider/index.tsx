@@ -227,7 +227,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                     <ProgressBar progressStyle={ progressStyle } />
 
                     {
-                        stops.length &&
+                        step >= 2 &&
                         stops.map((stop, index) => (
                             <Step
                                 key={ index }
