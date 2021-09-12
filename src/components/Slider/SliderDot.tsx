@@ -3,7 +3,20 @@ import cn from 'classnames';
 
 import {Dot, DotTooltip, DotHandle} from "./Slider.styles";
 
-const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, onDragEnd, onChangeValue, tooltip, focus, railSize, step, disabled}, ref) => {
+const SliderDot = ({
+    value,
+    max, 
+    min, 
+    isDragged, 
+    onDragStart,
+    onDragEnd,
+    onChangeValue,
+    tooltip,
+    focus,
+    railSize,
+    step,
+    disabled
+}) => {
     const [position, setPosition] = useState(null);
     const [isClick, setClick] = useState<boolean>(false)
     const [startX, setStartX] = useState(0);
@@ -28,7 +41,7 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
             transition: 'left 0s ease'
         }
     }
-    
+
     const showTooltip = useMemo(() => {
         switch (tooltip) {
         case 'always':
@@ -143,6 +156,6 @@ const SliderDot = React.forwardRef(({value, max, min, isDragged, onDragStart, on
             </Dot>
         </>
     );
-});
+}
 
 export default SliderDot;
