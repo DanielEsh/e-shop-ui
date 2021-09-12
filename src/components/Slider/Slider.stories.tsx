@@ -24,6 +24,7 @@ StandartAlwaysTooltip.args = {
     max: 80,
     value: 30,
     tooltip: 'always',
+    showMaxMin: true,
     onChange: (value) => console.log('value', value),
 };
 
@@ -32,6 +33,7 @@ StandartFocusTooltip.args = {
     min: 0,
     max: 80,
     value: 30,
+    showMaxMin: true,
     tooltip: 'focus',
 };
 
@@ -54,6 +56,7 @@ RangeAlwaysTooltip.args = {
         30, 60
     ],
     tooltip: 'always',
+    showMaxMin: true,
     onChange: (value) => console.log('value', value),
     range: true,
 };
@@ -66,6 +69,7 @@ RangeFocusTooltip.args = {
         30, 60
     ],
     tooltip: 'focus',
+    showMaxMin: true,
     range: true,
 };
 
@@ -75,5 +79,6 @@ Steps.args = {
     max: 80,
     step: 10,
     value: 0,
+    showMaxMin: true,
     tooltip: 'focus',
 };

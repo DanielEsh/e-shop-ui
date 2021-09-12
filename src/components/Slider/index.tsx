@@ -22,6 +22,7 @@ export type RangeSliderOptions = {
     value: any;
     onChange?: (item) => void,
     range: boolean,
+    showMaxMin: boolean,
 }
 
 const RangeSlider: React.FC<RangeSliderOptions> = ({
@@ -35,6 +36,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     transition = true,
     onChange,
     range= false,
+    showMaxMin= false,
 }) => {
 
     const [firstValue, setFirstValue] = useState<number>(min);
@@ -182,10 +184,13 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
             ref={ sliderEl }
             role="slider"
         >
-            <SliderCurrentValue>
-                <span>{ min }</span>
-                <span>{ max }</span>
-            </SliderCurrentValue>
+            {
+                showMaxMin &&
+                <SliderCurrentValue>
+                    <span>{ min }</span>
+                    <span>{ max }</span>
+                </SliderCurrentValue>
+            }
             <Rail
                 onClick={ handleRailClick }
                 ref={ railEl }
