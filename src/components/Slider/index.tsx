@@ -13,7 +13,7 @@ import {
 } from "./Slider.styles";
 
 export type RangeSliderOptions = {
-    theme: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark',
+    color: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark',
     min: number,
     max: number,
     step: number,
@@ -27,14 +27,13 @@ export type RangeSliderOptions = {
 }
 
 const RangeSlider: React.FC<RangeSliderOptions> = ({
-    theme = 'primary',
+    color = 'primary',
     min,
     max,
     value,
     step= 1,
     disabled = false,
     tooltip='never',
-    transition = true,
     onChange,
     range= false,
     showMaxMin= false,
@@ -44,7 +43,6 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
     const [secondValue, setSecondValue] = useState<number>(max);
     const [isDragged, setIsDragged] = useState<boolean>(false);
     const [sliderSize, setSliderSize] = useState(1);
-    const [oldValue, setOldValue] = useState([]);
     const [focusDot, setFocusDot] = useState(0);
 
     const sliderEl = useRef(true);
@@ -133,22 +131,20 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
         }
 
         if (value.length && range) {
-            setOldValue(value);
             setFirstValue(value[0]);
             setSecondValue(value[1]);
             return;
         }
 
-        setOldValue(value);
         setFirstValue(value);
     }
 
-    const handleDragStart = (index) => {
+    function handleDragStart(index) {
         setFocusDot(index);
         setIsDragged(true);
     }
 
-    const handleDragEnd = () => {
+    function handleDragEnd() {
         setFocusDot(0);
         setIsDragged(false);
     }
@@ -174,13 +170,13 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
         setValues(targetValue);
     }
 
-    const handleRailClick = (e) => {
+    function handleRailClick(event: React.MouseEvent) {
         if (isDragged || step > 1) {
             return;
         }
 
         const sliderOffsetLeft = railEl.current.getBoundingClientRect().left;
-        const currentValue = (e.clientX - sliderOffsetLeft) / sliderSize * 100;
+        const currentValue = (event.clientX - sliderOffsetLeft) / sliderSize * 100;
         setPosition(currentValue);
     }
 

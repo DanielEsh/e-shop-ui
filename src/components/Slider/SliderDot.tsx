@@ -11,7 +11,7 @@ type SliderDotOptions = {
     value: number,
     max: number,
     min: number,
-    isDragged: () => void,
+    isDragged: boolean,
     onDragStart: () => void,
     onDragEnd: () => void,
     onChangeValue: (currentValue) => void,
