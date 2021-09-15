@@ -54,7 +54,7 @@ module.exports = {
         //Variables
         "no-label-var": "warn",
         "no-undef-init": "warn",
-        "@typescript-eslint/no-use-before-define": ["error"],
+        "@typescript-eslint/no-use-before-define": ["off"],
         "comma-dangle": ["warn", "only-multiline"],
         "comma-spacing": ["warn", {"before": false, "after": true}],
         "comma-style": ["warn", "last"],

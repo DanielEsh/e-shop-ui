@@ -6,7 +6,7 @@
         "build": "rollup -c",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook",
-        "lint:css":"stylelint './src/**/*.tsx'",
+        "lint:css":"stylelint './src/**/*.styles.tsx'",
         "lint:eslint": "eslint ./src",
         "lint:eslint:fix": "eslint ./src --fix"
     },

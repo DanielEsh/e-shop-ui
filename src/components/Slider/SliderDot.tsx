@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo, useCallback} from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import cn from 'classnames';
 
 import {
@@ -7,7 +7,22 @@ import {
     DotHandle
 } from "./Slider.styles";
 
-const SliderDot = ({
+type SliderDotOptions = {
+    value: number,
+    max: number,
+    min: number,
+    isDragged: () => void,
+    onDragStart: () => void,
+    onDragEnd: () => void,
+    onChangeValue: (currentValue) => void,
+    tooltip: string,
+    focus: boolean,
+    railSize: number,
+    step: number,
+    disabled: boolean,
+}
+
+const SliderDot: React.FC<SliderDotOptions> = ({
     value,
     max, 
     min, 
@@ -62,22 +77,8 @@ const SliderDot = ({
         setPosition(style);
     }, [value])
 
-    const handleMouseEnter = () => {
-        setIsHovering(true);
-    }
-
-    const handleMouseLeave = () => {
-        setIsHovering(false);
-    }
-
-    /** When clicked on dot, start dragged end touch events **/
-    const handleMouseDown = (event: React.MouseEvent) => {
-        onDragStart(event)
-        bindEvents();
-    }
-
     /** Calculate current value, change dot position **/
-    const changePosition = (percent: number) => {
+    function changePosition(percent: number) {
         if (disabled) {
             return;
         }
@@ -97,26 +98,41 @@ const SliderDot = ({
     }
 
     /** When dragStart set started values **/
-    const handleDragStart = (event: React.MouseEvent) => {
+    function handleDragStart(event: React.MouseEvent) {
         onDragStart();
         setStartX(event.clientX);
         setStartPosition(parseFloat(currentPosition));
     }
 
     /** When dragged we listen mouse events end set new position on Dot **/
-    const handleDragged = (event: React.MouseEvent) => {
+    function handleDragged(event) {
         const currentXPosition = event.clientX;
         const diff = (currentXPosition - startX) / railSize * 100;
         changePosition(startPosition + diff);
     }
 
     /** Clear events **/
-    const handleDragEnd = () => {
+    function handleDragEnd() {
         onDragEnd();
         unbindEvents();
     }
 
-    const bindEvents = () => {
+
+    function handleMouseEnter() {
+        setIsHovering(true);
+    }
+
+    function handleMouseLeave() {
+        setIsHovering(false);
+    }
+
+    /** When clicked on dot, start dragged end touch events **/
+    function handleMouseDown() {
+        onDragStart()
+        bindEvents();
+    }
+
+    function bindEvents() {
         window.addEventListener('mousemove', handleDragged);
         window.addEventListener('touchmove', handleDragged);
         window.addEventListener('mouseup', handleDragEnd);
@@ -124,14 +140,13 @@ const SliderDot = ({
         window.addEventListener('contextmenu', handleDragEnd);
     }
 
-    const unbindEvents = () => {
+    function unbindEvents() {
         window.removeEventListener('mousemove', handleDragged);
         window.removeEventListener('touchmove', handleDragged);
         window.removeEventListener('mouseup', handleDragEnd);
         window.removeEventListener('touchend', handleDragEnd);
         window.removeEventListener('contextmenu', handleDragEnd);
     }
-
 
 
     return (
