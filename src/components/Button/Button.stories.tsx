@@ -12,7 +12,7 @@ const Template: Story<ButtonProps> = (args) => <Button { ...args } />;
 
 export const PrimaryMedium = Template.bind({});
 PrimaryMedium.args = {
-    theme: 'primary',
+    color: 'primary',
     label: 'Test Button',
     size: 'medium',
 };
@@ -27,7 +27,7 @@ RoundedOutline.args = {
 
 export const SuccessLarge = Template.bind({});
 SuccessLarge.args = {
-    theme: 'success',
+    color: 'success',
     size: 'large',
     label: 'Button',
 };

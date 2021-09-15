@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Btn, BtnHover, BtnText } from './Button-styles'
 
 export type ButtonProps = {
-    theme: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark'
+    color: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark'
     size: 'small' | 'medium' | 'large';
     label: string;
     outline?: boolean,
@@ -15,7 +15,7 @@ export type ButtonProps = {
 
 export const Button: React.FC<ButtonProps> = ({
     type = 'button',
-    theme = 'primary',
+    color = 'primary',
     size = 'medium',
     label,
     rounded,
@@ -45,7 +45,7 @@ export const Button: React.FC<ButtonProps> = ({
 
     return (
         <Btn
-            className={ [`color--${theme}`, `size--${size}`, disabled ? 'is-disabled' : '', outline ? 'is-outline' : ''].join(' ') }
+            className={ [`color--${color}`, `size--${size}`, disabled ? 'is-disabled' : '', outline ? 'is-outline' : ''].join(' ') }
             disabled={ disabled }
             isRounded={ rounded }
             onClick={ onClick }
