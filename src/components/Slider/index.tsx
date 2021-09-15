@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useMemo} from 'react';
+import React, {useState, useEffect, useRef, useMemo, useCallback} from 'react';
 import cn from 'classnames';
 
 import SliderDot from "./SliderDot";
@@ -19,8 +19,7 @@ export type RangeSliderOptions = {
     step: number,
     disabled: boolean,
     tooltip: 'never' | 'always' | 'focus',
-    transition: boolean,
-    value: any;
+    value: number | [];
     onChange?: (item) => void,
     range: boolean,
     showMaxMin: boolean,
@@ -125,7 +124,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
         return result;
     }, [step, firstValue, max, min, range]);
 
-    const setValues = (value) => {
+    const setValues = useCallback((value) => {
         if (min > max || disabled) {
             return;
         }
@@ -137,17 +136,17 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
         }
 
         setFirstValue(value);
-    }
+    }, [firstValue, secondValue])
 
-    function handleDragStart(index) {
+    const handleDragStart = useCallback((index) => {
         setFocusDot(index);
         setIsDragged(true);
-    }
+    }, [focusDot, isDragged])
 
-    function handleDragEnd() {
+    const handleDragEnd = useCallback(() => {
         setFocusDot(0);
         setIsDragged(false);
-    }
+    }, [focusDot, isDragged]);
 
     const setPosition = (percent) => {
         let dot = 'dot1';
