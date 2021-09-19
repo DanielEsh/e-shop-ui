@@ -1,6 +1,49 @@
 import styled from "styled-components";
 import {theme} from "../Theme";
 
+export const ProgressBar = styled('div')`
+  position: absolute;
+  left: ${({progressStyle}) => progressStyle.left};
+  bottom: 0;
+  height: 2px;
+  width: ${({progressStyle}) => progressStyle.width};
+`
+
+export const Step = styled('div')`
+  position: absolute;
+  top: 50%;
+  left: ${({left}) => left}%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: red;
+  border: 1px solid red;
+  transform: translate(-50%, -50%);
+`
+
+export const DotTooltip = styled('div')`
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    padding: 4px 4px 12px;
+    font-size: 16px;
+    transform: translateX(-50%);
+    font-weight: 500;
+    pointer-events: none;
+`
+
+export const DotHandle = styled('div')`
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transition: transform .3s ease-in-out;
+`
+
 export const SliderRoot = styled('div')`
     width: 100%;
     height: 20px;
@@ -9,6 +52,15 @@ export const SliderRoot = styled('div')`
       z-index: 10;
       opacity: .5;
       cursor: not-allowed;
+    }
+  
+    &.color-primary {
+      ${ProgressBar} {
+        background-color: ${theme.colors.primary};
+      }
+      ${DotHandle} {
+        background-color: ${theme.colors.primary};
+      }
     }
 `
 
@@ -30,36 +82,6 @@ export const Track = styled('div')`
   background-color: #ccd3da;
   width: 100%;
   height: 1px;
-`
-
-export const ProgressBar = styled('div')`
-  position: absolute;
-  left: ${({progressStyle}) => progressStyle.left};
-  bottom: 0;
-  height: 2px;
-  width: ${({progressStyle}) => progressStyle.width};
-  background-color: red;
-`
-
-export const Step = styled('div')`
-  position: absolute;
-  top: 50%;
-  left: ${({left}) => left}%;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: red;
-  border: 1px solid red;
-  transform: translate(-50%, -50%);
-`
-
-export const DotHandle = styled('div')`
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: red;
-    transition: transform .3s ease-in-out;
 `
 
 export const Dot = styled('div')`
@@ -98,20 +120,4 @@ export const Dot = styled('div')`
       }
     }
   }
-`
-
-export const DotTooltip = styled('div')`
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 36px;
-    padding: 4px 4px 12px;
-    font-size: 16px;
-    color: red;
-    transform: translateX(-50%);
-    font-weight: 500;
-    pointer-events: none;
 `

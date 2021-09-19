@@ -49,7 +49,7 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
 
     const classes = cn({
         'is-disabled': disabled,
-    })
+    }, `color-${color}`)
 
 
     const handleResetSize = () => {
