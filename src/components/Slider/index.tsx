@@ -179,6 +179,9 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
         setPosition(currentValue);
     }
 
+    const setFirst = useCallback((value) => setFirstValue(value), []);
+    const setSecond = useCallback((value) => setSecondValue(value), []);
+
     return (
         <SliderRoot
             className={ classes }
@@ -203,11 +206,9 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                         isDragged={ isDragged }
                         max={ max }
                         min={ min }
-                        onChangeValue={ (value) => {
-                            setFirstValue(value)
-                        } }
+                        onChangeValue={ setFirst }
                         onDragEnd={ handleDragEnd }
-                        onDragStart={ () => handleDragStart(1) }
+                        onDragStart={ useCallback(() => handleDragStart(1), [] ) }
                         railSize={ sliderSize }
                         step={ step }
                         tooltip={ tooltip }
@@ -222,9 +223,9 @@ const RangeSlider: React.FC<RangeSliderOptions> = ({
                             isDragged={ isDragged }
                             max={ max }
                             min={ min }
-                            onChangeValue={ (value) => setSecondValue(value) }
+                            onChangeValue={ setSecond }
                             onDragEnd={ handleDragEnd }
-                            onDragStart={ () => handleDragStart(2) }
+                            onDragStart={ useCallback(() => handleDragStart(2), [] ) }
                             railSize={ sliderSize }
                             step={ step }
                             tooltip={ tooltip }
