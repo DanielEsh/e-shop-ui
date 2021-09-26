@@ -8,33 +8,62 @@ export default {
     component: Button,
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => <Button { ...args } />;
+export const PrimaryMedium = () => {
+    return (
+        <Button>
+            Button
+        </Button>
+    )
+}
 
-export const PrimaryMedium = Template.bind({});
-PrimaryMedium.args = {
-    color: 'primary',
-    label: 'Test Button',
-    size: 'medium',
-};
+export const RoundedOutline = () => {
+    return (
+        <Button
+            outline
+            rounded
+            size={ 'medium' }
+        >
+            Button
+        </Button>
+    )
+}
 
-export const RoundedOutline = Template.bind({});
-RoundedOutline.args = {
-    label: 'Button',
-    size: 'medium',
-    outline: true,
-    rounded: true,
-};
+export const SuccessLarge = () => {
+    return (
+        <Button
+            color={ 'success' }
+            outline
+            rounded
+            size={ 'large' }
+        >
+            Button
+        </Button>
+    )
+}
 
-export const SuccessLarge = Template.bind({});
-SuccessLarge.args = {
-    color: 'success',
-    size: 'large',
-    label: 'Button',
-};
+export const DarkLarge = () => {
+    return (
+        <Button
+            color={ 'dark' }
+            outline
+            rounded
+            size={ 'large' }
+        >
+            Button
+        </Button>
+    )
+}
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-    size: 'small',
-    label: 'Button',
-    disabled: true,
-};
+export const Disabled = () => {
+    return (
+        <Button
+            color={ 'dark' }
+            disabled
+            outline
+            rounded
+            size={ 'large' }
+        >
+            Button
+        </Button>
+    )
+}

@@ -16,7 +16,8 @@ export const theme = {
         blackHover: '#3f4246'
     },
     transition: {
+        default: 'cubic-bezier(.25, .74, .22, .99)',
         ease: 'cubic-bezier(.25, .1, .25, 1)',
-        linear: 'cubic-bezier(0, 0, 1, 1)'
+        linear: 'cubic-bezier(0, 0, 1, 1)',
     }
 };

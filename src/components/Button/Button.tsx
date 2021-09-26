@@ -1,10 +1,16 @@
 import React, { useRef, useState } from 'react';
-import { Btn, BtnHover, BtnText } from './Button-styles'
+import cn from 'classnames';
+
+import { 
+    Btn, 
+    BtnHover, 
+    BtnText
+} from './Button.styled'
 
 export type ButtonProps = {
-    color: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark'
-    size: 'small' | 'medium' | 'large';
-    label: string;
+    color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark'
+    size?: 'small' | 'medium' | 'large';
+    children: string;
     outline?: boolean,
     rounded?: boolean,
     disabled?: boolean,
@@ -17,7 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
     type = 'button',
     color = 'primary',
     size = 'medium',
-    label,
+    children,
     rounded,
     outline,
     disabled,
@@ -26,14 +32,19 @@ export const Button: React.FC<ButtonProps> = ({
     const [positionX, setpositionX] = useState(50);
     const [positionY, setPositionY] = useState(50);
 
-    const button = useRef<HTMLButtonElement>(null);
+    const buttonEl = useRef<HTMLButtonElement>(null);
+
+    const classes = cn({
+        'is-disabled': disabled,
+        'is-outline': outline,
+    }, [`color--${color}`, `size--${size}`])
 
 
     const handleMouseListener = (e:React.MouseEvent) => {
-        const container = button.current;
+        const container = buttonEl.current;
         const event = e.nativeEvent;
 
-        if (!container) {return;}
+        if (!container) return;
 
         const x = event.offsetX / container.offsetWidth;
         const y = (event.offsetY + ((container.offsetWidth - container.offsetHeight) / 2)) / container.offsetWidth;
@@ -45,13 +56,13 @@ export const Button: React.FC<ButtonProps> = ({
 
     return (
         <Btn
-            className={ [`color--${color}`, `size--${size}`, disabled ? 'is-disabled' : '', outline ? 'is-outline' : ''].join(' ') }
+            ref={ buttonEl }
+            className={ classes }
             disabled={ disabled }
             isRounded={ rounded }
             onClick={ onClick }
-            onMouseEnter={ () => handleMouseListener }
+            onMouseEnter={ handleMouseListener }
             onMouseLeave={ handleMouseListener }
-            ref={ button }
             type={ type }
         >
             <BtnHover
@@ -59,7 +70,7 @@ export const Button: React.FC<ButtonProps> = ({
             />
 
             <BtnText>
-                {label}
+                { children }
             </BtnText>
 
         </Btn>

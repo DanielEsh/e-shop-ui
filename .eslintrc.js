@@ -20,7 +20,7 @@ module.exports = {
     "no-console": "warn",
         "array-callback-return": "warn",
         "class-methods-use-this": "warn",
-        "curly": ["warn", "all"],
+        "curly": ["warn", "multi"],
         "max-classes-per-file": ["warn", 1],
         "no-alert": "warn",
         "no-constructor-return": "warn",
@@ -100,11 +100,13 @@ module.exports = {
         "react/jsx-indent": ["error", 4],
         "react/jsx-key": "error",
         "react/jsx-max-props-per-line": ["error", {"maximum": 3}],
-        "react/jsx-no-bind": "error",
+        "react/jsx-no-bind": "off",
         "react/jsx-no-literals": "off",
         "react/jsx-no-target-blank": "error",
         "react/jsx-pascal-case": "error",
-        "react/jsx-sort-props": "error",
+        "react/jsx-sort-props": ["error", {
+            "reservedFirst": ["ref", "key"],
+        }],
         "react/jsx-space-before-closing": "error"
 }
 }
