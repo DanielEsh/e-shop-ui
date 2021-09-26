@@ -14,5 +14,9 @@ export const theme = {
         whiteHover: '#f7f7f7',
         black: '#2d2f33',
         blackHover: '#3f4246'
+    },
+    transition: {
+        ease: 'cubic-bezier(.25, .1, .25, 1)',
+        linear: 'cubic-bezier(0, 0, 1, 1)'
     }
 };
