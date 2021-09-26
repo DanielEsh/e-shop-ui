@@ -1,4 +1,6 @@
 import typescript from "rollup-plugin-typescript2";
+import { babel } from '@rollup/plugin-babel';
+
 import pkg from "./package.json";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
@@ -12,6 +14,7 @@ const plugins = [
     typescript({
         typescript: require("typescript"),
     }),
+    babel({ babelHelpers: 'bundled' }),
 ];
 
 export default [

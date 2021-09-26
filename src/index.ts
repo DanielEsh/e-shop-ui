@@ -1,3 +1,3 @@
-import {InitComponent} from "./components/InitComponent/index";
+import { Button } from "./components/Button";
 
-export { InitComponent };
+export { Button };
