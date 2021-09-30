@@ -1,23 +1,23 @@
-module.exports = {
+export default {
     "root": true,
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-    "ecmaFeatures": {
-        "jsx": true
-    },
-    "ecmaVersion": 12,
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
         "sourceType": "module"
-},
+    },
     "plugins": ["prettier", "react", "@typescript-eslint"],
     "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended"
-],
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended"
+    ],
     "rules": {
     //Best Practices
-    "no-console": "warn",
+        "no-console": "warn",
         "array-callback-return": "warn",
         "class-methods-use-this": "warn",
         "curly": ["warn", "multi"],
@@ -108,5 +108,5 @@ module.exports = {
             "reservedFirst": ["ref", "key"],
         }],
         "react/jsx-space-before-closing": "error"
-}
+    }
 }
