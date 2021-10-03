@@ -29,7 +29,7 @@ const Tooltip = ({
     content = 'content',
     clicked,
     placement = 'top',
-    contentOffset = 25,
+    contentOffset = 8,
     enterDelay = 250,
     leaveDelay = 250,
 }, ref) => {
@@ -99,9 +99,9 @@ const Tooltip = ({
         const target = targetEl.current;
 
         if (placement === 'top') {
-            content.style.top = `-${contentOffset}px`;
+            content.style.top = `-${content.clientHeight + contentOffset}px`;
         } else if (placement === 'bottom') {
-            content.style.top = `${contentOffset}px`;
+            content.style.bottom = `-${content.clientHeight + contentOffset}px`;
         } else if (placement === 'left') {
             content.style.left = `-${content.clientWidth}px`
         } else {

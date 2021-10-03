@@ -13,5 +13,9 @@ export const Target = styled('div')`
 export const Content = styled('div')`
     position: absolute;
     left: 50%;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
     transform: translateX(-50%);
 `
