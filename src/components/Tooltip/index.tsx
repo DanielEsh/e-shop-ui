@@ -117,7 +117,6 @@ const Tooltip = ({
                         ref={ contentEl }
                         onMouseEnter={ handleContentEnter }
                         onMouseLeave={ handleContentLeave }
-                        onKeyDown={ handlePressEsc }
                     >
                         { content }
                     </Content>
