@@ -30,11 +30,12 @@ const Tooltip = ({
     clicked,
     placement = 'top',
     contentOffset = 25,
-    enterDelay = 0,
-    leaveDelay = 0,
+    enterDelay = 250,
+    leaveDelay = 250,
 }, ref) => {
     const [isVisible, setVisible] = useState<boolean>(false);
     const [position, setPosition] = useState<PositionProps>(null);
+    const [timeout, setCloseTimout] = useState(null);
 
     const contentEl = useRef<HTMLDivElement>(null);
     const targetEl = useRef<HTMLDivElement>(null);
@@ -54,9 +55,8 @@ const Tooltip = ({
     }
 
     const hide = () => {
-        setTimeout( () => {
-            setVisible(false);
-        }, leaveDelay);
+        const timeout = setTimeout( () => setVisible(false), leaveDelay);
+        setCloseTimout(timeout);
     }
 
     const handleMouseEnter = () => {
@@ -66,6 +66,15 @@ const Tooltip = ({
 
     const handleMouseLeave = () => {
         if (clicked) return;
+        hide();
+    }
+
+    const handleContentEnter = () => {
+        clearTimeout(timeout);
+        setVisible(true);
+    }
+
+    const handleContentLeave = () => {
         hide();
     }
 
@@ -96,6 +105,8 @@ const Tooltip = ({
                 isVisible && (
                     <Content 
                         ref={ contentEl }
+                        onMouseEnter={ handleContentEnter }
+                        onMouseLeave={ handleContentLeave }
                     >
                         { content }
                     </Content>
