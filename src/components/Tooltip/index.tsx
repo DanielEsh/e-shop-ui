@@ -44,12 +44,12 @@ const Tooltip = ({
     )
 
     useEffect(() => {
-        setContentPosition();
     }, [])
 
     const show = () => {
         setTimeout( () => {
             setVisible(true);
+            setContentPosition();
         }, enterDelay);
     }
 
@@ -79,15 +79,15 @@ const Tooltip = ({
         const content = contentEl.current;
         const target = targetEl.current;
 
-        // if (placement === 'top') {
-        //     content.style.top = `-${contentOffset}px`;
-        // } else if (placement === 'bottom') {
-        //     content.style.top = `${contentOffset}px`;
-        // } else if (placement === 'left') {
-        //     content.style.left = `-${content.clientWidth}px`
-        // } else {
-        //     content.style.left  = `${content.clientWidth + target.clientWidth}px`
-        // }
+        if (placement === 'top') {
+            content.style.top = `-${contentOffset}px`;
+        } else if (placement === 'bottom') {
+            content.style.top = `${contentOffset}px`;
+        } else if (placement === 'left') {
+            content.style.left = `-${content.clientWidth}px`
+        } else {
+            content.style.left  = `${content.clientWidth + target.clientWidth}px`
+        }
     }
 
     return (

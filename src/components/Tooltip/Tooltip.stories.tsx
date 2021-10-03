@@ -42,4 +42,5 @@ export const Clicked = Template.bind({});
 Clicked.args = {
    children: <div>click me</div>,
    clicked: true,
+   placement: 'top',
 };
