@@ -12,6 +12,7 @@ export const Target = styled('div')`
 
 export const Content = styled('div')`
     position: absolute;
+    top: 130%;
     left: 50%;
     transform: translateX(-50%);
 `

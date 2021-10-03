@@ -22,6 +22,8 @@ export const Bottom = Template.bind({});
 Bottom.args = {
    children: <div>Activator</div>,
    placement: 'bottom',
+   enterDelay: 250,
+   leaveDelay: 250,
 };
 
 export const Left = Template.bind({});

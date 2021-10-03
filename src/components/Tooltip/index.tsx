@@ -13,6 +13,8 @@ export type TooltipProps = {
     clicked: boolean;
     placement: 'top' | 'left' | 'bottom' | 'right'
     contentOffset: number;
+    enterDelay: number;
+    leaveDelay: number;
 }
 
 type PositionProps = {
@@ -28,8 +30,10 @@ const Tooltip = ({
     clicked,
     placement = 'top',
     contentOffset = 25,
+    enterDelay = 0,
+    leaveDelay = 0,
 }, ref) => {
-    const [isVisible, setVisible] = useState<boolean>(true); // TODO: set false
+    const [isVisible, setVisible] = useState<boolean>(false);
     const [position, setPosition] = useState<PositionProps>(null);
 
     const contentEl = useRef<HTMLDivElement>(null);
@@ -43,14 +47,26 @@ const Tooltip = ({
         setContentPosition();
     }, [])
 
+    const show = () => {
+        setTimeout( () => {
+            setVisible(true);
+        }, enterDelay);
+    }
+
+    const hide = () => {
+        setTimeout( () => {
+            setVisible(false);
+        }, leaveDelay);
+    }
+
     const handleMouseEnter = () => {
         if (clicked) return;
-        // setVisible(true);
+        show();
     }
 
     const handleMouseLeave = () => {
         if (clicked) return;
-        // setVisible(false);
+        hide();
     }
 
     const handleClick = () => {
@@ -63,15 +79,15 @@ const Tooltip = ({
         const content = contentEl.current;
         const target = targetEl.current;
 
-        if (placement === 'top') {
-            content.style.top = `-${contentOffset}px`;
-        } else if (placement === 'bottom') {
-            content.style.top = `${contentOffset}px`;
-        } else if (placement === 'left') {
-            content.style.left = `-${content.clientWidth}px`
-        } else {
-            content.style.left  = `${content.clientWidth + target.clientWidth}px`
-        }
+        // if (placement === 'top') {
+        //     content.style.top = `-${contentOffset}px`;
+        // } else if (placement === 'bottom') {
+        //     content.style.top = `${contentOffset}px`;
+        // } else if (placement === 'left') {
+        //     content.style.left = `-${content.clientWidth}px`
+        // } else {
+        //     content.style.left  = `${content.clientWidth + target.clientWidth}px`
+        // }
     }
 
     return (
