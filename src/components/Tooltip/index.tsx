@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import cn from 'classnames';
 
 import { 
@@ -8,24 +8,53 @@ import {
  } from './Tooltip.styles';
 
 export type TooltipProps = {
-
+    children: HTMLElement;
+    content: string;
+    clicked: boolean;
 }
 
 const Tooltip = ({
-    children
+    children,
+    content = 'content',
+    clicked,
 }, ref) => {
+    const [isVisible, setVisible] = useState<boolean>(false);
 
     const classes = cn(
 
     )
 
+    const handleMouseEnter = () => {
+        if (clicked) return;
+        setVisible(true);
+    }
+
+    const handleMouseLeave = () => {
+        if (clicked) return;
+        setVisible(false);
+    }
+
+    const handleClick = () => {
+        if (clicked) {
+            setVisible(!isVisible)
+        }
+    }
+
     return (
         <Wrapper>
-            <Content>
-                Tooltip
-            </Content>
-            <Target>
-                Test element
+            {
+                isVisible && (
+                    <Content>
+                        { content }
+                    </Content>
+                )
+            }
+            <Target
+                onClick={ handleClick }
+                onMouseEnter={ handleMouseEnter }
+                onMouseLeave={ handleMouseLeave }
+            >
+                { children }
             </Target>
         </Wrapper>
     );

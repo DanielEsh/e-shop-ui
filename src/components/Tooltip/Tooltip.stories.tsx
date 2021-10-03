@@ -12,5 +12,11 @@ const Template: Story<TooltipProps> = (args) => <Tooltip { ...args } />;
 
 export const Default = Template.bind({});
 Default.args = {
-   
+   children: <div>Activator</div>
+};
+
+export const Clicked = Template.bind({});
+Clicked.args = {
+   children: <div>click me</div>,
+   clicked: true,
 };
