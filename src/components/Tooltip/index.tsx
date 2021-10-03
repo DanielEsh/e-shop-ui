@@ -45,6 +45,10 @@ const Tooltip = ({
     )
 
     useEffect(() => {
+        document.addEventListener('keydown', handlePressEsc);
+        return () => {
+            document.removeEventListener('keydown', handlePressEsc);
+        }
     }, [])
 
     const show = () => {
@@ -84,6 +88,12 @@ const Tooltip = ({
         }
     }
 
+    const handlePressEsc = (event) => {
+        if (event.code === 'Escape') {
+            hide();
+        }
+    }
+
     const setContentPosition = () => {
         const content = contentEl.current;
         const target = targetEl.current;
@@ -107,6 +117,7 @@ const Tooltip = ({
                         ref={ contentEl }
                         onMouseEnter={ handleContentEnter }
                         onMouseLeave={ handleContentLeave }
+                        onKeyDown={ handlePressEsc }
                     >
                         { content }
                     </Content>
