@@ -99,7 +99,7 @@ const Tooltip = ({
         const target = targetEl.current;
 
         if (placement === 'top') {
-            content.style.top = `-${content.clientHeight + contentOffset}px`;
+            content.style.top = `-${content.clientHeight + contentOffset + 5}px`;
         } else if (placement === 'bottom') {
             content.style.bottom = `-${content.clientHeight + contentOffset}px`;
         } else if (placement === 'left') {
