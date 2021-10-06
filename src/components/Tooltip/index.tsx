@@ -11,7 +11,8 @@ export type TooltipProps = {
     children: HTMLElement;
     content: string;
     clicked: boolean;
-    placement: 'top' | 'left' | 'bottom' | 'right'
+    arrow: boolean;
+    placement: 'top' | 'left' | 'bottom' | 'right';
     contentOffset: number;
     enterDelay: number;
     leaveDelay: number;
@@ -28,6 +29,7 @@ const Tooltip = ({
     children,
     content = 'content',
     clicked,
+    arrow=true,
     placement = 'top',
     contentOffset = 8,
     enterDelay = 250,
@@ -70,7 +72,7 @@ const Tooltip = ({
 
     const handleMouseLeave = () => {
         if (clicked) return;
-        hide();
+        // hide();
     }
 
     const handleContentEnter = () => {
@@ -79,7 +81,7 @@ const Tooltip = ({
     }
 
     const handleContentLeave = () => {
-        hide();
+        // hide();
     }
 
     const handleClick = () => {
@@ -97,13 +99,15 @@ const Tooltip = ({
     const setContentPosition = () => {
         const content = contentEl.current;
         const target = targetEl.current;
+        const arrowOffset = arrow ? 6 : 0;
 
         if (placement === 'top') {
-            content.style.top = `-${content.clientHeight + contentOffset + 5}px`;
+            console.log('top', content.clientHeight);
+            content.style.top = `-${content.clientHeight + contentOffset + arrowOffset}px`;
         } else if (placement === 'bottom') {
-            content.style.bottom = `-${content.clientHeight + contentOffset}px`;
+            content.style.bottom = `-${content.clientHeight + contentOffset + arrowOffset}px`;
         } else if (placement === 'left') {
-            content.style.left = `-${content.clientWidth}px`
+            content.style.left = `-${content.clientWidth + contentOffset + arrowOffset}px`
         } else {
             content.style.left  = `${content.clientWidth + target.clientWidth}px`
         }
@@ -115,6 +119,8 @@ const Tooltip = ({
                 isVisible && (
                     <Content 
                         ref={ contentEl }
+                        arrow={ arrow }
+                        placement={ placement }
                         onMouseEnter={ handleContentEnter }
                         onMouseLeave={ handleContentLeave }
                     >
