@@ -12,15 +12,19 @@ export const Target = styled('div')`
 
 export const Content = styled('div')`
     position: absolute;
-    top: 50%;
-    left: 50%;
     padding: 8px 12px;
     border-radius: 8px;
     background-color: ${theme.colors.black};
     color: #fff;
-    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+    transform: translate(-50%);
 
-    &:after {
+    &.is-hovering {
+        opacity: 1;
+    }
+
+    /* &:after {
         content: '';
         position: absolute;
         ${({ placement }) => {
@@ -46,5 +50,5 @@ export const Content = styled('div')`
         height: 15px;
         transform: translate(-50%, -50%) rotate(45deg);
         background-color: ${theme.colors.black};
-    }
+    } */
 `

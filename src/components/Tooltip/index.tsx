@@ -36,15 +36,16 @@ const Tooltip = ({
     leaveDelay = 250,
 }, ref) => {
     const [isVisible, setVisible] = useState<boolean>(false);
-    const [position, setPosition] = useState<PositionProps>(null);
+    const [isShow, setShow] = useState<boolean>(false);
+    const [position, setPosition] = useState(null);
     const [timeout, setCloseTimout] = useState(null);
 
     const contentEl = useRef<HTMLDivElement>(null);
     const targetEl = useRef<HTMLDivElement>(null);
 
-    const classes = cn(
-
-    )
+    const contentClasses = cn({
+        'is-hovering': isShow
+    });
 
     useEffect(() => {
         document.addEventListener('keydown', handlePressEsc);
@@ -56,6 +57,7 @@ const Tooltip = ({
     const show = () => {
         setTimeout( () => {
             setVisible(true);
+            setShow(true);
             setContentPosition();
         }, enterDelay);
     }
@@ -72,7 +74,8 @@ const Tooltip = ({
 
     const handleMouseLeave = () => {
         if (clicked) return;
-        // hide();
+        setShow(false);
+        hide();
     }
 
     const handleContentEnter = () => {
@@ -102,31 +105,35 @@ const Tooltip = ({
         const arrowOffset = arrow ? 6 : 0;
 
         if (placement === 'top') {
-            console.log('top', content.clientHeight);
-            content.style.top = `-${content.clientHeight + contentOffset + arrowOffset}px`;
+            content.style.left = `${target.clientWidth / 2}px`;
+            content.style.top = `-${content.clientHeight + contentOffset + arrowOffset}px`
         } else if (placement === 'bottom') {
-            content.style.bottom = `-${content.clientHeight + contentOffset + arrowOffset}px`;
+            content.style.left = `${target.clientWidth / 2}px`;
+            content.style.top = `${target.clientHeight + contentOffset + arrowOffset}px`;
         } else if (placement === 'left') {
-            content.style.left = `-${content.clientWidth + contentOffset + arrowOffset}px`
+            content.style.left = `-${target.clientWidth / 2 + contentOffset + arrowOffset}px`;
+            content.style.top = `-${target.clientHeight / 2}px`
         } else {
-            content.style.left  = `${content.clientWidth + target.clientWidth}px`
+            content.style.left = `${target.clientWidth}px`;
+            content.style.top = `-${target.clientHeight / 2}px`
         }
     }
 
     return (
         <Wrapper>
             {
-                isVisible && (
-                    <Content 
-                        ref={ contentEl }
-                        arrow={ arrow }
-                        placement={ placement }
-                        onMouseEnter={ handleContentEnter }
-                        onMouseLeave={ handleContentLeave }
-                    >
-                        { content }
-                    </Content>
-                )
+                 <Content 
+                    ref={ contentEl }
+                    className={ contentClasses }
+                    arrow={ arrow }
+                    placement={ placement }
+                    onMouseEnter={ handleContentEnter }
+                    onMouseLeave={ handleContentLeave }
+             >
+                 <div>
+                     { isVisible && content }
+                 </div>
+             </Content>
             }
             <Target
                 ref={ targetEl }
