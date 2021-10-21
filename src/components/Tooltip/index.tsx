@@ -132,6 +132,7 @@ const Tooltip = ({
             <Content 
                     ref={ contentEl }
                     className={ contentClasses }
+                    placement={ placement }
                     arrow={ arrow }
                     onMouseEnter={ handleContentEnter }
                     onMouseLeave={ handleContentLeave }
