@@ -39,7 +39,7 @@ export const Content = styled('div')`
                     `
                     if (placement === 'left') return css`
                         top: 50%;
-                        right: -20%;
+                        right: -10%;
                     `
                     if (placement === 'right') return css`
                         top: 50%;

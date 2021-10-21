@@ -15,12 +15,14 @@ const Template: Story<TooltipProps> = (args) => <Tooltip { ...args } />;
 
 export const Default = Template.bind({});
 Default.args = {
-   children: <div>Activator</div>,
+   children: <div>Hover on Me</div>,
+   content: 'Tip positioned Top'
 };
 
 export const Bottom = Template.bind({});
 Bottom.args = {
    children: <div>Activator</div>,
+   content: 'Tip positioned Bottom',
    placement: 'bottom',
    enterDelay: 250,
    leaveDelay: 250,
@@ -28,13 +30,17 @@ Bottom.args = {
 
 export const Left = Template.bind({});
 Left.args = {
-   children: <div>Activator</div>,
+   children: <div>Hello World</div>,
+   content: 'Left with arrow',
+   arrow: true,
    placement: 'left',
 };
 
 export const Right = Template.bind({});
 Right.args = {
    children: <div>Activator</div>,
+   content: 'Right with Arrow',
+   arrow: true,
    placement: 'right',
 };
 

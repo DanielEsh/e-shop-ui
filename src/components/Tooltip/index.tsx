@@ -121,7 +121,7 @@ const Tooltip = ({
             content.style.left = `${targetBounds.left - content.offsetWidth - contentOffset - arrowOffset}px`;
             content.style.top = `${(targetBounds.top - (target.offsetHeight / 2))}px`
         } else if (placement == 'right') {
-            content.style.left = `${targetBounds.left + content.offsetWidth + contentOffset + arrowOffset}px`;
+            content.style.left = `${targetBounds.left + target.offsetWidth + contentOffset + arrowOffset}px`;
             content.style.top = `${(targetBounds.top - (target.offsetHeight / 2))}px`
         }
         
