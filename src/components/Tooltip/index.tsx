@@ -29,7 +29,7 @@ const Tooltip = ({
     children,
     content = 'content',
     clicked,
-    arrow=true,
+    arrow=false,
     placement = 'top',
     contentOffset = 8,
     enterDelay = 250,
@@ -74,8 +74,8 @@ const Tooltip = ({
 
     const handleMouseLeave = () => {
         if (clicked) return;
-        setShow(false);
-        hide();
+        // setShow(false);
+        // hide();
     }
 
     const handleContentEnter = () => {
@@ -104,19 +104,22 @@ const Tooltip = ({
         const target = targetEl.current;
         const arrowOffset = arrow ? 6 : 0;
 
+        const targetBounds = target.getBoundingClientRect();
+        
         if (placement === 'top') {
-            content.style.left = `${target.clientWidth / 2}px`;
-            content.style.top = `-${content.clientHeight + contentOffset + arrowOffset}px`
+            content.style.left = `${targetBounds.left + (target.offsetWidth - content.offsetWidth) / 2}px`;
+            content.style.top = `${(targetBounds.top - content.offsetHeight) - contentOffset - arrowOffset}px`
         } else if (placement === 'bottom') {
-            content.style.left = `${target.clientWidth / 2}px`;
-            content.style.top = `${target.clientHeight + contentOffset + arrowOffset}px`;
+            content.style.left = `${targetBounds.left + (target.offsetWidth - content.offsetWidth) / 2}px`;
+            content.style.top = `${(targetBounds.top + target.offsetHeight) + contentOffset + arrowOffset}px`
         } else if (placement === 'left') {
-            content.style.left = `-${target.clientWidth / 2 + contentOffset + arrowOffset}px`;
-            content.style.top = `-${target.clientHeight / 2}px`
-        } else {
-            content.style.left = `${target.clientWidth}px`;
-            content.style.top = `-${target.clientHeight / 2}px`
+            content.style.left = `${targetBounds.left - content.offsetWidth - contentOffset - arrowOffset}px`;
+            content.style.top = `${(targetBounds.top - (target.offsetHeight / 2))}px`
+        } else if (placement == 'right') {
+            content.style.left = `${targetBounds.left + content.offsetWidth + contentOffset + arrowOffset}px`;
+            content.style.top = `${(targetBounds.top - (target.offsetHeight / 2))}px`
         }
+        
     }
 
     return (
