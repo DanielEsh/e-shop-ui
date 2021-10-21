@@ -128,13 +128,11 @@ const Tooltip = ({
     }
 
     return (
-        <Wrapper>
-            {
-                 <Content 
+        <Wrapper ref={ref}>
+            <Content 
                     ref={ contentEl }
                     className={ contentClasses }
                     arrow={ arrow }
-                    placement={ placement }
                     onMouseEnter={ handleContentEnter }
                     onMouseLeave={ handleContentLeave }
              >
@@ -142,7 +140,6 @@ const Tooltip = ({
                      { isVisible && content }
                  </div>
              </Content>
-            }
             <Target
                 ref={ targetEl }
                 onClick={ handleClick }

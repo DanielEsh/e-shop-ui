@@ -16,10 +16,12 @@ export const Content = styled('div')`
     background-color: ${theme.colors.black};
     color: #fff;
     opacity: 0;
+    transform: translate(0, -10px) scale(0);
     transition: opacity .3s, transform .3s;
 
     &.is-hovering {
         opacity: 1;
+        transform: translate(0, 0) scale(1);
     }
 
     ${({arrow}) => {
