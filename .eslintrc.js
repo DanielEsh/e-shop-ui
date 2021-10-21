@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     "root": true,
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -16,7 +16,7 @@ export default {
         "plugin:react/recommended"
     ],
     "rules": {
-    //Best Practices
+        //Best Practices
         "no-console": "warn",
         "array-callback-return": "warn",
         "class-methods-use-this": "warn",
