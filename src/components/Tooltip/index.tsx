@@ -18,18 +18,11 @@ export type TooltipProps = {
     leaveDelay: number;
 }
 
-type PositionProps = {
-    top: boolean;
-    left: boolean;
-    bottom: boolean;
-    right: boolean;
-}
-
 const Tooltip = ({
     children,
     content = 'content',
     clicked,
-    arrow=false,
+    arrow = false,
     placement = 'top',
     contentOffset = 8,
     enterDelay = 250,
@@ -37,7 +30,6 @@ const Tooltip = ({
 }, ref) => {
     const [isVisible, setVisible] = useState<boolean>(false);
     const [isShow, setShow] = useState<boolean>(false);
-    const [position, setPosition] = useState(null);
     const [timeout, setCloseTimout] = useState(null);
 
     const contentEl = useRef<HTMLDivElement>(null);
@@ -76,7 +68,6 @@ const Tooltip = ({
 
     const handleMouseLeave = () => {
         if (clicked) return;
-        setShow(false);
         hide();
     }
 
@@ -128,7 +119,10 @@ const Tooltip = ({
     }
 
     return (
-        <Wrapper ref={ref}>
+        <Wrapper 
+            ref={ref}
+            role="tooltip"
+        >
             <Content 
                     ref={ contentEl }
                     className={ contentClasses }
