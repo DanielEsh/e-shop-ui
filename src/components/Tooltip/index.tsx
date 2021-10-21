@@ -63,7 +63,9 @@ const Tooltip = ({
     }
 
     const hide = () => {
-        const timeout = setTimeout( () => setVisible(false), leaveDelay);
+        const timeout = setTimeout( () => {
+            setShow(false);
+        }, leaveDelay);
         setCloseTimout(timeout);
     }
 
@@ -74,8 +76,8 @@ const Tooltip = ({
 
     const handleMouseLeave = () => {
         if (clicked) return;
-        // setShow(false);
-        // hide();
+        setShow(false);
+        hide();
     }
 
     const handleContentEnter = () => {
@@ -84,12 +86,15 @@ const Tooltip = ({
     }
 
     const handleContentLeave = () => {
-        // hide();
+        hide();
     }
 
     const handleClick = () => {
         if (clicked) {
-            setVisible(!isVisible)
+            show();
+            if (isShow) {
+                hide();
+            }
         }
     }
 
