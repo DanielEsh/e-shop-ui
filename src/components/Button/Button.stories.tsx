@@ -37,7 +37,6 @@ Dark.args = {
     size: 'large',
     children: 'RoundedOutline button',
     outline: true,
-    rounded: true,
 };
 
 export const Disabled = ButtonTemplate.bind({});
