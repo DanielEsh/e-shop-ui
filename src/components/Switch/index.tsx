@@ -35,8 +35,6 @@ export const Switch: React.FC<SwitchProps> = ({
     }, []);
 
     const handleChange = () => {
-        console.log(isDisabled);
-        
         if (isDisabled) return;
         setIsActive(!isActive);
     };
