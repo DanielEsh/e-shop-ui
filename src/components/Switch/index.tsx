@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import { 
     Wrapper,
+    Name,
     SwitchWrapper,
     SwitchStyled,
 } from './Switch.styles';
@@ -31,9 +32,9 @@ export const Switch: React.FC<SwitchProps> = ({label}) => {
 
     return (
         <Wrapper>
-            <label htmlFor="switch">
-                Label text
-            </label>
+            <Name htmlFor="switch">
+                { label }
+            </Name>
             <SwitchWrapper htmlFor="switch">
                 <input
                     id="switch"

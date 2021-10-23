@@ -24,6 +24,12 @@ export const SwitchStyled = styled('span')`
         transition: transform 0.3s ease;
     }
 
+    &:hover {
+       &:before {
+            box-shadow: 0 0 0 5px hsla(0, 0%, 100%, 0.25);
+       }
+    }
+
     &.is-active {
         background-color: #336699;
 
@@ -48,4 +54,8 @@ export const SwitchWrapper = styled('label')`
 export const Wrapper = styled('div')`
     display: flex;
     justify-content: space-between;
+`
+
+export const Name = styled('label')`
+    cursor: pointer;
 `
