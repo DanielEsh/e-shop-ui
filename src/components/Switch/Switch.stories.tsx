@@ -20,3 +20,9 @@ Active.args = {
     label: 'Active Switcher',
     active: true,
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    label: 'Disabled Switcher',
+    isDisabled: true,
+};

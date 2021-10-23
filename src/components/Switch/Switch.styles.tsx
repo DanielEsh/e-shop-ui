@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 // import { theme } from "../Theme";
 
 export const SwitchStyled = styled('span')`
@@ -38,6 +38,11 @@ export const SwitchStyled = styled('span')`
             background-color: #6699cc;
         }        
     }
+
+    &.is-disabled {
+        opacity: 0.6;
+        pointer-events: none;
+    }
 `
 
 export const SwitchWrapper = styled('label')`
@@ -51,11 +56,23 @@ export const SwitchWrapper = styled('label')`
     }
 `
 
+export const Name = styled('label')`
+    cursor: pointer;
+`
+
 export const Wrapper = styled('div')`
     display: flex;
     justify-content: space-between;
-`
 
-export const Name = styled('label')`
-    cursor: pointer;
+    ${({isDisabled}) => {
+        if (isDisabled) 
+            return css`
+                pointer-events: none;
+
+                ${Name} {
+                    pointer-events: none;
+                }
+            `
+        
+    }}
 `

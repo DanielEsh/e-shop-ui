@@ -10,35 +10,39 @@ import {
 
 
 export type SwitchProps = {
-    label: string;
-    disabled: boolean;
-    active: boolean;
+    label?: string;
+    isDisabled?: boolean;
+    isActiveDefault?: boolean;
     color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark';
     onChange: () => void;
-    value: string | number | boolean;
+    value?: string | number | boolean;
 }
 
 export const Switch: React.FC<SwitchProps> = ({
     label,
-    active = false,
+    isActiveDefault = false,
+    isDisabled = false,
 }) => {
     const [isActive, setIsActive] = useState<boolean>(false);
 
-
     const classes = cn({
         'is-active': isActive,
+        'is-disabled': isDisabled,
     });
 
     useEffect(() => {
-        if (active) return setIsActive(true);
+        if (isActiveDefault) return setIsActive(true);
     }, []);
 
     const handleChange = () => {
+        console.log(isDisabled);
+        
+        if (isDisabled) return;
         setIsActive(!isActive);
     };
 
     return (
-        <Wrapper>
+        <Wrapper isDisabled={ isDisabled }>
             <Name htmlFor="switch">
                 { label }
             </Name>
