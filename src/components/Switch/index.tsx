@@ -15,7 +15,6 @@ export type SwitchProps = {
     isActiveDefault?: boolean;
     color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark';
     onChange: () => void;
-    value?: string | number | boolean;
 }
 
 export const Switch: React.FC<SwitchProps> = ({

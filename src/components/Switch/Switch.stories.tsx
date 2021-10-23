@@ -18,7 +18,7 @@ Default.args = {
 export const Active = Template.bind({});
 Active.args = {
     label: 'Active Switcher',
-    active: true,
+    isActiveDefault: true,
 };
 
 export const Disabled = Template.bind({});
