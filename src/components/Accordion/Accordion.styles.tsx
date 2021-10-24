@@ -38,6 +38,6 @@ export const Header = styled('div')`
 
 export const Content = styled('div')`
     overflow: hidden;
-    max-height: 0;
+    max-height: ${props => props.maxHeight}px;
     transition: max-height .3s ease-in-out;
 `
