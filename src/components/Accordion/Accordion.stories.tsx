@@ -12,5 +12,6 @@ const Template: Story<AccordionProps> = (args) => <Accordion { ...args } />;
 
 export const Default = Template.bind({});
 Default.args = {
-    label: 'Switch',
+    header: 'AccordionItem',
+    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio quis adipisci id rem veritatis suscipit consequuntur molestiae odit vitae provident aliquam reiciendis hic, blanditiis molestias est qui iure voluptates sunt.'
 };
