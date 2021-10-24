@@ -22,7 +22,6 @@ export const Accordion:React.FC<AccordionProps> = ({
 
     useEffect(() => {
         if (contentEl.current) contentHeight = contentEl.current.scrollHeight;
-        style();
         console.log('contentHeight', contentHeight);
     }, [maxHeight]);
 
@@ -34,11 +33,6 @@ export const Accordion:React.FC<AccordionProps> = ({
         
         
         return setIsActive(!isActive);
-    };
-
-    const style = () => {
-        console.log('style', maxHeight);
-        return `maxHeight: ${maxHeight}px`;
     };
 
 
