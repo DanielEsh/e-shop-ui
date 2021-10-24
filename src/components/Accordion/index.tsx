@@ -22,7 +22,6 @@ export const Accordion:React.FC<AccordionProps> = ({
 
     useEffect(() => {
         if (contentEl.current) contentHeight = contentEl.current.scrollHeight;
-        console.log('contentHeight', contentHeight);
     }, [maxHeight]);
 
     const handleToggle = () => {
