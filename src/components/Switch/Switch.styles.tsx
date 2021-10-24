@@ -41,7 +41,13 @@ export const SwitchStyled = styled('span')`
 
     &.is-disabled {
         opacity: 0.6;
-        pointer-events: none;
+        cursor: not-allowed;
+
+        &:hover {
+            &:before {
+                box-shadow: none;
+            }
+        }
     }
 `
 
@@ -68,7 +74,7 @@ export const Wrapper = styled('div')`
     ${({isDisabled}) => {
         if (isDisabled) 
             return css`
-                pointer-events: none;
+                cursor: not-allowed;
 
                 ${Name} {
                     pointer-events: none;

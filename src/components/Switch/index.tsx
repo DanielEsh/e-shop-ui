@@ -23,7 +23,7 @@ export const Switch: React.FC<SwitchProps> = ({
     label,
     isActiveDefault = false,
     isDisabled = false,
-    id = '',
+    id = 'switch',
     name = ''
 }) => {
     const [isActive, setIsActive] = useState<boolean>(false);
