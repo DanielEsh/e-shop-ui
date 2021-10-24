@@ -14,6 +14,8 @@ export type SwitchProps = {
     isDisabled?: boolean;
     isActiveDefault?: boolean;
     color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark';
+    id?: string;
+    name?: string;
     onChange: () => void;
 }
 
@@ -21,6 +23,8 @@ export const Switch: React.FC<SwitchProps> = ({
     label,
     isActiveDefault = false,
     isDisabled = false,
+    id = '',
+    name = ''
 }) => {
     const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -40,12 +44,13 @@ export const Switch: React.FC<SwitchProps> = ({
 
     return (
         <Wrapper isDisabled={ isDisabled }>
-            <Name htmlFor="switch">
+            <Name htmlFor={ id }>
                 { label }
             </Name>
-            <SwitchWrapper htmlFor="switch">
+            <SwitchWrapper htmlFor={ id }>
                 <input
-                    id="switch"
+                    id={ id }
+                    name={ name }
                     onChange={ handleChange }
                     role="switch"
                     type="checkbox" 

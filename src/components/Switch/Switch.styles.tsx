@@ -58,6 +58,7 @@ export const SwitchWrapper = styled('label')`
 
 export const Name = styled('label')`
     cursor: pointer;
+    user-select: none;
 `
 
 export const Wrapper = styled('div')`
