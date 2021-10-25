@@ -4,6 +4,7 @@ import { theme } from "../Theme";
 const headerZIndex = 1;
 const headerAfterZIndex = -1;
 const headerTransiion = `.3s ${theme.transition.ease}`;
+const headerColor = '#000';
 const activeBackgroundColor = '#f0f1f2';
 
 export const Header = styled('div')`
@@ -12,7 +13,6 @@ export const Header = styled('div')`
     padding: 30px 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     cursor: pointer;
 
     &:after {
@@ -39,6 +39,19 @@ export const Header = styled('div')`
     &.is-active {
         background-color: ${activeBackgroundColor};
     }
+`
+
+export const HeaderIcon = styled('span')`
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: ${headerColor};
+    transform: translate(-50%, -50%);
 `
 
 export const Content = styled('div')`

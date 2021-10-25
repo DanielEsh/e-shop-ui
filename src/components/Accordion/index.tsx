@@ -3,8 +3,10 @@ import cn from 'classnames';
 
 import { 
     Header,
+    HeaderIcon,
     Content,
 } from './Accordion.styles';
+import AccordionIcon from './AccordionIcon';
 
 export type AccordionProps = {
     header: string;
@@ -50,9 +52,9 @@ export const Accordion:React.FC<AccordionProps> = ({
                     { header }
                 </div>
                 
-                <span>
-                    { isActive ? "-" : "+" }
-                </span>   
+                <HeaderIcon>
+                    <AccordionIcon isOpened={ isActive } />
+                </HeaderIcon>   
             </Header>
             <Content 
                 ref={ contentEl }
