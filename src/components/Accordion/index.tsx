@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { forwardRef, useState, useEffect, useRef } from 'react';
 import cn from 'classnames';
 
 import { 
@@ -16,13 +16,13 @@ export type AccordionProps = {
     onToggle: () => void;
 }
 
-export const Accordion:React.FC<AccordionProps> = ({
+export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
     header,
     content,
     active = false,
     disabled = false,
     onToggle,
-}) => {
+}, ref) => {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [maxHeight, setMaxHeight] = useState<number>(0);
     let contentHeight = 0;
@@ -50,36 +50,36 @@ export const Accordion:React.FC<AccordionProps> = ({
     const handleToggle = () => {
         if (disabled) return;
 
-        if (!isActive) 
+        if (!isActive)
             setMaxHeight(contentHeight);
-        else 
+        else
             setMaxHeight(0);
-        
+
         onToggle();
         return setIsActive(!isActive);
     };
 
 
     return (
-        <>
-            <Header 
+        <div ref={ ref }>
+            <Header
                 className={ classes }
                 onClick={ handleToggle }
             >
                 <div >
                     { header }
                 </div>
-                
+
                 <HeaderIcon>
                     <AccordionIcon isOpened={ isActive } />
-                </HeaderIcon>   
+                </HeaderIcon>
             </Header>
-            <Content 
+            <Content
                 ref={ contentEl }
                 maxHeight={ maxHeight }
             >
                 { content }
             </Content>
-        </>
+        </div>
     )
-}
+});
