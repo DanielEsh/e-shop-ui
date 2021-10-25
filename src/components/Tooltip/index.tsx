@@ -5,7 +5,7 @@ import {
     Wrapper,
     Target,
     Content,
- } from './Tooltip.styles';
+} from './Tooltip.styles';
 
 export type TooltipProps = {
     children: HTMLElement;
@@ -18,7 +18,7 @@ export type TooltipProps = {
     leaveDelay: number;
 }
 
-const Tooltip = ({
+export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(({
     children,
     content = 'content',
     clicked,
@@ -83,16 +83,12 @@ const Tooltip = ({
     const handleClick = () => {
         if (clicked) {
             show();
-            if (isShow) {
-                hide();
-            }
+            if (isShow) hide();
         }
     }
 
     const handlePressEsc = (event) => {
-        if (event.code === 'Escape') {
-            hide();
-        }
+        if (event.code === 'Escape') hide();
     }
 
     const setContentPosition = () => {
@@ -101,7 +97,7 @@ const Tooltip = ({
         const arrowOffset = arrow ? 6 : 0;
 
         const targetBounds = target.getBoundingClientRect();
-        
+
         if (placement === 'top') {
             content.style.left = `${targetBounds.left + (target.offsetWidth - content.offsetWidth) / 2}px`;
             content.style.top = `${(targetBounds.top - content.offsetHeight) - contentOffset - arrowOffset}px`
@@ -115,26 +111,26 @@ const Tooltip = ({
             content.style.left = `${targetBounds.left + target.offsetWidth + contentOffset + arrowOffset}px`;
             content.style.top = `${(targetBounds.top - (target.offsetHeight / 2))}px`
         }
-        
+
     }
 
     return (
-        <Wrapper 
-            ref={ref}
+        <Wrapper
+            ref={ ref }
             role="tooltip"
         >
-            <Content 
-                    ref={ contentEl }
-                    className={ contentClasses }
-                    placement={ placement }
-                    arrow={ arrow }
-                    onMouseEnter={ handleContentEnter }
-                    onMouseLeave={ handleContentLeave }
-             >
-                 <div>
-                     { isVisible && content }
-                 </div>
-             </Content>
+            <Content
+                ref={ contentEl }
+                arrow={ arrow }
+                className={ contentClasses }
+                onMouseEnter={ handleContentEnter }
+                onMouseLeave={ handleContentLeave }
+                placement={ placement }
+            >
+                <div>
+                    { isVisible && content }
+                </div>
+            </Content>
             <Target
                 ref={ targetEl }
                 onClick={ handleClick }
@@ -145,6 +141,4 @@ const Tooltip = ({
             </Target>
         </Wrapper>
     );
-}
-
-export default forwardRef(Tooltip);
+});

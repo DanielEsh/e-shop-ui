@@ -7,6 +7,7 @@ export const Wrapper = styled('div')`
 
 export const Target = styled('div')`
     position: relative;
+    cursor: pointer;
 `
 
 export const Content = styled('div')`
@@ -48,7 +49,7 @@ export const Content = styled('div')`
                         left: 0;
                     `
                 }};
-                display: ${ props=> props.arrow ? 'block' : 'none' };
+                display: ${props=> props.arrow ? 'block' : 'none'};
                 width: 15px;
                 height: 15px;
                 transform: translate(-50%, -50%) rotate(45deg);
