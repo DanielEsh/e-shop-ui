@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import cn from 'classnames';
 
 import { 
     Header,
@@ -20,6 +21,10 @@ export const Accordion:React.FC<AccordionProps> = ({
 
     const contentEl = useRef<HTMLDivElement>(null);
 
+    const classes = cn({
+        'is-active': isActive,
+    });
+
     useEffect(() => {
         if (contentEl.current) contentHeight = contentEl.current.scrollHeight;
     }, [maxHeight]);
@@ -37,7 +42,10 @@ export const Accordion:React.FC<AccordionProps> = ({
 
     return (
         <div className="AccordionItem">
-            <Header onClick={ handleToggle }>
+            <Header 
+                className={ classes }
+                onClick={ handleToggle }
+            >
                 <div >
                     { header }
                 </div>
