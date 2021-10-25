@@ -29,6 +29,7 @@ ActiveDefault.args = {
     Odio quis adipisci id rem veritatis suscipit consequuntur molestiae
     odit vitae provident aliquam reiciendis hic, blanditiis molestias est qui iure voluptates sunt.`,
     active: true,
+    onToggle: () => console.log('onToggle'),
 };
 
 export const Disabled = Template.bind({});
