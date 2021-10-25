@@ -5,6 +5,7 @@ const headerZIndex = 1;
 const headerAfterZIndex = -1;
 const headerTransiion = `.3s ${theme.transition.ease}`;
 const headerColor = '#000';
+const backgroundColor = '#fff';
 const activeBackgroundColor = '#f0f1f2';
 
 export const Header = styled('div')`
@@ -13,6 +14,7 @@ export const Header = styled('div')`
     padding: 30px 0;
     display: flex;
     align-items: center;
+    background-color: ${backgroundColor};
     cursor: pointer;
 
     &:after {
@@ -38,6 +40,17 @@ export const Header = styled('div')`
 
     &.is-active {
         background-color: ${activeBackgroundColor};
+    }
+
+    &.is-disabled {
+        background-color: ${backgroundColor};
+        cursor: not-allowed;
+
+        &:hover {
+            &:after {
+                transform: scaleY(0);
+            }
+        }
     }
 `
 

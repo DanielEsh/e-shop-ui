@@ -30,3 +30,18 @@ ActiveDefault.args = {
     odit vitae provident aliquam reiciendis hic, blanditiis molestias est qui iure voluptates sunt.`,
     active: true,
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    header: 'AccordionItem',
+    content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    Odio quis adipisci id rem veritatis suscipit consequuntur molestiae
+    odit vitae provident aliquam reiciendis hic, blanditiis molestias est qui iure voluptates sunt.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    Odio quis adipisci id rem veritatis suscipit consequuntur molestiae
+    odit vitae provident aliquam reiciendis hic, blanditiis molestias est qui iure voluptates sunt.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    Odio quis adipisci id rem veritatis suscipit consequuntur molestiae
+    odit vitae provident aliquam reiciendis hic, blanditiis molestias est qui iure voluptates sunt.`,
+    disabled: true,
+};

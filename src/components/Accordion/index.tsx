@@ -12,12 +12,14 @@ export type AccordionProps = {
     header: string;
     content: string;
     active?: boolean;
+    disabled?: boolean;
 }
 
 export const Accordion:React.FC<AccordionProps> = ({
     header,
     content,
     active = false,
+    disabled = false,
 }) => {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [maxHeight, setMaxHeight] = useState<number>(0);
@@ -28,6 +30,7 @@ export const Accordion:React.FC<AccordionProps> = ({
 
     const classes = cn({
         'is-active': isActive,
+        'is-disabled': disabled,
     });
 
     useEffect(() => {
@@ -43,6 +46,8 @@ export const Accordion:React.FC<AccordionProps> = ({
     }, [maxHeight]);
 
     const handleToggle = () => {
+        if (disabled) return;
+
         if (!isActive) 
             setMaxHeight(contentHeight);
         else 
