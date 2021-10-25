@@ -11,17 +11,20 @@ import AccordionIcon from './AccordionIcon';
 export type AccordionProps = {
     header: string;
     content: string;
+    active?: boolean;
 }
 
 export const Accordion:React.FC<AccordionProps> = ({
     header,
     content,
+    active = false,
 }) => {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [maxHeight, setMaxHeight] = useState<number>(0);
     let contentHeight = 0;
 
     const contentEl = useRef<HTMLDivElement>(null);
+    const initialRender = useRef(false);
 
     const classes = cn({
         'is-active': isActive,
@@ -29,6 +32,14 @@ export const Accordion:React.FC<AccordionProps> = ({
 
     useEffect(() => {
         if (contentEl.current) contentHeight = contentEl.current.scrollHeight;
+
+        if (!initialRender.current) {
+            initialRender.current = true;
+            if (active) {
+                setMaxHeight(contentHeight);
+                setIsActive(true);
+            }
+        }
     }, [maxHeight]);
 
     const handleToggle = () => {
