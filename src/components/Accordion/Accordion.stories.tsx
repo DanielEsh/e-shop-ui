@@ -1,11 +1,12 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { Accordion, AccordionProps } from '../Accordion';
+import { Accordion, AccordionProps } from './index';
 
 export default {
     title: 'Components/Accordion',
     component: Accordion,
+    argTypes: { onClick: { action: 'clicked' } },
 } as Meta;
 
 const Template: Story<AccordionProps> = (args) => <Accordion { ...args } />;
@@ -29,7 +30,6 @@ ActiveDefault.args = {
     Odio quis adipisci id rem veritatis suscipit consequuntur molestiae
     odit vitae provident aliquam reiciendis hic, blanditiis molestias est qui iure voluptates sunt.`,
     active: true,
-    onToggle: () => console.log('onToggle'),
 };
 
 export const Disabled = Template.bind({});

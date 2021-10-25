@@ -61,7 +61,7 @@ export const Accordion:React.FC<AccordionProps> = ({
 
 
     return (
-        <div className="AccordionItem">
+        <>
             <Header 
                 className={ classes }
                 onClick={ handleToggle }
@@ -80,6 +80,6 @@ export const Accordion:React.FC<AccordionProps> = ({
             >
                 { content }
             </Content>
-        </div>
+        </>
     )
 }
