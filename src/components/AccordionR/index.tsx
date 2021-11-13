@@ -1,28 +1,36 @@
-import React, {createContext, useContext, useRef, useEffect, useState, CSSProperties} from 'react';
+import React, {createContext, useContext, useRef, useEffect, useState, useMemo} from 'react';
 
 import {Content} from '../Accordion/Accordion.styles';
 
-const testContextValue = {
-    open: false,
-    toggle: 'toggle',
-}
+// const testContextValue = {
+//     active: [],
+//     toggle(number) {
+//         console.log(number);
+//         this.active.push(number);
+//     }
+// }
 
-const AccordionContext = createContext(testContextValue);
+const AccordionContext = createContext();
 
-export const AccordionHeader = () => {
+export const AccordionHeader = ({children, number}) => {
+    // const setContext = useContext(AccordionContext);
+    // const {toggle} = useContext(AccordionContext);
+    const { open, toggle } = useContext(AccordionContext);
+    
     return (
-        <div>Header</div>
+        <div onClick={ () => toggle(number) }>{children}</div>
     )
 }
 
-export const AccordionBody = () => {
+export const AccordionBody = ({children, number}) => {
     const [dimensions, setDimensions] = useState(0);
     const ref = useRef(null);
 
-    const {open} = useContext(AccordionContext);
+    const { open } = useContext(AccordionContext);
+    // const {active} = useContext(AccordionContext);
+    // const context = useContext(AccordionContext);
 
     const getDimensions = (node) => {
-        console.log(node.scrollHeight);
         return node.scrollHeight;
     }
 
@@ -30,16 +38,17 @@ export const AccordionBody = () => {
     useEffect(() => {
         if (ref.current) 
             setDimensions(getDimensions(ref.current))
-        
+
+        console.log('context', open);
     }, []);
 
     return (
         <Content
             ref={ ref }
-            isOpened={ open }
-            minHeight={ dimensions }
+            isOpened={ (Array.isArray(open) ? open.includes(number) : open === number) }
+            maxHeight={ dimensions }
         >
-            Body
+            {children}
         </Content>
     )
 }
@@ -53,18 +62,19 @@ export const AccordionItem = ({children}) => {
     );
 };
 
-export const AccordionR = () => {
+export const AccordionR = ({open, toggle, children}) => {
+    const [a, setA] = useState([]);
+    const accordionContext = {
+        open: a,
+        toggle(v) {
+            setA(v)
+        }
+    }
+
     return (
         <div>
-            <AccordionContext.Provider value={ testContextValue }>
-                <AccordionItem>
-                    <AccordionHeader />
-                    <AccordionBody />
-                </AccordionItem>
-                <AccordionItem>
-                    <AccordionHeader />
-                    <AccordionBody />
-                </AccordionItem>
+            <AccordionContext.Provider value={ accordionContext }>
+                {children}
             </AccordionContext.Provider>
         </div>
     );
