@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {FC, ReactElement} from 'react';
 
 import {Header} from './Accordion.styles';
 
-export const AccordionHeader = ({children, onClick}) => {
+type AccordionHeaderProps = {
+    children: ReactElement;
+    onClick: () => void;
+}
+
+export const AccordionHeader: FC<AccordionHeaderProps> = ({
+    children,
+    onClick,
+}) => {
     return (
         <Header onClick={ onClick }>
             {children}

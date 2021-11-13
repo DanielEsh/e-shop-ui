@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {FC, ReactElement, useContext} from 'react';
 
 import {AccordionContext} from "./index";
 
@@ -7,11 +7,11 @@ import { AccordionBody } from "./AccordionBody";
 
 type AccordionItemProps = {
     number: number;
-    header: React.ReactElement;
-    body: React.ReactElement;
+    header: ReactElement;
+    body: ReactElement;
 }
 
-export const AccordionItem: React.FC<AccordionItemProps> = ({
+export const AccordionItem: FC<AccordionItemProps> = ({
     number,
     header,
     body}) => {

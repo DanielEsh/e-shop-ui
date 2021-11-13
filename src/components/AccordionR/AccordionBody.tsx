@@ -1,24 +1,32 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {FC, useRef, useState, useEffect, ReactElement} from 'react';
 import {Content} from "./Accordion.styles";
 
-export const AccordionBody = ({children, isOpened}) => {
-    const [dimensions, setDimensions] = useState(0);
-    const ref = useRef(null);
+type AccordionBodyProps = {
+    children: ReactElement;
+    isOpened: boolean;
+}
 
-    const getDimensions = (node) => {
+export const AccordionBody: FC<AccordionBodyProps> = ({
+    children,
+    isOpened
+}) => {
+    const [minHeight, setMinHeight] = useState<number>(0);
+    const ref = useRef<HTMLDivElement>(null);
+
+    const getMinHeight = (node: HTMLDivElement) => {
         return node.scrollHeight;
     }
 
     useEffect(() => {
         if (ref.current)
-            setDimensions(getDimensions(ref.current))
+            setMinHeight(getMinHeight(ref.current))
     }, []);
 
     return (
         <Content
             ref={ ref }
             isOpened={ isOpened }
-            maxHeight={ dimensions }
+            maxHeight={ minHeight }
         >
             {children}
         </Content>
