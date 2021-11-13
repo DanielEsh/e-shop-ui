@@ -15,8 +15,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     number,
     header,
     body}) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+
     const { open, toggle } = useContext(AccordionContext);
     
     const onClick = () => {

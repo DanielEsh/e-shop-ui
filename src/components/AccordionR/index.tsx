@@ -1,6 +1,6 @@
 import React, {useEffect, useState, createContext} from 'react';
 
-export const AccordionContext = createContext();
+export const AccordionContext = createContext(undefined);
 
 export type AccordionProps = {
     stayOpen: boolean;
