@@ -9,3 +9,4 @@ export default {
 } as Meta;
 
 export { default as Default} from './examples/Default';
+export { default as StayOpened} from './examples/StayOpened';
