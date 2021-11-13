@@ -4,7 +4,7 @@ export const AccordionContext = createContext(undefined);
 
 export type AccordionProps = {
     stayOpen?: boolean;
-    defaultOpen?: [number];
+    defaultOpen?: number[];
     children: ReactNode;
 }
 
