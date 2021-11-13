@@ -13,13 +13,13 @@ export const Primary = () => (
     <div>
         <AccordionR>
             <AccordionItem
-                body={ <div>Body</div> }
-                header={ <div>Header</div> }
+                body={ <div>Body1</div> }
+                header={ <div>Header1</div> }
                 number={ 1 }
             />
             <AccordionItem
-                body={ <div>Body</div> }
-                header={ <div>Header</div> }
+                body={ <div>Body2</div> }
+                header={ <div>Header2</div> }
                 number={ 2 }
             />
         </AccordionR>

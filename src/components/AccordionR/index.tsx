@@ -2,25 +2,32 @@ import React, {useEffect, useState, createContext} from 'react';
 
 export const AccordionContext = createContext();
 
-export const AccordionR = ({stayOpen = false, defaultOpen = [1, 2], children}) => {
-    const [open, setOpen] = useState([]);
-    const toggle = (id) => {
-        console.log('main toggle', open);
-        if (open.includes(id)) {
-            const arr = open.filter(item => item !== id);
-            setOpen(arr);
-        } else {
-            setOpen([...open, id]);
-        }
+export type AccordionProps = {
+    stayOpen: boolean;
+    defaultOpen: [number];
+    children: React.ReactElement;
+}
 
+export const AccordionR: React.FC<AccordionProps> = ({
+    stayOpen = false,
+    defaultOpen = [],
+    children}) => {
+    const [open, setOpen] = useState<Array<number>>([]);
+
+    const toggle = (id) => {
+        if (open.includes(id)) 
+            return setOpen(open.filter(item => item !== id));
+        if (stayOpen) 
+            return setOpen([...open, id]);
+        setOpen([id]);
     };
 
     useEffect(() => {
-        if (stayOpen) {
+        if (stayOpen) 
             setOpen(defaultOpen);
-        } else {
+        else 
             setOpen([defaultOpen[0]]);
-        }
+        
     }, []);
 
     const accordionContext = {
