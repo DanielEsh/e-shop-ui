@@ -1,85 +1,46 @@
-import React, { forwardRef, useState, useEffect, useRef } from 'react';
-import cn from 'classnames';
+import React, {FC, ReactNode, useEffect, useState, createContext} from 'react';
 
-import { 
-    Header,
-    HeaderIcon,
-    Content,
-} from './Accordion.styles';
-import AccordionIcon from './AccordionIcon';
+export const AccordionContext = createContext(undefined);
 
 export type AccordionProps = {
-    header: string;
-    content: string;
-    active?: boolean;
-    disabled?: boolean;
-    onToggle: () => void;
+    stayOpen?: boolean;
+    defaultOpen?: number[];
+    children: ReactNode;
 }
 
-export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
-    header,
-    content,
-    active = false,
-    disabled = false,
-    onToggle,
-}, ref) => {
-    const [isActive, setIsActive] = useState<boolean>(false);
-    const [maxHeight, setMaxHeight] = useState<number>(0);
-    let contentHeight = 0;
+export const Accordion: FC<AccordionProps> = ({
+    stayOpen = false,
+    defaultOpen = [],
+    children}) => {
+    const [open, setOpen] = useState<Array<number>>([]);
 
-    const contentEl = useRef<HTMLDivElement>(null);
-    const initialRender = useRef(false);
-
-    const classes = cn({
-        'is-active': isActive,
-        'is-disabled': disabled,
-    });
-
-    useEffect(() => {
-        if (contentEl.current) contentHeight = contentEl.current.scrollHeight;
-
-        if (!initialRender.current) {
-            initialRender.current = true;
-            if (active) {
-                setMaxHeight(contentHeight);
-                setIsActive(true);
-            }
-        }
-    }, [maxHeight]);
-
-    const handleToggle = () => {
-        if (disabled) return;
-
-        if (!isActive)
-            setMaxHeight(contentHeight);
-        else
-            setMaxHeight(0);
-
-        onToggle();
-        return setIsActive(!isActive);
+    const toggle = (id) => {
+        if (open.includes(id)) 
+            return setOpen(open.filter(item => item !== id));
+        if (stayOpen) 
+            return setOpen([...open, id]);
+        setOpen([id]);
     };
 
+    useEffect(() => {
+        if (stayOpen) 
+            setOpen(defaultOpen);
+        else 
+            setOpen([defaultOpen[0]]);
+        
+    }, []);
+
+    const accordionContext = {
+        open,
+        toggle,
+    }
 
     return (
-        <div ref={ ref }>
-            <Header
-                className={ classes }
-                onClick={ handleToggle }
-            >
-                <div >
-                    { header }
-                </div>
-
-                <HeaderIcon>
-                    <AccordionIcon isOpened={ isActive } />
-                </HeaderIcon>
-            </Header>
-            <Content
-                ref={ contentEl }
-                maxHeight={ maxHeight }
-            >
-                { content }
-            </Content>
+        <div>
+            <AccordionContext.Provider value={ accordionContext }>
+                {children}
+            </AccordionContext.Provider>
         </div>
-    )
-});
+    );
+};
+
