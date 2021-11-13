@@ -62,7 +62,7 @@ export const AccordionItem = ({children}) => {
     );
 };
 
-export const AccordionR = ({stayOpen = false, children}) => {
+export const AccordionR = ({stayOpen = false, defaultOpen = [1, 2], children}) => {
     const [open, setOpen] = useState([]);
     const toggle = (id) => {
         if (stayOpen) {
@@ -77,6 +77,14 @@ export const AccordionR = ({stayOpen = false, children}) => {
         }
 
     };
+
+    useEffect(() => {
+        if (stayOpen) {
+            setOpen(defaultOpen);
+        } else {
+            setOpen([defaultOpen[0]]);
+        }
+    }, []);
 
     const accordionContext = {
         open,
