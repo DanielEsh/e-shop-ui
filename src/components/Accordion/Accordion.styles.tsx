@@ -69,7 +69,7 @@ export const HeaderIcon = styled('span')`
 
 export const Content = styled('div')`
     overflow: hidden;
-    max-height: ${props => props.maxHeight}px;
+    max-height: ${props => props.isOpened ? props.maxHeight : 0}px;
     background-color: ${activeBackgroundColor};
     transition: max-height .3s ease-in-out;
 `

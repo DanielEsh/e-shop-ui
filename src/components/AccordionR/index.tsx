@@ -1,7 +1,9 @@
-import React, {createContext, useContext, useRef} from 'react';
+import React, {createContext, useContext, useRef, useEffect, useState, CSSProperties} from 'react';
+
+import {Content} from '../Accordion/Accordion.styles';
 
 const testContextValue = {
-    open: 'open',
+    open: false,
     toggle: 'toggle',
 }
 
@@ -14,14 +16,31 @@ export const AccordionHeader = () => {
 }
 
 export const AccordionBody = () => {
+    const [dimensions, setDimensions] = useState(0);
     const ref = useRef(null);
 
-    const getDimensions = (node) => {
+    const {open} = useContext(AccordionContext);
 
+    const getDimensions = (node) => {
+        console.log(node.scrollHeight);
+        return node.scrollHeight;
     }
 
+
+    useEffect(() => {
+        if (ref.current) 
+            setDimensions(getDimensions(ref.current))
+        
+    }, []);
+
     return (
-        <div ref={ ref }>Body</div>
+        <Content
+            ref={ ref }
+            isOpened={ open }
+            minHeight={ dimensions }
+        >
+            Body
+        </Content>
     )
 }
 
