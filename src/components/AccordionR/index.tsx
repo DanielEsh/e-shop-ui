@@ -62,10 +62,20 @@ export const AccordionItem = ({children}) => {
     );
 };
 
-export const AccordionR = ({children}) => {
+export const AccordionR = ({stayOpen = false, children}) => {
     const [open, setOpen] = useState([]);
     const toggle = (id) => {
-        open === id ? setOpen([]) : setOpen(id);
+        if (stayOpen) {
+            if (open.includes(id)) {
+                const arr = open.filter(item => item !== id);
+                setOpen(arr);
+            } else {
+                setOpen([...open, id]);
+            }
+        } else {
+            open === id ? setOpen([]) : setOpen(id);
+        }
+
     };
 
     const accordionContext = {
