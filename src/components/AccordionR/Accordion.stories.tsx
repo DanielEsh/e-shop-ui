@@ -1,7 +1,8 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import {AccordionR, AccordionItem, AccordionHeader, AccordionBody} from './index';
+import {AccordionR} from './index';
+import {AccordionItem} from './AccordionItem';
 
 export default {
     title: 'R',
@@ -11,22 +12,16 @@ export default {
 export const Primary = () => (
     <div>
         <AccordionR>
-            <AccordionItem>
-                <AccordionHeader number={ 1 }>
-                    Header
-                </AccordionHeader>
-                <AccordionBody number={ 1 }>
-                    Body
-                </AccordionBody>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionHeader number={ 2 }>
-                    Header
-                </AccordionHeader>
-                <AccordionBody number={ 2 }>
-                    Body
-                </AccordionBody>
-            </AccordionItem>
+            <AccordionItem
+                body={ <div>Body</div> }
+                header={ <div>Header</div> }
+                number={ 1 }
+            />
+            <AccordionItem
+                body={ <div>Body</div> }
+                header={ <div>Header</div> }
+                number={ 2 }
+            />
         </AccordionR>
     </div>
 );
