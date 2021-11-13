@@ -1,10 +1,12 @@
 import React from 'react';
 
+import {Header} from './Accordion.styles';
+
 export const AccordionHeader = ({children, onClick}) => {
     return (
-        <div onClick={ onClick }>
+        <Header onClick={ onClick }>
             {children}
-        </div>
+        </Header>
     );
 };
 

@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {Content} from "../Accordion/Accordion.styles";
+import {Content} from "./Accordion.styles";
 
 export const AccordionBody = ({children, isOpened}) => {
     const [dimensions, setDimensions] = useState(0);
