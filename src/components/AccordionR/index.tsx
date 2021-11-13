@@ -62,13 +62,15 @@ export const AccordionItem = ({children}) => {
     );
 };
 
-export const AccordionR = ({open, toggle, children}) => {
-    const [a, setA] = useState([]);
+export const AccordionR = ({children}) => {
+    const [open, setOpen] = useState([]);
+    const toggle = (id) => {
+        open === id ? setOpen([]) : setOpen(id);
+    };
+
     const accordionContext = {
-        open: a,
-        toggle(v) {
-            setA(v)
-        }
+        open,
+        toggle,
     }
 
     return (
