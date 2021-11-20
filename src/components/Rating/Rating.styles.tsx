@@ -7,6 +7,14 @@ export const RatingWrapper = styled('ul')`
     padding: 0;
 `
 
+export const RatingValue = styled('div')`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    font-size: 18px;
+`
+
 export const StarWrapper = styled('li')`
     position: relative;
     margin: 5px;

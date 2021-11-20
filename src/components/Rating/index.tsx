@@ -3,7 +3,8 @@ import React, {forwardRef, useState} from 'react';
 import Star from './Star';
 
 import {
-    RatingWrapper
+    RatingWrapper,
+    RatingValue,
 } from "./Rating.styles";
 
 
@@ -67,7 +68,9 @@ export const Rating = forwardRef<HTMLUListElement, RatingProps>(({
             onMouseLeave={ endHover }
         >
             {ratingItems}
-            {hoverMode ? currentHoverRating : currentRating }
+            <RatingValue>
+                {hoverMode ? currentHoverRating : currentRating }
+            </RatingValue>
         </RatingWrapper>
     );
 });
