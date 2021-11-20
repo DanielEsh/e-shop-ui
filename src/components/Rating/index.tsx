@@ -9,20 +9,18 @@ import {
 export type RatingProps = {
     halfMode: boolean,
     editableMode: boolean,
+    defaultRatingValue: number,
 };
 
 export const Rating: FC<RatingProps> = ({
     halfMode = false,
     editableMode = true,
+    defaultRatingValue= 4.5,
 }) => {
-    const [currentRating, setCurrentRating] = useState<number>(0);
+    const [currentRating, setCurrentRating] = useState<number>(defaultRatingValue);
     const [currentHoverRating, setCurrentHoverRating] = useState<number>(0);
     const [hoverMode, setHoverMode] = useState<boolean>(false);
     const starsEl = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        setCurrentRating(4);
-    }, []);
     
     const onHover = (index : number) => {
         setCurrentHoverRating(index);
