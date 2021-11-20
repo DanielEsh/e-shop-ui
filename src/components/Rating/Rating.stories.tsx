@@ -13,3 +13,5 @@ export const Test = () => {
         <Rating />
     )
 };
+
+export { default as Default } from './examples/Default';

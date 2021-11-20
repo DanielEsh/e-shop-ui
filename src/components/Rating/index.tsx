@@ -9,11 +9,11 @@ import {
 
 
 export type RatingProps = {
-    halfMode: boolean,
-    editableMode: boolean,
-    defaultRatingValue: number,
-    ratingItemsCount: number,
-    onChange: (value: number) => void,
+    halfMode?: boolean,
+    editableMode?: boolean,
+    defaultRatingValue?: number,
+    ratingItemsCount?: number,
+    onChange?: (value: number) => void,
 };
 
 export const Rating = forwardRef<HTMLUListElement, RatingProps>(({
