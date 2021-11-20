@@ -7,11 +7,13 @@ import {
 } from "./Rating.styles";
 
 export type RatingProps = {
-    half: boolean,
+    halfMode: boolean,
+    editableMode: boolean,
 };
 
 export const Rating: FC<RatingProps> = ({
-    half = false
+    halfMode = false,
+    editableMode = true,
 }) => {
     const [currentRating, setCurrentRating] = useState<number>(0);
     const [currentHoverRating, setCurrentHoverRating] = useState<number>(0);
@@ -26,11 +28,11 @@ export const Rating: FC<RatingProps> = ({
         setCurrentHoverRating(index);
     };
 
-    const onRatingMouseEnter = () => {
-        setHoverMode(true);
+    const startHover = () => {
+        if (editableMode) setHoverMode(true);
     };
 
-    const onRatingMouseLeave = () => {
+    const endHover = () => {
         setCurrentHoverRating(0);
         setHoverMode(false);
     };
@@ -44,7 +46,7 @@ export const Rating: FC<RatingProps> = ({
     for (let index = 0; index < 5; index += 1)
         stars.push(<Star
             key={ index } currentHoverRating={ currentHoverRating } currentRating={ currentRating }
-            half={ half }
+            half={ halfMode }
             hoverMode={ hoverMode }
             index={ index + 1 }
             onHover={ onHover }
@@ -56,8 +58,8 @@ export const Rating: FC<RatingProps> = ({
         <RatingWrapper
             ref={ starsEl }
             onClick={ onClick }
-            onMouseEnter={ onRatingMouseEnter }
-            onMouseLeave={ onRatingMouseLeave }
+            onMouseEnter={ startHover }
+            onMouseLeave={ endHover }
         >
             {stars}
             {hoverMode ? currentHoverRating : currentRating }
