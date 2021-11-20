@@ -63,6 +63,7 @@ export const Rating = forwardRef<HTMLUListElement, RatingProps>(({
     return (
         <RatingWrapper
             ref={ ref }
+            editableMode={ editableMode }
             onClick={ onClick }
             onMouseEnter={ startHover }
             onMouseLeave={ endHover }

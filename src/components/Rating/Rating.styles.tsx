@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { theme } from "../Theme";
 
+const goldColor = '#fadb14';
+const grayDefaultColor = '#f0f0f0';
+
 export const RatingWrapper = styled('ul')`
     display: flex;
     margin: 0;
     padding: 0;
+    cursor: ${({editableMode}) => editableMode ? 'pointer' : 'auto'};
 `
 
 export const RatingValue = styled('div')`
@@ -23,7 +27,7 @@ export const StarWrapper = styled('li')`
     height: 30px;
   
     &.is-active {
-        color: #fadb14;
+        color: ${goldColor};
     }
 `;
 
@@ -38,13 +42,12 @@ export const First = styled('div')`
     z-index: 1;
     width: 50%;
     height: 100%;
-    color: #f0f0f0;
-    //color: #fadb14;
+    color: ${grayDefaultColor};
     overflow: hidden;
     transition: color ${theme.transition.default} .3s;
   
     &.is-active {
-        color: #fadb14;
+        color: ${goldColor};
     }
 `
 
@@ -53,11 +56,11 @@ export const Second = styled('div')`
     top: 0;
     width: 100%;
     height: 100%;
-    color: #f0f0f0;
+    color: ${grayDefaultColor};
     overflow: hidden;
     transition: color ${theme.transition.default} .3s;
 
     &.is-active {
-        color: #fadb14;
+        color: ${goldColor};
     }
 `
