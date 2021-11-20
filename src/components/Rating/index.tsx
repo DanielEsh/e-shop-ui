@@ -8,26 +8,35 @@ import {
 
 export const Rating = () => {
     const [currentRating, setCurrentRating] = useState<number>(0);
+    const [currentHoverRating, setCurrentHoverRating] = useState<number>(0);
+    const [hoverMode, setHoverMode] = useState<boolean>(false);
     const starsEl = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         console.log('star', starsEl.current);
-
+        setCurrentRating(4);
     }, []);
     
     const onHover = (event, index) => {
-        setCurrentRating(index);
+        setCurrentHoverRating(index);
     };
-    
+
+    const onRatingMouseEnter = () => {
+        setHoverMode(true);
+    };
+
     const onRatingMouseLeave = () => {
-        setCurrentRating(0);
-    }
+        setCurrentHoverRating(0);
+        setHoverMode(false);
+    };
 
     const stars = [];
 
     for (let index = 0; index < 5; index += 1)
         stars.push(<Star
-            key={ index } currentRating={ currentRating } index={ index + 1 }
+            key={ index } currentHoverRating={ currentHoverRating } currentRating={ currentRating }
+            hoverMode={ hoverMode }
+            index={ index + 1 }
             onHover={ onHover }
         />);
     
@@ -36,10 +45,11 @@ export const Rating = () => {
     return (
         <RatingWrapper
             ref={ starsEl }
+            onMouseEnter={ onRatingMouseEnter }
             onMouseLeave={ onRatingMouseLeave }
         >
             {stars}
-            {currentRating}
+            {hoverMode ? currentHoverRating : currentRating }
         </RatingWrapper>
     );
 };

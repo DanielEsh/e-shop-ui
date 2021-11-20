@@ -7,14 +7,16 @@ const Star = ({
     onHover,
     index,
     currentRating,
+    currentHoverRating,
+    hoverMode,
 }) => {
     
     const classesFirst = cn({
-        'is-active': currentRating >= index - 0.5
+        'is-active': hoverMode ? currentHoverRating >= index - 0.5 : currentRating >= index - 0.5
     })
 
     const classesSecond = cn({
-        'is-active': currentRating >= index
+        'is-active': hoverMode ? currentHoverRating >= index : currentRating >= index
     })
     
     return (
