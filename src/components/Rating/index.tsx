@@ -18,6 +18,10 @@ export const Rating = () => {
     const onHover = (event, index) => {
         setCurrentRating(index);
     };
+    
+    const onRatingMouseLeave = () => {
+        setCurrentRating(0);
+    }
 
     const stars = [];
 
@@ -32,6 +36,7 @@ export const Rating = () => {
     return (
         <RatingWrapper
             ref={ starsEl }
+            onMouseLeave={ onRatingMouseLeave }
         >
             {stars}
             {currentRating}
