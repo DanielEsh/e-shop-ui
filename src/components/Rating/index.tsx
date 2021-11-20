@@ -1,4 +1,4 @@
-import React, {FC, useRef, useEffect, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 
 import Star from './Star';
 
@@ -11,20 +11,22 @@ export type RatingProps = {
     editableMode: boolean,
     defaultRatingValue: number,
     ratingItemsCount: number,
+    onChange: (value: number) => void,
 };
 
 export const Rating: FC<RatingProps> = ({
     halfMode = true,
-    editableMode = true,
+    editableMode = false,
     defaultRatingValue= 4.5,
     ratingItemsCount = 8,
+    onChange,
 }) => {
     const [currentRating, setCurrentRating] = useState<number>(defaultRatingValue);
     const [currentHoverRating, setCurrentHoverRating] = useState<number>(0);
     const [hoverMode, setHoverMode] = useState<boolean>(false);
     const starsEl = useRef<HTMLDivElement>(null);
     const ratingItems = [];
-    
+
     const onHover = (index : number) => {
         setCurrentHoverRating(index);
     };
@@ -39,7 +41,8 @@ export const Rating: FC<RatingProps> = ({
     };
 
     const onClick = () => {
-        setCurrentRating(currentHoverRating);
+        if (editableMode) setCurrentRating(currentHoverRating);
+        onChange(currentRating);
     }
 
     for (let index = 0; index < ratingItemsCount; index ++)
