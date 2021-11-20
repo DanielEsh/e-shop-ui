@@ -1,10 +1,11 @@
-import React, {FC, useRef, useState} from 'react';
+import React, {forwardRef, useState} from 'react';
 
 import Star from './Star';
 
 import {
     RatingWrapper
 } from "./Rating.styles";
+
 
 export type RatingProps = {
     halfMode: boolean,
@@ -14,17 +15,16 @@ export type RatingProps = {
     onChange: (value: number) => void,
 };
 
-export const Rating: FC<RatingProps> = ({
+export const Rating = forwardRef<HTMLUListElement, RatingProps>(({
     halfMode = true,
     editableMode = false,
-    defaultRatingValue= 4.5,
-    ratingItemsCount = 8,
+    defaultRatingValue= 0,
+    ratingItemsCount = 5,
     onChange,
-}) => {
+}, ref) => {
     const [currentRating, setCurrentRating] = useState<number>(defaultRatingValue);
     const [currentHoverRating, setCurrentHoverRating] = useState<number>(0);
     const [hoverMode, setHoverMode] = useState<boolean>(false);
-    const starsEl = useRef<HTMLDivElement>(null);
     const ratingItems = [];
 
     const onHover = (index : number) => {
@@ -42,7 +42,8 @@ export const Rating: FC<RatingProps> = ({
 
     const onClick = () => {
         if (editableMode) setCurrentRating(currentHoverRating);
-        onChange(currentRating);
+        if (onChange) onChange(currentRating);
+
     }
 
     for (let index = 0; index < ratingItemsCount; index ++)
@@ -55,14 +56,12 @@ export const Rating: FC<RatingProps> = ({
                 hoverMode={ hoverMode }
                 index={ index + 1 }
                 onHover={ onHover }
-            />
-        );
-    
-    
+            />);
+
 
     return (
         <RatingWrapper
-            ref={ starsEl }
+            ref={ ref }
             onClick={ onClick }
             onMouseEnter={ startHover }
             onMouseLeave={ endHover }
@@ -71,4 +70,4 @@ export const Rating: FC<RatingProps> = ({
             {hoverMode ? currentHoverRating : currentRating }
         </RatingWrapper>
     );
-};
+});
