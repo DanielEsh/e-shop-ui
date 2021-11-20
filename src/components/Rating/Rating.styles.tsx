@@ -30,8 +30,13 @@ export const First = styled('div')`
     z-index: 1;
     width: 50%;
     height: 100%;
-    color: #fadb14;
+    color: #f0f0f0;
+    //color: #fadb14;
     overflow: hidden;
+  
+    &.is-active {
+        color: #fadb14;
+    }
 `
 
 export const Second = styled('div')`
@@ -41,4 +46,8 @@ export const Second = styled('div')`
     height: 100%;
     color: #f0f0f0;
     overflow: hidden;
+
+    &.is-active {
+        color: #fadb14;
+    }
 `

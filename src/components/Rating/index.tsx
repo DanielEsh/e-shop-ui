@@ -22,7 +22,10 @@ export const Rating = () => {
     const stars = [];
 
     for (let index = 0; index < 5; index += 1)
-        stars.push(<Star key={ index } index={ index + 1 } onHover={ onHover } />);
+        stars.push(<Star
+            key={ index } currentRating={ currentRating } index={ index + 1 }
+            onHover={ onHover }
+        />);
     
     
 
