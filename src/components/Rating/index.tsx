@@ -43,7 +43,7 @@ export const Rating = forwardRef<HTMLUListElement, RatingProps>(({
 
     const onClick = () => {
         if (editableMode) setCurrentRating(currentHoverRating);
-        if (onChange) onChange(currentRating);
+        if (onChange) onChange(currentHoverRating);
 
     }
 

@@ -3,9 +3,7 @@ import { Rating } from "../index";
 
 const Default = () : JSX.Element => {
     return (
-        <>
-            <Rating />
-        </>
+        <Rating />
     );
 };
 
