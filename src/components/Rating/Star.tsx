@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {FC} from 'react';
 import cn from 'classnames';
 
 import {StarWrapper, StarIconSvg, First, Second} from './Rating.styles';
 
-const Star = ({
+type StarProps = {
+    onHover: (index: number) => void;
+    index: number;
+    currentRating: number;
+    currentHoverRating: number;
+    hoverMode: boolean;
+    half: boolean;
+};
+
+const Star: FC<StarProps> = ({
     onHover,
     index,
     currentRating,
@@ -25,7 +34,7 @@ const Star = ({
             {half && (
                 <First
                     className={ classesFirst }
-                    onMouseEnter={ (e) => (onHover(e, index - 0.5)) }
+                    onMouseEnter={ () => (onHover(index - 0.5)) }
                 >
                     <StarIconSvg
                         aria-hidden="true"
@@ -40,7 +49,7 @@ const Star = ({
             )}
             <Second
                 className={ classesSecond }
-                onMouseEnter={ (e) => (onHover(e, index)) }
+                onMouseEnter={ () => (onHover(index)) }
             >
                 <StarIconSvg
                     aria-hidden="true"
