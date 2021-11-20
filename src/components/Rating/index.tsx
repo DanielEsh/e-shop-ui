@@ -6,7 +6,7 @@ import {
     RatingWrapper
 } from "./Rating.styles";
 
-export const Rating = () => {
+export const Rating = ({half = false}) => {
     const [currentRating, setCurrentRating] = useState<number>(0);
     const [currentHoverRating, setCurrentHoverRating] = useState<number>(0);
     const [hoverMode, setHoverMode] = useState<boolean>(false);
@@ -30,11 +30,16 @@ export const Rating = () => {
         setHoverMode(false);
     };
 
+    const onClick = () => {
+        setCurrentRating(currentHoverRating);
+    }
+
     const stars = [];
 
     for (let index = 0; index < 5; index += 1)
         stars.push(<Star
             key={ index } currentHoverRating={ currentHoverRating } currentRating={ currentRating }
+            half={half}
             hoverMode={ hoverMode }
             index={ index + 1 }
             onHover={ onHover }
@@ -45,6 +50,7 @@ export const Rating = () => {
     return (
         <RatingWrapper
             ref={ starsEl }
+            onClick={ onClick }
             onMouseEnter={ onRatingMouseEnter }
             onMouseLeave={ onRatingMouseLeave }
         >
