@@ -33,6 +33,7 @@ export const First = styled('div')`
     color: #f0f0f0;
     //color: #fadb14;
     overflow: hidden;
+    transition: color ${theme.transition.default} .3s;
   
     &.is-active {
         color: #fadb14;
@@ -46,6 +47,7 @@ export const Second = styled('div')`
     height: 100%;
     color: #f0f0f0;
     overflow: hidden;
+    transition: color ${theme.transition.default} .3s;
 
     &.is-active {
         color: #fadb14;
