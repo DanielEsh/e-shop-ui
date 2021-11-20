@@ -10,17 +10,20 @@ export type RatingProps = {
     halfMode: boolean,
     editableMode: boolean,
     defaultRatingValue: number,
+    ratingItemsCount: number,
 };
 
 export const Rating: FC<RatingProps> = ({
-    halfMode = false,
+    halfMode = true,
     editableMode = true,
     defaultRatingValue= 4.5,
+    ratingItemsCount = 8,
 }) => {
     const [currentRating, setCurrentRating] = useState<number>(defaultRatingValue);
     const [currentHoverRating, setCurrentHoverRating] = useState<number>(0);
     const [hoverMode, setHoverMode] = useState<boolean>(false);
     const starsEl = useRef<HTMLDivElement>(null);
+    const ratingItems = [];
     
     const onHover = (index : number) => {
         setCurrentHoverRating(index);
@@ -39,16 +42,18 @@ export const Rating: FC<RatingProps> = ({
         setCurrentRating(currentHoverRating);
     }
 
-    const stars = [];
-
-    for (let index = 0; index < 5; index += 1)
-        stars.push(<Star
-            key={ index } currentHoverRating={ currentHoverRating } currentRating={ currentRating }
-            half={ halfMode }
-            hoverMode={ hoverMode }
-            index={ index + 1 }
-            onHover={ onHover }
-        />);
+    for (let index = 0; index < ratingItemsCount; index ++)
+        ratingItems.push(
+            <Star
+                key={ index }
+                currentHoverRating={ currentHoverRating }
+                currentRating={ currentRating }
+                half={ halfMode }
+                hoverMode={ hoverMode }
+                index={ index + 1 }
+                onHover={ onHover }
+            />
+        );
     
     
 
@@ -59,7 +64,7 @@ export const Rating: FC<RatingProps> = ({
             onMouseEnter={ startHover }
             onMouseLeave={ endHover }
         >
-            {stars}
+            {ratingItems}
             {hoverMode ? currentHoverRating : currentRating }
         </RatingWrapper>
     );
