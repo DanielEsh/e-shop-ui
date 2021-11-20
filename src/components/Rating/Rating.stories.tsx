@@ -15,3 +15,4 @@ export const Test = () => {
 };
 
 export { default as Default } from './examples/Default';
+export { default as HalfMode } from './examples/HalfMode';
