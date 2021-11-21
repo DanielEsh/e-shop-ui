@@ -18,6 +18,11 @@ export type ButtonProps = {
     onClick?: () => void;
 }
 
+type Coords = {
+    x: number,
+    y: number,
+}
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     type = 'button',
     color = 'primary',
@@ -28,8 +33,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     disabled,
     onClick,
 }, ref) => {
-    const [positionX, setPositionX] = useState(50);
-    const [positionY, setPositionY] = useState(50);
+    const defaultCoords: Coords = {
+        x: 50,
+        y: 50,
+    }
+    const [hoverPosition, setHoverPosition] = useState<Coords>(defaultCoords);
     const [rippleArray, setRippleArray] = useState([]);
     const [rippleSize, setRippleSize] = useState(0);
 
@@ -52,10 +60,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
         const x = event.offsetX / container.offsetWidth;
         const y = (event.offsetY + ((container.offsetWidth - container.offsetHeight) / 2)) / container.offsetWidth;
 
-        set
-
-        setPositionX(100 * (x - .5));
-        setPositionY(100 * (y - .5));
+        setHoverPosition({
+            x: 100 * (x - .5),
+            y: 100 * (y - .5),
+        })
     }
 
     const onRipple = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -90,7 +98,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
             type={ type }
         >
             <BtnHover
-                style={ {transformOrigin: `${positionX}% ${positionY}%`} }
+                style={ {transformOrigin: `${hoverPosition?.x}% ${hoverPosition?.y}%`} }
             />
 
             <RippleContainer>
