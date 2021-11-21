@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useState, useLayoutEffect } from 'react';
+import React, { forwardRef, useState, useLayoutEffect } from 'react';
 import cn from 'classnames';
 
 import {
@@ -41,19 +41,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     const [rippleArray, setRippleArray] = useState([]);
     const [rippleSize, setRippleSize] = useState(0);
 
-    const buttonEl = useRef<HTMLButtonElement>(null);
-
-    const currentRef: any = ref ? ref : buttonEl;
-
     const classes = cn({
         'is-disabled': disabled,
         'is-outline': outline,
     }, [`color--${color}`, `size--${size}`])
 
 
-    const onHover = (e:React.MouseEvent) => {
-        const container = currentRef?.current;
+    const onHover = (e:React.MouseEvent<HTMLButtonElement>) => {
         const event = e.nativeEvent;
+        const { currentTarget: container } = e;
 
         if (!container) return;
 
@@ -105,7 +101,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
 
     return (
         <Btn
-            ref={ currentRef }
+            ref={ ref }
             className={ classes }
             disabled={ disabled }
             isRounded={ rounded }
