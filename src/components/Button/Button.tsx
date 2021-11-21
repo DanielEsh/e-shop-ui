@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { forwardRef, useRef, useState } from 'react';
 import cn from 'classnames';
 
 import { 
@@ -18,8 +18,7 @@ export type ButtonProps = {
     onClick?: () => void;
 }
 
-
-export const Button: React.FC<ButtonProps> = ({
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     type = 'button',
     color = 'primary',
     size = 'medium',
@@ -28,11 +27,13 @@ export const Button: React.FC<ButtonProps> = ({
     outline,
     disabled,
     onClick,
-}) => {
+}, ref) => {
     const [positionX, setpositionX] = useState(50);
     const [positionY, setPositionY] = useState(50);
 
     const buttonEl = useRef<HTMLButtonElement>(null);
+
+    const currentRef = ref ? ref : buttonEl;
 
     const classes = cn({
         'is-disabled': disabled,
@@ -41,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
 
 
     const handleMouseListener = (e:React.MouseEvent) => {
-        const container = buttonEl.current;
+        const container = currentRef?.current;
         const event = e.nativeEvent;
 
         if (!container) return;
@@ -56,7 +57,7 @@ export const Button: React.FC<ButtonProps> = ({
 
     return (
         <Btn
-            ref={ buttonEl }
+            ref={ currentRef }
             className={ classes }
             disabled={ disabled }
             isRounded={ rounded }
@@ -75,4 +76,4 @@ export const Button: React.FC<ButtonProps> = ({
 
         </Btn>
     );
-};
+})
