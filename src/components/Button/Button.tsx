@@ -66,12 +66,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
         })
     }
 
+    /**
+     * Clear ripple effect
+     */
     useLayoutEffect(() => {
-        setTimeout(() => {
+        const isRippleEffect = rippleArray.length;
+        let bounce = null;
+        if (!isRippleEffect) clearTimeout(bounce);
+
+        bounce = setTimeout(() => {
             setRippleArray([]);
         }, 1000);
     }, [rippleArray.length])
 
+    /**
+     * Add Ripple Effect
+     * @param event
+     */
     const onRipple = (event: React.MouseEvent<HTMLDivElement>) => {
         const { pageX, pageY, currentTarget } = event;
 
@@ -112,13 +123,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
                 rippleArray.map((ripple, index) => {
                     return (
                         <span
-                            key={index}
-                            style={{
+                            key={ index }
+                            style={ {
                                 top: ripple.y,
                                 left: ripple.x,
                                 width: rippleSize,
                                 height: rippleSize
-                            }}
+                            } }
                         />
                     );
                 })}
