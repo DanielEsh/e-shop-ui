@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { forwardRef, useRef, useState, useLayoutEffect } from 'react';
 import cn from 'classnames';
 
 import {
@@ -65,6 +65,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
             y: 100 * (y - .5),
         })
     }
+
+    useLayoutEffect(() => {
+        setTimeout(() => {
+            setRippleArray([]);
+        }, 1000);
+    }, [rippleArray.length])
 
     const onRipple = (event: React.MouseEvent<HTMLDivElement>) => {
         const { pageX, pageY, currentTarget } = event;
