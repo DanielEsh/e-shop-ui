@@ -26,14 +26,6 @@ SuccessLarge.args = {
     rounded: true,
 };
 
-export const Dark = ButtonTemplate.bind({});
-Dark.args = { 
-    color: 'dark',
-    size: 'large',
-    children: 'RoundedOutline button',
-    outline: true,
-};
-
 export const Disabled = ButtonTemplate.bind({});
 Disabled.args = { 
     color: 'dark',
@@ -45,3 +37,4 @@ Disabled.args = {
 };
 
 export { default as Default } from './examples/Default';
+export { default as Dark } from './examples/Dark';
