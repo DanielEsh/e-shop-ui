@@ -46,15 +46,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
         'is-outline': outline,
     }, [`color--${color}`, `size--${size}`])
 
-
-    const onHover = (e:React.MouseEvent<HTMLButtonElement>) => {
-        const event = e.nativeEvent;
-        const { currentTarget: container } = e;
+    /**
+     * Add hover effect
+     * @param event
+     */
+    const onHover = (event:React.MouseEvent<HTMLButtonElement>) => {
+        const nativeEvent = event.nativeEvent;
+        const { currentTarget: container } = event;
 
         if (!container) return;
 
-        const x = event.offsetX / container.offsetWidth;
-        const y = (event.offsetY + ((container.offsetWidth - container.offsetHeight) / 2)) / container.offsetWidth;
+        const x = nativeEvent.offsetX / container.offsetWidth;
+        const y = (nativeEvent.offsetY + ((container.offsetWidth - container.offsetHeight) / 2)) / container.offsetWidth;
 
         setHoverPosition({
             x: 100 * (x - .5),
