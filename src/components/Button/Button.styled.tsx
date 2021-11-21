@@ -75,7 +75,7 @@ export const Btn = styled.button<{isRounded?: boolean}>`
     };
     border: 1px solid;
     &.is-disabled {
-        pointer-events: none;
+        cursor: not-allowed;
     }
   
     &:hover {
