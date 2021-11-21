@@ -16,6 +16,32 @@ export const BtnHover = styled.span`
                 border-color .8s ${theme.transition.default};
 `
 
+export const RippleContainer = styled.div`
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  span {
+    transform: scale(0);
+    border-radius: 100%;
+    position: absolute;
+    opacity: 0.75;
+    background-color: #1fecf9;
+    animation-name: ripple;
+    animation-duration: .8s;
+  }
+
+  @keyframes ripple {
+    to {
+      opacity: 0;
+      transform: scale(2);
+    }
+  }
+`;
+
 export const BtnText = styled.span`
     position: relative;
     z-index: 1;

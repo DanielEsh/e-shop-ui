@@ -10,11 +10,6 @@ export default {
 
 const ButtonTemplate: Story<ButtonProps> = (args) => <Button { ...args } />;
 
-export const Default = ButtonTemplate.bind({});
-Default.args = { 
-    children: 'Default button'
-};
-
 export const RoundedOutline = ButtonTemplate.bind({});
 RoundedOutline.args = { 
     children: 'RoundedOutline button',
@@ -48,3 +43,5 @@ Disabled.args = {
     rounded: true,
     disabled: true,
 };
+
+export { default as Default } from './examples/Default';
