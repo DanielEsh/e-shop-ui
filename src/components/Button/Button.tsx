@@ -15,6 +15,7 @@ export type ButtonProps = {
     rounded?: boolean,
     disabled?: boolean,
     type?: 'button' | 'submit',
+    rippleEffect?: boolean,
     onClick?: () => void;
 }
 
@@ -31,6 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     rounded,
     outline,
     disabled,
+    rippleEffect = true,
     onClick,
 }, ref) => {
     const defaultCoords: Coords = {
@@ -38,8 +40,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
         y: 50,
     }
     const [hoverPosition, setHoverPosition] = useState<Coords>(defaultCoords);
-    const [rippleArray, setRippleArray] = useState([]);
-    const [rippleSize, setRippleSize] = useState(0);
+    const [ripplePosition, setRipplePosition] = useState([]);
 
     const classes = cn({
         'is-disabled': disabled,
@@ -69,38 +70,45 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
      * Clear ripple effect (remove DOM element)
      */
     useLayoutEffect(() => {
-        const isRippleEffect = rippleArray.length;
+        const isRippleEffect = ripplePosition.length;
         const RippleTime = 800;
         let bounce = null;
 
         if (!isRippleEffect) clearTimeout(bounce);
 
         bounce = setTimeout(() => {
-            setRippleArray([]);
+            setRipplePosition([]);
+            clearTimeout(bounce);
         }, RippleTime * 2);
-    }, [rippleArray.length])
+
+        return () => clearTimeout(bounce);
+    }, [ripplePosition.length])
 
     /**
      * Add Ripple Effect (add DOM element and start animation)
      * @param event
      */
     const onRipple = (event: React.MouseEvent<HTMLDivElement>) => {
-        const { pageX, pageY, currentTarget } = event;
+        if (rippleEffect) {
+            const { pageX, pageY, currentTarget } = event;
 
-        const rippleContainer = currentTarget.getBoundingClientRect()
+            const rippleContainer = currentTarget.getBoundingClientRect()
 
-        const size =
-            rippleContainer.width > rippleContainer.height
-                ? rippleContainer.width
-                : rippleContainer.height;
-        const x = pageX - rippleContainer.x - size / 2;
-        const y = pageY - rippleContainer.y - size / 2;
+            const size =
+                rippleContainer.width > rippleContainer.height
+                    ? rippleContainer.width
+                    : rippleContainer.height;
+            const x = pageX - rippleContainer.x - size / 2;
+            const y = pageY - rippleContainer.y - size / 2;
 
-        setRippleArray([{
-            x,
-            y,
-        }]);
-        setRippleSize(size);
+            setRipplePosition([{
+                x,
+                y,
+                size,
+            }]);
+        }
+
+        onClick();
     }
 
 
@@ -119,22 +127,24 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
                 style={ {transformOrigin: `${hoverPosition?.x}% ${hoverPosition?.y}%`} }
             />
 
-            <RippleContainer>
-                {rippleArray.length > 0 &&
-                rippleArray.map((ripple, index) => {
-                    return (
-                        <span
-                            key={ index }
-                            style={ {
-                                top: ripple.y,
-                                left: ripple.x,
-                                width: rippleSize,
-                                height: rippleSize
-                            } }
-                        />
-                    );
-                })}
-            </RippleContainer>
+            {rippleEffect && (
+                <RippleContainer>
+                    {ripplePosition.length > 0 &&
+                    ripplePosition.map((ripple, index) => {
+                        return (
+                            <span
+                                key={ index }
+                                style={ {
+                                    top: ripple.y,
+                                    left: ripple.x,
+                                    width: ripple.size,
+                                    height: ripple.size
+                                } }
+                            />
+                        );
+                    })}
+                </RippleContainer>
+            )}
 
             <BtnText>
                 { children }
