@@ -66,20 +66,22 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     }
 
     /**
-     * Clear ripple effect
+     * Clear ripple effect (remove DOM element)
      */
     useLayoutEffect(() => {
         const isRippleEffect = rippleArray.length;
+        const RippleTime = 800;
         let bounce = null;
+
         if (!isRippleEffect) clearTimeout(bounce);
 
         bounce = setTimeout(() => {
             setRippleArray([]);
-        }, 1000);
+        }, RippleTime * 2);
     }, [rippleArray.length])
 
     /**
-     * Add Ripple Effect
+     * Add Ripple Effect (add DOM element and start animation)
      * @param event
      */
     const onRipple = (event: React.MouseEvent<HTMLDivElement>) => {
