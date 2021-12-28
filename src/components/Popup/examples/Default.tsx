@@ -12,7 +12,7 @@ const Default = () => {
         console.log('ref', ref.current);
     }, []);
     return (
-        <Portal scope={ ref }>
+        <Portal scope={ ref.current }>
             <div>
                 test test
             </div>

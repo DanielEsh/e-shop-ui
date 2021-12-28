@@ -18,7 +18,7 @@ export const Portal: FC<PortalProps> = (props) => {
     const [container, setContainer] = useState(body);
 
     useEffect(() => {
-        if (scope) setContainer(document.getElementById('custom-root'));
+        if (scope) setContainer(scope.current);
     }, [scope]);
 
     return container ? createPortal(children, container) : null;
