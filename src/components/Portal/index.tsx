@@ -1,7 +1,7 @@
 import {FC, ReactElement, useState, useEffect} from 'react';
 import { createPortal } from "react-dom";
 
-import { canUseDom } from "../../utils/isClient";
+import { canUseDom } from "../../utils/canUseDom";
 
 const body = canUseDom ? document.body : null;
 
