@@ -1,9 +1,9 @@
 import {FC, ReactElement, useState, useEffect} from 'react';
 import { createPortal } from "react-dom";
 
-import { isClient } from "../../utils/isClient";
+import { canUseDom } from "../../utils/isClient";
 
-const body = isClient ? document.body : null;
+const body = canUseDom ? document.body : null;
 
 export type PortalProps = {
     children: ReactElement;

@@ -1,4 +1,4 @@
-export const isClient = (): boolean => {
+export const canUseDom = (): boolean => {
     return (
         typeof window !== 'undefined' &&
         typeof window.document !== 'undefined' &&
