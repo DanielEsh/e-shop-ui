@@ -1,4 +1,4 @@
-import {FC, ReactElement, RefObject, useState, useEffect} from 'react';
+import {FC, ReactElement, useState, useEffect} from 'react';
 import { createPortal } from "react-dom";
 
 import { isClient } from "../../utils/isClient";
@@ -7,19 +7,19 @@ const body = isClient ? document.body : null;
 
 export type PortalProps = {
     children: ReactElement;
-    scope?: RefObject<HTMLElement>;
+    container?: HTMLElement;
 }
 
 export const Portal: FC<PortalProps> = (props) => {
     const {
         children,
-        scope,
+        container,
     } = props;
-    const [container, setContainer] = useState(body);
+    const [node, setNode] = useState<HTMLElement>(body);
 
     useEffect(() => {
-        if (scope) setContainer(scope.current);
-    }, [scope]);
+        if (container) setNode(container);
+    }, [container]);
 
-    return container ? createPortal(children, container) : null;
+    return node ? createPortal(children, node) : null;
 };

@@ -12,7 +12,7 @@ const Default = () => {
         console.log('ref', ref.current);
     }, []);
     return (
-        <Portal scope={ ref.current }>
+        <Portal container={ document.getElementById('custom-root') }>
             <div>
                 test test
             </div>
