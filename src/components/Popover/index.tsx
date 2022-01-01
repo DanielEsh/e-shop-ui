@@ -26,7 +26,7 @@ export const Popover:FC<PopoverProps> = (props) => {
         content,
         children,
         isVisible,
-        offsetY = -1,
+        offsetY = 0,
         offsetX = 0,
     } = props;
 
@@ -35,9 +35,9 @@ export const Popover:FC<PopoverProps> = (props) => {
         return element.getBoundingClientRect();
     };
 
-    const computeCoordsFromPlacement = (reference, floating, placement = 'top') => {
+    const computeCoordsFromPlacement = (reference, floating, placement = 'right') => {
         const commonX = reference.x + reference.width / 2 - floating.width / 2;
-        const commonY = (reference.y + reference.height / 2 - floating.height / 2) + 200;
+        const commonY = (reference.y + reference.height / 2 - floating.height / 2);
 
         let coords;
         switch (placement) {
