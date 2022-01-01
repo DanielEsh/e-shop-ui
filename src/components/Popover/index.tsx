@@ -9,6 +9,8 @@ import {
 export type PopoverProps = {
     content?: ReactElement;
     children?: ReactElement;
+    offsetY: number;
+    offsetX: number;
     isVisible?: boolean;
 }
 
@@ -24,6 +26,8 @@ export const Popover:FC<PopoverProps> = (props) => {
         content,
         children,
         isVisible,
+        offsetY = -1,
+        offsetX = 0,
     } = props;
 
     const getRect = (element) => {
@@ -33,7 +37,7 @@ export const Popover:FC<PopoverProps> = (props) => {
 
     const computeCoordsFromPlacement = (reference, floating, placement = 'top') => {
         const commonX = reference.x + reference.width / 2 - floating.width / 2;
-        const commonY = reference.y + reference.height / 2 - floating.height / 2;
+        const commonY = (reference.y + reference.height / 2 - floating.height / 2) + 200;
 
         let coords;
         switch (placement) {
@@ -56,6 +60,13 @@ export const Popover:FC<PopoverProps> = (props) => {
         return coords;
     };
 
+    const computeOffset = (coords, offsetX, offsetY) => {
+        return {
+            x: coords.x + offsetX,
+            y: coords.y + offsetY,
+        }
+    };
+
     useEffect( () => {
         const rectA = getRect(activator.current);
         const rectB = getRect(ctnt.current);
@@ -63,7 +74,8 @@ export const Popover:FC<PopoverProps> = (props) => {
         const crds = computeCoordsFromPlacement(rectA, rectB);
         gx = crds.x;
         gy = crds.y;
-        setCoords(crds);
+        const offsetCrds = computeOffset(crds, offsetX, offsetY);
+        setCoords(offsetCrds);
     }, []);
 
     return (
