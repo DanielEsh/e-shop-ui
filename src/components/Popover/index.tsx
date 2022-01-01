@@ -1,13 +1,14 @@
 import React, {FC} from 'react';
 
 export type PopoverProps = {
-    
+    isVisible?: boolean;
 }
 
-export const Popover:FC<PopoverProps> = () => {
+export const Popover:FC<PopoverProps> = (props) => {
+    const { isVisible } = props;
+
     return (
-        <>
-            test
-        </>
+        <div>{isVisible && <div>test</div>}</div>
     )
 }
+
