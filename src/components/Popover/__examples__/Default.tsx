@@ -11,7 +11,7 @@ const Container = styled('div')`
 
 const Default = (): JSX.Element => {
     const ref = useRef(null);
-    const [popoverVisible, setPopoverVisible] = useState<boolean>(false);
+    const [popoverVisible, setPopoverVisible] = useState<boolean>(true);
 
     const renderPopoverContent = (): JSX.Element => {
         return (
