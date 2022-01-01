@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
 
 import {Popover} from '../index';
@@ -6,12 +6,17 @@ import {Button} from '../../Button';
 import {Portal} from '../../Portal';
 
 const Container = styled('div')`
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 `;
 
 const Default = (): JSX.Element => {
-    const ref = useRef(null);
+    const customRootElement = useRef(null);
     const [popoverVisible, setPopoverVisible] = useState<boolean>(true);
+    const [node, setNode] = useState(null);
 
     const renderPopoverContent = (): JSX.Element => {
         return (
@@ -21,11 +26,16 @@ const Default = (): JSX.Element => {
         )
     };
 
+    useEffect(() => {
+        setNode(customRootElement.current)
+    }, []);
+
     return (
         <>
-            <Container ref={ ref } />
+            <Container ref={ customRootElement } />
             
             <Popover 
+                attachEl={ node }
                 content={ renderPopoverContent() }
                 isVisible={ popoverVisible }
             >

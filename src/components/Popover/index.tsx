@@ -4,14 +4,15 @@ import {
     PopoverContainer
 } from './Popover.styles';
 
-// import {Portal} from '../Portal';
+import {Portal} from '../Portal';
 
 export type PopoverProps = {
     content?: ReactElement;
     children?: ReactElement;
-    offsetY: number;
-    offsetX: number;
+    offsetY?: number;
+    offsetX?: number;
     isVisible?: boolean;
+    attachEl?: HTMLElement;
 }
 
 export const Popover:FC<PopoverProps> = (props) => {
@@ -28,6 +29,7 @@ export const Popover:FC<PopoverProps> = (props) => {
         isVisible,
         offsetY = 0,
         offsetX = 0,
+        attachEl,
     } = props;
 
     const getRect = (element) => {
@@ -35,9 +37,9 @@ export const Popover:FC<PopoverProps> = (props) => {
         return element.getBoundingClientRect();
     };
 
-    const computeCoordsFromPlacement = (reference, floating, placement = 'right') => {
+    const computeCoordsFromPlacement = (reference, floating, placement = 'bottom') => {
         const commonX = reference.x + reference.width / 2 - floating.width / 2;
-        const commonY = (reference.y + reference.height / 2 - floating.height / 2);
+        const commonY = reference.y + reference.height / 2 - floating.height / 2;
 
         let coords;
         switch (placement) {
@@ -83,19 +85,21 @@ export const Popover:FC<PopoverProps> = (props) => {
             <div ref={ activator }>
                 { children }
             </div>
-            {
-                isVisible && (
-                    <PopoverContainer 
-                        ref={ ctnt }
-                        style={ {
-                            top: coords?.y,
-                            left: coords?.x,
-                        } }
-                    >
-                        {content}
-                    </PopoverContainer>
-                )
-            }
+            <Portal container={ attachEl ? attachEl : null }>
+                {
+                    isVisible && (
+                        <PopoverContainer 
+                            ref={ ctnt }
+                            style={ {
+                                top: coords?.y,
+                                left: coords?.x,
+                            } }
+                        >
+                            {content}
+                        </PopoverContainer>
+                    )
+                }
+            </Portal>
         </>
     )
 }
