@@ -1,5 +1,5 @@
 import React, {FC, ReactElement, useState, useRef, useEffect} from 'react';
-import { usePopper } from 'react-popper';
+import { usePopover } from '../../hooks/usePopover';
 
 import {
     PopoverContainer
@@ -33,7 +33,7 @@ export const Popover:FC<PopoverProps> = (props) => {
         attachEl,
     } = props;
 
-    const { styles, attributes } = usePopper(activator.current, ctnt.current, {
+    const { styles, attributes } = usePopover(activator.current, ctnt.current, {
         placement: 'top',
     });
 
