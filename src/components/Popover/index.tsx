@@ -2,7 +2,8 @@ import React, {FC, ReactElement, useState, useRef, useEffect} from 'react';
 import { usePopover } from '../../hooks/usePopover';
 
 import {
-    PopoverContainer
+    PopoverContainer,
+    Arrow,
 } from './Popover.styles';
 
 import {Portal} from '../Portal';
@@ -21,6 +22,7 @@ export const Popover:FC<PopoverProps> = (props) => {
 
     const activator = useRef(null);
     const ctnt = useRef(null);
+    const arrow = useRef(null);
 
     let gx, gy = 0;
 
@@ -37,6 +39,7 @@ export const Popover:FC<PopoverProps> = (props) => {
         placement: 'top',
         offsetY: offsetY,
         offsetX: offsetX,
+        arrow: arrow.current,
     });
 
     const getRect = (element) => {
@@ -102,6 +105,7 @@ export const Popover:FC<PopoverProps> = (props) => {
                             style={ styles.popper } { ...attributes.popper }
                         >
                             {content}
+                            <Arrow ref={ arrow } />
                         </PopoverContainer>
                     )
                 }

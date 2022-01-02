@@ -10,3 +10,11 @@ export const PopoverContainer = styled('div')`
     height: 56px;
     width: 256px;
 `
+
+export const Arrow = styled('div')`
+    position: absolute;
+    top: -5px;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+`

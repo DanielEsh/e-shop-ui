@@ -42,6 +42,12 @@ export const usePopover = (reference, popper, options?) => {
                     offset: [options.offsetY, options.offsetX],
                 },
             },
+            {
+                name: 'arrow',
+                options: {
+                    element: options?.arrow,
+                },
+            },
         ],
     });
 
