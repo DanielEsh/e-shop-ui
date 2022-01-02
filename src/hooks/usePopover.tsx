@@ -1,6 +1,4 @@
-import React, {RefObject} from 'react';
 import { usePopper } from 'react-popper';
-import {useFloating, shift} from '@floating-ui/react-dom';
 
 export type Direction = [
     'top-start',
@@ -18,21 +16,17 @@ export type Direction = [
 ]
 
 export type OptionsType = {
-    placement: Direction | Direction[],
-    offsetX: number,
-    offsetY: number,
+    placement?: any,
+    offsetX?: number,
+    offsetY?: number,
+    arrow: HTMLElement,
 }
-
-type usePopoverType = {
-    activator: RefObject<HTMLElement>,
-    
-}
-
-export const usePopover = (reference, popper, options?) => {
-    const defaultOptions = {
-        placement: 'top',
-    }
-
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const usePopover = (
+    reference: HTMLElement,
+    popper: HTMLElement,
+    options?: OptionsType
+) => {
     const { styles, attributes } = usePopper(reference, popper, {
         placement: options.placement,
         modifiers: [

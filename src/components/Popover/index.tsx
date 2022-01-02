@@ -105,7 +105,6 @@ export const Popover:FC<PopoverProps> = (props) => {
                             style={ styles.popper } { ...attributes.popper }
                         >
                             {content}
-                            <Arrow ref={ arrow } />
                         </PopoverContainer>
                     )
                 }
