@@ -34,15 +34,9 @@ export const Popover:FC<PopoverProps> = (props) => {
     } = props;
 
     const { styles, attributes } = usePopover(activator.current, ctnt.current, {
-        placement: 'top',
-        modifiers: [
-            {
-                name: 'offset',
-                options: {
-                    offset: [offsetY, offsetX],
-                },
-            },
-        ],
+        placement: 'bottom',
+        offsetY: offsetY,
+        offsetX: offsetX,
     });
 
     const getRect = (element) => {
