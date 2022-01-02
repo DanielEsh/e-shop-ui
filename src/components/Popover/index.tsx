@@ -33,11 +33,7 @@ export const Popover:FC<PopoverProps> = (props) => {
         attachEl,
     } = props;
 
-    const { styles, attributes } = usePopover(activator.current, ctnt.current, {
-        placement: 'bottom',
-        offsetY: offsetY,
-        offsetX: offsetX,
-    });
+    const { styles, reference, floating } = usePopover();
 
     const getRect = (element) => {
         return element.getBoundingClientRect();
@@ -76,30 +72,30 @@ export const Popover:FC<PopoverProps> = (props) => {
     };
 
     useEffect( () => {
-        const rectA = getRect(activator.current);
-        const rectB = getRect(ctnt.current);
-        if (attachEl) {
-            const rectParent = getRect(attachEl);
-            console.log('rp', rectParent);
-        }
-        const crds = computeCoordsFromPlacement(rectA, rectB);
-        gx = crds.x;
-        gy = crds.y;
-        const offsetCrds = computeOffset(crds, offsetX, offsetY);
-        setCoords(offsetCrds);
+        // const rectA = getRect(activator.current);
+        // const rectB = getRect(ctnt.current);
+        // if (attachEl) {
+        //     const rectParent = getRect(attachEl);
+        //     console.log('rp', rectParent);
+        // }
+        // const crds = computeCoordsFromPlacement(rectA, rectB);
+        // gx = crds.x;
+        // gy = crds.y;
+        // const offsetCrds = computeOffset(crds, offsetX, offsetY);
+        // setCoords(offsetCrds);
     }, [attachEl]);
 
     return (
         <>
-            <div ref={ activator }>
+            <div ref={ reference }>
                 { children }
             </div>
             <Portal container={ attachEl ? attachEl : null }>
                 {
                     isVisible && (
                         <PopoverContainer 
-                            ref={ ctnt }
-                            style={ styles.popper } { ...attributes.popper }
+                            ref={ floating }
+                            style={ styles }
                         >
                             {content}
                         </PopoverContainer>

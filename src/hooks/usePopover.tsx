@@ -1,5 +1,6 @@
 import React, {RefObject} from 'react';
 import { usePopper } from 'react-popper';
+import {useFloating, shift} from '@floating-ui/react-dom';
 
 export type Direction = [
     'top-start',
@@ -27,25 +28,25 @@ type usePopoverType = {
     
 }
 
-export const usePopover = (reference, popper, options?) => {
+export const usePopover = (options?) => {
     const defaultOptions = {
         placement: 'top',
     }
 
-    const { styles, attributes } = usePopper(reference, popper, {
-        placement: options.placement,
-        modifiers: [
-            {
-                name: 'offset',
-                options: {
-                    offset: [options.offsetY, options.offsetX],
-                },
-            },
-        ],
+    const {x, y, reference, floating, strategy} = useFloating({
+        placement: 'top',
+        middleware: [shift()],
     });
+
+    const styles = {
+        position: strategy,
+        top: y ?? '',
+        left: x ?? '',
+    }
 
     return {
         styles,
-        attributes,
+        reference,
+        floating,
     }
 };
