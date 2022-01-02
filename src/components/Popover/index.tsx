@@ -1,4 +1,5 @@
 import React, {FC, ReactElement, useState, useRef, useEffect} from 'react';
+import { usePopper } from 'react-popper';
 
 import {
     PopoverContainer
@@ -31,6 +32,10 @@ export const Popover:FC<PopoverProps> = (props) => {
         offsetX = 0,
         attachEl,
     } = props;
+
+    const { styles, attributes } = usePopper(activator.current, ctnt.current, {
+        placement: 'top',
+    });
 
     const getRect = (element) => {
         return element.getBoundingClientRect();
@@ -92,10 +97,7 @@ export const Popover:FC<PopoverProps> = (props) => {
                     isVisible && (
                         <PopoverContainer 
                             ref={ ctnt }
-                            style={ {
-                                top: coords?.y,
-                                left: coords?.x,
-                            } }
+                            style={ styles.popper } { ...attributes.popper }
                         >
                             {content}
                         </PopoverContainer>
