@@ -29,7 +29,7 @@ export type PopoverProps = {
     offsetX?: number;
     isVisible?: boolean;
     attachEl?: HTMLElement;
-    placement: Placement | Placement[];
+    placement: string;
 }
 
 export const Popover:FC<PopoverProps> = (props) => {

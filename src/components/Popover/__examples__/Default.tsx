@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import {Popover} from '../index';
 import {Button} from '../../Button';
-import {Portal} from '../../Portal';
 
 const Container = styled('div')`
     position: absolute;
@@ -38,6 +37,7 @@ const Default = (): JSX.Element => {
                 attachEl={ node }
                 content={ renderPopoverContent() }
                 isVisible={ popoverVisible }
+                placement="top"
             >
                 <Button 
                     onClick={ () => setPopoverVisible(!popoverVisible) }
