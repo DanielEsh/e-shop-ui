@@ -28,25 +28,25 @@ type usePopoverType = {
     
 }
 
-export const usePopover = (options?) => {
+export const usePopover = (reference, popper, options?) => {
     const defaultOptions = {
         placement: 'top',
     }
 
-    const {x, y, reference, floating, strategy} = useFloating({
-        placement: 'top',
-        middleware: [shift()],
+    const { styles, attributes } = usePopper(reference, popper, {
+        placement: options.placement,
+        modifiers: [
+            {
+                name: 'offset',
+                options: {
+                    offset: [options.offsetY, options.offsetX],
+                },
+            },
+        ],
     });
-
-    const styles = {
-        position: strategy,
-        top: y ?? '',
-        left: x ?? '',
-    }
 
     return {
         styles,
-        reference,
-        floating,
+        attributes,
     }
 };
