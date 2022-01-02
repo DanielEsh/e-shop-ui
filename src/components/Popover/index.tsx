@@ -33,11 +33,10 @@ export const Popover:FC<PopoverProps> = (props) => {
     } = props;
 
     const getRect = (element) => {
-        console.log('getRect', element.getBoundingClientRect());
         return element.getBoundingClientRect();
     };
 
-    const computeCoordsFromPlacement = (reference, floating, placement = 'bottom') => {
+    const computeCoordsFromPlacement = (reference, floating, placement = 'top') => {
         const commonX = reference.x + reference.width / 2 - floating.width / 2;
         const commonY = reference.y + reference.height / 2 - floating.height / 2;
 
@@ -72,13 +71,16 @@ export const Popover:FC<PopoverProps> = (props) => {
     useEffect( () => {
         const rectA = getRect(activator.current);
         const rectB = getRect(ctnt.current);
-
+        if (attachEl) {
+            const rectParent = getRect(attachEl);
+            console.log('rp', rectParent);
+        }
         const crds = computeCoordsFromPlacement(rectA, rectB);
         gx = crds.x;
         gy = crds.y;
         const offsetCrds = computeOffset(crds, offsetX, offsetY);
         setCoords(offsetCrds);
-    }, []);
+    }, [attachEl]);
 
     return (
         <>
