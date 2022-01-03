@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useRef} from 'react';
+import React, {FC, ReactElement, useRef, useEffect} from 'react';
 import { usePopover } from '../../hooks/usePopover';
 
 import {
@@ -29,7 +29,7 @@ export type PopoverProps = {
     offsetX?: number;
     isVisible?: boolean;
     attachEl?: HTMLElement;
-    placement: string;
+    placement: any;
 }
 
 export const Popover:FC<PopoverProps> = (props) => {
@@ -43,15 +43,14 @@ export const Popover:FC<PopoverProps> = (props) => {
         placement = 'top',
     } = props;
 
-    const activator = useRef(null);
-    const ctnt = useRef(null);
-    const arrow = useRef(null);
+    // const activator = useRef(null);
+    // const ctnt = useRef(null);
+    // const arrow = useRef(null);
 
-    const { styles, attributes } = usePopover(activator.current, ctnt.current, {
+    let a,b;
+
+    const { styles, activator, popper } = usePopover({
         placement: placement,
-        offsetY: offsetY,
-        offsetX: offsetX,
-        arrow: arrow.current,
     });
 
     return (
@@ -63,8 +62,8 @@ export const Popover:FC<PopoverProps> = (props) => {
                 {
                     isVisible && (
                         <PopoverContainer 
-                            ref={ ctnt }
-                            style={ styles.popper } { ...attributes.popper }
+                            ref={ popper }
+                            style={ styles }
                         >
                             {content}
                         </PopoverContainer>
