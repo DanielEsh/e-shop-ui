@@ -37,8 +37,8 @@ export const Popover:FC<PopoverProps> = (props) => {
         content,
         children,
         isVisible,
-        offsetY = 0,
-        offsetX = 8,
+        offsetY = -8,
+        offsetX = 0,
         attachEl,
         placement = 'top',
     } = props;
@@ -51,6 +51,8 @@ export const Popover:FC<PopoverProps> = (props) => {
 
     const { styles, activator, popper } = usePopover({
         placement: placement,
+        offsetY,
+        offsetX,
     });
 
     return (

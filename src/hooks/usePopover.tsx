@@ -85,6 +85,13 @@ export const usePopover = (
           return coords;
     };
 
+    const computeCoordsWithOffset = (coords, x, y) => {
+        return {
+            x: coords.x + x, 
+            y: coords.y + y,
+        };
+    }
+
 
     let styles = {};
 
@@ -93,8 +100,7 @@ export const usePopover = (
             const activatorRect = getElementRects(activator.current);
             const popperRect = getElementRects(popper.current);
             const coords = computeCoordsFromPlacement(activatorRect, popperRect, options.placement);
-
-            setCoords(coords);
+            setCoords(computeCoordsWithOffset(coords, options.offsetX, options.offsetY));
         }
     }, []);
 

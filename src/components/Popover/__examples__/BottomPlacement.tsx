@@ -25,6 +25,7 @@ const Default = (): JSX.Element => {
             <Popover
                 content={ renderPopoverContent() }
                 isVisible={ popoverVisible }
+                offsetY={ 20 }
                 placement="bottom"
             >
                 <Button 
