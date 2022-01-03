@@ -37,6 +37,14 @@ export const usePopover = (
     //     attributes,
     // }
 
+
+    /**
+     * 1. добавить offset
+     * 2. добавить стрелку
+     * 3. добавить position mode (absolute, fixed)
+     * 4. добавить перевертывание элемента если он не помещается в размеры родителя
+     */
+
     const [coords, setCoords] = useState(null);
 
     const activator = useRef(null);
