@@ -39,7 +39,6 @@ export const usePopover = (
 
 
     /**
-     * 1. добавить offset
      * 2. добавить стрелку
      * 3. добавить position mode (absolute, fixed)
      * 4. добавить перевертывание элемента если он не помещается в размеры родителя
@@ -85,10 +84,14 @@ export const usePopover = (
           return coords;
     };
 
-    const computeCoordsWithOffset = (coords, x, y) => {
+    const computeCoordsWithOffset = (coords, x, y, placement) => {
+        const multiplier = ['left', 'top'].includes(placement) ? -1 : 1;
+        const commonY = multiplier * y;
+        const commonX = multiplier * x;
+
         return {
-            x: coords.x + x, 
-            y: coords.y + y,
+            x: coords.x + commonX, 
+            y: coords.y + commonY,
         };
     }
 
@@ -100,7 +103,7 @@ export const usePopover = (
             const activatorRect = getElementRects(activator.current);
             const popperRect = getElementRects(popper.current);
             const coords = computeCoordsFromPlacement(activatorRect, popperRect, options.placement);
-            setCoords(computeCoordsWithOffset(coords, options.offsetX, options.offsetY));
+            setCoords(computeCoordsWithOffset(coords, options.offsetX, options.offsetY, options.placement));
         }
     }, []);
 
