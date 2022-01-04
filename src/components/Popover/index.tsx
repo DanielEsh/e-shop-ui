@@ -73,6 +73,15 @@ export const Popover:FC<PopoverProps> = (props) => {
         hidePopover();
     };
 
+    const onFloatingEnter = () => {
+        clearTimeout(timeout);
+        setVisible(true);
+    }
+
+    const onFloatingLeave = () => {
+        hidePopover();
+    }
+
     return (
         <>
             <div 
@@ -88,6 +97,8 @@ export const Popover:FC<PopoverProps> = (props) => {
                     isVisible && (
                         <PopoverContainer 
                             ref={ floating }
+                            onMouseEnter={ onFloatingEnter }
+                            onMouseLeave={ onFloatingLeave }
                             style={ styles }
                         >
                             {content}
