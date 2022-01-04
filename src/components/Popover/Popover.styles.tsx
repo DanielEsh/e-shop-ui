@@ -6,6 +6,8 @@ export const Target = styled('div')`
 `
 
 export const PopoverContent = styled('div')`
+    transition: all .3s;
+
     &.tooltip-enter {
         opacity: 0;
         transform: scale(0.9);
@@ -13,7 +15,6 @@ export const PopoverContent = styled('div')`
     &.tooltip-enter-active {
         opacity: 1;
         transform: translateX(0);
-        transition: opacity .3s, transform .3s;
     }
     &.tooltip-exit {
         opacity: 1;
@@ -21,7 +22,6 @@ export const PopoverContent = styled('div')`
     &.tooltip-exit-active {
         opacity: 0;
         transform: scale(0.9);
-        transition: opacity .3s, transform .3s;
     }
 `
 
