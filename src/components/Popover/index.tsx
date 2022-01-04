@@ -4,7 +4,7 @@ import {Placement} from '@floating-ui/react-dom';
 
 
 import {
-    PopoverContainer,
+    Target,
 } from './Popover.styles';
 
 import {Portal} from '../Portal';
@@ -97,25 +97,25 @@ export const Popover:FC<PopoverProps> = (props) => {
 
     return (
         <>
-            <div 
+            <Target 
                 ref={ reference }
                 onClick={ onReferenceClick }
                 onMouseEnter={ onReferenceEnter }
                 onMouseLeave={ onReferenceLeave }
             >
                 { children }
-            </div>
+            </Target>
             <Portal container={ attachEl ? attachEl : null }>
                 {
                     isVisible && (
-                        <PopoverContainer 
+                        <div
                             ref={ floating }
                             onMouseEnter={ onFloatingEnter }
                             onMouseLeave={ onFloatingLeave }
                             style={ styles }
                         >
                             {content}
-                        </PopoverContainer>
+                        </div>
                     )
                 }
             </Portal>
