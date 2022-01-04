@@ -1,10 +1,11 @@
 import React, {FC, ReactElement, useState, useEffect} from 'react';
 import { usePopover } from '../../hooks/usePopover';
 import {Placement} from '@floating-ui/react-dom';
-
+import { CSSTransition } from 'react-transition-group';
 
 import {
     Target,
+    PopoverContent,
 } from './Popover.styles';
 
 import {Portal} from '../Portal';
@@ -106,18 +107,22 @@ export const Popover:FC<PopoverProps> = (props) => {
                 { children }
             </Target>
             <Portal container={ attachEl ? attachEl : null }>
-                {
-                    isVisible && (
-                        <div
-                            ref={ floating }
-                            onMouseEnter={ onFloatingEnter }
-                            onMouseLeave={ onFloatingLeave }
-                            style={ styles }
-                        >
-                            {content}
-                        </div>
-                    )
-                }
+                <CSSTransition
+                    classNames="tooltip"
+                    in={ isVisible }
+                    mountOnEnter
+                    timeout={ 300 }
+                    unmountOnExit
+                >
+                    <PopoverContent
+                        ref={ floating }
+                        onMouseEnter={ onFloatingEnter }
+                        onMouseLeave={ onFloatingLeave }
+                        style={ styles }
+                    >
+                        {content}
+                    </PopoverContent>
+                </CSSTransition>
             </Portal>
         </>
     )

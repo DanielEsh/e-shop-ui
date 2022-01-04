@@ -12,6 +12,13 @@ const Container = styled('div')`
     height: 200%;
 `;
 
+const TooltipContent = styled('div')`
+    width: 256px;
+    height: 56px;
+    background-color: #000;
+    color: #fff;
+`
+
 const Default = (): JSX.Element => {
     const customRootElement = useRef(null);
     const [popoverVisible, setPopoverVisible] = useState<boolean>(true);
@@ -19,9 +26,9 @@ const Default = (): JSX.Element => {
 
     const renderPopoverContent = (): JSX.Element => {
         return (
-            <div>
+            <TooltipContent>
                 test content
-            </div>
+            </TooltipContent>
         )
     };
 
