@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useState} from 'react';
+import React, {FC, ReactElement, useState, useEffect} from 'react';
 import { usePopover } from '../../hooks/usePopover';
 import {Placement} from '@floating-ui/react-dom';
 
@@ -82,6 +82,18 @@ export const Popover:FC<PopoverProps> = (props) => {
     const onFloatingLeave = () => {
         hidePopover();
     }
+
+    const onPressEsc = (event) => {
+        if (event.code === 'Escape') hidePopover();
+    }
+
+
+    useEffect(() => {
+        document.addEventListener('keydown', onPressEsc);
+        return () => {
+            document.removeEventListener('keydown', onPressEsc);
+        }
+    }, [])
 
     return (
         <>
