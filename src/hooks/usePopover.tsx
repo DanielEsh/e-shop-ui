@@ -3,10 +3,11 @@ import {useEffect} from 'react';
 import {useFloating, flip, offset, getScrollParents, Placement} from '@floating-ui/react-dom';
 
 export type OptionsType = {
-    placement?: Placement,
-    offsetX?: number,
-    offsetY?: number,
-    arrow?: HTMLElement,
+    placement?: Placement;
+    offsetX?: number;
+    offsetY?: number;
+    arrow?: HTMLElement;
+    isVisible?: boolean;
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const usePopover = (options?: OptionsType) => {
@@ -42,7 +43,7 @@ export const usePopover = (options?: OptionsType) => {
             parent.removeEventListener('resize', update);
           });
         };
-      }, [refs.reference, refs.floating, update]);
+      }, [refs.reference, refs.floating, update, options?.isVisible]);
 
     return { 
         styles,

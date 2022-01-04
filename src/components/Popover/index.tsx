@@ -15,10 +15,10 @@ export type PopoverProps = {
     offsetY?: number;
     offsetX?: number;
     attachEl?: HTMLElement;
-    placement: Placement;
-    enterDelay: number;
-    leaveDelay: number;
-    clicked: boolean;
+    placement?: Placement;
+    enterDelay?: number;
+    leaveDelay?: number;
+    clicked?: boolean;
 }
 
 export const Popover:FC<PopoverProps> = (props) => {
@@ -41,6 +41,7 @@ export const Popover:FC<PopoverProps> = (props) => {
         placement: placement,
         offsetY,
         offsetX,
+        isVisible
     });
 
     const showPopover = () => {

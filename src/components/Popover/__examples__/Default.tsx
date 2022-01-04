@@ -36,7 +36,6 @@ const Default = (): JSX.Element => {
             <Popover 
                 attachEl={ node }
                 content={ renderPopoverContent() }
-                isVisible={ popoverVisible }
                 offsetY={ 10 }
                 placement="top"
             >
