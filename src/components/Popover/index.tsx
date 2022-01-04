@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useRef, useEffect} from 'react';
+import React, {FC, ReactElement} from 'react';
 import { usePopover } from '../../hooks/usePopover';
 import {Placement} from '@floating-ui/react-dom';
 
@@ -30,21 +30,11 @@ export const Popover:FC<PopoverProps> = (props) => {
         placement = 'top',
     } = props;
 
-    // const activator = useRef(null);
-    // const ctnt = useRef(null);
-    // const arrow = useRef(null);
-
-    let a, b;
-
     const { styles, reference, floating } = usePopover({
         placement: placement,
         offsetY,
         offsetX,
     });
-
-   
-
-    
 
     return (
         <>
@@ -52,17 +42,6 @@ export const Popover:FC<PopoverProps> = (props) => {
                 { children }
             </div>
             <Portal container={ attachEl ? attachEl : null }>
-                {/* {
-                    isVisible && (
-                        <PopoverContainer 
-                            ref={ popper }
-                            style={ styles }
-                        >
-                            {content}
-                        </PopoverContainer>
-                    )
-                } */}
-
                 {
                     isVisible && (
                         <PopoverContainer 
