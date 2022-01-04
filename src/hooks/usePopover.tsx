@@ -1,120 +1,54 @@
 /* eslint-disable indent */
-import { usePopper } from 'react-popper';
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect} from 'react';
+import {useFloating, flip, offset, getScrollParents, Placement} from '@floating-ui/react-dom';
 
 export type OptionsType = {
-    placement?: any,
+    placement?: Placement,
     offsetX?: number,
     offsetY?: number,
     arrow?: HTMLElement,
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const usePopover = (
-    options?: OptionsType
-) => {
-    // const { styles, attributes } = usePopper(reference, popper, {
-    //     placement: options.placement,
-    //     modifiers: [
-    //         {
-    //             name: 'offset',
-    //             options: {
-    //                 offset: [options.offsetY, options.offsetX],
-    //             },
-    //         },
-    //         {
-    //             name: 'arrow',
-    //             options: {
-    //                 element: options?.arrow,
-    //             },
-    //         },
-    //     ],
-    // });
+export const usePopover = (options?: OptionsType) => {
+    const {x, y, reference, floating, strategy, update, refs} = useFloating({
+        placement: options.placement,
+        middleware: [flip(), offset({
+            mainAxis: options.offsetY,
+            crossAxis: options.offsetX,
+        })],
+    });
 
-
-
-    // return {
-    //     styles,
-    //     attributes,
-    // }
-
-
-    /**
-     * 2. добавить стрелку
-     * 3. добавить position mode (absolute, fixed)
-     * 4. добавить перевертывание элемента если он не помещается в размеры родителя
-     */
-
-    const [coords, setCoords] = useState(null);
-
-    const activator = useRef(null);
-    const popper = useRef<HTMLElement | null>(null);
-
-
-    
-    const getElementRects = (element: HTMLElement) => {
-        return element.getBoundingClientRect(); 
-    };
-
-    const computeCoordsFromPlacement = (
-        activator,
-        popper,
-        placement,
-    ) => {
-        const commonX = activator.x + activator.width / 2 - popper.width / 2;
-        const commonY = activator.y + activator.height / 2 - popper.height / 2;
-
-        let coords;
-        switch (placement) {
-            case 'top':
-              coords = {x: commonX, y: activator.y - popper.height};
-              break;
-            case 'bottom':
-              coords = {x: commonX, y: activator.y + activator.height};
-              break;
-            case 'right':
-              coords = {x: activator.x + activator.width, y: commonY};
-              break;
-            case 'left':
-              coords = {x: activator.x - popper.width, y: commonY};
-              break;
-            default:
-              coords = {x: activator.x, y: activator.y};
-          }
-
-          return coords;
-    };
-
-    const computeCoordsWithOffset = (coords, x, y, placement) => {
-        const multiplier = ['left', 'top'].includes(placement) ? -1 : 1;
-        const commonY = multiplier * y;
-        const commonX = multiplier * x;
-
-        return {
-            x: coords.x + commonX, 
-            y: coords.y + commonY,
-        };
+    const styles = { 
+        position: strategy,
+        top: y ?? '',
+        left: x ?? '',
     }
-
-
-    let styles = {};
 
     useEffect(() => {
-        if (activator && popper) {
-            const activatorRect = getElementRects(activator.current);
-            const popperRect = getElementRects(popper.current);
-            const coords = computeCoordsFromPlacement(activatorRect, popperRect, options.placement);
-            setCoords(computeCoordsWithOffset(coords, options.offsetX, options.offsetY, options.placement));
-        }
-    }, []);
-
-    styles = {
-        top: coords?.y,
-        left: coords?.x,
-    }
+        if (!refs.reference.current || !refs.floating.current) 
+          return;
+        
+        const parents = [
+          ...getScrollParents(refs.reference.current),
+          ...getScrollParents(refs.floating.current),
+        ];
+        parents.forEach((parent) => {
+          parent.addEventListener('scroll', update);
+          parent.addEventListener('resize', update);
+        });
+        return () => {
+          parents.forEach((parent) => {
+            parent.removeEventListener('scroll', update);
+            parent.removeEventListener('resize', update);
+          });
+        };
+      }, [refs.reference, refs.floating, update]);
 
     return { 
         styles,
-        activator,
-        popper,
+        reference,
+        floating,
+        update,
+        refs,
     }
 };

@@ -1,27 +1,13 @@
 import React, {FC, ReactElement, useRef, useEffect} from 'react';
 import { usePopover } from '../../hooks/usePopover';
-import {useFloating, flip, getScrollParents} from '@floating-ui/react-dom';
+import {Placement} from '@floating-ui/react-dom';
+
 
 import {
     PopoverContainer,
 } from './Popover.styles';
 
 import {Portal} from '../Portal';
-
-export type Placement = [
-    'top-start',
-    'top',
-    'top-end',
-    'bottom-start',
-    'bottom',
-    'bottom-end',
-    'right-start',
-    'right',
-    'right-end',
-    'left-start',
-    'left',
-    'left-end',
-]
 
 export type PopoverProps = {
     content?: ReactElement;
@@ -30,7 +16,7 @@ export type PopoverProps = {
     offsetX?: number;
     isVisible?: boolean;
     attachEl?: HTMLElement;
-    placement: any;
+    placement: Placement;
 }
 
 export const Popover:FC<PopoverProps> = (props) => {
@@ -50,36 +36,15 @@ export const Popover:FC<PopoverProps> = (props) => {
 
     let a, b;
 
-    // const { styles, activator, popper } = usePopover({
-    //     placement: placement,
-    //     offsetY,
-    //     offsetX,
-    // });
-
-    const {x, y, reference, floating, strategy, update, refs} = useFloating({
-        placement: 'top',
-        middleware: [flip()],
+    const { styles, reference, floating } = usePopover({
+        placement: placement,
+        offsetY,
+        offsetX,
     });
 
-    useEffect(() => {
-        if (!refs.reference.current || !refs.floating.current) {
-          return;
-        }
-        const parents = [
-          ...getScrollParents(refs.reference.current),
-          ...getScrollParents(refs.floating.current),
-        ];
-        parents.forEach((parent) => {
-          parent.addEventListener('scroll', update);
-          parent.addEventListener('resize', update);
-        });
-        return () => {
-          parents.forEach((parent) => {
-            parent.removeEventListener('scroll', update);
-            parent.removeEventListener('resize', update);
-          });
-        };
-      }, [refs.reference, refs.floating, update]);
+   
+
+    
 
     return (
         <>
@@ -102,11 +67,7 @@ export const Popover:FC<PopoverProps> = (props) => {
                     isVisible && (
                         <PopoverContainer 
                             ref={ floating }
-                            style={ {
-                                position: strategy,
-                                top: y ?? '',
-                                left: x ?? '',
-                            } }
+                            style={ styles }
                         >
                             {content}
                         </PopoverContainer>
