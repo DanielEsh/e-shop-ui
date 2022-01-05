@@ -21,7 +21,7 @@ const TooltipContent = styled('div')`
 
 const Default = (): JSX.Element => {
     const customRootElement = useRef(null);
-    const [popoverVisible, setPopoverVisible] = useState<boolean>(true);
+    const [popoverVisible, setPopoverVisible] = useState<boolean>(false);
     const [node, setNode] = useState(null);
 
     const renderPopoverContent = (): JSX.Element => {
@@ -41,10 +41,10 @@ const Default = (): JSX.Element => {
             <Container ref={ customRootElement } />
             
             <Popover 
-                attachEl={ node }
-                content={ renderPopoverContent() }
-                offsetY={ 10 }
+                containerEl={ node }
+                isVisible={ popoverVisible }
                 placement="top"
+                popover={ renderPopoverContent() }
             >
                 <Button 
                     onClick={ () => setPopoverVisible(!popoverVisible) }

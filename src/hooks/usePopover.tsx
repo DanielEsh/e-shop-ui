@@ -1,11 +1,11 @@
 /* eslint-disable indent */
 import {useEffect} from 'react';
 import {useFloating, flip, offset, getScrollParents, Placement} from '@floating-ui/react-dom';
+import { Offset } from '../components/Popover/Popover';
 
 export type OptionsType = {
     placement?: Placement;
-    offsetX?: number;
-    offsetY?: number;
+    offset: Offset;
     arrow?: HTMLElement;
     isVisible?: boolean;
 }
@@ -14,8 +14,8 @@ export const usePopover = (options?: OptionsType) => {
     const {x, y, reference, floating, strategy, update, refs} = useFloating({
         placement: options.placement,
         middleware: [flip(), offset({
-            mainAxis: options.offsetY,
-            crossAxis: options.offsetX,
+            mainAxis: options?.offset?.y,
+            crossAxis: options?.offset?.x,
         })],
     });
 
