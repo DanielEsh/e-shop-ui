@@ -107,6 +107,7 @@ module.exports = {
         "react/jsx-pascal-case": "error",
         "react/jsx-sort-props": ["error", {
             "reservedFirst": ["ref", "key"],
+            "noSortAlphabetically": true,
         }],
         "react/jsx-space-before-closing": "error"
     }

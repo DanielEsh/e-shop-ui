@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Fade} from '../Fade';
+import {Fade} from './Fade';
 import {Button} from '../../Button';
 
 const Default = (): JSX.Element => {
@@ -10,7 +10,7 @@ const Default = (): JSX.Element => {
             <Button onClick={ () => setRender(!render) }>
                 show transition
             </Button>
-            <Fade inProp={ render }>
+            <Fade in={ render }>
                 <span>Im a fade Transition!</span>
             </Fade>
         </>

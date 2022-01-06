@@ -7,4 +7,4 @@ export default {
     component: Fade,
 } as Meta;
 
-export { default as Default } from './__examples__/Default';
+export { default as Default } from './Default';
