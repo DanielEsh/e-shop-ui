@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {Tooltip} from '../index';
-import {Button} from '../../Button';
 
 const TooltipContent = styled('div')`
     width: 256px;
@@ -23,13 +22,10 @@ const Default = (): JSX.Element => {
     return (
         <>
             <Tooltip 
-                clickable
-                placement="top"
+                placement="top-start"
                 popover={ renderPopoverContent() }
             >
-                <Button>
-                    Click me
-                </Button>
+                Hover on text
             </Tooltip>
         </>
     );
