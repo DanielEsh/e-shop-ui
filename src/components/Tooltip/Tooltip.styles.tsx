@@ -27,8 +27,9 @@ export const TooltipContent = styled('div')`
 
 export const Arrow = styled('div')`
     position: absolute;
-    top: -5px;
-    width: 10px;
-    height: 10px;
-    background-color: red;
+    top: 86%;
+    width: 16px;
+    height: 16px;
+    background-color: #000;
+    transform: rotate(316deg);
 `

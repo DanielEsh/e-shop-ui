@@ -1,4 +1,4 @@
-import React, {forwardRef, ReactElement, useState, useEffect} from 'react';
+import React, {forwardRef, ReactElement, useState, useRef, useEffect} from 'react';
 import {Placement} from '@floating-ui/react-dom';
 import { usePopover } from '../../hooks/usePopover';
 import { useForkRef } from '../../hooks/useForkRef';
@@ -8,6 +8,7 @@ import {Portal} from '../Portal';
 import {
     TooltipTarget,
     TooltipContent,
+    Arrow,
 } from './Tooltip.styles';
 
 export type Offset = {
@@ -41,9 +42,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
     const [isVisible, setIsVisible] = useState(false);
     const [timeout, setCloseTimout] = useState(null);
 
-    const { styles, reference, floating } = usePopover({
+    const arrowRef = useRef<HTMLElement>(null);
+
+    const { styles, reference, floating, arrowStyles } = usePopover({
         placement: placement,
         offset: offset,
+        arrow: arrowRef,
         isVisible,
     });
 
@@ -120,6 +124,10 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
                         style={ styles }
                     >
                         {popover}
+                        <Arrow 
+                            ref={ arrowRef }
+                            style={ arrowStyles }
+                        />
                     </TooltipContent>
                 </CSSTransition>
             </Portal>
