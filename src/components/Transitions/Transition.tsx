@@ -6,6 +6,7 @@ export type TransitionProps = {
     type: 'fade' | 'scale' | 'pushUp' | 'pushLeft' | 'pushRight' | 'pushDown';
     children: ReactElement;
     in: boolean;
+    timingFunction?: 'string';
     duration?: number;
     appear?: boolean;
     mountOnEnter?: boolean;
@@ -24,10 +25,11 @@ export const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, re
     const {
         type = 'fade',
         children,
+        timingFunction = 'linear',
         duration = 300,
         appear,
-        mountOnEnter,
-        unmountOnExit,
+        mountOnEnter = true,
+        unmountOnExit = true,
         enter,
         exit,
         onEnter,
@@ -39,8 +41,8 @@ export const Transition = forwardRef<HTMLDivElement, TransitionProps>((props, re
     } = props;
 
     const defaultStyle = {
-        display: 'inline-block',
-        transition: `all ${duration}ms ease-in-out`,
+        transitionDuration: `${duration}ms`,
+        transitionTimingFunction: `${timingFunction}`
     }
 
     return (

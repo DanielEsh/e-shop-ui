@@ -1,9 +1,19 @@
 export const TransitionVariants = {
     fade: {
-        entering: { opacity: 1 },
-        entered:  { opacity: 1 },
-        exiting:  { opacity: 0 },
-        exited:  { opacity: 0 },
+        entering: { 
+            opacity: 0,
+            transitionProperty: 'opacity'
+        },
+        entered:  { 
+            opacity: 1,
+        },
+        exiting:  { 
+            opacity: 0,
+            transitionProperty: 'opacity'
+        },
+        exited:  { 
+            opacity: 1,
+        },
     },
     scale: { 
         entering: { transform: 'scale(1)'},
