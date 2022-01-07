@@ -12,7 +12,7 @@ const Default = (): JSX.Element => {
             </Button>
             <Transition 
                 in={ render }
-                type="fade"
+                type="pushUp"
             >
                 <span>Im a fade Transition!</span>
             </Transition>

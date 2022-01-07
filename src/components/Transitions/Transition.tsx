@@ -3,7 +3,7 @@ import { Transition as RTransition } from 'react-transition-group';
 import { TransitionVariants } from './utils';
 
 export type TransitionProps = {
-    type: 'fade' | 'scale';
+    type: 'fade' | 'scale' | 'pushUp';
     children: ReactElement;
     in: boolean;
     duration?: number;

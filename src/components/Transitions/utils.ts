@@ -11,4 +11,10 @@ export const TransitionVariants = {
         exiting:  { transform: 'scale(0)'},
         exited:  { transform: 'scale(0)' },
     },
+    pushUp: { 
+        entering: { transform: 'translateY(0%)', opacity: 1},
+        entered:  { transform: 'translateY(0%)', opacity: 1},
+        exiting:  { transform: 'translateY(100%)', opacity: 0},
+        exited:  { transform: 'translateY(100%)', opacity: 0},
+    },
 }
