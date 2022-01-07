@@ -38,10 +38,26 @@ export const TransitionVariants = {
         },
     },
     pushUp: { 
-        entering: { transform: 'translateY(0%)', opacity: 1},
-        entered:  { transform: 'translateY(0%)', opacity: 1},
-        exiting:  { transform: 'translateY(-100%)', opacity: 0},
-        exited:  { transform: 'translateY(-100%)', opacity: 0},
+        entering: { 
+            transform: 'translateY(100%)', 
+            opacity: 0,
+            transitionProperty: 'transform, opacity',
+            transformOrigin: 'center center',
+        },
+        entered:  { 
+            opacity: 1,
+            transform: 'translateY(0%)', 
+        },
+        exiting:  { 
+            transform: 'translateY(100%)', 
+            opacity: 0,
+            transitionProperty: 'transform, opacity',
+            transformOrigin: 'center center',
+        },
+        exited:  { 
+            opacity: 1,
+            transform: 'translateY(0%)', 
+        },
     },
     pushRight: { 
         entering: { transform: 'translateX(0%)', opacity: 1},
