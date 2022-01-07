@@ -23,7 +23,7 @@ const TransitionedBlock = styled('div')`
 
 const text = 'Im pushDown Transition';
 
-const PushUp = (): JSX.Element => {
+const PushDown = (): JSX.Element => {
     const [render, setRender] = useState<boolean>(false);
 
     return (
@@ -45,4 +45,4 @@ const PushUp = (): JSX.Element => {
     )
 }
 
-export default PushUp;
+export default PushDown;
