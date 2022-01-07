@@ -14,7 +14,25 @@ export const TransitionVariants = {
     pushUp: { 
         entering: { transform: 'translateY(0%)', opacity: 1},
         entered:  { transform: 'translateY(0%)', opacity: 1},
+        exiting:  { transform: 'translateY(-100%)', opacity: 0},
+        exited:  { transform: 'translateY(-100%)', opacity: 0},
+    },
+    pushRight: { 
+        entering: { transform: 'translateX(0%)', opacity: 1},
+        entered:  { transform: 'translateX(0%)', opacity: 1},
+        exiting:  { transform: 'translateX(100%)', opacity: 0},
+        exited:  { transform: 'translateX(100%)', opacity: 0},
+    },
+    pushDown: { 
+        entering: { transform: 'translateY(0%)', opacity: 1},
+        entered:  { transform: 'translateY(0%)', opacity: 1},
         exiting:  { transform: 'translateY(100%)', opacity: 0},
         exited:  { transform: 'translateY(100%)', opacity: 0},
+    },
+    pushLeft: { 
+        entering: { transform: 'translateX(0%)', opacity: 1},
+        entered:  { transform: 'translateX(0%)', opacity: 1},
+        exiting:  { transform: 'translateX(-100%)', opacity: 0},
+        exited:  { transform: 'translateX(-100%)', opacity: 0},
     },
 }
