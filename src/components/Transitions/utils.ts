@@ -60,10 +60,26 @@ export const TransitionVariants = {
         },
     },
     pushRight: { 
-        entering: { transform: 'translateX(0%)', opacity: 1},
-        entered:  { transform: 'translateX(0%)', opacity: 1},
-        exiting:  { transform: 'translateX(100%)', opacity: 0},
-        exited:  { transform: 'translateX(100%)', opacity: 0},
+        entering: { 
+            transform: 'translateX(-100%)', 
+            opacity: 0,
+            transitionProperty: 'transform, opacity',
+            transformOrigin: 'center center',
+        },
+        entered:  { 
+            opacity: 1,
+            transform: 'translateX(0%)', 
+        },
+        exiting:  { 
+            transform: 'translateX(-100%)', 
+            opacity: 0,
+            transitionProperty: 'transform, opacity',
+            transformOrigin: 'center center',
+        },
+        exited:  { 
+            opacity: 1,
+            transform: 'translateX(0%)', 
+        },
     },
     pushDown: { 
         entering: { 
