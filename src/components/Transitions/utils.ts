@@ -16,10 +16,26 @@ export const TransitionVariants = {
         },
     },
     scale: { 
-        entering: { transform: 'scale(1)'},
-        entered:  { transform: 'scale(1)' },
-        exiting:  { transform: 'scale(0)'},
-        exited:  { transform: 'scale(0)' },
+        entering: { 
+            transform: 'scale(0.6)',
+            opacity: 0,
+            transitionProperty: 'transform, opacity',
+            transformOrigin: 'center center',
+        },
+        entered:  { 
+            opacity: 1,
+            transform: 'scale(1)',
+        },
+        exiting:  { 
+            transform: 'scale(0)',
+            opacity: 0,
+            transitionProperty: 'transform, opacity',
+            transformOrigin: 'center center',
+        },
+        exited:  { 
+            transform: 'scale(1)',
+            opacity: 1,
+        },
     },
     pushUp: { 
         entering: { transform: 'translateY(0%)', opacity: 1},
