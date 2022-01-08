@@ -1,11 +1,14 @@
 import React from 'react';
 import { Dropdown } from "../Dropdown";
+import {Button} from '../../Button';
 
 const Default = (): JSX.Element => {
     return (
         <>
             <Dropdown>
-                test
+                <Button>
+                    button
+                </Button>
             </Dropdown>
         </>
     );
