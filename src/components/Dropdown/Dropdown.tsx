@@ -1,6 +1,11 @@
 import React, {forwardRef, ReactElement} from 'react';
 import {Tooltip} from '../Tooltip';
 
+import {
+    DropdownMenu,
+    DropdownMenuItem,
+} from "./Dropdown.styles";
+
 export type DropdownProps = {
     children: ReactElement | string;
 };
@@ -12,7 +17,20 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
 
     const menuPopover = (): JSX.Element => {
         return (
-            <div>test</div>
+            <DropdownMenu>
+                <DropdownMenuItem header>
+                    Header
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    Item
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    Item
+                </DropdownMenuItem>
+                <DropdownMenuItem disabled>
+                    Disabled item
+                </DropdownMenuItem>
+            </DropdownMenu>
         )
     };
 
@@ -20,9 +38,10 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
         <>
             <Tooltip
                 popover={ menuPopover() }
+                placement="bottom-start"
                 clickable
             >
-                <span>{children}</span>
+                <div>{children}</div>
             </Tooltip>
         </>
     )
