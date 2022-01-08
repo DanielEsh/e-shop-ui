@@ -33,4 +33,5 @@ export const Arrow = styled('div')`
     height: 16px;
     background-color: #000;
     transform: rotate(316deg);
+    display: none;
 `
