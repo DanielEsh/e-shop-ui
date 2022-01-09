@@ -2,6 +2,7 @@ import React, {forwardRef, ReactElement, useState, useRef, useEffect} from 'reac
 import {Placement} from '@floating-ui/react-dom';
 import { usePopover } from '../../hooks/usePopover';
 import { useForkRef } from '../../hooks/useForkRef';
+import { useOnClickOutside } from "../../hooks/useClickOutside";
 import { CSSTransition } from 'react-transition-group';
 
 import {Portal} from '../Portal';
@@ -44,12 +45,14 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
 
     const arrowRef = useRef<HTMLElement>(null);
 
-    const { styles, reference, floating, arrowStyles } = usePopover({
+    const { styles, reference, floating, arrowStyles, refs } = usePopover({
         placement: placement,
         offset: offset,
         arrow: arrowRef,
         isVisible,
     });
+
+    const forkedRef = useForkRef(ref, reference);
 
     const showPopover = () => {
         setTimeout( () => {
@@ -63,6 +66,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
         }, leaveDelay);
         setCloseTimout(timeout);
     }
+
+    useOnClickOutside(refs.floating, hidePopover);
 
     const onReferenceClick = () => {
         if (clickable) isVisible ? hidePopover() : showPopover();
@@ -102,7 +107,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
     return (
         <>
             <TooltipTarget 
-                ref={ useForkRef(ref, reference) }
+                ref={ forkedRef }
                 onClick={ onReferenceClick }
                 onMouseEnter={ onReferenceEnter }
                 onMouseLeave={ onReferenceLeave }

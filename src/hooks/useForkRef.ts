@@ -12,7 +12,7 @@ export function useForkRef(refA?: AnyRef, refB?: AnyRef): (CallbackRef) | null {
 
 type HTMLElementOrNull = HTMLElement | null;
 type CallbackRef = (node: HTMLElementOrNull) => void;
-type AnyRef = Ref<HTMLElement>;
+type AnyRef = Ref<HTMLElement | Element>;
 
 function setRef(ref: AnyRef, value: HTMLElementOrNull) {
     if (typeof ref === 'function') 
