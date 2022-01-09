@@ -3,7 +3,6 @@ import styled, {css} from 'styled-components';
 export const DropdownMenu = styled('div')`
     display: flex;
     flex-direction: column;
-    padding: 16px;
     border: 1px solid gray;
     border-radius: 6px;
     background-color: #fff;
@@ -11,7 +10,13 @@ export const DropdownMenu = styled('div')`
 `
 
 export const DropdownMenuItem = styled('div')`
-    margin: 10px 0;  
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background-color .2s linear;
+
+    &:hover {
+        background-color: #d3d3d3;
+    }
   
     ${(props) => {
         if (props.header) return css`
@@ -23,6 +28,11 @@ export const DropdownMenuItem = styled('div')`
         if (props.disabled) return css`
              color: gray;
              font-size: 16px;
+             cursor: default;
+          
+              &:hover {
+                  background-color: #fff;
+              }
         `
       
         return css `
