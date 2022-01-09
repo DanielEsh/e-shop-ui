@@ -1,5 +1,17 @@
 import styled, {css} from 'styled-components';
 
+export const Test = styled('div')`
+    display: flex;
+    padding: 16px;
+    border: 1px solid black;
+    outline: red;
+    
+    &:focus {
+        background-color: red;
+        outline: red;
+    }
+`
+
 export const DropdownMenu = styled('div')`
     display: flex;
     flex-direction: column;
@@ -7,6 +19,10 @@ export const DropdownMenu = styled('div')`
     border-radius: 6px;
     background-color: #fff;
     color: #000;
+
+    &:focus {
+        background-color: blue;
+    }     
 `
 
 export const DropdownMenuItem = styled('div')`
@@ -16,6 +32,10 @@ export const DropdownMenuItem = styled('div')`
 
     &:hover {
         background-color: #d3d3d3;
+    }
+  
+    &:focus {
+        background-color: green;
     }
   
     ${(props) => {

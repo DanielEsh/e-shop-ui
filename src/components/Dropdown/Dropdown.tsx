@@ -1,7 +1,8 @@
-import React, {forwardRef, ReactElement} from 'react';
+import React, {forwardRef, ReactElement, useRef} from 'react';
 import {Tooltip} from '../Tooltip';
 
 import {
+    Test,
     DropdownMenu,
     DropdownMenuItem,
 } from "./Dropdown.styles";
@@ -15,16 +16,18 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
         children
     } = props;
 
+    const menu = useRef(null);
+
     const menuPopover = (): JSX.Element => {
         return (
-            <DropdownMenu>
-                <DropdownMenuItem header>
+            <DropdownMenu ref={ menu } tabIndex="0">
+                <DropdownMenuItem header tabIndex="0">
                     Header
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem tabIndex="0">
                     Item
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem tabIndex="0">
                     Item
                 </DropdownMenuItem>
                 <DropdownMenuItem disabled>
@@ -34,6 +37,13 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
         )
     };
 
+    const onClick = () => {
+        console.log('click');
+        setTimeout( () => {
+            menu?.current.focus();
+        }, 1000)
+    };
+
     return (
         <>
             <Tooltip
@@ -41,7 +51,12 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
                 placement="bottom-start"
                 clickable
             >
-                <div>{children}</div>
+                <Test
+                    tabIndex="0"
+                    onClick={ onClick }
+                >
+                    {children}
+                </Test>
             </Tooltip>
         </>
     )
