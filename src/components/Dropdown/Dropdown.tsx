@@ -9,18 +9,14 @@ export const DropdownContext = createContext(undefined);
 
 export type DropdownProps = {
     children: ReactElement | string;
+    menu: ReactElement;
 };
 
 export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
     const {
-        children
+        children,
+        menu,
     } = props;
-
-    const menuPopover = (): JSX.Element => {
-        return (
-            <span>test</span>
-        )
-    };
 
     const context = {
         open,
@@ -30,7 +26,8 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
         <>
             <DropdownContext.Provider value={ context }>
                 <Tooltip
-                    popover={ menuPopover() }
+                    ref={ ref }
+                    popover={ menu }
                     placement="bottom-start"
                     clickable
                 >
