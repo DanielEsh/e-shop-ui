@@ -1,4 +1,4 @@
-import React, {forwardRef, ReactElement, useRef} from 'react';
+import React, {forwardRef, ReactElement, useRef, createContext} from 'react';
 import {Tooltip} from '../Tooltip';
 
 import {
@@ -6,6 +6,8 @@ import {
     DropdownMenu,
     DropdownMenuItem,
 } from "./Dropdown.styles";
+
+export const DropdownContext = createContext(undefined);
 
 export type DropdownProps = {
     children: ReactElement | string;
@@ -37,27 +39,26 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
         )
     };
 
-    const onClick = () => {
-        console.log('click');
-        setTimeout( () => {
-            menu?.current.focus();
-        }, 1000)
-    };
+    const context = {
+        open,
+    }
 
     return (
         <>
-            <Tooltip
-                popover={ menuPopover() }
-                placement="bottom-start"
-                clickable
-            >
-                <Test
-                    tabIndex="0"
-                    onClick={ onClick }
+            <DropdownContext.Provider value={ context }>
+                <Tooltip
+                    popover={ menuPopover() }
+                    placement="bottom-start"
+                    clickable
                 >
-                    {children}
-                </Test>
-            </Tooltip>
+                    <Test
+                        tabIndex="0"
+                    >
+                        {children}
+                    </Test>
+                </Tooltip>
+            </DropdownContext.Provider>
+            
         </>
     )
 })
