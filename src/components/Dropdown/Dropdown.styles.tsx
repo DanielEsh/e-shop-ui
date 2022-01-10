@@ -25,7 +25,7 @@ export const DropdownMenuRoot = styled('div')`
     }     
 `
 
-export const DropdownMenuItem = styled('div')`
+export const DropdownItemRoot = styled('div')`
     padding: 10px 16px;
     cursor: pointer;
     transition: background-color .2s linear;

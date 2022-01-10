@@ -3,7 +3,6 @@ import {Tooltip} from '../Tooltip';
 
 import {
     Test,
-    DropdownMenuItem,
 } from "./Dropdown.styles";
 
 export const DropdownContext = createContext(undefined);
