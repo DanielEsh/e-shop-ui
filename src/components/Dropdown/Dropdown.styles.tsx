@@ -12,7 +12,7 @@ export const Test = styled('div')`
     }
 `
 
-export const DropdownMenu = styled('div')`
+export const DropdownMenuRoot = styled('div')`
     display: flex;
     flex-direction: column;
     border: 1px solid gray;

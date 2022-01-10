@@ -1,9 +1,8 @@
-import React, {forwardRef, ReactElement, useRef, createContext} from 'react';
+import React, {forwardRef, ReactElement, createContext} from 'react';
 import {Tooltip} from '../Tooltip';
 
 import {
     Test,
-    DropdownMenu,
     DropdownMenuItem,
 } from "./Dropdown.styles";
 
@@ -18,24 +17,9 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
         children
     } = props;
 
-    const menu = useRef(null);
-
     const menuPopover = (): JSX.Element => {
         return (
-            <DropdownMenu ref={ menu } tabIndex="0">
-                <DropdownMenuItem header tabIndex="0">
-                    Header
-                </DropdownMenuItem>
-                <DropdownMenuItem tabIndex="0">
-                    Item
-                </DropdownMenuItem>
-                <DropdownMenuItem tabIndex="0">
-                    Item
-                </DropdownMenuItem>
-                <DropdownMenuItem disabled>
-                    Disabled item
-                </DropdownMenuItem>
-            </DropdownMenu>
+            <span>test</span>
         )
     };
 
