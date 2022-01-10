@@ -7,16 +7,21 @@ const Default = (): JSX.Element => {
         return (
             <DropdownMenu>
                 <>
-                    <DropdownItem header>
+                    <DropdownItem 
+                        header
+                        tabIndex="0"
+                    >
                         Header
                     </DropdownItem>
-                    <DropdownItem>
+                    <DropdownItem 
+                        tabIndex="0"
+                    >
                         Item 1
                     </DropdownItem>
-                    <DropdownItem>
+                    <DropdownItem tabIndex="0">
                         Item 2
                     </DropdownItem>
-                    <DropdownItem>
+                    <DropdownItem tabIndex="0">
                         Item 3
                     </DropdownItem>
                     <DropdownItem disabled>

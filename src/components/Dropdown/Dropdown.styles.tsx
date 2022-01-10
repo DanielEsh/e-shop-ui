@@ -1,6 +1,6 @@
 import styled, {css} from 'styled-components';
 
-export const Test = styled('div')`
+export const Test = styled('button')`
     display: flex;
     padding: 16px;
     border: 1px solid black;

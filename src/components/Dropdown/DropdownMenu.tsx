@@ -1,4 +1,4 @@
-import React, {forwardRef, ReactElement} from 'react';
+import React, {forwardRef, ReactElement, useEffect, useRef} from 'react';
 
 import {
     DropdownMenuRoot,
@@ -13,8 +13,17 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
         children
     } = props;
 
+    const menuRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        menuRef.current.focus();
+    }, [])
+
     return (
-        <DropdownMenuRoot ref={ ref }>
+        <DropdownMenuRoot 
+            ref={ menuRef }
+            tabIndex="0"
+        >
             {children}
         </DropdownMenuRoot>
     )
