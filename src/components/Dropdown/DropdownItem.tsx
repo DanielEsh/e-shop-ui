@@ -9,6 +9,7 @@ export type DropdownItemProps = {
     header?: boolean;
     disabled?: boolean;
     tabIndex?: number | string;
+    dataKey?: number | string;
 };
 
 export const DropdownItem = forwardRef<HTMLDivElement, DropdownItemProps>((props, ref) => {
@@ -17,6 +18,7 @@ export const DropdownItem = forwardRef<HTMLDivElement, DropdownItemProps>((props
         header,
         disabled,
         tabIndex,
+        dataKey,
     } = props;
 
     return (
@@ -25,6 +27,7 @@ export const DropdownItem = forwardRef<HTMLDivElement, DropdownItemProps>((props
             header={ header }
             disabled={ disabled }
             tabIndex={ tabIndex }
+            data-key={ dataKey }
         >
             {children}
         </DropdownItemRoot>
