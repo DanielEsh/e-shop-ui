@@ -44,6 +44,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
     const [timeout, setCloseTimout] = useState(null);
 
     const arrowRef = useRef<HTMLElement>(null);
+    let activeElement;
 
     const { styles, reference, floating, arrowStyles, refs } = usePopover({
         placement: placement,
@@ -55,6 +56,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
     const forkedRef = useForkRef(ref, reference);
 
     const showPopover = () => {
+        activeElement = document.activeElement;
         setTimeout( () => {
             setIsVisible(true);
         }, enterDelay);
@@ -63,6 +65,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
     const hidePopover = () => {
         const timeout = setTimeout( () => {
             setIsVisible(false);
+            activeElement.focus();
         }, leaveDelay);
         setCloseTimout(timeout);
     }
