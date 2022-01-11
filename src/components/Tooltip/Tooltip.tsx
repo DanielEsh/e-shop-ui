@@ -4,6 +4,7 @@ import { usePopover } from '../../hooks/usePopover';
 import { useForkRef } from '../../hooks/useForkRef';
 import { useOnClickOutside } from "../../hooks/useClickOutside";
 import { CSSTransition } from 'react-transition-group';
+import { isKeyCode, Keys } from '../../utils/isCodeKey';
 
 import {Portal} from '../Portal';
 import {
@@ -56,7 +57,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
     const forkedRef = useForkRef(ref, reference);
 
     const showPopover = () => {
-        activeElement = document.activeElement;
+        if (document.activeElement) activeElement = document.activeElement;
+        
         setTimeout( () => {
             setIsVisible(true);
         }, enterDelay);
@@ -65,7 +67,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
     const hidePopover = () => {
         const timeout = setTimeout( () => {
             setIsVisible(false);
-            activeElement.focus();
+            if (activeElement) activeElement.focus();
         }, leaveDelay);
         setCloseTimout(timeout);
     }
@@ -96,14 +98,16 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
         hidePopover() 
     }
 
-    const onPressEsc = (event) => {
-        if (event.code === 'Escape') hidePopover();
+    const onKeyDown = (event) => {
+        if (isKeyCode(event.keyCode, [Keys.ESC])) hidePopover();
+
+        if (isKeyCode(event.keyCode, [Keys.ENTER, Keys.SPACE])) onReferenceClick();
     }
 
     useEffect(() => {
-        document.addEventListener('keydown', onPressEsc);
+        document.addEventListener('keydown', onKeyDown);
         return () => {
-            document.removeEventListener('keydown', onPressEsc);
+            document.removeEventListener('keydown', onKeyDown);
         }
     }, [])
 
