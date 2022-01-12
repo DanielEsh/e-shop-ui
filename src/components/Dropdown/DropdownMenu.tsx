@@ -29,16 +29,21 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
     }
 
     const onBlur = () => {
-        console.log('blur');
         nodes[0].focus();
     }
 
 
+    const getNotDisabledMenuNodes = () => {
+        return []
+            .slice
+            .call(menuRef.current.querySelectorAll('[role="menuitem"]'))
+            .filter(node => !node.attributes.disabled);
+    };
+
+
     useEffect(() => {
-        let firstNode, lastNode;
-        menuRef.current.focus();
-        
-        nodes = [].slice.call(menuRef.current.querySelectorAll('[role="menuitem"]'));
+        let firstNode, lastNode;        
+        nodes = getNotDisabledMenuNodes();
         
         if (idx <= nodes.length && idx >= 0) {
             nodes[idx].focus();
@@ -51,8 +56,8 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
             console.log('firstNode', firstNode);
             console.log('lastNode', lastNode);
         }
-       
-        nodes[3].addEventListener('blur', onBlur);
+        //nodes[4].addEventListener('blur', onBlur());
+        
         
         document.addEventListener('keydown', onKeyDown);
         return () => {
