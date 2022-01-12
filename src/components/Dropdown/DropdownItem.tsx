@@ -24,6 +24,7 @@ export const DropdownItem = forwardRef<HTMLDivElement, DropdownItemProps>((props
     return (
         <DropdownItemRoot 
             ref={ ref }
+            role="menuitem"
             header={ header }
             disabled={ disabled }
             tabIndex={ tabIndex }
