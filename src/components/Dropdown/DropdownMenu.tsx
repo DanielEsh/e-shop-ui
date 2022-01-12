@@ -27,6 +27,11 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
         }
     }
 
+    const onBlur = () => {
+        console.log('blur');
+        nodes[0].focus();
+    }
+
 
     useEffect(() => {
         menuRef.current.focus();
@@ -34,12 +39,14 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
         if (idx <= nodes.length && idx >= 0) {
             nodes[idx].focus();
         }
+
+        nodes[3].addEventListener('blur', onBlur);
         
         document.addEventListener('keydown', onKeyDown);
         return () => {
             document.removeEventListener('keydown', onKeyDown);
         }
-    }, [idx])
+    }, [])
 
     return (
         <DropdownMenuRoot 
