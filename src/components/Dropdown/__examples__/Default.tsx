@@ -42,7 +42,10 @@ const Default = (): JSX.Element => {
 
     return (
         <>
-            <Dropdown menu={ content() }>
+            <Dropdown 
+                menu={ content() }
+                clickable
+            >
                 dropdown element
             </Dropdown>
         </>

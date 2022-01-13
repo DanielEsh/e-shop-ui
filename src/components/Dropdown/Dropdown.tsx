@@ -1,5 +1,6 @@
 import React, {forwardRef, ReactElement, createContext} from 'react';
-import {Tooltip} from '../Tooltip';
+import {Tooltip, Offset} from '../Tooltip';
+import {Placement} from '@floating-ui/react-dom';
 
 import {
     Test,
@@ -10,12 +11,18 @@ export const DropdownContext = createContext(undefined);
 export type DropdownProps = {
     children: ReactElement | string;
     menu: ReactElement;
+    offset?: Offset;
+    placement?: Placement;
+    enterDelay?: number;
+    leaveDelay?: number;
+    clickable?: boolean;
 };
 
 export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
     const {
         children,
         menu,
+        placement = 'bottom-start',
     } = props;
 
     const context = {
@@ -28,8 +35,8 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
                 <Tooltip
                     ref={ ref }
                     popover={ menu }
-                    placement="bottom-start"
-                    clickable
+                    placement={ placement }
+                    { ...props }
                 >
                     <Test
                         tabIndex="0"
