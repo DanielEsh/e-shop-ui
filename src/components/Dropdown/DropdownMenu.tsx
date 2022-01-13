@@ -23,27 +23,22 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
     let nodes;
     let index = 0;
 
+    const getNextFocusedNodeIndex = (direction) => {
+        index += direction;
+        if (index > (nodes.length - 1)) index = 0;
+        if (index < 0) index = nodes.length - 1;
+        return index
+    };
+
+    const setFocusedNode = () => {
+        nodes[count.current].focus();
+    }
+
     const onKeyDown = (event) => {
         if (isKeyCode(event.keyCode, [Keys.UP, Keys.DOWN])) {
             const direction = event.keyCode - 39;
-            setIdx(idx + direction);
-            index += direction;
-            count.current = count.current + direction;
-
-            // console.log('nodes', nodes);
-
-
-            if (count.current > (nodes.length - 1)) {
-                index = 0;
-                setIdx(0);
-                count.current = 0;
-            }
-
-            if (count.current < 0) {
-                index = nodes.length
-                setIdx(nodes.length);
-                count.current = nodes.length - 1;
-            }
+            count.current = getNextFocusedNodeIndex(direction); 
+            setFocusedNode();
         }
     }
 
@@ -60,19 +55,9 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
     };
 
 
-    useEffect(() => {
-        let firstNode, lastNode;        
+    useEffect(() => { 
         nodes = getNotDisabledMenuNodes();
-        console.log(idx, nodes[count.current]);
-
-        if (count.current >= 0) {
-            nodes[count.current].focus();
-        }
-        
-        
-        
-        
-        
+        setFocusedNode();
         document.addEventListener('keydown', onKeyDown);
         return () => {
             document.removeEventListener('keydown', onKeyDown);
