@@ -18,13 +18,32 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
     const [idx, setIdx] = React.useState<number>(0);
 
     const menuRef = useRef<HTMLDivElement>(null);
+    const count = useRef(0);
 
     let nodes;
+    let index = 0;
 
     const onKeyDown = (event) => {
         if (isKeyCode(event.keyCode, [Keys.UP, Keys.DOWN])) {
             const direction = event.keyCode - 39;
             setIdx(idx + direction);
+            index += direction;
+            count.current = count.current + direction;
+
+            // console.log('nodes', nodes);
+
+
+            if (count.current > (nodes.length - 1)) {
+                index = 0;
+                setIdx(0);
+                count.current = 0;
+            }
+
+            if (count.current < 0) {
+                index = nodes.length
+                setIdx(nodes.length);
+                count.current = nodes.length - 1;
+            }
         }
     }
 
@@ -44,26 +63,21 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
     useEffect(() => {
         let firstNode, lastNode;        
         nodes = getNotDisabledMenuNodes();
-        
-        if (idx <= nodes.length && idx >= 0) {
-            nodes[idx].focus();
-        }
+        console.log(idx, nodes[count.current]);
 
-        if (nodes.length) {
-            const n =nodes.filter(node => !node.attributes.disabled)
-            firstNode = n[0];
-            lastNode = n[n.length - 1];
-            console.log('firstNode', firstNode);
-            console.log('lastNode', lastNode);
+        if (count.current >= 0) {
+            nodes[count.current].focus();
         }
-        //nodes[4].addEventListener('blur', onBlur());
+        
+        
+        
         
         
         document.addEventListener('keydown', onKeyDown);
         return () => {
             document.removeEventListener('keydown', onKeyDown);
         }
-    }, [])
+    }, [idx])
 
     return (
         <DropdownMenuRoot 
