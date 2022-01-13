@@ -2,7 +2,9 @@ import React, {forwardRef, ReactElement, useState, useRef, useEffect} from 'reac
 import {Placement} from '@floating-ui/react-dom';
 import { usePopover } from '../../hooks/usePopover';
 import { useForkRef } from '../../hooks/useForkRef';
+import { useOnClickOutside } from "../../hooks/useClickOutside";
 import { CSSTransition } from 'react-transition-group';
+import { isKeyCode, Keys } from '../../utils/isCodeKey';
 
 import {Portal} from '../Portal';
 import {
@@ -43,15 +45,20 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
     const [timeout, setCloseTimout] = useState(null);
 
     const arrowRef = useRef<HTMLElement>(null);
+    let activeElement;
 
-    const { styles, reference, floating, arrowStyles } = usePopover({
+    const { styles, reference, floating, arrowStyles, refs } = usePopover({
         placement: placement,
         offset: offset,
         arrow: arrowRef,
         isVisible,
     });
 
+    const forkedRef = useForkRef(ref, reference);
+
     const showPopover = () => {
+        if (document.activeElement) activeElement = document.activeElement;
+        
         setTimeout( () => {
             setIsVisible(true);
         }, enterDelay);
@@ -60,9 +67,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
     const hidePopover = () => {
         const timeout = setTimeout( () => {
             setIsVisible(false);
+            if (activeElement) activeElement.focus();
         }, leaveDelay);
         setCloseTimout(timeout);
     }
+
+    useOnClickOutside(refs.floating, hidePopover);
 
     const onReferenceClick = () => {
         if (clickable) isVisible ? hidePopover() : showPopover();
@@ -88,21 +98,23 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
         hidePopover() 
     }
 
-    const onPressEsc = (event) => {
-        if (event.code === 'Escape') hidePopover();
+    const onKeyDown = (event) => {
+        if (isKeyCode(event.keyCode, [Keys.ESC, Keys.TAB])) hidePopover();
+
+        if (isKeyCode(event.keyCode, [Keys.ENTER, Keys.SPACE])) onReferenceClick();
     }
 
     useEffect(() => {
-        document.addEventListener('keydown', onPressEsc);
+        document.addEventListener('keydown', onKeyDown);
         return () => {
-            document.removeEventListener('keydown', onPressEsc);
+            document.removeEventListener('keydown', onKeyDown);
         }
     }, [])
 
     return (
         <>
             <TooltipTarget 
-                ref={ useForkRef(ref, reference) }
+                ref={ forkedRef }
                 onClick={ onReferenceClick }
                 onMouseEnter={ onReferenceEnter }
                 onMouseLeave={ onReferenceLeave }

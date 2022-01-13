@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 
 import { canUseDom } from "../../utils/canUseDom";
 
-const body = canUseDom ? document.body : null;
+const app = canUseDom ? document.getElementById('app') : null;
 
 export type PortalProps = {
     children: ReactElement;
@@ -15,7 +15,7 @@ export const Portal: FC<PortalProps> = (props) => {
         children,
         container,
     } = props;
-    const [node, setNode] = useState<HTMLElement>(body);
+    const [node, setNode] = useState<HTMLElement>(app);
 
     useEffect(() => {
         if (container) setNode(container);

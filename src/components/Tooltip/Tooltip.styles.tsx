@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const TooltipTarget = styled('div')`
     position: relative;
+    display: inline-block;
     cursor: pointer;
 `
 
@@ -32,4 +33,5 @@ export const Arrow = styled('div')`
     height: 16px;
     background-color: #000;
     transform: rotate(316deg);
+    display: none;
 `

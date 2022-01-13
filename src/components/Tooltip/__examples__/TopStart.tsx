@@ -24,8 +24,13 @@ const Default = (): JSX.Element => {
             <Tooltip 
                 placement="top-start"
                 popover={ renderPopoverContent() }
+                clickable
             >
-                Hover on text
+                <div 
+                    tabIndex={ 0 }
+                >
+                    Hover on text
+                </div>
             </Tooltip>
         </>
     );
