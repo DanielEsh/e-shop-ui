@@ -9,25 +9,25 @@ const Default = (): JSX.Element => {
                 <>
                     <DropdownItem 
                         header
-                        tabIndex="0"
+                        tabIndex="-1"
                         dataKey="0"
                     >
                         Header
                     </DropdownItem>
                     <DropdownItem 
-                        tabIndex="0"
+                        tabIndex="-1"
                         dataKey="1"
                     >
                         Item 1
                     </DropdownItem>
                     <DropdownItem 
-                        tabIndex="0"
+                        tabIndex="-1"
                         dataKey="2"
                     >
                         Item 2
                     </DropdownItem>
                     <DropdownItem 
-                        tabIndex="0"
+                        tabIndex="-1"
                         dataKey="3"
                     >
                         Item 3

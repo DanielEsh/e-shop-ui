@@ -1,6 +1,5 @@
 import React, {forwardRef, ReactElement, useEffect, useRef} from 'react';
 import { isKeyCode, Keys } from '../../utils/isCodeKey';
-import { First } from '../Rating/Rating.styles';
 
 import {
     DropdownMenuRoot,
@@ -14,8 +13,6 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
     const {
         children
     } = props;
-
-    const [idx, setIdx] = React.useState<number>(0);
 
     const menuRef = useRef<HTMLDivElement>(null);
     const count = useRef(0);
@@ -40,10 +37,10 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
             count.current = getNextFocusedNodeIndex(direction); 
             setFocusedNode();
         }
-    }
 
-    const onBlur = () => {
-        nodes[0].focus();
+        if (isKeyCode(event.keyCode, [Keys.TAB])) {
+            console.log('tab');
+        }
     }
 
 
@@ -54,20 +51,25 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
             .filter(node => !node.attributes.disabled);
     };
 
+    const onBlur = () => {
+        console.log('blur');
+    };
 
     useEffect(() => { 
         nodes = getNotDisabledMenuNodes();
         setFocusedNode();
+
         document.addEventListener('keydown', onKeyDown);
         return () => {
             document.removeEventListener('keydown', onKeyDown);
         }
-    }, [idx])
+    }, [])
 
     return (
         <DropdownMenuRoot 
             ref={ menuRef }
             tabIndex="0"
+            onBlur={ onBlur }
         >
             {children}
         </DropdownMenuRoot>
