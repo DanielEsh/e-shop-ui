@@ -20,7 +20,7 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
     let nodes;
     let index = 0;
 
-    const getNextFocusedNodeIndex = (direction) => {
+    const getNextFocusedNodeIndex = (direction: number) => {
         index += direction;
         if (index > (nodes.length - 1)) index = 0;
         if (index < 0) index = nodes.length - 1;
@@ -31,15 +31,11 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
         nodes[count.current].focus();
     }
 
-    const onKeyDown = (event) => {
+    const onKeyDown = (event: KeyboardEvent) => {
         if (isKeyCode(event.keyCode, [Keys.UP, Keys.DOWN])) {
             const direction = event.keyCode - 39;
             count.current = getNextFocusedNodeIndex(direction); 
             setFocusedNode();
-        }
-
-        if (isKeyCode(event.keyCode, [Keys.TAB])) {
-            console.log('tab');
         }
     }
 
@@ -49,10 +45,6 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
             .slice
             .call(menuRef.current.querySelectorAll('[role="menuitem"]'))
             .filter(node => !node.attributes.disabled);
-    };
-
-    const onBlur = () => {
-        console.log('blur');
     };
 
     useEffect(() => { 
@@ -69,7 +61,6 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>((props
         <DropdownMenuRoot 
             ref={ menuRef }
             tabIndex="0"
-            onBlur={ onBlur }
         >
             {children}
         </DropdownMenuRoot>

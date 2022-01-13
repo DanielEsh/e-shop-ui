@@ -99,7 +99,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => 
     }
 
     const onKeyDown = (event) => {
-        if (isKeyCode(event.keyCode, [Keys.ESC])) hidePopover();
+        if (isKeyCode(event.keyCode, [Keys.ESC, Keys.TAB])) hidePopover();
 
         if (isKeyCode(event.keyCode, [Keys.ENTER, Keys.SPACE])) onReferenceClick();
     }
