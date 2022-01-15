@@ -27,12 +27,16 @@ export const Modal: React.FC<ModalProps> = (props) => {
             in={ isOpen }
             type="fade"
         >
-            <ModalOverlay 
-                ref={ ref }
-                onClick={ onClose }
-            >
-                {children}
-            </ModalOverlay>
+            <>
+                <ModalOverlay 
+                    ref={ ref }
+                    onClick={ onClose }
+                />
+
+                <div>
+                    {children}
+                </div>
+            </>
         </Transition>
         
     )

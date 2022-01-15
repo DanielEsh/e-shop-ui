@@ -38,7 +38,7 @@ const Default = (): JSX.Element => {
                     type="pushLeft"
                 >
                     <ModalAside 
-                        onClick={ () => setShowModal(false) }
+                        onClick={ () => console.log('click') }
                     >
                         test
                     </ModalAside>
