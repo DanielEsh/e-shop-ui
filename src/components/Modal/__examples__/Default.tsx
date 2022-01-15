@@ -23,7 +23,10 @@ const Default = (): JSX.Element => {
                 show Modal
             </Button>
 
-            <Modal isOpen={ showModal }>
+            <Modal 
+                isOpen={ showModal }
+                onClose={ () => setShowModal(false) }
+            >
                 <Transition 
                     type="pushLeft" 
                     in={ showModal }

@@ -9,6 +9,7 @@ export const ModalOverlay = styled('div')`
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
     visibility: hidden;
+    transition: all .5s;
     
     &.active {
         opacity: 1;
