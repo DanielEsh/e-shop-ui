@@ -11,12 +11,12 @@ const ModalAside = styled('div')`
     width: 500px;
     height: 100%;
     background-color: #fff;
-    transform: translateX(100%);
+    /* transform: translateX(100%);
     transition: all .3s linear;
 
     &.active {
         transform: translateX(0%);
-    }
+    } */
 `
 
 
@@ -33,12 +33,17 @@ const Default = (): JSX.Element => {
                 isOpen={ showModal }
                 onClose={ () => setShowModal(false) }
             >
-                <ModalAside 
-                    className={ showModal ? 'active' : '' }
-                    onClick={ () => setShowModal(false) }
+                <Transition 
+                    in={ showModal }
+                    type="pushLeft"
                 >
-                    test
-                </ModalAside>
+                    <ModalAside 
+                        onClick={ () => setShowModal(false) }
+                    >
+                        test
+                    </ModalAside>
+                </Transition>
+                
             </Modal>
         </>
     )
