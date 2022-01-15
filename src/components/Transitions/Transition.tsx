@@ -1,10 +1,10 @@
-import React, { forwardRef, ReactElement } from "react";
+import React, { forwardRef, ReactNode } from "react";
 import { Transition as RTransition } from 'react-transition-group';
 import { TransitionVariants } from './utils';
 
 export type TransitionProps = {
     type: 'fade' | 'scale' | 'pushUp' | 'pushLeft' | 'pushRight' | 'pushDown';
-    children: ReactElement;
+    children: ReactNode;
     in: boolean;
     timingFunction?: 'string';
     duration?: number;

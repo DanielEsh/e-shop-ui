@@ -112,7 +112,7 @@ export const TransitionVariants = {
         },
         entered:  { 
             opacity: 1,
-            transform: 'translateX(0%)', 
+            //transform: 'translateX(0%)', 
         },
         exiting:  { 
             transform: 'translateX(100%)', 
