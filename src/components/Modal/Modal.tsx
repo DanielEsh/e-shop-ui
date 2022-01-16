@@ -17,6 +17,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
     const ref = useRef(null);
     const modal = useRef(null);
     const activeEl = useRef(null);
+
     const {
         isOpen,
         onClose,
@@ -57,16 +58,6 @@ export const Modal: React.FC<ModalProps> = (props) => {
     }
 
     const onOpenModal = (state) => {
-        const children = getFocusableChildren();
-        if (state) {
-            activeEl.current = document.activeElement
-            children[0].focus();
-        }
-        else {
-            if (activeEl.current) activeEl.current.focus();
-            onClose();
-        }
-        
         setIsActive(state);
     };
 
@@ -100,7 +91,6 @@ export const Modal: React.FC<ModalProps> = (props) => {
     }
 
     useEffect(() => {
-        console.log('Mounted', ref);
         onOpenModal(isOpen);
         document.addEventListener('keydown', onKeyDown);
         return () => {
@@ -108,11 +98,26 @@ export const Modal: React.FC<ModalProps> = (props) => {
         }
     }, [isOpen])
 
+    useEffect(() => {
+        const child = getFocusableChildren();
+        
+        if (isActive) {
+            activeEl.current = document.activeElement
+            if (child.length) {
+                child[0].focus();
+            }
+            
+        }
+        else {
+            if (activeEl.current) activeEl.current.focus();
+            onClose();
+        }
+    }, [isActive])
+
     return (
         <Transition 
-            in={ isOpen }
+            in={ isActive }
             type="fade"
-            duration={ 400 }
         >
             <>
                 <ModalOverlay 
