@@ -103,10 +103,9 @@ export const Modal: React.FC<ModalProps> = (props) => {
         
         if (isActive) {
             activeEl.current = document.activeElement
-            if (child.length) {
+            setTimeout(() => {
                 child[0].focus();
-            }
-            
+            }, 100)
         }
         else {
             if (activeEl.current) activeEl.current.focus();
@@ -118,6 +117,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
         <Transition 
             in={ isActive }
             type="fade"
+            duration={ 400 }
         >
             <>
                 <ModalOverlay 
