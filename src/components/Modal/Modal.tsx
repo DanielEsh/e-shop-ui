@@ -14,6 +14,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
     const [isActive, setIsActive] = React.useState(false);
 
     const ref = useRef(null);
+    const modal = useRef(null);
     const activeEl = useRef(null);
     const {
         isOpen,
@@ -21,13 +22,36 @@ export const Modal: React.FC<ModalProps> = (props) => {
         children,
     } = props;
 
+    const focusableElements = [
+        'a[href]',
+        'area[href]',
+        'input:not([disabled]):not([type=hidden])',
+        'select:not([disabled])',
+        'textarea:not([disabled])',
+        'button:not([disabled])',
+        'object',
+        'embed',
+        '[tabindex]:not(.modal)',
+        'audio[controls]',
+        'video[controls]',
+        '[contenteditable]:not([contenteditable="false"])',
+    ];
+
+    const getFocusableChildren = () => {
+        if (!modal.current) return;
+
+        return modal.current.querySelectorAll(focusableElements.join(', '));
+    }
+
     const onOpenModal = (state) => {
+        const children = getFocusableChildren();
         if (state) {
             activeEl.current = document.activeElement
-        } else {
+            children[0].focus();
+        }
+        else {
             if (activeEl.current) activeEl.current.focus();
         }
-        
         
         setIsActive(state);
     };
@@ -49,7 +73,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
                     onClick={ onClose }
                 />
 
-                <div>
+                <div ref={ modal }>
                     {children}
                 </div>
             </>
