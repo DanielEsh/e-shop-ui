@@ -11,13 +11,45 @@ const ModalAside = styled('div')`
     width: 500px;
     height: 100%;
     background-color: #fff;
-    /* transform: translateX(100%);
-    transition: all .3s linear;
-
-    &.active {
-        transform: translateX(0%);
-    } */
 `
+
+const ModalContent = styled('div')`
+    padding: 56px;
+`
+
+const ExamplesForm = (): JSX.Element => {
+    return (
+        <ModalContent>
+            <h2>Title</h2>
+            <p>Description</p>
+
+            <form>
+                <div>
+                    <label htmlFor="">
+                        Name
+                    </label>
+                    <input type="text" />
+                </div>
+                <div>
+                    <label htmlFor="">
+                        Phone
+                    </label>
+                    <input type="text" />
+                </div>
+                <div>
+                    <label htmlFor="">
+                        Email
+                    </label>
+                    <input type="text" />
+                </div>
+
+                <Button>
+                    Submit
+                </Button>
+            </form>
+        </ModalContent>
+    )
+}
 
 
 const Default = (): JSX.Element => {
@@ -33,16 +65,11 @@ const Default = (): JSX.Element => {
                 isOpen={ showModal }
                 onClose={ () => setShowModal(false) }
             >
-                <Transition 
-                    in={ showModal }
-                    type="pushLeft"
+                <ModalAside 
+                    onClick={ () => console.log('click') }
                 >
-                    <ModalAside 
-                        onClick={ () => console.log('click') }
-                    >
-                        test
-                    </ModalAside>
-                </Transition>
+                    <ExamplesForm />
+                </ModalAside>
                 
             </Modal>
         </>

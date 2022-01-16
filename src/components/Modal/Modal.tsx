@@ -26,6 +26,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
         <Transition 
             in={ isOpen }
             type="fade"
+            duration={ 400 }
         >
             <>
                 <ModalOverlay 
