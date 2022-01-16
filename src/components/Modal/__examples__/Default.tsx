@@ -65,7 +65,7 @@ const Default = (): JSX.Element => {
                 isOpen={ showModal }
                 onClose={ () => setShowModal(false) }
             >
-                <Transition 
+                {/* <Transition 
                     in={ showModal }
                     type="pushLeft"
                     duration={ 400 }
@@ -76,12 +76,12 @@ const Default = (): JSX.Element => {
                     >
                         <ExamplesForm />
                     </ModalAside>
-                </Transition>
-                {/* <ModalAside 
+                </Transition> */}
+                <ModalAside 
                     onClick={ () => console.log('click') }
                 >
                     <ExamplesForm />
-                </ModalAside> */}
+                </ModalAside>
                 
             </Modal>
         </>

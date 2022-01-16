@@ -8,6 +8,7 @@ export type ModalProps = {
     children: React.ReactNode;
     isOpen?: boolean;
     onClose?: () => void;
+    onOpen?: () => void;
 }
 
 
@@ -21,6 +22,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
     const {
         isOpen,
         onClose,
+        onOpen,
         children,
     } = props;
 
@@ -57,7 +59,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
         return currentFocus;
     }
 
-    const onOpenModal = (state) => {
+    const onToggleModal = (state) => {
         setIsActive(state);
     };
 
@@ -86,12 +88,12 @@ export const Modal: React.FC<ModalProps> = (props) => {
     }
 
     const onKeyDown = (event) => {
-        if (isKeyCode(event.keyCode, [Keys.ESC])) onOpenModal(false);
+        if (isKeyCode(event.keyCode, [Keys.ESC])) onToggleModal(false);
         if (isKeyCode(event.keyCode, [Keys.TAB])) onTabClick(event);
     }
 
     useEffect(() => {
-        onOpenModal(isOpen);
+        onToggleModal(isOpen);
         document.addEventListener('keydown', onKeyDown);
         return () => {
             document.removeEventListener('keydown', onKeyDown);
@@ -102,6 +104,9 @@ export const Modal: React.FC<ModalProps> = (props) => {
         const child = getFocusableChildren();
         
         if (isActive) {
+            if (onOpen) {
+                onOpen();
+            }
             activeEl.current = document.activeElement
             setTimeout(() => {
                 child[0].focus();
@@ -109,7 +114,9 @@ export const Modal: React.FC<ModalProps> = (props) => {
         }
         else {
             if (activeEl.current) activeEl.current.focus();
-            onClose();
+            if (onClose) {
+                onClose();
+            }
         }
     }, [isActive])
 
