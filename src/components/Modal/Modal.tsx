@@ -11,16 +11,31 @@ export type ModalProps = {
 
 
 export const Modal: React.FC<ModalProps> = (props) => {
+    const [isActive, setIsActive] = React.useState(false);
+
     const ref = useRef(null);
+    const activeEl = useRef(null);
     const {
         isOpen,
         onClose,
         children,
     } = props;
 
+    const onOpenModal = (state) => {
+        if (state) {
+            activeEl.current = document.activeElement
+        } else {
+            if (activeEl.current) activeEl.current.focus();
+        }
+        
+        
+        setIsActive(state);
+    };
+
     useEffect(() => {
         console.log('Mounted', ref);
-    }, [])
+        onOpenModal(isOpen);
+    }, [isOpen])
 
     return (
         <Transition 
