@@ -9,6 +9,7 @@ export type ModalProps = {
     isOpen?: boolean;
     onClose?: () => void;
     onOpen?: () => void;
+    notClickableOverlay?: boolean;
 }
 
 
@@ -23,6 +24,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
         isOpen,
         onClose,
         onOpen,
+        notClickableOverlay = false,
         children,
     } = props;
 
@@ -57,6 +59,12 @@ export const Modal: React.FC<ModalProps> = (props) => {
             currentFocus = focusableChildren[0];
         }
         return currentFocus;
+    }
+
+    const onOverlayClick = () => {
+        if (notClickableOverlay) return
+
+        onClose();
     }
 
     const onToggleModal = (state) => {
@@ -129,7 +137,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
             <>
                 <ModalOverlay 
                     ref={ ref }
-                    onClick={ onClose }
+                    onClick={ onOverlayClick }
                 />
 
                 <div ref={ modal }>
