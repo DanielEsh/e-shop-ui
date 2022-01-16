@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react'
 import { ModalOverlay } from './Modal.styles';
 import {Transition} from '../Transitions/Transition';
+import { isKeyCode, Keys } from '../../utils/isCodeKey';
 
 
 export type ModalProps = {
@@ -51,14 +52,23 @@ export const Modal: React.FC<ModalProps> = (props) => {
         }
         else {
             if (activeEl.current) activeEl.current.focus();
+            onClose();
         }
         
         setIsActive(state);
     };
 
+    const onKeyDown = (event) => {
+        if (isKeyCode(event.keyCode, [Keys.ESC])) onOpenModal(false);
+    }
+
     useEffect(() => {
         console.log('Mounted', ref);
         onOpenModal(isOpen);
+        document.addEventListener('keydown', onKeyDown);
+        return () => {
+            document.removeEventListener('keydown', onKeyDown);
+        }
     }, [isOpen])
 
     return (
