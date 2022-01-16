@@ -44,6 +44,18 @@ export const Modal: React.FC<ModalProps> = (props) => {
         return modal.current.querySelectorAll(focusableElements.join(', '));
     }
 
+    const getFocusedChild = () => {
+        let currentFocus;
+        const focusableChildren = getFocusableChildren();
+        
+        try {
+            currentFocus = document.activeElement;
+        } catch (err) {
+            currentFocus = focusableChildren[0];
+        }
+        return currentFocus;
+    }
+
     const onOpenModal = (state) => {
         const children = getFocusableChildren();
         if (state) {
@@ -58,8 +70,33 @@ export const Modal: React.FC<ModalProps> = (props) => {
         setIsActive(state);
     };
 
+    const onTabClick = (e) => {
+        const focusableChildren = getFocusableChildren();
+        const totalFocusable = focusableChildren.length;
+        if (totalFocusable === 0) return;
+        const currentFocus = getFocusedChild();
+
+        let focusedIndex = 0;
+
+        for (let i = 0; i < totalFocusable; i += 1) 
+            if (focusableChildren[i] === currentFocus) {
+                focusedIndex = i;
+                break;
+            }
+    
+
+        if (e.shiftKey && focusedIndex === 0) {
+            e.preventDefault();
+            focusableChildren[totalFocusable - 1].focus();
+        } else if (!e.shiftKey && focusedIndex === totalFocusable - 1) {
+            e.preventDefault();
+            focusableChildren[0].focus();
+        }
+    }
+
     const onKeyDown = (event) => {
         if (isKeyCode(event.keyCode, [Keys.ESC])) onOpenModal(false);
+        if (isKeyCode(event.keyCode, [Keys.TAB])) onTabClick(event);
     }
 
     useEffect(() => {
