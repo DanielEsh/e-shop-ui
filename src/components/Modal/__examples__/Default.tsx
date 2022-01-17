@@ -64,7 +64,6 @@ const Default = (): JSX.Element => {
             <Modal 
                 isOpen={ showModal }
                 onClose={ () => setShowModal(false) }
-                notClickableOverlay
             >
                 {/* <Transition 
                     in={ showModal }

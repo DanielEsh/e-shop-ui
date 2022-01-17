@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react'
 import { ModalOverlay } from './Modal.styles';
 import {Transition} from '../Transitions/Transition';
+import {Portal} from '../Portal';
 import { isKeyCode, Keys } from '../../utils/isCodeKey';
 
 
@@ -10,6 +11,7 @@ export type ModalProps = {
     onClose?: () => void;
     onOpen?: () => void;
     notClickableOverlay?: boolean;
+    containerEl?: HTMLElement;
 }
 
 
@@ -26,6 +28,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
         onOpen,
         notClickableOverlay = false,
         children,
+        containerEl,
     } = props;
 
     const focusableElements = [
@@ -129,22 +132,23 @@ export const Modal: React.FC<ModalProps> = (props) => {
     }, [isActive])
 
     return (
-        <Transition 
-            in={ isActive }
-            type="fade"
-            duration={ 400 }
-        >
-            <>
-                <ModalOverlay 
-                    ref={ ref }
-                    onClick={ onOverlayClick }
-                />
+        <Portal container={ containerEl }>
+            <Transition
+                in={ isActive }
+                type="fade"
+                duration={ 400 }
+            >
+                <>
+                    <ModalOverlay
+                        ref={ ref }
+                        onClick={ onOverlayClick }
+                    />
 
-                <div ref={ modal }>
-                    {children}
-                </div>
-            </>
-        </Transition>
-        
+                    <div ref={ modal }>
+                        {children}
+                    </div>
+                </>
+            </Transition>
+        </Portal>
     )
 }
