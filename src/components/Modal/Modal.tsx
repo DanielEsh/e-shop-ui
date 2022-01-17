@@ -3,6 +3,7 @@ import { ModalOverlay } from './Modal.styles';
 import {Transition} from '../Transitions/Transition';
 import {Portal} from '../Portal';
 import { isKeyCode, Keys } from '../../utils/isCodeKey';
+import {useLockedBody} from "../../hooks/useLockedBody";
 
 
 export type ModalProps = {
@@ -102,6 +103,8 @@ export const Modal: React.FC<ModalProps> = (props) => {
         if (isKeyCode(event.keyCode, [Keys.ESC])) onToggleModal(false);
         if (isKeyCode(event.keyCode, [Keys.TAB])) onTabClick(event);
     }
+
+    useLockedBody(isActive);
 
     useEffect(() => {
         onToggleModal(isOpen);
