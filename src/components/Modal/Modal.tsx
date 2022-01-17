@@ -144,7 +144,10 @@ export const Modal: React.FC<ModalProps> = (props) => {
                         onClick={ onOverlayClick }
                     />
 
-                    <div ref={ modal }>
+                    <div
+                        ref={ modal }
+                        role="dialog"
+                    >
                         {children}
                     </div>
                 </>
