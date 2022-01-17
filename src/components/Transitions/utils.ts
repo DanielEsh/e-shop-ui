@@ -108,11 +108,10 @@ export const TransitionVariants = {
             transform: 'translateX(100%)', 
             opacity: 0,
             transitionProperty: 'transform, opacity',
-            transformOrigin: 'center center',
         },
         entered:  { 
             opacity: 1,
-            transform: 'translateX(0%)', 
+            //transform: 'translateX(0%)', 
         },
         exiting:  { 
             transform: 'translateX(100%)', 

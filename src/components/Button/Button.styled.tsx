@@ -107,6 +107,9 @@ export const Btn = styled.button<{isRounded?: boolean}>`
                     color: white;
                 }
             }
+            &:focus {
+                background-color: red;
+            }
             &:hover ${BtnHover} {
                 background-color: ${theme.colors.primaryHover};
                 border-color: ${theme.colors.primaryHover};
