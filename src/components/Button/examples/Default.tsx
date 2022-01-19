@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {Button} from "../index";
+import { Button } from "@/components/Button";
 
 const Default = (): JSX.Element => {
     const btnRef = useRef<HTMLButtonElement>(null);
