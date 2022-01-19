@@ -1,10 +1,10 @@
-import React, { forwardRef, useState, useLayoutEffect } from 'react';
-import cn from 'classnames';
+import React, { forwardRef, useState, useLayoutEffect } from 'react'
+import cn from 'classnames'
 
 import {
-    Btn,
-    BtnHover,
-    BtnText, RippleContainer
+  Btn,
+  BtnHover,
+  BtnText, RippleContainer,
 } from './Button.styled'
 
 export type ButtonProps = {
@@ -25,131 +25,132 @@ type Coords = {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
-    type = 'button',
-    color = 'primary',
-    size = 'medium',
-    children,
-    rounded,
-    outline,
-    disabled,
-    rippleEffect = true,
-    onClick,
+  type = 'button',
+  color = 'primary',
+  size = 'medium',
+  children,
+  rounded,
+  outline,
+  disabled,
+  rippleEffect = true,
+  onClick,
 }, ref) => {
-    const defaultCoords: Coords = {
-        x: 50,
-        y: 50,
-    }
-    const [hoverPosition, setHoverPosition] = useState<Coords>(defaultCoords);
-    const [ripplePosition, setRipplePosition] = useState([]);
+  const defaultCoords: Coords = {
+    x: 50,
+    y: 50,
+  }
+  const [hoverPosition, setHoverPosition] = useState<Coords>(defaultCoords)
+  const [ripplePosition, setRipplePosition] = useState([])
 
-    const classes = cn({
-        'is-disabled': disabled,
-        'is-outline': outline,
-    }, [`color--${color}`, `size--${size}`])
+  const classes = cn({
+    'is-disabled': disabled,
+    'is-outline': outline,
+  }, [`color--${color}`, `size--${size}`])
 
-    /**
+  /**
      * Add hover effect
      * @param event
      */
-    const onHover = (event:React.MouseEvent<HTMLButtonElement>) => {
-        const nativeEvent = event.nativeEvent;
-        const { currentTarget: container } = event;
+  const onHover = (event:React.MouseEvent<HTMLButtonElement>) => {
+    const nativeEvent = event.nativeEvent
+    const { currentTarget: container } = event
 
-        if (!container) return;
-
-        const x = nativeEvent.offsetX / container.offsetWidth;
-        const y = (nativeEvent.offsetY + ((container.offsetWidth - container.offsetHeight) / 2)) / container.offsetWidth;
-
-        setHoverPosition({
-            x: 100 * (x - .5),
-            y: 100 * (y - .5),
-        })
+    if (!container) {
+      return
     }
 
-    /**
+    const x = nativeEvent.offsetX / container.offsetWidth
+    const y = (nativeEvent.offsetY + ((container.offsetWidth - container.offsetHeight) / 2)) / container.offsetWidth
+
+    setHoverPosition({
+      x: 100 * (x - .5),
+      y: 100 * (y - .5),
+    })
+  }
+
+  /**
      * Clear ripple effect (remove DOM element)
      */
-    useLayoutEffect(() => {
-        const isRippleEffect = ripplePosition.length;
-        const RippleTime = 800;
-        let bounce = null;
+  useLayoutEffect(() => {
+    const isRippleEffect = ripplePosition.length
+    const RippleTime = 800
+    let bounce = null
 
-        if (!isRippleEffect) clearTimeout(bounce);
+    if (!isRippleEffect) clearTimeout(bounce)
 
-        bounce = setTimeout(() => {
-            setRipplePosition([]);
-            clearTimeout(bounce);
-        }, RippleTime * 2);
+    bounce = setTimeout(() => {
+      setRipplePosition([])
+      clearTimeout(bounce)
+    }, RippleTime * 2)
 
-        return () => clearTimeout(bounce);
-    }, [ripplePosition.length])
+    return () => clearTimeout(bounce)
+  }, [ripplePosition.length])
 
-    /**
+  /**
      * Add Ripple Effect (add DOM element and start animation)
      * @param event
      */
-    const onRipple = (event: React.MouseEvent<HTMLDivElement>) => {
-        if (rippleEffect) {
-            const { pageX, pageY, currentTarget } = event;
+  const onRipple = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (rippleEffect) {
+      const { pageX, pageY, currentTarget } = event
 
-            const rippleContainer = currentTarget.getBoundingClientRect()
+      const rippleContainer = currentTarget.getBoundingClientRect()
 
-            const size =
+      const size =
                 rippleContainer.width > rippleContainer.height
-                    ? rippleContainer.width
-                    : rippleContainer.height;
-            const x = pageX - rippleContainer.x - size / 2;
-            const y = pageY - rippleContainer.y - size / 2;
+                  ? rippleContainer.width
+                  : rippleContainer.height
+      const x = pageX - rippleContainer.x - size / 2
+      const y = pageY - rippleContainer.y - size / 2
 
-            setRipplePosition([{
-                x,
-                y,
-                size,
-            }]);
-        }
-
-        if (onClick) onClick();
+      setRipplePosition([{
+        x,
+        y,
+        size,
+      }])
     }
 
+    if (onClick) onClick()
+  }
 
-    return (
-        <Btn
-            ref={ ref }
-            className={ classes }
-            disabled={ disabled }
-            isRounded={ rounded }
-            onClick={ onRipple }
-            onMouseEnter={ onHover }
-            onMouseLeave={ onHover }
-            type={ type }
-        >
-            <BtnHover
-                style={ {transformOrigin: `${hoverPosition?.x}% ${hoverPosition?.y}%`} }
-            />
+  return (
+    <Btn
+      ref={ ref }
+      className={ classes }
+      disabled={ disabled }
+      isRounded={ rounded }
+      onClick={ onRipple }
+      onMouseEnter={ onHover }
+      onMouseLeave={ onHover }
+      type={ type }
+    >
+      <BtnHover
+        style={ { transformOrigin: `${hoverPosition?.x}% ${hoverPosition?.y}%` } }
+      />
 
-            {rippleEffect && (
-                <RippleContainer>
-                    {ripplePosition.length > 0 &&
+      {rippleEffect && (
+        <RippleContainer>
+          {ripplePosition.length > 0 &&
                     ripplePosition.map((ripple, index) => {
-                        return (
-                            <span
-                                key={ index }
-                                style={ {
-                                    top: ripple.y,
-                                    left: ripple.x,
-                                    width: ripple.size,
-                                    height: ripple.size
-                                } }
-                            />
-                        );
+                      return (
+                        <span
+                          key={ index }
+                          style={ {
+                            top: ripple.y,
+                            left: ripple.x,
+                            width: ripple.size,
+                            height: ripple.size,
+                          } }
+                        />
+                      )
                     })}
-                </RippleContainer>
-            )}
+        </RippleContainer>
+      )}
 
-            <BtnText>
-                { children }
-            </BtnText>
+      <BtnText>
+        { children }
+      </BtnText>
 
-        </Btn>
-    );
+    </Btn>
+  )
 })
