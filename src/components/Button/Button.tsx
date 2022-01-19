@@ -11,6 +11,7 @@ export type ButtonProps = {
     rounded?: boolean
     disabled?: boolean
     rippleEffect?: boolean
+    loading?: boolean
     onMouseDown?: () => void
     onMouseUp?: () => void
     onMouseEnter?: () => void
