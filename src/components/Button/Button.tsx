@@ -26,9 +26,13 @@ export type ButtonProps = {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  const {
+    children,
+  } = props
+
   return (
     <button ref={ref}>
-      {props}
+      {children}
     </button>
   )
 })
