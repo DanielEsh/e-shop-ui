@@ -3,6 +3,8 @@ import cn from 'classnames'
 
 import {
   ButtonRoot,
+  ButtonAddonLeft,
+  ButtonAddonRight,
 } from '@/components/Button/Button.styled'
 
 export type ButtonProps = {
@@ -33,6 +35,8 @@ export type ButtonProps = {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     children,
+    addonLeft,
+    addonRight,
     color,
     size = 'medium',
     outline,
@@ -49,7 +53,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
       ref={ref}
       className={classes}
     >
+      {
+        addonLeft && (
+          <ButtonAddonLeft>
+            {addonLeft}
+          </ButtonAddonLeft>
+        )
+      }
+
       {children}
+
+      {
+        addonRight && (
+          <ButtonAddonRight>
+            {addonRight}
+          </ButtonAddonRight>
+        )
+      }
     </ButtonRoot>
   )
 })

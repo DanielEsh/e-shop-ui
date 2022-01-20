@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { theme } from "../Theme";
+import styled from 'styled-components'
+import { theme } from '../Theme'
 
 export const BtnHover = styled.span`
     position: absolute;
@@ -40,7 +40,7 @@ export const RippleContainer = styled.div`
             transform: scale(2);
         }
     }
-`;
+`
 
 export const BtnText = styled.span`
     position: relative;
@@ -69,10 +69,10 @@ export const Btn = styled.button<{isRounded?: boolean}>`
     transform: translate3d(0,0,0);
     height: auto;
     border-radius: ${
-      ({isRounded}) => isRounded ?
-          '28px' :
-          '2px'
-    };
+  ({ isRounded }) => isRounded ?
+    '28px' :
+    '2px'
+};
     border: 1px solid;
     &.is-disabled {
         cursor: not-allowed;
@@ -257,16 +257,11 @@ export const Btn = styled.button<{isRounded?: boolean}>`
     }
 `
 
-
-
-
-
-
-
-
-
-
-export const ButtonRoot = styled('button')` 
+export const ButtonRoot = styled('button')`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   &.size { 
     &--medium {
       height: 44px;
@@ -287,4 +282,14 @@ export const ButtonRoot = styled('button')`
       line-height: 1.16;
     }
   }
+`
+
+export const ButtonAddonLeft = styled.span`
+  margin-right: 8px;
+  margin-left: -4px;
+`
+
+export const ButtonAddonRight = styled.span`
+  margin-left: 8px;
+  margin-right: -4px;
 `
