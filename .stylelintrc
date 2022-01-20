@@ -14,7 +14,7 @@
         "selector-no-vendor-prefix": true,
         "selector-pseudo-element-colon-notation": "single",
         "indentation": [
-            4,
+            2,
             {
                 "baseIndentLevel": 1
             }

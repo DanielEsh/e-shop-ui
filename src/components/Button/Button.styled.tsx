@@ -255,24 +255,36 @@ export const Btn = styled.button<{isRounded?: boolean}>`
             }
         }
     }
-    &.size {
-        &--medium {
-            height: 44px;
-            padding: 0 24px;
-            font-size: 16px;
-            line-height: 1;
-        }
-        &--large {
-            height: 54px;
-            padding: 0 40px;
-            font-size: 16px;
-            line-height: 1;
-        }
-        &--small {
-            height: 32px;
-            padding: 0 24px;
-            font-size: 14px;
-            line-height: 1.16;
-        }
+`
+
+
+
+
+
+
+
+
+
+
+export const ButtonRoot = styled('button')` 
+  &.size { 
+    &--medium {
+      height: 44px;
+      padding: 0 24px;
+      font-size: 16px;
+      line-height: 1;
     }
+    &--large {
+      height: 54px;
+      padding: 0 40px;
+      font-size: 16px;
+      line-height: 1;
+    }
+    &--small {
+      height: 32px;
+      padding: 0 24px;
+      font-size: 14px;
+      line-height: 1.16;
+    }
+  }
 `

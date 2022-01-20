@@ -1,4 +1,9 @@
 import { forwardRef, ReactNode } from 'react'
+import cn from 'classnames'
+
+import {
+  ButtonRoot,
+} from '@/components/Button/Button.styled'
 
 export type ButtonProps = {
     children: ReactNode
@@ -28,11 +33,23 @@ export type ButtonProps = {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     children,
+    color,
+    size = 'medium',
+    outline,
+    disabled,
   } = props
 
+  const classes = cn({
+    'is-disabled': disabled,
+    'is-outline': outline,
+  }, [`color--${color}`, `size--${size}`])
+
   return (
-    <button ref={ref}>
+    <ButtonRoot
+      ref={ref}
+      className={classes}
+    >
       {children}
-    </button>
+    </ButtonRoot>
   )
 })
