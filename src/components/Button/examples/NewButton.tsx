@@ -24,7 +24,11 @@ const NewButton = () => {
   return (
     <>
       <Container>
-        <Button size="small">
+        <Button
+          size="small"
+          id="4"
+          title="Button title"
+        >
           example button
         </Button>
         <Button
