@@ -14,7 +14,6 @@ export type ButtonProps = {
     color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark'
     size?: 'small' | 'medium' | 'large'
     type?: 'button' | 'submit'
-    outline?: boolean
     rounded?: boolean
     disabled?: boolean
     rippleEffect?: boolean
@@ -39,13 +38,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     addonRight,
     color,
     size = 'medium',
-    outline,
     disabled,
   } = props
 
   const classes = cn({
     'is-disabled': disabled,
-    'is-outline': outline,
   }, [`color--${color}`, `size--${size}`])
 
   return (

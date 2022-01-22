@@ -1,4 +1,5 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 import { Button } from '@/components/Button/Button'
 
@@ -25,9 +26,11 @@ const NewButton = () => {
     <>
       <Container>
         <Button
-          size="small"
-          id="4"
-          title="Button title"
+          onMouseEnter={action('onMouseEnter')}
+          onClick={action('onClick')}
+          onMouseLeave={action('onMouseLeave')}
+          onFocus={action('onFocus')}
+          onBlur={action('onBlur')}
         >
           example button
         </Button>
