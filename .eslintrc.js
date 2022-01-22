@@ -220,7 +220,7 @@ module.exports = {
     'react/jsx-indent': [2, 2],
     'react/jsx-indent-props': [2, 2],
     'react/jsx-key': 2,
-    'react/jsx-no-bind': 1,
+    'react/jsx-no-bind': 0,
     'react/jsx-no-duplicate-props': 2,
     'react/jsx-no-literals': 0,
     'react/jsx-no-undef': 2,
