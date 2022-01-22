@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { theme } from '../Theme'
+import { FillHover } from '@/components/FillHover'
 
 export const BtnHover = styled.span`
     position: absolute;
@@ -258,9 +259,12 @@ export const Btn = styled.button<{isRounded?: boolean}>`
 `
 
 export const ButtonRoot = styled('button')`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: color .8s ${theme.transition.default}, background-color .8s ${theme.transition.default}, border-color .8s ${theme.transition.default}, box-shadow .4s ${theme.transition.default};
+  overflow: hidden;
   
   &.size { 
     &--medium {
@@ -281,6 +285,14 @@ export const ButtonRoot = styled('button')`
       font-size: 14px;
       line-height: 1.16;
     }
+  }
+
+  &:hover ${FillHover} {
+    transform: scale(1) translate3d(-50%, -50%, 0);
+    width: 110%;
+    color: ${theme.colors.white};
+    background-color: ${theme.colors.blackHover};
+    border-color: ${theme.colors.blackHover};
   }
 `
 

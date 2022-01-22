@@ -1,5 +1,6 @@
 import { forwardRef, ReactNode } from 'react'
 import cn from 'classnames'
+import { useFillHover, FillHover } from '@/components/FillHover'
 
 import {
   ButtonRoot,
@@ -48,10 +49,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     'is-outline': outline,
   }, [`color--${color}`, `size--${size}`])
 
+  const { fillHoverStyles, onFillHover } = useFillHover()
+
+  const onMouseEnter = (event) => {
+    onFillHover(event)
+  }
+
   return (
     <ButtonRoot
       ref={ref}
       className={classes}
+      onMouseEnter={ onMouseEnter }
     >
       {
         addonLeft && (
@@ -70,6 +78,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
           </ButtonAddonRight>
         )
       }
+
+      <FillHover style={fillHoverStyles} />
     </ButtonRoot>
   )
 })
