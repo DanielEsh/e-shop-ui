@@ -26,6 +26,7 @@ const NewButton = () => {
     <>
       <Container>
         <Button
+          className="test"
           onMouseEnter={action('onMouseEnter')}
           onClick={action('onClick')}
           onMouseLeave={action('onMouseLeave')}

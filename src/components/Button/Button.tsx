@@ -37,14 +37,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     className,
     addonLeft,
     addonRight,
-    color,
+    color = 'primary',
     size = 'medium',
     disabled,
   } = props
 
-  const classes = cn({
-    'is-disabled': disabled,
-  }, [`color--${color}`, `size--${size}`])
+  const classes = cn(className, {
+    ['h-5 bg-blue-300 p-5']: size === 'medium',
+  })
 
   return (
     <ButtonRoot
