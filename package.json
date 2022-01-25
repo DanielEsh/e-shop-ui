@@ -38,9 +38,11 @@
         "@storybook/addon-essentials": "^6.4.13",
         "@storybook/addon-links": "^6.4.13",
         "@storybook/react": "^6.4.13",
+        "@tailwindcss/postcss7-compat": "^2.2.17",
         "@types/react": "^17.0.6",
         "@typescript-eslint/eslint-plugin": "^4.26.0",
         "@typescript-eslint/parser": "^4.26.0",
+        "autoprefixer": "^9",
         "babel-loader": "^8.2.2",
         "babel-plugin-styled-components": "^1.13.2",
         "eslint": "^7.27.0",
@@ -48,6 +50,7 @@
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-react": "^7.24.0",
         "eslint-plugin-react-hooks": "^4.3.0",
+        "postcss": "^7",
         "prettier": "^2.3.0",
         "pretty-quick": "^3.1.0",
         "rollup": "^2.49.0",
@@ -56,6 +59,7 @@
         "stylelint-config-recommended": "^5.0.0",
         "stylelint-config-styled-components": "^0.1.1",
         "stylelint-processor-styled-components": "^1.10.0",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat",
         "typescript": "^4.2.4"
     }
 }
