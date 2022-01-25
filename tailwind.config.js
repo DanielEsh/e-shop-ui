@@ -1,5 +1,6 @@
 module.exports = {
   content: ['./src/**/*.{tsx,ts}'],
+  darkMode: 'class',
   theme: {
     colors: {
       primary: {
@@ -28,6 +29,7 @@ module.exports = {
       warning: '#fbbf24',
       success: '#22c55e',
       danger: '#dc2626',
+      transparent: 'transparent',
     },
   },
   plugins: [],

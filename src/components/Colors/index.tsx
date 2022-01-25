@@ -1,7 +1,7 @@
 const Colors = () => (
   <div>
     <h2>Primary</h2>
-    <div className="bg-primary-500">colors</div>
+    <div className="bg-primary-500 dark:bg-gray-500">colors</div>
     <div className="bg-primary-400">colors</div>
     <div className="bg-primary-300">colors</div>
     <div className="bg-primary-200">colors</div>
