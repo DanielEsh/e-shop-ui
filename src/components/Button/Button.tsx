@@ -2,7 +2,6 @@ import { forwardRef, ReactNode } from 'react'
 import cn from 'classnames'
 
 import {
-  ButtonRoot,
   ButtonAddonLeft,
   ButtonAddonRight,
 } from '@/components/Button/Button.styled'
@@ -39,15 +38,26 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     addonRight,
     color = 'primary',
     size = 'medium',
-    disabled,
   } = props
 
-  const classes = cn(className, {
-    ['h-5 bg-blue-300 p-5']: size === 'medium',
-  })
+  const rootClasses = 'flex justify-center items-center rounded-md'
+
+  const colors = {
+    primary: 'bg-primary-500 text-white border border-primary-500',
+    dark: 'bg-dark-500 text-white border border-dark-500',
+    info: 'bg-gray-100 text-dark border border-gray-100',
+  }
+
+  const classes = cn(
+    className,
+    rootClasses,
+    colors[color],
+    {
+      ['h-5 bg-blue-300 p-5']: size === 'medium',
+    })
 
   return (
-    <ButtonRoot
+    <button
       ref={ref}
       {...props}
       className={classes}
@@ -69,6 +79,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
           </ButtonAddonRight>
         )
       }
-    </ButtonRoot>
+    </button>
   )
 })
