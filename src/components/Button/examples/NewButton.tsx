@@ -59,33 +59,33 @@ const NewButton = () => {
       <Container>
         <Button
           size="medium"
-          color="dark"
+          color="secondary"
         >
           example button
         </Button>
         <Button
           size="medium"
-          color="dark"
+          color="secondary"
           addonLeft={InfoCircleIcon()}
         >
           example button
         </Button>
         <Button
           size="medium"
-          color="dark"
+          color="secondary"
           addonRight={InfoCircleIcon()}
         >
           example button
         </Button>
         <Button
           size="medium"
-          color="dark"
+          color="secondary"
         >
           {InfoCircleIcon()}
         </Button>
         <Button
           size="medium"
-          color="dark"
+          color="secondary"
           disabled
         >
           disabled button
@@ -95,36 +95,54 @@ const NewButton = () => {
       <Container>
         <Button
           size="large"
-          color="info"
+          color="gray"
         >
           example button
         </Button>
         <Button
           size="large"
-          color="info"
+          color="gray"
           addonLeft={InfoCircleIcon()}
         >
           example button
         </Button>
         <Button
           size="large"
-          color="info"
+          color="gray"
           addonRight={InfoCircleIcon()}
         >
           example button
         </Button>
         <Button
           size="large"
-          color="info"
+          color="gray"
         >
           {InfoCircleIcon()}
         </Button>
         <Button
           size="large"
-          color="info"
+          color="gray"
           disabled
         >
           disabled button
+        </Button>
+      </Container>
+
+      <Container>
+        <Button
+          color="success"
+        >
+          success button
+        </Button>
+        <Button
+          color="warning"
+        >
+          warning button
+        </Button>
+        <Button
+          color="danger"
+        >
+          danger button
         </Button>
       </Container>
     </>

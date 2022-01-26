@@ -5,7 +5,7 @@ export type ButtonProps = {
     children: ReactNode
     addonLeft?: ReactNode
     addonRight?: ReactNode
-    color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'light' | 'dark'
+    color?: 'primary' | 'secondary' | 'gray' | 'success' | 'warning' | 'danger'
     size?: 'small' | 'medium' | 'large'
     type?: 'button' | 'submit'
     rounded?: boolean
@@ -36,12 +36,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     disabled,
   } = props
 
-  const rootClasses = 'flex justify-center items-center rounded-md'
+  const rootClasses = 'flex justify-center items-center border rounded-md focus:outline-none focus:ring'
 
   const colors = {
-    primary: 'bg-primary-500 text-white border border-primary-500',
-    dark: 'bg-dark-500 text-white border border-dark-500',
-    info: 'bg-gray-100 text-dark border border-gray-100',
+    primary: 'bg-primary-500 border-primary-500 text-white ring-offset-1 ring-primary-300',
+    secondary: `
+        bg-dark-500 text-white border-dark-500
+        dark:bg-light-500 dark:text-black dark:border-light-500
+        ring-offset-1 ring-dark-300`,
+    gray: 'bg-gray-100 text-black border-gray-100 ring-offset-1 ring-gray-300',
+    success: 'bg-success border-success text-white ring-offset-1 ring-success',
+    warning: 'bg-warning border-warning text-white ring-offset-1 ring-warning',
+    danger: 'bg-danger border-danger text-white ring-offset-1 ring-danger',
   }
 
   const sizes = {
