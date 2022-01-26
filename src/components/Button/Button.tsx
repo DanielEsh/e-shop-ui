@@ -48,12 +48,19 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     info: 'bg-gray-100 text-dark border border-gray-100',
   }
 
+  const sizes = {
+    small: 'py-1 px-2',
+    medium: 'py-2 px-4',
+    large: 'py-4 px-8',
+  }
+
   const classes = cn(
     className,
     rootClasses,
     colors[color],
+    sizes[size],
     {
-      ['h-5 bg-blue-300 p-5']: size === 'medium',
+      // ['h-5 bg-blue-300 p-5']: size === 'medium',
     })
 
   return (
