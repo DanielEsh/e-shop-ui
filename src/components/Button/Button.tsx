@@ -1,11 +1,6 @@
 import { forwardRef, ReactNode } from 'react'
 import cn from 'classnames'
 
-import {
-  ButtonAddonLeft,
-  ButtonAddonRight,
-} from '@/components/Button/Button.styled'
-
 export type ButtonProps = {
     children: ReactNode
     addonLeft?: ReactNode
@@ -71,9 +66,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     >
       {
         addonLeft && (
-          <ButtonAddonLeft>
+          <span className="mx-1 mr-2">
             {addonLeft}
-          </ButtonAddonLeft>
+          </span>
         )
       }
 
@@ -81,9 +76,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
 
       {
         addonRight && (
-          <ButtonAddonRight>
+          <span className="mx-1 ml-2">
             {addonRight}
-          </ButtonAddonRight>
+          </span>
         )
       }
     </button>
