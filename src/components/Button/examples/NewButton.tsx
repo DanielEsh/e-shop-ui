@@ -51,6 +51,9 @@ const NewButton = () => {
         <Button size="small">
           {InfoCircleIcon()}
         </Button>
+        <Button size="small" disabled>
+          disabled button
+        </Button>
       </Container>
 
       <Container>
@@ -80,6 +83,13 @@ const NewButton = () => {
         >
           {InfoCircleIcon()}
         </Button>
+        <Button
+          size="medium"
+          color="dark"
+          disabled
+        >
+          disabled button
+        </Button>
       </Container>
 
       <Container>
@@ -108,6 +118,13 @@ const NewButton = () => {
           color="info"
         >
           {InfoCircleIcon()}
+        </Button>
+        <Button
+          size="large"
+          color="info"
+          disabled
+        >
+          disabled button
         </Button>
       </Container>
     </>

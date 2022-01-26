@@ -33,6 +33,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     addonRight,
     color = 'primary',
     size = 'medium',
+    disabled,
   } = props
 
   const rootClasses = 'flex justify-center items-center rounded-md'
@@ -55,7 +56,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     colors[color],
     sizes[size],
     {
-      // ['h-5 bg-blue-300 p-5']: size === 'medium',
+      [' opacity-70 cursor-not-allowed']: disabled,
     })
 
   return (
