@@ -1,7 +1,9 @@
-import { forwardRef, ReactNode } from 'react'
+import { forwardRef, ReactNode, useRef, useState } from 'react'
 import cn from 'classnames'
 
 import { Loader } from '@/components/Loader/Loader'
+
+import './ripple.css'
 
 export type ButtonProps = {
     children: ReactNode
@@ -39,7 +41,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     disabled,
   } = props
 
-  const rootClasses = 'flex justify-center items-center border rounded-md focus:outline-none focus:ring'
+  const rootClasses = 'relative flex justify-center items-center border rounded-md focus:outline-none focus:ring overflow-hidden'
 
   const colors = {
     primary: 'bg-primary-500 border-primary-500 text-white ring-offset-1 ring-primary-300',
@@ -59,6 +61,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     large: 'py-4 px-8',
   }
 
+  const [ripple, setRipple] = useState(false)
+
+  const rf = useRef({
+    x: 0,
+    y: 0,
+  })
+
   const classes = cn(
     className,
     rootClasses,
@@ -68,11 +77,30 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
       [' opacity-70 cursor-not-allowed']: disabled,
     })
 
+  const handleClick = (e) => {
+    const x = e.clientX
+    const y = e.clientY
+
+    const bt = e.target.offsetTop
+    const bl = e.target.offsetLeft
+
+    rf.current = {
+      x: x - bl,
+      y: y - bt,
+    }
+    setRipple(true)
+
+    setTimeout(() => {
+      setRipple(false)
+    }, 500)
+  }
+
   return (
     <button
       ref={ref}
       {...props}
       className={classes}
+      onClick={handleClick}
     >
       {
         !loading && addonLeft && (
@@ -81,6 +109,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
           </span>
         )
       }
+
+      { ripple && <div className="ripple" style={{ top: rf.current.y, left: rf.current.x }} />}
 
       {!loading && children}
 

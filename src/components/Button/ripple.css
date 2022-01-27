@@ -1,0 +1,16 @@
+.ripple {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: scale .5s ease-out;
+}
+
+@keyframes scale {
+    to {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
+}
