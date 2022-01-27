@@ -10,6 +10,7 @@ export const BtnHover = styled.span`
     width: 100%;
     padding-top: 100%;
     border-radius: 200px;
+    background-color: blue;
     transform: scale(0) translate3d(-50%, -50%, 0);
     backface-visibility: hidden;
     transition: transform .4s ${theme.transition.default},

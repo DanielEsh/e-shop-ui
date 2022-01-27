@@ -14,3 +14,41 @@
         opacity: 0;
     }
 }
+
+.button:before {
+    content: '';
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: blue;
+    transition: width .5s, height .5s;
+}
+
+.button:hover::before {
+    width: 500px;
+    height: 500px;
+}
+
+/*.button:hover .hover {*/
+/*    transform: scale(1) translate3d(-50%, -50%, 0);*/
+/*    width: 110%;*/
+/*}*/
+
+/*.hover {*/
+/*    position: absolute;*/
+/*    z-index: 1;*/
+/*    left: 50%;*/
+/*    top: 50%;*/
+/*    width: 100%;*/
+/*    padding-top: 100%;*/
+/*    border-radius: 200px;*/
+/*    background-color: blue;*/
+/*    border: 1px solid blue;*/
+/*    transform: scale(0) translate3d(-50%, -50%, 0);*/
+/*    backface-visibility: hidden;*/
+/*    transition: transform .4s ease-out, background-color .8s ease-out, border-color .8s ease-out;*/
+/*}*/

@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode, useRef, useState } from 'react'
+import React, { forwardRef, ReactNode, useRef, useState } from 'react'
 import cn from 'classnames'
 
 import { Loader } from '@/components/Loader/Loader'
@@ -61,14 +61,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     large: 'py-4 px-8',
   }
 
+  const defaultCoords = {
+    x: 50,
+    y: 50,
+  }
+
   const [ripple, setRipple] = useState(false)
+  const [hoverPosition, setHoverPosition] = useState(0)
 
   const rf = useRef({
     x: 0,
     y: 0,
   })
 
+  const btn = useRef(null)
+
   const classes = cn(
+    'button',
     className,
     rootClasses,
     colors[color],
@@ -95,12 +104,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     }, 500)
   }
 
+  const handleMouseEnter = (event) => {
+    const x = event.pageX - btn.current.offsetLeft
+    const y = event.pageY - btn.current.offsetTop
+
+    btn.current.style.setProperty('--x', x + 'px')
+    btn.current.style.setProperty('--y', y + 'px')
+  }
+
   return (
     <button
-      ref={ref}
+      ref={btn}
       {...props}
       className={classes}
       onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
     >
       {
         !loading && addonLeft && (
@@ -110,7 +128,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
         )
       }
 
-      { ripple && <div className="ripple" style={{ top: rf.current.y, left: rf.current.x }} />}
+      <div
+        className="hover"
+      />
+
+      { ripple && <div className="ripple" key={hoverPosition} style={{ top: rf.current.y, left: rf.current.x }} />}
 
       {!loading && children}
 
