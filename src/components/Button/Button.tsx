@@ -1,6 +1,8 @@
 import { forwardRef, ReactNode } from 'react'
 import cn from 'classnames'
 
+import { Loader } from '@/components/Loader/Loader'
+
 export type ButtonProps = {
     children: ReactNode
     addonLeft?: ReactNode
@@ -33,6 +35,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     addonRight,
     color = 'primary',
     size = 'medium',
+    loading,
     disabled,
   } = props
 
@@ -72,17 +75,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
       className={classes}
     >
       {
-        addonLeft && (
+        !loading && addonLeft && (
           <span className="mx-1 mr-2">
             {addonLeft}
           </span>
         )
       }
 
-      {children}
+      {!loading && children}
 
       {
-        addonRight && (
+        loading && <Loader />
+      }
+
+      {
+        !loading && addonRight && (
           <span className="mx-1 ml-2">
             {addonRight}
           </span>

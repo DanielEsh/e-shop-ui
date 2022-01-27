@@ -116,6 +116,7 @@ const NewButton = () => {
         <Button
           size="large"
           color="gray"
+          loading
         >
           {InfoCircleIcon()}
         </Button>
