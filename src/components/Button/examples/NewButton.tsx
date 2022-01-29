@@ -145,6 +145,11 @@ const NewButton = () => {
         >
           danger button
         </Button>
+        <Button
+          href="test"
+        >
+          link button
+        </Button>
       </Container>
     </>
   )

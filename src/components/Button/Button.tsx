@@ -30,9 +30,10 @@ export type ButtonProps = {
     id?: string
     title?: string
     role?: string
+    href?: string
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, innerRef) => {
+export const Button = forwardRef<HTMLElement, ButtonProps>((props, innerRef) => {
   const {
     children,
     className,
@@ -44,6 +45,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, innerRe
     disabled,
     onClick,
     onMouseLeave,
+    href,
   } = props
 
   const rootClasses = 'relative flex justify-center items-center border rounded-md overflow-hidden ripple-hover__container focus:outline-none focus:ring '
@@ -65,6 +67,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, innerRe
 
   const defaultRef = useRef<HTMLButtonElement>(null)
   const mergedRefs = useMergedRef(innerRef, defaultRef)
+
+  const Tag = href ? 'a' : 'button'
 
   const classes = cn(
     'button',
@@ -90,7 +94,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, innerRe
   }
 
   return (
-    <button
+    <Tag
       ref={mergedRefs}
       {...props}
       className={classes}
@@ -123,6 +127,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, innerRe
           </span>
         )
       }
-    </button>
+    </Tag>
   )
 })
