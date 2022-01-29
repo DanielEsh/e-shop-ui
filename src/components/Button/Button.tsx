@@ -5,6 +5,7 @@ import { Loader } from '@/components/Loader/Loader'
 
 import { useRipple, RippleContainer } from '@/components/Ripple'
 import { useRippleHover, RippleHover } from '@/components/RippleHover'
+import { useMergedRef } from '@/hooks/useMergeRef'
 
 import './ripple.css'
 
@@ -12,12 +13,12 @@ export type ButtonProps = {
     children: ReactNode
     addonLeft?: ReactNode
     addonRight?: ReactNode
+    className?: string
     color?: 'primary' | 'secondary' | 'gray' | 'success' | 'warning' | 'danger'
     size?: 'small' | 'medium' | 'large'
     type?: 'button' | 'submit'
-    rounded?: boolean
+    outline?: boolean
     disabled?: boolean
-    rippleEffect?: boolean
     loading?: boolean
     onMouseDown?: () => void
     onMouseUp?: () => void
@@ -26,13 +27,12 @@ export type ButtonProps = {
     onClick?: () => void
     onFocus?: () => void
     onBlur?: () => void
-    className?: string
     id?: string
     title?: string
     role?: string
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, innerRef) => {
   const {
     children,
     className,
@@ -50,10 +50,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
 
   const colors = {
     primary: 'bg-primary-500 border-primary-500 text-white ring-offset-1 ring-primary-300',
-    secondary: `
-        bg-dark-500 text-white border-dark-500
-        dark:bg-light-500 dark:text-black dark:border-light-500
-        ring-offset-1 ring-dark-300`,
+    secondary: 'bg-dark-500 text-white border-dark-500 dark:bg-light-500 dark:text-black dark:border-light-500 ring-offset-1 ring-dark-300',
     gray: 'bg-gray-100 text-black border-gray-100 ring-offset-1 ring-gray-300',
     success: 'bg-success border-success text-white ring-offset-1 ring-success',
     warning: 'bg-warning border-warning text-white ring-offset-1 ring-warning',
@@ -66,7 +63,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     large: 'py-4 px-8',
   }
 
-  const btn = useRef(null)
+  const defaultRef = useRef<HTMLButtonElement>(null)
+  const mergedRefs = useMergedRef(innerRef, defaultRef)
 
   const classes = cn(
     'button',
@@ -79,7 +77,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     })
 
   const { applyRippleEffect, ripplePosition } = useRipple()
-  const { applyRippleHover } = useRippleHover(btn)
+  const { applyRippleHover } = useRippleHover(defaultRef)
 
   const handleClick = (event) => {
     applyRippleEffect(event)
@@ -93,7 +91,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
 
   return (
     <button
-      ref={btn}
+      ref={mergedRefs}
       {...props}
       className={classes}
       onClick={handleClick}
