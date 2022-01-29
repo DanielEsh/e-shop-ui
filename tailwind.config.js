@@ -37,6 +37,21 @@ module.exports = {
       success: '#22c55e',
       danger: '#dc2626',
       transparent: 'transparent',
+      currentColor: 'currentColor',
+    },
+    scale: {
+      '0': '0',
+    },
+    keyframes: {
+      ripple: {
+        to: {
+          opacity: '0',
+          transform: 'scale(2)',
+        },
+      },
+    },
+    animation: {
+      ripple: 'ripple .8s ease-in-out',
     },
   },
   plugins: [],

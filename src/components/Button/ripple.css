@@ -1,11 +1,16 @@
 .ripple {
     position: absolute;
+    top: var(--y);
+    left: var(--x);
     width: 100%;
     height: 100%;
     background: red;
     border-radius: 50%;
     transform: translate(-50%, -50%) scale(0);
     animation: scale .5s ease-out;
+}
+.my-scale-0 {
+    transform: scale(0);
 }
 
 @keyframes scale {
