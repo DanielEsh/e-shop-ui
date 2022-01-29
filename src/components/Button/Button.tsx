@@ -4,6 +4,7 @@ import cn from 'classnames'
 import { Loader } from '@/components/Loader/Loader'
 
 import { useRipple, RippleContainer } from '@/components/Ripple'
+import { useRippleHover, RippleHover } from '@/components/RippleHover'
 
 import './ripple.css'
 
@@ -42,9 +43,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     loading,
     disabled,
     onClick,
+    onMouseLeave,
   } = props
 
-  const rootClasses = 'relative flex justify-center items-center border rounded-md focus:outline-none focus:ring overflow-hidden'
+  const rootClasses = 'relative flex justify-center items-center border rounded-md overflow-hidden ripple-hover__container focus:outline-none focus:ring '
 
   const colors = {
     primary: 'bg-primary-500 border-primary-500 text-white ring-offset-1 ring-primary-300',
@@ -77,6 +79,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     })
 
   const { applyRippleEffect, ripplePosition } = useRipple()
+  const { applyRippleHover } = useRippleHover(btn)
 
   const handleClick = (event) => {
     applyRippleEffect(event)
@@ -84,11 +87,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
   }
 
   const handleMouseEnter = (event) => {
-    const x = event.pageX - btn.current.offsetLeft
-    const y = event.pageY - btn.current.offsetTop
-
-    btn.current.style.setProperty('--x', x + 'px')
-    btn.current.style.setProperty('--y', y + 'px')
+    applyRippleHover(event)
+    if (onMouseLeave) onMouseLeave()
   }
 
   return (
@@ -101,19 +101,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     >
       {
         !loading && addonLeft && (
-          <span className="mx-1 mr-2">
+          <span className="z-10 mx-1 mr-2">
             {addonLeft}
           </span>
         )
       }
 
-      <div
-        className="hover"
-      />
+      { !disabled && <RippleHover /> }
+      { !disabled && <RippleContainer ripples={ripplePosition} />}
 
-      <RippleContainer ripples={ripplePosition} />
-
-      {!loading && children}
+      {!loading && (
+        <span className="z-10">{children}</span>
+      )}
 
       {
         loading && <Loader />
@@ -121,7 +120,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
 
       {
         !loading && addonRight && (
-          <span className="mx-1 ml-2">
+          <span className="z-10 mx-1 ml-2">
             {addonRight}
           </span>
         )
