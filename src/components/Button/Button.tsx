@@ -47,6 +47,15 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, innerRef) => 
     onClick,
     onMouseLeave,
     href,
+    id,
+    title,
+    role,
+    onBlur,
+    onFocus,
+    onMouseDown,
+    onMouseUp,
+    onMouseEnter,
+    type,
   } = props
 
   const rootClasses = 'relative flex justify-center items-center border rounded-md overflow-hidden ripple-hover__container focus:outline-none focus:ring '
@@ -100,16 +109,25 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, innerRef) => 
 
   const handleMouseEnter = (event) => {
     applyRippleHover(event)
-    if (onMouseLeave) onMouseLeave()
+    if (onMouseEnter) onMouseEnter()
   }
 
   return (
     <Tag
       ref={mergedRefs}
-      {...props}
+      href={href}
+      title={title}
+      role={role}
+      id={id}
+      type={type}
       className={classes}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+      onBlur={onBlur}
+      onFocus={onFocus}
     >
       {
         !loading && addonLeft && (
