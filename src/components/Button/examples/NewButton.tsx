@@ -151,6 +151,42 @@ const NewButton = () => {
           link button
         </Button>
       </Container>
+      <Container>
+        <Button
+          outline
+          size="large"
+        >
+          outline button
+        </Button>
+        <Button
+          outline
+          color="secondary"
+          size="large"
+        >
+          outline button
+        </Button>
+        <Button
+          outline
+          color="gray"
+          size="large"
+        >
+          outline button
+        </Button>
+        <Button
+          outline
+          color="success"
+          size="large"
+        >
+          outline button
+        </Button>
+        <Button
+          outline
+          color="danger"
+          size="large"
+        >
+          outline button
+        </Button>
+      </Container>
     </>
   )
 }

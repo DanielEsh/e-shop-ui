@@ -40,6 +40,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, innerRef) => 
     addonLeft,
     addonRight,
     color = 'primary',
+    outline,
     size = 'medium',
     loading,
     disabled,
@@ -59,6 +60,14 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, innerRef) => 
     danger: 'bg-danger border-danger text-white ring-offset-1 ring-danger',
   }
 
+  const outlineColors = {
+    primary: 'bg-white border-primary-500 text-black',
+    secondary: 'bg-white border-dark-500 text-black dark:bg-dark-500 dark:text-white dark:border-light-500',
+    gray: 'bg-white border-gray-100 text-dark',
+    success: 'bg-white border-success text-success',
+    danger: 'bg-white border-danger text-danger',
+  }
+
   const sizes = {
     small: 'py-1 px-2',
     medium: 'py-2 px-4',
@@ -74,10 +83,11 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, innerRef) => 
     'button',
     className,
     rootClasses,
-    colors[color],
     sizes[size],
     {
       [' opacity-70 cursor-not-allowed']: disabled,
+      [colors[color]]: !outline,
+      [outlineColors[color]]: outline,
     })
 
   const { applyRippleEffect, ripplePosition } = useRipple()
