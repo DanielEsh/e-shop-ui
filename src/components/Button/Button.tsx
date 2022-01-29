@@ -137,7 +137,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, innerRef) => 
         )
       }
 
-      { !disabled && <RippleHover /> }
+      { !disabled && <RippleHover color={color} /> }
       { !disabled && <RippleContainer ripples={ripplePosition} />}
 
       {!loading && (
