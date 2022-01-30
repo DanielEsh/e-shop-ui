@@ -181,6 +181,13 @@ const NewButton = () => {
         >
           outline button
         </Button>
+        <Button
+          outline
+          color="ghost"
+          size="large"
+        >
+          ghost button
+        </Button>
       </Container>
     </>
   )
