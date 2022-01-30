@@ -189,6 +189,13 @@ const NewButton = () => {
           ghost button
         </Button>
       </Container>
+      <div className="w-96 h-24 bg-gray-100">
+        <Button
+          size="block"
+        >
+          ghost button
+        </Button>
+      </div>
     </>
   )
 }

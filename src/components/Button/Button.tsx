@@ -15,7 +15,7 @@ export type ButtonProps = {
     addonRight?: ReactNode
     className?: string
     color?: 'primary' | 'secondary' | 'gray' | 'success' | 'error' | 'ghost'
-    size?: 'small' | 'medium' | 'large'
+    size?: 'small' | 'medium' | 'large' | 'block'
     type?: 'button' | 'submit'
     outline?: boolean
     disabled?: boolean
@@ -81,6 +81,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, innerRef) => 
     small: 'py-1 px-2',
     medium: 'py-2 px-4',
     large: 'py-4 px-8',
+    block: 'w-full h-full',
   }
 
   const defaultRef = useRef<HTMLButtonElement>(null)
