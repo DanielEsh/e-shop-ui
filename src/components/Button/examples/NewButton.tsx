@@ -136,14 +136,9 @@ const NewButton = () => {
           success button
         </Button>
         <Button
-          color="warning"
+          color="error"
         >
-          warning button
-        </Button>
-        <Button
-          color="danger"
-        >
-          danger button
+          error button
         </Button>
         <Button
           href="test"
@@ -181,7 +176,7 @@ const NewButton = () => {
         </Button>
         <Button
           outline
-          color="danger"
+          color="error"
           size="large"
         >
           outline button

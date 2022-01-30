@@ -5,9 +5,8 @@ export const RippleHover = ({ color }) => {
     primary: 'bg-primary-200',
     secondary: 'bg-dark-300',
     gray: 'bg-gray-300',
-    success: '',
-    warning: '',
-    danger: '',
+    success: 'bg-success-400',
+    error: 'bg-error-400',
   }
 
   const classes = cn(

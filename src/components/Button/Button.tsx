@@ -14,7 +14,7 @@ export type ButtonProps = {
     addonLeft?: ReactNode
     addonRight?: ReactNode
     className?: string
-    color?: 'primary' | 'secondary' | 'gray' | 'success' | 'warning' | 'danger'
+    color?: 'primary' | 'secondary' | 'gray' | 'success' | 'error'
     size?: 'small' | 'medium' | 'large'
     type?: 'button' | 'submit'
     outline?: boolean
@@ -61,12 +61,11 @@ export const Button = forwardRef<HTMLElement, ButtonProps>((props, innerRef) => 
   const rootClasses = 'relative flex justify-center items-center border rounded-md overflow-hidden ripple-hover__container focus:outline-none focus:ring '
 
   const colors = {
-    primary: 'bg-primary-500 border-primary-500 text-white ring-offset-1 ring-primary-300',
+    primary: 'bg-primary-500 border-primary-500 text-black ring-offset-1 ring-primary-300',
     secondary: 'bg-dark-500 text-white border-dark-500 dark:bg-light-500 dark:text-black dark:border-light-500 ring-offset-1 ring-dark-300',
     gray: 'bg-gray-100 text-black border-gray-100 ring-offset-1 ring-gray-300',
-    success: 'bg-success border-success text-white ring-offset-1 ring-success',
-    warning: 'bg-warning border-warning text-white ring-offset-1 ring-warning',
-    danger: 'bg-danger border-danger text-white ring-offset-1 ring-danger',
+    success: 'bg-success-500 border-success-500 text-white ring-offset-1 ring-success-500',
+    error: 'bg-error-500 border-error-500 text-white ring-offset-1 ring-error-500',
   }
 
   const outlineColors = {
