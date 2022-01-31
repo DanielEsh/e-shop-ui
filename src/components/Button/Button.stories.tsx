@@ -1,19 +1,14 @@
-import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
-import { Button, ButtonProps } from './index'
+import { Button } from '@/components/Button'
 
 export default {
   title: 'Components/Button',
   component: Button,
-  argTypes: {
-    onClick: {
-      action: 'clicked',
-    },
-  },
 } as Meta
 
-export { default as Default } from './examples/Default'
-export { default as Dark } from './examples/Dark'
-export { default as SuccessLarge } from './examples/SuccessLarge'
-export { default as Disabled } from './examples/Disabled'
+export { default as Default } from './__examples__/Default'
+export { default as SizesColors } from './__examples__/Sizes&Colors'
+export { default as CustomClassNames } from './__examples__/CustomClassNames'
+export { default as Outline } from './__examples__/Outline'
+export { default as Global } from './__examples__/Global'
