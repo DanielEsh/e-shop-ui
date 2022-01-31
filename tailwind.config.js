@@ -44,6 +44,14 @@ module.exports = {
       transparent: 'transparent',
       currentColor: 'currentColor',
     },
+    fontSize: {
+      h1: '80px',
+      h2: '60px',
+      h3: '40px',
+      h4: '20px',
+      h5: '16px',
+      h6: '14px',
+    },
     scale: {
       '0': '0',
     },
