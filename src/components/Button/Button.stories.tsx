@@ -1,7 +1,7 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react'
 
-import { Button, ButtonProps } from './index'
+import { Button, ButtonProps } from '@/components/Button'
 
 export default {
   title: 'Components/Button',
@@ -13,8 +13,4 @@ export default {
   },
 } as Meta
 
-export { default as Default } from './examples/Default'
-export { default as Dark } from './examples/Dark'
-export { default as SuccessLarge } from './examples/SuccessLarge'
-export { default as Disabled } from './examples/Disabled'
 export { default as NewButton } from './examples/NewButton'
