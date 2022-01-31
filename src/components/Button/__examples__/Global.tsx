@@ -1,15 +1,4 @@
-import React from 'react'
-import { action } from '@storybook/addon-actions'
-import styled from 'styled-components'
-import { Button } from '@/components/Button/Button'
-
-const Container = styled.div`
-  display: flex;
-  
-  button {
-    margin: 10px;
-  }
-`
+import { Button } from '@/components/Button'
 
 const InfoCircleIcon = () => {
   return (
@@ -21,183 +10,127 @@ const InfoCircleIcon = () => {
   )
 }
 
-const NewButton = () => {
+const Global = () => {
   return (
-    <>
-      <Container>
-        <Button
-          className="test"
-          size="small"
-          onMouseEnter={action('onMouseEnter')}
-          onClick={action('onClick')}
-          onMouseLeave={action('onMouseLeave')}
-          onFocus={action('onFocus')}
-          onBlur={action('onBlur')}
-        >
+    <div>
+      <h2>Primary Buttons</h2>
+      <div className="flex gap-6">
+        <Button>
           example button
         </Button>
         <Button
-          size="small"
           addonLeft={InfoCircleIcon()}
         >
           example button
         </Button>
         <Button
-          size="small"
           addonRight={InfoCircleIcon()}
         >
           example button
         </Button>
-        <Button size="small">
+        <Button>
           {InfoCircleIcon()}
         </Button>
-        <Button size="small" disabled>
+        <Button disabled>
           disabled button
         </Button>
-      </Container>
+      </div>
 
-      <Container>
+      <h2>Secondary Buttons</h2>
+      <div className="flex gap-6">
         <Button
-          size="medium"
           color="secondary"
         >
           example button
         </Button>
         <Button
-          size="medium"
           color="secondary"
           addonLeft={InfoCircleIcon()}
         >
           example button
         </Button>
         <Button
-          size="medium"
           color="secondary"
           addonRight={InfoCircleIcon()}
         >
           example button
         </Button>
         <Button
-          size="medium"
           color="secondary"
         >
           {InfoCircleIcon()}
         </Button>
         <Button
-          size="medium"
           color="secondary"
           disabled
         >
           disabled button
         </Button>
-      </Container>
+      </div>
 
-      <Container>
+      <h2>Gray Buttons</h2>
+      <div className="flex gap-6">
         <Button
-          size="large"
           color="gray"
         >
           example button
         </Button>
         <Button
-          size="large"
           color="gray"
           addonLeft={InfoCircleIcon()}
         >
           example button
         </Button>
         <Button
-          size="large"
           color="gray"
           addonRight={InfoCircleIcon()}
         >
           example button
         </Button>
         <Button
-          size="large"
           color="gray"
-          loading
         >
           {InfoCircleIcon()}
         </Button>
         <Button
-          size="large"
           color="gray"
           disabled
         >
           disabled button
         </Button>
-      </Container>
+      </div>
 
-      <Container>
+      <h2>Utils Buttons</h2>
+      <div className="flex gap-6">
         <Button
           color="success"
         >
-          success button
+          example button
         </Button>
         <Button
           color="error"
         >
-          error button
+          example button
         </Button>
         <Button
-          href="test"
+          href="/url"
         >
           link button
         </Button>
-      </Container>
-      <Container>
         <Button
-          outline
-          size="large"
-        >
-          outline button
-        </Button>
-        <Button
-          outline
-          color="secondary"
-          size="large"
-        >
-          outline button
-        </Button>
-        <Button
-          outline
-          color="gray"
-          size="large"
-        >
-          outline button
-        </Button>
-        <Button
-          outline
-          color="success"
-          size="large"
-        >
-          outline button
-        </Button>
-        <Button
-          outline
-          color="error"
-          size="large"
-        >
-          outline button
-        </Button>
-        <Button
-          outline
           color="ghost"
-          size="large"
         >
           ghost button
         </Button>
-      </Container>
-      <div className="w-96 h-24 bg-gray-100">
         <Button
-          size="block"
+          loading
         >
-          ghost button
+          loading button
         </Button>
       </div>
-    </>
+
+    </div>
   )
 }
 
-export default NewButton
+export default Global
