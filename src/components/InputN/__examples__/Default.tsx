@@ -3,7 +3,11 @@ import { Input } from '@/components/InputN'
 
 const Default = () => {
   return (
-    <Input value="test" />
+    <Input
+      id="1"
+      label="Label"
+      value="test"
+    />
   )
 }
 

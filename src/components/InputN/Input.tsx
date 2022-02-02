@@ -21,10 +21,20 @@ export type InputProps = {
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
     value = '',
+    label = '',
     type = 'text',
+    id,
   } = props
 
   return (
-    <input type={type} ref={ref} value={value} />
+    <div>
+      <label htmlFor={id}>{label}</label>
+      <input
+        ref={ref}
+        id={id}
+        type={type}
+        value={value}
+      />
+    </div>
   )
 })
