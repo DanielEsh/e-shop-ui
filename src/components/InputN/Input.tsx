@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import cn from 'classnames'
 
 export type InputProps = {
@@ -28,10 +28,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     id,
   } = props
 
+  const [inputValue, setInputValue] = useState<string | number>('')
+
   const classes = cn(
     className,
     'relative w-full h-12 border rounded-md',
   )
+
+  useEffect(() => {
+    setInputValue(value)
+  }, [])
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value)
+  }
 
   return (
     <div className={classes}>
@@ -46,7 +56,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         ref={ref}
         id={id}
         type={type}
-        value={value}
+        value={inputValue}
+        onChange={handleChange}
       />
     </div>
   )
