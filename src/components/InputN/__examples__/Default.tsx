@@ -3,11 +3,13 @@ import { Input } from '@/components/InputN'
 
 const Default = () => {
   return (
-    <Input
-      id="1"
-      label="Label"
-      value="test"
-    />
+    <div className="w-64">
+      <Input
+        id="1"
+        label="Label"
+        value="test"
+      />
+    </div>
   )
 }
 

@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import cn from 'classnames'
 
 export type InputProps = {
     className?: string
@@ -20,16 +21,28 @@ export type InputProps = {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
+    className,
     value = '',
     label = '',
     type = 'text',
     id,
   } = props
 
+  const classes = cn(
+    className,
+    'relative w-full h-12 border rounded-md',
+  )
+
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
+    <div className={classes}>
+      <label
+        className="absolute left-0"
+        htmlFor={id}
+      >
+        {label}
+      </label>
       <input
+        className="w-full h-11 px-4 border-none focus:outline-none"
         ref={ref}
         id={id}
         type={type}
