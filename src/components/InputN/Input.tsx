@@ -1,17 +1,30 @@
-import { forwardRef, ReactNode } from 'react'
+import { forwardRef } from 'react'
 
 export type InputProps = {
-    children: ReactNode,
+    className?: string
+    color?: 'primary' | 'secondary' | 'gray' | 'success' | 'error'
+    value?: string | number
+    label?: string
+    placeholder?: string
+    disabled?: boolean
+    readonly?: boolean
+    required?: boolean
+    onClick?: () => void
+    onChange?: () => void
+    onFocus?: () => void
+    onBlur?: () => void
+    name?: string
+    id?: string
+    type?: string
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
-    children,
+    value = '',
+    type = 'text',
   } = props
 
   return (
-    <div ref={ref}>
-      {children}
-    </div>
+    <input type={type} ref={ref} value={value} />
   )
 })
