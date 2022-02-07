@@ -28,6 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     label = '',
     type = 'text',
     placeholder = '',
+    disabled,
     id,
   } = props
 
@@ -36,6 +37,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const classes = cn(
     className,
     'relative w-full h-12 border rounded-md',
+    {
+      ['pointer-events-none opacity-50']: disabled,
+    },
   )
 
   useEffect(() => {
@@ -54,8 +58,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         id={id}
         type={type}
         value={inputValue}
-        onChange={handleChange}
         placeholder={placeholder}
+        disabled={disabled}
+        onChange={handleChange}
       />
 
       <label
