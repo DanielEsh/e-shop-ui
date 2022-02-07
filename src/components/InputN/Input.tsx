@@ -10,7 +10,7 @@ export type InputProps = {
     label?: string
     placeholder?: string
     disabled?: boolean
-    readonly?: boolean
+    readOnly?: boolean
     errorField?: string | number
     onClick?: () => void
     onChange?: (event) => void
@@ -30,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     type = 'text',
     placeholder = '',
     disabled,
-    readonly,
+    readOnly,
     errorField,
     onClick,
     onChange,
@@ -65,7 +65,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   )
 
   const handleChange = (event) => {
-    if (readonly) return
+    if (readOnly) return
     setInputValue(event.target.value)
     if (onChange) onChange(event)
   }
@@ -80,7 +80,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           type={type}
           name={name}
           value={inputValue}
-          placeholder={placeholder}
+          placeholder={placeholder ? placeholder : label}
+          readOnly={readOnly}
           disabled={disabled}
           onChange={handleChange}
           onClick={onClick}
@@ -92,7 +93,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           className={labelClasses}
           htmlFor={id}
         >
-          {placeholder}
+          {label}
         </label>
       </div>
       {

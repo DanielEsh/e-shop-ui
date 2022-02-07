@@ -7,14 +7,14 @@ const Default = () => {
       <div className="w-64">
         <Input
           id="1"
-          placeholder="Label"
+          label="Label"
           value=""
         />
       </div>
       <div className="w-64 mt-4">
         <Input
           id="2"
-          placeholder="Label"
+          label="Label"
           value=""
           disabled
         />
@@ -22,9 +22,9 @@ const Default = () => {
       <div className="w-64 mt-4">
         <Input
           id="3"
-          placeholder="Label"
+          label="Label"
           value="12321"
-          readonly
+          readOnly
         />
       </div>
     </div>
