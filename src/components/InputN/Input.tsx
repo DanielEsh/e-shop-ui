@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from 'react'
+import { forwardRef, useState } from 'react'
 import cn from 'classnames'
 
 import './Input.css'
@@ -30,17 +30,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     placeholder = '',
     disabled,
     readonly,
+      required,
     id,
   } = props
 
   const [inputValue, setInputValue] = useState<string | number>(value)
 
-  const classes = cn(
+  const rootClasses = cn(
     className,
     'relative w-full h-12 border rounded-md',
     {
       ['pointer-events-none opacity-50']: disabled,
     },
+  )
+
+  const inputClasses = cn(
+    'input w-full h-11 px-4 border-none rounded-md placeholder-transparent focus:outline-none',
   )
 
   const handleChange = (event) => {
@@ -49,9 +54,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   }
 
   return (
-    <div className={classes}>
+    <div className={rootClasses}>
       <input
-        className="input w-full h-11 px-4 border-none rounded-md placeholder-transparent focus:outline-none"
+        className={inputClasses}
         ref={ref}
         id={id}
         type={type}
