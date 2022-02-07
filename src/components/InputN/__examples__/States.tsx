@@ -4,7 +4,23 @@ import { Input } from '@/components/InputN'
 const States = () => {
   return (
     <div>
-      <div className="w-64">
+      <div className="w-64 mt-4">
+        <Input
+          id="2"
+          label="Label"
+          value=""
+          disabled
+        />
+      </div>
+      <div className="w-64 mt-4">
+        <Input
+          id="3"
+          label="Label"
+          value="12321"
+          readOnly
+        />
+      </div>
+      <div className="w-64 mt-4">
         <Input
           id="1"
           label="Label"

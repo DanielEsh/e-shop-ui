@@ -1,5 +1,5 @@
-import React from 'react'
 import { Input } from '@/components/InputN'
+import { action } from '@storybook/addon-actions'
 
 const Default = () => {
   return (
@@ -10,22 +10,10 @@ const Default = () => {
           label="Label"
           value=""
           color="primary"
-        />
-      </div>
-      <div className="w-64 mt-4">
-        <Input
-          id="2"
-          label="Label"
-          value=""
-          disabled
-        />
-      </div>
-      <div className="w-64 mt-4">
-        <Input
-          id="3"
-          label="Label"
-          value="12321"
-          readOnly
+          onChange={action('onChange')}
+          onClick={action('onClick')}
+          onFocus={action('onFocus')}
+          onBlur={action('onBlur')}
         />
       </div>
     </div>
