@@ -9,6 +9,8 @@ const States = () => {
           id="1"
           placeholder="Label"
           value=""
+          error
+          errorField="Поле обязательно для заполнения"
         />
       </div>
       <div className="w-64 mt-4">
