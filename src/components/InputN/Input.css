@@ -1,0 +1,12 @@
+.label {
+    transition: transform .3s;
+}
+
+.input:focus ~ .label {
+    transform: translateY(-1.25rem);
+}
+
+.input:not(:placeholder-shown) ~ .label  {
+    transform: translateY(-1.25rem);
+}
+
