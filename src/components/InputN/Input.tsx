@@ -1,7 +1,8 @@
-import { forwardRef, useState, ReactNode } from 'react'
+import { forwardRef, ReactNode, useState, useEffect, useRef } from 'react'
 import cn from 'classnames'
 
 import './Input.css'
+import {useMergedRef} from "@/hooks/useMergeRef";
 
 export type InputProps = {
     className?: string
@@ -16,6 +17,7 @@ export type InputProps = {
     onChange?: (event) => void
     onFocus?: () => void
     onBlur?: () => void
+    autoFocus?: boolean
     name?: string
     id?: string
     type?: string
@@ -37,12 +39,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     onChange,
     onFocus,
     onBlur,
+    autoFocus,
     id,
     name,
     icon,
   } = props
 
   const [inputValue, setInputValue] = useState<string | number>(value)
+
+  const defaultInputRef = useRef<HTMLInputElement>(null)
+
+  const mergedRefs = useMergedRef(ref, defaultInputRef)
 
   const rootClasses = cn(
     className,
@@ -73,12 +80,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     if (onChange) onChange(event)
   }
 
+  useEffect(() => {
+    if (autoFocus && defaultInputRef) {
+      defaultInputRef.current.focus()
+    }
+  }, [])
+
   return (
     <>
       <div className={rootClasses}>
         <input
           className={inputClasses}
-          ref={ref}
+          ref={mergedRefs}
           id={id}
           type={type}
           name={name}
@@ -107,6 +120,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           {label}
         </label>
       </div>
+
       {
         color === 'error' && errorField && (
           <div className="text-h6 text-error-500">
