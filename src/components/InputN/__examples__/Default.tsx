@@ -13,10 +13,18 @@ const Default = () => {
       </div>
       <div className="w-64 mt-4">
         <Input
-          id="1"
+          id="2"
           placeholder="Label"
           value=""
           disabled
+        />
+      </div>
+      <div className="w-64 mt-4">
+        <Input
+          id="3"
+          placeholder="Label"
+          value="12321"
+          readonly
         />
       </div>
     </div>

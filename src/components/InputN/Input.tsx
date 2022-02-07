@@ -29,10 +29,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     type = 'text',
     placeholder = '',
     disabled,
+    readonly,
     id,
   } = props
 
-  const [inputValue, setInputValue] = useState<string | number>('')
+  const [inputValue, setInputValue] = useState<string | number>(value)
 
   const classes = cn(
     className,
@@ -42,11 +43,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     },
   )
 
-  useEffect(() => {
-    setInputValue(value)
-  }, [])
-
   const handleChange = (event) => {
+    if (readonly) return
     setInputValue(event.target.value)
   }
 
