@@ -9,6 +9,7 @@ const Default = () => {
           id="1"
           label="Label"
           value=""
+          color="primary"
         />
       </div>
       <div className="w-64 mt-4">

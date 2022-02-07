@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef, useState, ReactNode } from 'react'
 import cn from 'classnames'
 
 import './Input.css'
@@ -19,6 +19,7 @@ export type InputProps = {
     name?: string
     id?: string
     type?: string
+    icon?: ReactNode
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -38,6 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     onBlur,
     id,
     name,
+    icon,
   } = props
 
   const [inputValue, setInputValue] = useState<string | number>(value)
@@ -49,11 +51,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       ['pointer-events-none opacity-50']: disabled,
       ['border-error-500']: color === 'error',
       ['border-success-500']: color === 'success',
+      ['border-primary-500']: color === 'primary',
     },
   )
 
   const inputClasses = cn(
-    'input w-full h-11 px-4 border-none rounded-md placeholder-transparent focus:outline-none',
+    'input w-full h-full px-4 border-none rounded-md placeholder-transparent focus:outline-none',
   )
 
   const labelClasses = cn(
@@ -88,6 +91,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           onFocus={onFocus}
           onBlur={onBlur}
         />
+
+        {
+          icon && (
+            <div className="absolute top-1/2 right-4 w-5 h-5 transform -translate-y-1/2">
+              {icon}
+            </div>
+          )
+        }
 
         <label
           className={labelClasses}
