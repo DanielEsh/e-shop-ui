@@ -13,7 +13,7 @@ export type InputProps = {
     readonly?: boolean
     errorField?: string | number
     onClick?: () => void
-    onChange?: () => void
+    onChange?: (event) => void
     onFocus?: () => void
     onBlur?: () => void
     name?: string
@@ -32,7 +32,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     disabled,
     readonly,
     errorField,
+    onClick,
+    onChange,
+    onFocus,
+    onBlur,
     id,
+    name,
   } = props
 
   const [inputValue, setInputValue] = useState<string | number>(value)
@@ -62,6 +67,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const handleChange = (event) => {
     if (readonly) return
     setInputValue(event.target.value)
+    if (onChange) onChange(event)
   }
 
   return (
@@ -72,10 +78,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           ref={ref}
           id={id}
           type={type}
+          name={name}
           value={inputValue}
           placeholder={placeholder}
           disabled={disabled}
           onChange={handleChange}
+          onClick={onClick}
+          onFocus={onFocus}
+          onBlur={onBlur}
         />
 
         <label
