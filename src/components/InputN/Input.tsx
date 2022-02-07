@@ -1,6 +1,8 @@
 import { forwardRef, useEffect, useState } from 'react'
 import cn from 'classnames'
 
+import './Input.css'
+
 export type InputProps = {
     className?: string
     color?: 'primary' | 'secondary' | 'gray' | 'success' | 'error'
@@ -25,6 +27,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     value = '',
     label = '',
     type = 'text',
+    placeholder = '',
     id,
   } = props
 
@@ -45,20 +48,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
   return (
     <div className={classes}>
-      <label
-        className="absolute left-0"
-        htmlFor={id}
-      >
-        {label}
-      </label>
       <input
-        className="w-full h-11 px-4 border-none focus:outline-none"
+        className="input w-full h-11 px-4 border-none rounded-md placeholder-transparent focus:outline-none"
         ref={ref}
         id={id}
         type={type}
         value={inputValue}
         onChange={handleChange}
+        placeholder={placeholder}
       />
+
+      <label
+        className="label absolute top-2 left-4 bg-white"
+        htmlFor={id}
+      >
+        {placeholder}
+      </label>
     </div>
   )
 })

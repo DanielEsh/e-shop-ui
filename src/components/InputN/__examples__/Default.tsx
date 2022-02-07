@@ -6,8 +6,8 @@ const Default = () => {
     <div className="w-64">
       <Input
         id="1"
-        label="Label"
-        value="test"
+        placeholder="Label"
+        value=""
       />
     </div>
   )

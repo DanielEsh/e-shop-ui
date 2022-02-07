@@ -52,9 +52,6 @@ module.exports = {
       h5: '16px',
       h6: '14px',
     },
-    scale: {
-      '0': '0',
-    },
     keyframes: {
       ripple: {
         to: {
@@ -65,6 +62,11 @@ module.exports = {
     },
     animation: {
       ripple: 'ripple .8s ease-in-out',
+    },
+    extend: {
+      translate: {
+        '2.5': '-1.25rem',
+      },
     },
   },
   plugins: [],
