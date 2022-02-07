@@ -9,7 +9,7 @@ const States = () => {
           id="1"
           placeholder="Label"
           value=""
-          error
+          color="error"
           errorField="Поле обязательно для заполнения"
         />
       </div>

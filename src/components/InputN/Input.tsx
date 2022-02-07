@@ -11,7 +11,6 @@ export type InputProps = {
     placeholder?: string
     disabled?: boolean
     readonly?: boolean
-    error?: boolean
     errorField?: string | number
     success?: boolean
     successField?: string | number,
@@ -27,13 +26,13 @@ export type InputProps = {
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
     className,
+    color,
     value = '',
     label = '',
     type = 'text',
     placeholder = '',
     disabled,
     readonly,
-    error,
     errorField,
     id,
   } = props
@@ -45,7 +44,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     'relative w-full h-12 border rounded-md',
     {
       ['pointer-events-none opacity-50']: disabled,
-      ['border-error-500']: error,
+      ['border-error-500']: color === 'error',
     },
   )
 
@@ -56,7 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const labelClasses = cn(
     'label absolute top-2 left-4 bg-white',
     {
-      ['text-error-500']: error,
+      ['text-error-500']: color === 'error',
     },
   )
 
@@ -87,7 +86,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         </label>
       </div>
       {
-        error && errorField && (
+        color === 'error' && errorField && (
           <div className="text-h6 text-error-500">
             {errorField}
           </div>
