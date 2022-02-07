@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import styled from 'styled-components';
 
 import {Tooltip} from '../index';
-import {Button} from '../../Button';
+import {Button} from '../../_new/Button';
 
 const TooltipContent = styled('div')`
     width: 256px;

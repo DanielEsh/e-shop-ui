@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react'
 
-import { Input } from '@/components/InputN'
+import { Input } from './index'
 
 export default {
   title: 'Forms/Input',

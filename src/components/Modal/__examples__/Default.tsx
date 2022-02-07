@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Modal} from '../index';
 import styled from 'styled-components';
 import { Transition } from '../../Transitions/Transition';
-import { Button } from '../../Button';
+import { Button } from '../../_new/Button';
 
 const ModalAside = styled('div')`
     position: absolute;

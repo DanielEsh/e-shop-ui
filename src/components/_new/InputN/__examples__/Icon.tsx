@@ -1,4 +1,4 @@
-import { Input } from '@/components/InputN'
+import { Input } from '@/components/_new/InputN'
 
 const Content = () => {
   return (

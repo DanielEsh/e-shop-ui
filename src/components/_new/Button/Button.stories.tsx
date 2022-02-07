@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react'
 
-import { Button } from '@/components/Button'
+import { Button } from './index'
 
 export default {
   title: 'Components/Button',

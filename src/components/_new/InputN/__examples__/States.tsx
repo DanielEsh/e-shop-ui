@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input } from '@/components/InputN'
+import { Input } from '@/components/_new/InputN'
 
 const States = () => {
   return (
