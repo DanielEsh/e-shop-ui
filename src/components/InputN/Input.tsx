@@ -12,8 +12,6 @@ export type InputProps = {
     disabled?: boolean
     readonly?: boolean
     errorField?: string | number
-    success?: boolean
-    successField?: string | number,
     onClick?: () => void
     onChange?: () => void
     onFocus?: () => void
@@ -45,6 +43,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     {
       ['pointer-events-none opacity-50']: disabled,
       ['border-error-500']: color === 'error',
+      ['border-success-500']: color === 'success',
     },
   )
 
@@ -56,6 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     'label absolute top-2 left-4 bg-white',
     {
       ['text-error-500']: color === 'error',
+      ['text-success-500']: color === 'success',
     },
   )
 

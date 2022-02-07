@@ -18,7 +18,7 @@ const States = () => {
           id="2"
           placeholder="Label"
           value=""
-          disabled
+          color="success"
         />
       </div>
     </div>
