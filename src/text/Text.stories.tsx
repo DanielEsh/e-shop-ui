@@ -1,14 +1,14 @@
 import React from 'react'
 import { Meta } from '@storybook/react'
 
-import Fonts from './Fonts'
+import Text from './Text'
 
 export default {
-  title: 'Fonts',
-  component: Fonts,
+  title: 'Text',
+  component: Text,
 } as Meta
 
-const Template = (args) => <Fonts { ...args } />
+const Template = (args) => <Text { ...args } />
 
 export const All = Template.bind({})
 All.args = {}

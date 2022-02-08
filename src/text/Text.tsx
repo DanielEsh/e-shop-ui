@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Fonts = () => {
+const Text = () => {
   return (
     <div>
       <h1 className="text-h1">h1</h1>
@@ -9,10 +9,12 @@ const Fonts = () => {
       <h4 className="text-h4">h4</h4>
       <h5 className="text-h5">h5</h5>
       <h6 className="text-h6">h6</h6>
-      <p>Title</p>
-      <p>Subtitle</p>
+      <div className="mt-10">
+        <p>Title</p>
+        <p>Subtitle</p>
+      </div>
     </div>
   )
 }
 
-export default Fonts
+export default Text
