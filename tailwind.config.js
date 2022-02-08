@@ -39,6 +39,10 @@ module.exports = {
         '400': '#ef4444',
         '500': '#dc2626',
       },
+      link: {
+        '500': '#1890ff',
+        '400': '#40a9ff',
+      },
       white: '#fff',
       black: '#000',
       transparent: 'transparent',

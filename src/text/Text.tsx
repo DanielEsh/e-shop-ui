@@ -11,6 +11,15 @@ const Text = () => {
         <p>Title</p>
         <p>Subtitle</p>
       </div>
+
+      <div className="mt-10">
+        <p className="text-h4 text-primary-500">Colors (Primary)</p>
+        <p className="text-h4 text-dark-500 dark:text-light-500">Colors (Secondary)</p>
+        <p className="text-h4 text-gray-500">Colors (Gray)</p>
+        <p className="text-h4 text-success-500">Colors (Success)</p>
+        <p className="text-h4 text-error-500">Colors (Error)</p>
+        <p className="text-h4 text-link-500">Colors (Error)</p>
+      </div>
     </div>
   )
 }
