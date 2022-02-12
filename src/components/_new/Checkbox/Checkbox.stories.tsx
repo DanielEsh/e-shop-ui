@@ -8,3 +8,4 @@ export default {
 } as Meta
 
 export { default as Default } from './__examples__/Default'
+export { default as SizeColors } from './__examples__/SizeColors'
