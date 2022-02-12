@@ -17,10 +17,21 @@ export interface CheckboxProps {
     name?: string
 }
 
-const Icon = () => {
+const Icon = (size) => {
+  const sizes = {
+    small: 'w-2 h-2',
+    medium: 'w-5 h-5',
+    large: 'w-6 h-6',
+  }
+
+  const classes = cn(
+    'absolute top-1/2 left-1/2 transform -translate-y-2/4 -translate-x-2/4',
+    sizes[size],
+  )
+
   return (
     <svg
-      className="absolute top-1/2 left-1/2 transform -translate-y-2/4 -translate-x-2/4 w-6 h-6"
+      className={classes}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 12 8"
     >
@@ -38,7 +49,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
   const {
     children,
     className,
-    color,
+    color = 'primary',
+    size = 'medium',
     onChange,
     onClick,
     onFocus,
@@ -70,11 +82,18 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     }),
   }
 
+  const sizes = {
+    small: 'w-4 h-4',
+    medium: 'w-6 h-6',
+    large: 'w-8 h-8',
+  }
+
   const rootClasses = cn('group relative inline-flex items-center', className)
 
   const checkboxClasses = cn(
-    'relative block w-8 h-8 border rounded-md',
+    'relative block border rounded-md',
     colors[color],
+    sizes[size],
   )
 
   return (
