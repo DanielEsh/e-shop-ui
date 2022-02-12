@@ -3,19 +3,32 @@ import { Checkbox } from '@/components/_new/Checkbox'
 const SizeColors = () => {
   return (
     <div className="flex">
-      <Checkbox>
+      <Checkbox
+        className="mr-4"
+        color="primary"
+      >
         small primary
       </Checkbox>
-      <Checkbox>
+      <Checkbox
+        className="mr-4"
+        color="secondary"
+      >
         small secondary
       </Checkbox>
-      <Checkbox>
+      <Checkbox
+        className="mr-4"
+        color="gray"
+      >
         small gray
       </Checkbox>
-      <Checkbox>
+      <Checkbox
+        className="mr-4"
+        color="gray">
         small success
       </Checkbox>
-      <Checkbox>
+      <Checkbox
+        className="mr-4"
+        color="gray">
         small error
       </Checkbox>
     </div>

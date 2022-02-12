@@ -37,6 +37,7 @@ const Icon = () => {
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const {
     children,
+      className,
     onChange,
     onClick,
     onFocus,
@@ -50,6 +51,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     if (onChange) onChange(isChecked)
   }
 
+  const rootClasses = cn('group relative inline-flex items-center', className)
+
   const checkboxClasses = cn(
     'relative block w-8 h-8 border bg-white rounded-md group-hover:bg-primary-500 group-hover:border-primary-500',
     {
@@ -58,7 +61,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
 
   return (
     <label
-      className="group relative inline-flex items-center"
+      className={rootClasses}
     >
       <span className={checkboxClasses}>
         {
