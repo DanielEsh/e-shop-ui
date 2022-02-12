@@ -23,12 +23,12 @@ const SizeColors = () => {
       </Checkbox>
       <Checkbox
         className="mr-4"
-        color="gray">
+        color="success">
         small success
       </Checkbox>
       <Checkbox
         className="mr-4"
-        color="gray">
+        color="error">
         small error
       </Checkbox>
     </div>
