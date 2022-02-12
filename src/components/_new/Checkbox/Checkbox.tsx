@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef } from 'react'
+import { ReactNode, forwardRef, useState } from 'react'
 
 export interface CheckboxProps {
     children: ReactNode
@@ -38,15 +38,22 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     children,
   } = props
 
+  const [isChecked, setIsChanged] = useState<boolean>(false)
+
+  const handleChange = () => {
+    setIsChanged(!isChecked)
+  }
+
   return (
     <label className="flex">
       <span className="relative inline-flex items-center">
-        <span className="relative block w-8 h-8 border bg-primary-500">
+        <span className="relative block w-8 h-8 border bg-primary-500 rounded-md">
           <Icon />
           <input
             ref={ref}
             type="checkbox"
-            className="hidden"
+            className="absolute top-0 left-0 opacity-1"
+            onChange={handleChange}
           />
         </span>
         <span className="ml-2 select-none">
