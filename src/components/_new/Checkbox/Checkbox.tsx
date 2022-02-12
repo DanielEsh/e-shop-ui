@@ -17,15 +17,26 @@ export interface CheckboxProps {
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
+  const {
+    children,
+  } = props
+
   return (
-    <div className="flex items-center">
-      <input
-        ref={ref}
-        type="checkbox"
-      />
-      <div>
-        {props.children}
-      </div>
-    </div>
+    <label className="flex">
+      <span className="relative inline-flex items-center">
+        <span className="relative block w-8 h-8 border">
+          <input
+            ref={ref}
+            type="checkbox"
+            className="hidden"
+          />
+        </span>
+        <span className="ml-2 select-none">
+          {children}
+        </span>
+      </span>
+    </label>
   )
 })
+
+Checkbox.displayName = 'Checkbox'
