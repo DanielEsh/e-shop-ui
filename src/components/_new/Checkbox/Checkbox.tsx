@@ -57,6 +57,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     onClick,
     onFocus,
     onBlur,
+    id,
+    name,
   } = props
 
   const [isChecked, setIsChanged] = useState<boolean>(false)
@@ -112,6 +114,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
   return (
     <label
       className={rootClasses}
+      role="checkbox"
     >
       <span className={checkboxClasses}>
         {
@@ -119,6 +122,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
         }
         <input
           ref={ref}
+          id={id}
+          name={name}
           type="checkbox"
           className="absolute top-0 left-0 opacity-0"
           onClick={onClick}
