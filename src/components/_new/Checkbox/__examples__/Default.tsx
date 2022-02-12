@@ -1,9 +1,15 @@
 import { Checkbox } from '@/components/_new/Checkbox'
+import { action } from '@storybook/addon-actions'
 
 const Default = () => {
   return (
     <div>
-      <Checkbox>
+      <Checkbox
+        onClick={action('onClick')}
+        onChange={action('onChange')}
+        onFocus={action('onFocus')}
+        onBlur={action('onBlur')}
+      >
         checkbox
       </Checkbox>
     </div>

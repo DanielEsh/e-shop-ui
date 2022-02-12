@@ -37,12 +37,17 @@ const Icon = () => {
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const {
     children,
+    onChange,
+    onClick,
+    onFocus,
+    onBlur,
   } = props
 
   const [isChecked, setIsChanged] = useState<boolean>(false)
 
   const handleChange = () => {
     setIsChanged(!isChecked)
+    if (onChange) onChange(isChecked)
   }
 
   const checkboxClasses = cn(
@@ -52,7 +57,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     })
 
   return (
-    <label className="group relative inline-flex items-center">
+    <label
+      className="group relative inline-flex items-center"
+    >
       <span className={checkboxClasses}>
         {
           isChecked && <Icon />
@@ -61,8 +68,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
           ref={ref}
           type="checkbox"
           className="absolute top-0 left-0 opacity-0"
+          onClick={onClick}
           checked={isChecked}
           onChange={handleChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
         />
       </span>
       <span className="ml-2 select-none">
