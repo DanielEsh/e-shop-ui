@@ -45,14 +45,16 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
   }
 
   return (
-    <label className="flex">
+    <label className="group flex">
       <span className="relative inline-flex items-center">
-        <span className="relative block w-8 h-8 border bg-primary-500 rounded-md">
-          <Icon />
+        <span className="relative block w-8 h-8 border bg-white rounded-md group-hover:bg-primary-500">
+          {
+            isChecked && <Icon />
+          }
           <input
             ref={ref}
             type="checkbox"
-            className="absolute top-0 left-0 opacity-1"
+            className="absolute top-0 left-0 opacity-0"
             onChange={handleChange}
           />
         </span>
