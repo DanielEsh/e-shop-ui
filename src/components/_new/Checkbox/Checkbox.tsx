@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef, useState } from 'react'
+import { ReactNode, forwardRef, useState, useEffect } from 'react'
 import cn from 'classnames'
 
 export interface CheckboxProps {
@@ -52,6 +52,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     color = 'primary',
     size = 'medium',
     disabled,
+    checked,
     onChange,
     onClick,
     onFocus,
@@ -65,6 +66,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     setIsChanged(!isChecked)
     if (onChange) onChange(isChecked)
   }
+
+  useEffect(() => {
+    if (checked) {
+      setIsChanged(true)
+    }
+  }, [])
 
   const colors = {
     primary: cn('bg-transparent border-primary-500 group-hover:bg-primary-500 ', {
