@@ -51,6 +51,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     className,
     color = 'primary',
     size = 'medium',
+    disabled,
     onChange,
     onClick,
     onFocus,
@@ -60,6 +61,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
   const [isChecked, setIsChanged] = useState<boolean>(false)
 
   const handleChange = () => {
+    if (disabled) return
     setIsChanged(!isChecked)
     if (onChange) onChange(isChecked)
   }
@@ -88,7 +90,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     large: 'w-8 h-8',
   }
 
-  const rootClasses = cn('group relative inline-flex items-center', className)
+  const rootClasses = cn(
+    className,
+    'group relative inline-flex items-center', {
+      ['opacity-60 pointer-events-none']: disabled,
+    })
 
   const checkboxClasses = cn(
     'relative block border rounded-md',
