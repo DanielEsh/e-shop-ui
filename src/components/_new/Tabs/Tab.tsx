@@ -1,4 +1,4 @@
-export const Bar = ({ children }) => {
+export const Tab = ({ children }) => {
   return (
     <div>
       {children}
