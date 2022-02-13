@@ -1,13 +1,24 @@
 import {
   ReactNode,
+  ForwardRefExoticComponent,
+  RefAttributes,
   forwardRef,
 } from 'react'
+
+import { Bar } from '@/components/_new/Tabs/Bar'
 
 export type TabsProps = {
     children: ReactNode,
 }
 
-export const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
+interface ITabs
+    extends ForwardRefExoticComponent<
+        TabsProps & RefAttributes<HTMLDivElement>
+        > {
+  Bar: typeof Bar;
+}
+
+export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
   const {
     children,
   } = props
@@ -19,4 +30,9 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
   )
 })
 
-Tabs.displayName = 'Tabs'
+TabsRoot.displayName = 'Tabs'
+
+export const Tabs = {
+  ...TabsRoot,
+  Bar: Bar,
+} as ITabs

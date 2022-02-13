@@ -3,7 +3,8 @@ import { Tabs } from '@/components/_new/Tabs'
 const Default = () => {
   return (
     <Tabs>
-      tabs
+      <Tabs.Bar />
+      <Tabs.Bar />
     </Tabs>
   )
 }
