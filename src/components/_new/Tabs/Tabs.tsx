@@ -3,6 +3,7 @@ import {
   ForwardRefExoticComponent,
   RefAttributes,
   forwardRef,
+  createContext,
 } from 'react'
 
 import { Bar } from '@/components/_new/Tabs/Bar'
@@ -11,7 +12,11 @@ import { Panels } from '@/components/_new/Tabs/Panels'
 import { Panel } from '@/components/_new/Tabs/Panel'
 
 export type TabsProps = {
-    children: ReactNode,
+    children: ReactNode
+    direction?: 'vertical' | 'horizontal'
+    defaultIndex?: number
+    selectedIndex?: number
+    onChange: (index: number) => void
 }
 
 interface ITabs
@@ -24,15 +29,24 @@ interface ITabs
   Panel: typeof Panel;
 }
 
+const TabsContext = createContext(undefined)
+
 export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
   const {
     children,
   } = props
 
+  const context = {
+    open,
+  }
+
   return (
-    <div ref={ref}>
-      {children}
-    </div>
+    <TabsContext.Provider value={context}>
+      <div ref={ref}>
+        {children}
+      </div>
+    </TabsContext.Provider>
+
   )
 })
 
