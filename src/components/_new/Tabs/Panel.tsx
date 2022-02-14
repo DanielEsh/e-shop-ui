@@ -1,4 +1,4 @@
-export const Panel = ({ children }) => {
+export const Panel = ({ value, children }) => {
   return (
     <div>
       {children}

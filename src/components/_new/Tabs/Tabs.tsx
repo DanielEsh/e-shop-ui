@@ -4,6 +4,7 @@ import {
   RefAttributes,
   forwardRef,
   createContext,
+  useState,
 } from 'react'
 
 import { Bar } from '@/components/_new/Tabs/Bar'
@@ -14,9 +15,8 @@ import { Panel } from '@/components/_new/Tabs/Panel'
 export type TabsProps = {
     children: ReactNode
     direction?: 'vertical' | 'horizontal'
-    defaultIndex?: number
-    selectedIndex?: number
-    onChange: (index: number) => void
+    activeTab: number | string
+    onChange?: (index: number) => void
 }
 
 interface ITabs
@@ -32,12 +32,15 @@ interface ITabs
 const TabsContext = createContext(undefined)
 
 export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
+  const [tabs, setTabs] = useState(null)
+
   const {
     children,
   } = props
 
   const context = {
-    open,
+    tabs,
+    setTabs,
   }
 
   return (
