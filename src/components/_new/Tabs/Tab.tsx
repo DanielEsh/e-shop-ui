@@ -1,6 +1,12 @@
+import { useContext } from 'react'
+import { TabsContext } from '@/components/_new/Tabs/Tabs'
+
 export const Tab = ({ value, children }) => {
+  const { onChange } = useContext(TabsContext)
+
   const onClick = () => {
     console.log('tabClick', value)
+    onChange(value)
   }
 
   return (

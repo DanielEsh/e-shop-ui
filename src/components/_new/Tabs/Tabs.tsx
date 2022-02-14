@@ -29,18 +29,20 @@ interface ITabs
   Panel: typeof Panel;
 }
 
-const TabsContext = createContext(undefined)
+export const TabsContext = createContext(undefined)
 
 export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
-  const [tabs, setTabs] = useState(null)
+  // const [tabs, setTabs] = useState(null)
 
   const {
     children,
+    activeTab,
+    onChange,
   } = props
 
   const context = {
-    tabs,
-    setTabs,
+    activeTab,
+    onChange,
   }
 
   return (
