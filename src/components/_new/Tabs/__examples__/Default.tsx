@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Tabs } from '@/components/_new/Tabs'
 
 const Default = () => {
-  const [activeTab, setActiveTab] = useState('1')
+  const [activeTab, setActiveTab] = useState('2')
 
   const onChange = (index) => {
     setActiveTab(index)
@@ -24,17 +24,15 @@ const Default = () => {
           Trading
         </Tabs.Tab>
       </Tabs.Bar>
-      <Tabs.Panels>
-        <Tabs.Panel value="1">
-          Recent panel
-        </Tabs.Panel>
-        <Tabs.Panel value="2">
-          Popular panel
-        </Tabs.Panel>
-        <Tabs.Panel value="3">
-          Trading panel
-        </Tabs.Panel>
-      </Tabs.Panels>
+      <Tabs.Panel value="1">
+        Recent panel
+      </Tabs.Panel>
+      <Tabs.Panel value="2">
+        Popular panel
+      </Tabs.Panel>
+      <Tabs.Panel value="3">
+        Trading panel
+      </Tabs.Panel>
     </Tabs>
   )
 }
