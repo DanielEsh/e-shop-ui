@@ -9,31 +9,33 @@ const Default = () => {
   }
 
   return (
-    <Tabs
-      activeTab={activeTab}
-      onChange={onChange}
-    >
-      <Tabs.Bar>
-        <Tabs.Tab value="1">
-          Recent
-        </Tabs.Tab>
-        <Tabs.Tab value="2">
-          Popular
-        </Tabs.Tab>
-        <Tabs.Tab value="3">
-          Trading
-        </Tabs.Tab>
-      </Tabs.Bar>
-      <Tabs.Panel value="1">
-        Recent panel
-      </Tabs.Panel>
-      <Tabs.Panel value="2">
-        Popular panel
-      </Tabs.Panel>
-      <Tabs.Panel value="3">
-        Trading panel
-      </Tabs.Panel>
-    </Tabs>
+    <div className="max-w-md">
+      <Tabs
+        activeTab={activeTab}
+        onChange={onChange}
+      >
+        <Tabs.Bar>
+          <Tabs.Tab value="1">
+            Recent
+          </Tabs.Tab>
+          <Tabs.Tab value="2">
+            Popular
+          </Tabs.Tab>
+          <Tabs.Tab value="3">
+            Trading
+          </Tabs.Tab>
+        </Tabs.Bar>
+        <Tabs.Panel value="1">
+          Recent panel
+        </Tabs.Panel>
+        <Tabs.Panel value="2">
+          Popular panel
+        </Tabs.Panel>
+        <Tabs.Panel value="3">
+          Trading panel
+        </Tabs.Panel>
+      </Tabs>
+    </div>
   )
 }
 

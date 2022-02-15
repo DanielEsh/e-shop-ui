@@ -1,21 +1,38 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
+import cn from 'classnames'
+
 import { TabsContext } from '@/components/_new/Tabs/Tabs'
 
 export const Tab = ({ value, children }) => {
-  const { onChange } = useContext(TabsContext)
+  const [isActive, setIsActive] = useState<boolean>(false)
+  const { activeTab, onChange } = useContext(TabsContext)
+
+  const classes = cn(
+    'flex items-center justify-center w-full py-2.5 rounded-md',
+    {
+      [' bg-light-500']: isActive,
+    },
+  )
 
   const onClick = () => {
-    console.log('tabClick', value)
     onChange(value)
   }
 
+  const changeActiveTab = () => {
+    return value === activeTab
+  }
+
+  useEffect(() => {
+    setIsActive(changeActiveTab)
+  }, [activeTab])
+
   return (
-    <div
+    <button
       role="tab"
-      className="flex items-center justify-center w-full py-2.5 bg-gray-200 rounded-md"
+      className={classes}
       onClick={onClick}
     >
       {children}
-    </div>
+    </button>
   )
 }
