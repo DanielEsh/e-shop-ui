@@ -25,15 +25,17 @@ const Default = () => {
             Trading
           </Tabs.Tab>
         </Tabs.Bar>
-        <Tabs.Panel value="1">
-          Recent panel
-        </Tabs.Panel>
-        <Tabs.Panel value="2">
-          Popular panel
-        </Tabs.Panel>
-        <Tabs.Panel value="3">
-          Trading panel
-        </Tabs.Panel>
+        <div className="flex justify-center items-center max-w-md h-20 mt-4 bg-primary-500 rounded-md">
+          <Tabs.Panel value="1">
+            Recent panel
+          </Tabs.Panel>
+          <Tabs.Panel value="2">
+            Popular panel
+          </Tabs.Panel>
+          <Tabs.Panel value="3">
+            Trading panel
+          </Tabs.Panel>
+        </div>
       </Tabs>
     </div>
   )

@@ -8,9 +8,9 @@ export const Tab = ({ value, children }) => {
   const { activeTab, onChange } = useContext(TabsContext)
 
   const classes = cn(
-    'flex items-center justify-center w-full py-2.5 rounded-md',
+    'flex items-center justify-center w-full py-2.5 rounded-md hover:bg-light-300 transition duration-150 ease-out',
     {
-      [' bg-light-500']: isActive,
+      [' bg-light-500 hover:bg-light-500']: isActive,
     },
   )
 
