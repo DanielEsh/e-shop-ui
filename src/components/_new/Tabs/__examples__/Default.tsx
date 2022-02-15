@@ -21,7 +21,10 @@ const Default = () => {
           <Tabs.Tab value="2">
             Popular
           </Tabs.Tab>
-          <Tabs.Tab value="3">
+          <Tabs.Tab
+            value="3"
+            disabled
+          >
             Trading
           </Tabs.Tab>
         </Tabs.Bar>

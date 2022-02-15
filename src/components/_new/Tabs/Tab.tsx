@@ -1,9 +1,21 @@
-import { useContext, useState, useEffect } from 'react'
+import { ReactNode, FC, useContext, useState, useEffect } from 'react'
 import cn from 'classnames'
 
 import { TabsContext } from '@/components/_new/Tabs/Tabs'
 
-export const Tab = ({ value, children }) => {
+type TabProps = {
+  value: string | number
+  children: ReactNode
+  disabled?: boolean
+}
+
+export const Tab: FC<TabProps> = (props) => {
+  const {
+    value,
+    children,
+    disabled,
+  } = props
+
   const [isActive, setIsActive] = useState<boolean>(false)
   const { activeTab, onChange } = useContext(TabsContext)
 
@@ -11,10 +23,12 @@ export const Tab = ({ value, children }) => {
     'flex items-center justify-center w-full py-2.5 rounded-md hover:bg-light-300 transition duration-150 ease-out',
     {
       [' bg-light-500 hover:bg-light-500']: isActive,
+      ['opacity-60 cursor-not-allowed hover:bg-transparent']: disabled,
     },
   )
 
   const onClick = () => {
+    if (disabled) return
     onChange(value)
   }
 
