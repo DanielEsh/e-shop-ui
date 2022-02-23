@@ -14,6 +14,7 @@ export type TabsProps = {
     children: ReactNode
     direction?: 'vertical' | 'horizontal'
     activeTab: number | string
+    color?: 'primary' | 'secondary' | 'gray'
     onChange?: (index: number) => void
 }
 
@@ -35,11 +36,13 @@ export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
     children,
     activeTab,
     onChange,
+    color = 'primary',
   } = props
 
   const context = {
     activeTab,
     onChange,
+    color: color,
   }
 
   return (

@@ -17,13 +17,23 @@ export const Tab: FC<TabProps> = (props) => {
   } = props
 
   const [isActive, setIsActive] = useState<boolean>(false)
-  const { activeTab, onChange } = useContext(TabsContext)
+  const { activeTab, onChange, color } = useContext(TabsContext)
+
+  const colorsList = {
+    primary: 'text-white hover:text-primary-500',
+    secondary: 'text-white hover:text-light-300 dark:text-black',
+  }
+
+  const colorsActiveList = {
+    primary: 'text-black hover:text-black',
+    secondary: 'text-black dark:text-white',
+  }
 
   const classes = cn(
-    'flex items-center justify-center w-full py-2.5 transition duration-150 ease-out text-white z-10',
+    'flex items-center justify-center w-full py-2.5 transition duration-150 ease-out z-10',
     {
-      ['text-black hover:text-black']: isActive,
-      ['hover:text-primary-500']: !disabled,
+      [colorsActiveList[color]]: isActive,
+      [colorsList[color]]: !disabled,
       ['opacity-60 cursor-not-allowed hover:bg-transparent']: disabled,
     },
   )
@@ -31,6 +41,7 @@ export const Tab: FC<TabProps> = (props) => {
   const onClick = () => {
     if (disabled) return
     onChange(value)
+    console.log(color)
   }
 
   const changeActiveTab = () => {

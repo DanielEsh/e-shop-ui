@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect, useRef } from 'react'
+import cn from 'classnames'
 
 import { TabsContext } from '@/components/_new/Tabs/Tabs'
 import { Indicator } from '@/components/_new/Tabs/Indicator'
@@ -8,7 +9,17 @@ export const Bar = ({ children }) => {
   const barRef = useRef<HTMLDivElement>(null)
   const tabs = useRef<any>(null)
 
-  const { activeTab } = useContext(TabsContext)
+  const { activeTab, color } = useContext(TabsContext)
+
+  const colorsList = {
+    primary: 'bg-dark-500 ',
+    secondary: 'bg-dark-500  dark:bg-light-500',
+  }
+
+  const classes = cn(
+    'p-2 space-x-4 rounded-md',
+    colorsList[color],
+  )
 
   useEffect(() => {
     tabs.current = barRef.current.querySelectorAll('[role="tab"]')
@@ -29,7 +40,7 @@ export const Bar = ({ children }) => {
   return (
     <div
       ref={barRef}
-      className="p-2 space-x-4 bg-dark-500 rounded-md"
+      className={classes}
     >
       <div className="relative flex">
         {boundingActiveTab && <Indicator styles={styles} />}
