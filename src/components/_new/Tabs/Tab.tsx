@@ -20,10 +20,11 @@ export const Tab: FC<TabProps> = (props) => {
   const { activeTab, onChange } = useContext(TabsContext)
 
   const classes = cn(
-    'flex items-center justify-center w-full py-2.5 rounded-md hover:bg-light-300 transition duration-150 ease-out text-white hover:text-black',
+    'flex items-center justify-center w-full py-2.5 rounded-md hover:bg-light-300 transition duration-150 ease-out text-white',
     {
       [' bg-light-500 hover:bg-light-500 text-black']: isActive,
-      ['opacity-60 cursor-not-allowed hover:bg-transparent hover:text-white']: disabled,
+      ['hover:text-black']: !disabled,
+      ['opacity-60 cursor-not-allowed hover:bg-transparent']: disabled,
     },
   )
 
