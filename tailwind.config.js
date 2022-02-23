@@ -69,6 +69,9 @@ module.exports = {
       ripple: 'ripple .8s ease-in-out',
     },
     extend: {
+      spacing: {
+        '16px': '16px',
+      },
       translate: {
         '2.5': '-1.25rem',
       },
