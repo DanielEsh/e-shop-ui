@@ -23,7 +23,6 @@ const Default = () => {
           </Tabs.Tab>
           <Tabs.Tab
             value="3"
-            disabled
           >
             Trading
           </Tabs.Tab>

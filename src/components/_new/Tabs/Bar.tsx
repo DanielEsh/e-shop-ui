@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect, useRef } from 'react'
 import cn from 'classnames'
-
+import { focusElement } from '@/utils/focus-management'
 import { TabsContext } from '@/components/_new/Tabs/Tabs'
 import { Indicator } from '@/components/_new/Tabs/Indicator'
 
@@ -9,7 +9,7 @@ export const Bar = ({ children }) => {
   const barRef = useRef<HTMLDivElement>(null)
   const tabs = useRef<any>(null)
 
-  const { activeTab, color } = useContext(TabsContext)
+  const { activeTab, onChange, color } = useContext(TabsContext)
 
   const colorsList = {
     primary: 'bg-dark-500 ',
@@ -21,8 +21,39 @@ export const Bar = ({ children }) => {
     colorsList[color],
   )
 
+  let index = 0
+
+  const getNextFocusedNodeIndex = (direction: number) => {
+    index += direction
+    if (index > (tabs.current.length - 1)) index = 0
+    if (index < 0) index = tabs.current.length - 1
+
+    return index
+  }
+
+  const onKeyDown = (event) => {
+    let direction = 0
+    if (event.code === 'ArrowRight') {
+      direction += -1
+    }
+
+    if (event.code === 'ArrowLeft') {
+      direction += 1
+    }
+
+    const focusIndex = getNextFocusedNodeIndex(direction)
+
+    focusElement(tabs.current[focusIndex])
+  }
+
   useEffect(() => {
     tabs.current = barRef.current.querySelectorAll('[role="tab"]')
+    focusElement(tabs.current[activeTab])
+    window.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+    }
   }, [])
 
   useEffect(() => {
