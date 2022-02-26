@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { TabsContext } from '@/components/_new/Tabs/Tabs'
+import { TabsContext } from '@/components/Tabs/Tabs'
 
 export const Panel = ({ value, children }) => {
   const { activeTab } = useContext(TabsContext)

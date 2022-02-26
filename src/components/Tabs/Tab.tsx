@@ -1,7 +1,7 @@
 import { ReactNode, FC, useContext, useState, useEffect } from 'react'
 import cn from 'classnames'
 
-import { TabsContext } from '@/components/_new/Tabs/Tabs'
+import { TabsContext } from '@/components/Tabs/Tabs'
 
 type TabProps = {
   value: string | number

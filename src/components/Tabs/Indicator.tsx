@@ -1,7 +1,7 @@
 import { FC, CSSProperties, useContext } from 'react'
 import cn from 'classnames'
 
-import { TabsContext } from '@/components/_new/Tabs/Tabs'
+import { TabsContext } from '@/components/Tabs/Tabs'
 
 type IndicatorProps = {
     styles: CSSProperties

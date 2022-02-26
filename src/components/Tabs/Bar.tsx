@@ -2,8 +2,8 @@ import { useState, useContext, useEffect, useRef } from 'react'
 import cn from 'classnames'
 import { focusIn, Focus } from '@/utils/focus-management'
 import { keyList, isKeyCode } from '@/utils/isKeyCode'
-import { TabsContext } from '@/components/_new/Tabs/Tabs'
-import { Indicator } from '@/components/_new/Tabs/Indicator'
+import { TabsContext } from '@/components/Tabs/Tabs'
+import { Indicator } from '@/components/Tabs/Indicator'
 
 export const Bar = ({ children }) => {
   const [boundingActiveTab, setBoundingActiveTab] = useState(null)

@@ -6,9 +6,9 @@ import {
   createContext,
 } from 'react'
 
-import { Bar } from '@/components/_new/Tabs/Bar'
-import { Tab } from '@/components/_new/Tabs/Tab'
-import { Panel } from '@/components/_new/Tabs/Panel'
+import { Bar } from '@/components/Tabs/Bar'
+import { Tab } from '@/components/Tabs/Tab'
+import { Panel } from '@/components/Tabs/Panel'
 
 export type TabsProps = {
     children: ReactNode

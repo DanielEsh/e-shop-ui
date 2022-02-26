@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Tabs } from '@/components/_new/Tabs'
+import { Tabs } from '@/components/Tabs'
 
 const Direction = () => {
   const [activeTab, setActiveTab] = useState('1')
