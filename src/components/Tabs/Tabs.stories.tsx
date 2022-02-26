@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react'
 
-import { Tabs } from '@/components/_new/Tabs'
+import { Tabs } from './index'
 
 export default {
   title: 'Components/Tabs',
