@@ -31,12 +31,6 @@ export function useFocusTrap(active = true): (instance: HTMLElement | null) => v
 
           if (focusElement) {
             focusElement.focus()
-          } else if (process.env.NODE_ENV === 'development') {
-            // eslint-disable-next-line no-console
-            console.warn(
-              '[@mantine/hooks/use-focus-trap] Failed to find focusable element within provided node',
-              node,
-            )
           }
         }
 
@@ -44,9 +38,6 @@ export function useFocusTrap(active = true): (instance: HTMLElement | null) => v
         setTimeout(() => {
           if (node.ownerDocument) {
             processNode(node)
-          } else if (process.env.NODE_ENV === 'development') {
-            // eslint-disable-next-line no-console
-            console.warn('[@mantine/hooks/use-focus-trap] Ref node is not part of the dom', node)
           }
         })
 
