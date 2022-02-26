@@ -55,7 +55,7 @@ export const Tab: FC<TabProps> = (props) => {
   return (
     <button
       role="tab"
-      tabIndex={0}
+      tabIndex={isActive ? 0 : -1}
       className={classes}
       onClick={onClick}
       disabled={disabled}
