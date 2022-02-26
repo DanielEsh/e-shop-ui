@@ -1,0 +1,17 @@
+.my-scale-0 {
+    transform: scale(0);
+}
+
+.ripple-hover {
+    top: var(--y);
+    left: var(--x);
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    transition: width .5s ease-in-out, height .5s ease-in-out;
+}
+
+.ripple-hover__container:hover .ripple-hover {
+    width: 500px;
+    height: 500px;
+}

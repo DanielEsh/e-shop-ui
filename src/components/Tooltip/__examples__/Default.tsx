@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
 
 import {Tooltip} from '../index';
-import {Button} from '../../Button';
+import {Button} from '../../_new/Button';
 
 const Container = styled('div')`
     position: absolute;
