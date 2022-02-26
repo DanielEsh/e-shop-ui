@@ -16,7 +16,7 @@ export const Indicator: FC<IndicatorProps> = ({ styles }) => {
   }
 
   const classes = cn(
-    'absolute h-full rounded-md transition-all duration-300',
+    'absolute rounded-md transition-all duration-300',
     colorsList[color],
   )
 

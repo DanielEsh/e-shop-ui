@@ -10,7 +10,7 @@ export const Bar = ({ children }) => {
   const barRef = useRef<HTMLDivElement>(null)
   const tabs = useRef<any>(null)
 
-  const { activeTab, color } = useContext(TabsContext)
+  const { activeTab, color, direction } = useContext(TabsContext)
 
   const colorsList = {
     primary: 'bg-dark-500 ',
@@ -18,17 +18,33 @@ export const Bar = ({ children }) => {
   }
 
   const classes = cn(
-    'p-2 space-x-4 rounded-md',
+    'relative flex p-2 rounded-md',
     colorsList[color],
+    {
+      ['flex-row']: direction === 'horizontal',
+      ['flex-col']: direction === 'vertical',
+    },
   )
 
   const onKeyDown = (event) => {
-    if (isKeyCode(event.code, [keyList.LEFT])) {
-      return focusIn(barRef.current, Focus.Previous | Focus.WrapAround)
+    if (direction === 'horizontal') {
+      if (isKeyCode(event.code, [keyList.LEFT])) {
+        return focusIn(barRef.current, Focus.Previous | Focus.WrapAround)
+      }
+
+      if (isKeyCode(event.code, [keyList.RIGHT])) {
+        focusIn(barRef.current, Focus.Next | Focus.WrapAround)
+      }
     }
 
-    if (isKeyCode(event.code, [keyList.RIGHT])) {
-      focusIn(barRef.current, Focus.Next | Focus.WrapAround)
+    if (direction === 'vertical') {
+      if (isKeyCode(event.code, [keyList.UP])) {
+        return focusIn(barRef.current, Focus.Previous | Focus.WrapAround)
+      }
+
+      if (isKeyCode(event.code, [keyList.DOWN])) {
+        focusIn(barRef.current, Focus.Next | Focus.WrapAround)
+      }
     }
   }
 
@@ -45,12 +61,16 @@ export const Bar = ({ children }) => {
     setBoundingActiveTab({
       width: tabs.current[activeTab].offsetWidth,
       left: tabs.current[activeTab].offsetLeft,
+      top: tabs.current[activeTab].offsetTop,
+      height: tabs.current[activeTab].offsetHeight,
     })
   }, [activeTab])
 
   const styles = {
     left: boundingActiveTab?.left,
     width: boundingActiveTab?.width,
+    top: boundingActiveTab?.top,
+    height: boundingActiveTab?.height,
   }
 
   return (
@@ -58,10 +78,8 @@ export const Bar = ({ children }) => {
       ref={barRef}
       className={classes}
     >
-      <div className="relative flex">
-        {boundingActiveTab && <Indicator styles={styles} />}
-        {children}
-      </div>
+      {boundingActiveTab && <Indicator styles={styles} />}
+      {children}
     </div>
   )
 }

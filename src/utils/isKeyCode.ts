@@ -4,12 +4,16 @@ export type KeyboardKeyValues =
     | 'ESC'
     | 'LEFT'
     | 'RIGHT'
+    | 'UP'
+    | 'DOWN'
     | string;
 
 export const keyList: Keys = {
   ESC: 'Escape',
   RIGHT: 'ArrowRight',
   LEFT: 'ArrowLeft',
+  UP: 'ArrowUp',
+  DOWN: 'ArrowDown',
 }
 /**
  * determines if a particular keyboard key has been pressed

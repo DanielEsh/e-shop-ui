@@ -37,12 +37,14 @@ export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
     activeTab,
     onChange,
     color = 'primary',
+    direction = 'horizontal',
   } = props
 
   const context = {
     activeTab,
     onChange,
     color: color,
+    direction: direction,
   }
 
   return (

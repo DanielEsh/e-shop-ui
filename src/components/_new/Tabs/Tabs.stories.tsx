@@ -9,3 +9,4 @@ export default {
 
 export { default as Default } from './__examples__/Default'
 export { default as Colors } from './__examples__/Colors'
+export { default as Direction } from './__examples__/Direction'
