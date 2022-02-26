@@ -1,4 +1,4 @@
-import { Input } from '@/components/_new/InputN'
+import { Input } from '@/components/Input'
 import { action } from '@storybook/addon-actions'
 
 const Default = () => {

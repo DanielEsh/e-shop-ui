@@ -1,4 +1,4 @@
-import { Input } from '@/components/_new/InputN'
+import { Input } from '@/components/Input'
 import React from 'react'
 
 const AutoFocus = () => {

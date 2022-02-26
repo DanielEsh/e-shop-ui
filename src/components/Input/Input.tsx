@@ -1,8 +1,8 @@
 import { forwardRef, ReactNode, useState, useEffect, useRef } from 'react'
 import cn from 'classnames'
+import { useMergedRef } from '@/hooks/useMergeRef'
 
 import './Input.css'
-import {useMergedRef} from "@/hooks/useMergeRef";
 
 export type InputProps = {
     className?: string
