@@ -5,10 +5,14 @@ import { keyList, isKeyCode } from '@/utils/isKeyCode'
 import { TabsContext } from '@/components/_new/Tabs/Tabs'
 import { Indicator } from '@/components/_new/Tabs/Indicator'
 
+import { useFocusTrap } from '@/hooks/useFocusTab'
+
 export const Bar = ({ children }) => {
   const [boundingActiveTab, setBoundingActiveTab] = useState(null)
   const barRef = useRef<HTMLDivElement>(null)
   const tabs = useRef<any>(null)
+
+  const focusTrapRef = useFocusTrap()
 
   const { activeTab, onChange, color } = useContext(TabsContext)
 
@@ -22,37 +26,37 @@ export const Bar = ({ children }) => {
     colorsList[color],
   )
 
-  let index = 0
+  // let index = 0
 
-  const getNextFocusedNodeIndex = (direction: number) => {
-    index += direction
-    if (index > (tabs.current.length - 1)) index = 0
-    if (index < 0) index = tabs.current.length - 1
+  // const getNextFocusedNodeIndex = (direction: number) => {
+  //   index += direction
+  //   if (index > (tabs.current.length - 1)) index = 0
+  //   if (index < 0) index = tabs.current.length - 1
 
-    return index
-  }
+  //   return index
+  // }
 
-  const onKeyDown = (event) => {
-    console.log(isKeyCode(event.code, [keyList.LEFT, keyList.RIGHT]))
-    let direction = 0
-    if (event.code === 'ArrowRight') {
-      direction += 1
-    }
+  // const onKeyDown = (event) => {
+  //   console.log(isKeyCode(event.code, [keyList.LEFT, keyList.RIGHT]))
+  //   let direction = 0
+  //   if (event.code === 'ArrowRight') {
+  //     direction += 1
+  //   }
 
-    if (event.code === 'ArrowLeft') {
-      direction += -1
-    }
+  //   if (event.code === 'ArrowLeft') {
+  //     direction += -1
+  //   }
 
-    const focusIndex = getNextFocusedNodeIndex(direction)
-    focusElement(tabs.current[focusIndex])
-  }
+  //   const focusIndex = getNextFocusedNodeIndex(direction)
+  //   focusElement(tabs.current[focusIndex])
+  // }
 
   useEffect(() => {
     tabs.current = barRef.current.querySelectorAll('[role="tab"]')
-    window.addEventListener('keydown', onKeyDown)
+    // window.addEventListener('keydown', onKeyDown)
 
     return () => {
-      window.removeEventListener('keydown', onKeyDown)
+      // window.removeEventListener('keydown', onKeyDown)
     }
   }, [])
 
@@ -73,7 +77,10 @@ export const Bar = ({ children }) => {
       ref={barRef}
       className={classes}
     >
-      <div className="relative flex">
+      <div
+        className="relative flex"
+        ref={focusTrapRef}
+      >
         {boundingActiveTab && <Indicator styles={styles} />}
         {children}
       </div>

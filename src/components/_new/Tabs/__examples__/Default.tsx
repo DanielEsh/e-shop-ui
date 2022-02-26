@@ -22,6 +22,11 @@ const Default = () => {
             Popular
           </Tabs.Tab>
           <Tabs.Tab
+            value="2"
+          >
+            Test
+          </Tabs.Tab>
+          <Tabs.Tab
             value="3"
           >
             Trading
@@ -35,6 +40,9 @@ const Default = () => {
             Popular panel
           </Tabs.Panel>
           <Tabs.Panel value="2">
+            Test panel
+          </Tabs.Panel>
+          <Tabs.Panel value="3">
             Trading panel
           </Tabs.Panel>
         </div>
