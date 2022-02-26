@@ -238,7 +238,7 @@ module.exports = {
     'react/void-dom-elements-no-children': 2,
 
     'react-hooks/rules-of-hooks': 2,
-    'react-hooks/exhaustive-deps': 1,
+    'react-hooks/exhaustive-deps': 0,
     'newline-before-return': 1,
   },
 }

@@ -1,11 +1,8 @@
 import {
   ReactNode,
-  ForwardRefExoticComponent,
-  RefAttributes,
   forwardRef,
-  createContext,
 } from 'react'
-
+import { TabsContext } from '@/components/Tabs/Context'
 import { Bar } from '@/components/Tabs/Bar'
 import { Tab } from '@/components/Tabs/Tab'
 import { Panel } from '@/components/Tabs/Panel'
@@ -15,23 +12,10 @@ export type TabsProps = {
     direction?: 'vertical' | 'horizontal'
     activeTab: number | string
     color?: 'primary' | 'secondary' | 'gray'
-    onChange?: (index: number) => void
+    onChange?: (index: number | string) => void
 }
-
-interface ITabs
-    extends ForwardRefExoticComponent<
-        TabsProps & RefAttributes<HTMLDivElement>
-        > {
-  Bar: typeof Bar;
-  Tab: typeof Tab;
-  Panel: typeof Panel;
-}
-
-export const TabsContext = createContext(undefined)
 
 export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
-  // const [tabs, setTabs] = useState(null)
-
   const {
     children,
     activeTab,
@@ -45,23 +29,24 @@ export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
     onChange,
     color: color,
     direction: direction,
+    activeTabIndicatorProperties: null,
   }
 
   return (
-    <TabsContext.Provider value={context}>
+    <TabsContext.Provider
+      value={context}
+    >
       <div ref={ref}>
         {children}
       </div>
     </TabsContext.Provider>
-
   )
 })
 
 TabsRoot.displayName = 'Tabs'
 
-export const Tabs = {
-  ...TabsRoot,
+export const Tabs = Object.assign(TabsRoot, {
   Bar: Bar,
   Tab: Tab,
   Panel: Panel,
-} as ITabs
+})

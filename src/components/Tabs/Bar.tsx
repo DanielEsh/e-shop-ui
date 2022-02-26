@@ -1,11 +1,15 @@
-import { useState, useContext, useEffect, useRef } from 'react'
+import { useState, useContext, useEffect, useRef, ReactNode, FC } from 'react'
 import cn from 'classnames'
 import { focusIn, Focus } from '@/utils/focus-management'
 import { keyList, isKeyCode } from '@/utils/isKeyCode'
-import { TabsContext } from '@/components/Tabs/Tabs'
+import { TabsContext } from '@/components/Tabs/Context'
 import { Indicator } from '@/components/Tabs/Indicator'
 
-export const Bar = ({ children }) => {
+export type BarProps = {
+  children: ReactNode
+}
+
+export const Bar: FC<BarProps> = ({ children }) => {
   const [boundingActiveTab, setBoundingActiveTab] = useState(null)
   const barRef = useRef<HTMLDivElement>(null)
   const tabs = useRef<any>(null)

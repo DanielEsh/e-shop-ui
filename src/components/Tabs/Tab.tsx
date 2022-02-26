@@ -1,7 +1,7 @@
-import { ReactNode, FC, useContext, useState, useEffect } from 'react'
+import { ReactNode, FC, useContext, useCallback, useRef, useEffect } from 'react'
 import cn from 'classnames'
 
-import { TabsContext } from '@/components/Tabs/Tabs'
+import { TabsContext } from '@/components/Tabs/Context'
 
 type TabProps = {
   value: string | number
@@ -16,8 +16,13 @@ export const Tab: FC<TabProps> = (props) => {
     disabled,
   } = props
 
-  const [isActive, setIsActive] = useState<boolean>(false)
-  const { activeTab, onChange, color } = useContext(TabsContext)
+  const tabRef = useRef<HTMLButtonElement>(null)
+
+  const { activeTab, activeTabIndicatorProperties, onChange, color } = useContext(TabsContext)
+
+  const isActive = useCallback(() => {
+    return value === activeTab
+  }, [activeTab])
 
   const colorsList = {
     primary: 'text-white hover:text-primary-500',
@@ -32,28 +37,30 @@ export const Tab: FC<TabProps> = (props) => {
   const classes = cn(
     'flex items-center justify-center w-full py-2.5 transition duration-150 ease-out z-10',
     {
-      [colorsActiveList[color]]: isActive,
+      [colorsActiveList[color]]: isActive(),
       [colorsList[color]]: !disabled,
       ['opacity-60 cursor-not-allowed hover:bg-transparent']: disabled,
     },
   )
 
   const onClick = () => {
-    if (disabled) return
-    onChange(value)
-    console.log(color)
-  }
-
-  const changeActiveTab = () => {
-    return value === activeTab
+    if (!disabled) onChange(value)
   }
 
   useEffect(() => {
-    setIsActive(changeActiveTab)
+    if (isActive()) {
+      console.log('SET', {
+        width: tabRef.current.offsetWidth,
+        left: tabRef.current.offsetLeft,
+        top: tabRef.current.offsetTop,
+        height: tabRef.current.offsetHeight,
+      })
+    }
   }, [activeTab])
 
   return (
     <button
+      ref={tabRef}
       role="tab"
       tabIndex={isActive ? 0 : -1}
       className={classes}
