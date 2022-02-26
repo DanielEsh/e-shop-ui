@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect, useRef } from 'react'
 import cn from 'classnames'
 import { focusElement } from '@/utils/focus-management'
+import { keyList, isKeyCode } from '@/utils/isKeyCode'
 import { TabsContext } from '@/components/_new/Tabs/Tabs'
 import { Indicator } from '@/components/_new/Tabs/Indicator'
 
@@ -32,23 +33,22 @@ export const Bar = ({ children }) => {
   }
 
   const onKeyDown = (event) => {
+    console.log(isKeyCode(event.code, [keyList.LEFT, keyList.RIGHT]))
     let direction = 0
     if (event.code === 'ArrowRight') {
-      direction += -1
-    }
-
-    if (event.code === 'ArrowLeft') {
       direction += 1
     }
 
-    const focusIndex = getNextFocusedNodeIndex(direction)
+    if (event.code === 'ArrowLeft') {
+      direction += -1
+    }
 
+    const focusIndex = getNextFocusedNodeIndex(direction)
     focusElement(tabs.current[focusIndex])
   }
 
   useEffect(() => {
     tabs.current = barRef.current.querySelectorAll('[role="tab"]')
-    focusElement(tabs.current[activeTab])
     window.addEventListener('keydown', onKeyDown)
 
     return () => {
