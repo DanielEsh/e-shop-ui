@@ -1,4 +1,4 @@
-import { Checkbox } from '@/components/_new/Checkbox'
+import { Checkbox } from '@/components/Checkbox'
 
 const States = () => {
   return (

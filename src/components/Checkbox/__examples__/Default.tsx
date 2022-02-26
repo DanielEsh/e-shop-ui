@@ -1,4 +1,4 @@
-import { Checkbox } from '@/components/_new/Checkbox'
+import { Checkbox } from '@/components/Checkbox'
 import { action } from '@storybook/addon-actions'
 
 const Default = () => {

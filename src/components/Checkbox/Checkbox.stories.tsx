@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react'
 
-import { Checkbox } from '@/components/_new/Checkbox'
+import { Checkbox } from './index'
 
 export default {
   title: 'Forms/Checkbox',
