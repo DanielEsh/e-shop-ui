@@ -43,6 +43,7 @@ module.exports = {
         '500': '#1890ff',
         '400': '#40a9ff',
       },
+      blue: 'rgba(30, 58, 138, .2)',
       white: '#fff',
       black: '#000',
       transparent: 'transparent',
@@ -68,6 +69,9 @@ module.exports = {
       ripple: 'ripple .8s ease-in-out',
     },
     extend: {
+      spacing: {
+        '16px': '16px',
+      },
       translate: {
         '2.5': '-1.25rem',
       },
