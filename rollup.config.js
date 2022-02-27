@@ -1,41 +1,43 @@
-import typescript from "rollup-plugin-typescript2";
-import { babel } from '@rollup/plugin-babel';
+import typescript from 'rollup-plugin-typescript2'
+import css from 'rollup-plugin-import-css'
+import { babel } from '@rollup/plugin-babel'
 
-import pkg from "./package.json";
+import pkg from './package.json'
 
-const extensions = [".js", ".jsx", ".ts", ".tsx"];
-const input = "src/index.ts";
+// const extensions = ['.js', '.jsx', '.ts', '.tsx']
+const input = 'src/index.ts'
 const external = [
-    ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {}),
-];
+  ...Object.keys(pkg.dependencies || {}),
+  ...Object.keys(pkg.peerDependencies || {}),
+]
 
 const plugins = [
-    typescript({
-        typescript: require("typescript"),
-    }),
-    babel({ babelHelpers: 'bundled' }),
-];
+  typescript({
+    typescript: require('typescript'),
+  }),
+  css(),
+  babel({ babelHelpers: 'bundled' }),
+]
 
 export default [
-    {
-        input,
-        output: {
-            file: pkg.module,
-            format: "esm",
-            sourcemap: true,
-        },
-        plugins,
-        external,
+  {
+    input,
+    output: {
+      file: pkg.module,
+      format: 'esm',
+      sourcemap: true,
     },
-    {
-        input,
-        output: {
-            file: pkg.main,
-            format: "cjs",
-            sourcemap: true,
-        },
-        plugins,
-        external,
+    plugins,
+    external,
+  },
+  {
+    input,
+    output: {
+      file: pkg.main,
+      format: 'cjs',
+      sourcemap: true,
     },
-];
+    plugins,
+    external,
+  },
+]
