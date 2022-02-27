@@ -1,18 +1,10 @@
-import { useState } from 'react'
 import { Tabs } from '@/components/Tabs'
 
 const Default = () => {
-  const [activeTab, setActiveTab] = useState('1')
-
-  const onChange = (index) => {
-    setActiveTab(index)
-  }
-
   return (
     <div className="max-w-md">
       <Tabs
-        activeTab={activeTab}
-        onChange={onChange}
+        defaultActiveTab={'1'}
       >
         <Tabs.Bar>
           <Tabs.Tab value="0">

@@ -12,7 +12,7 @@ const Default = () => {
     <>
       <div className="max-w-md">
         <Tabs
-          activeTab={activeTab}
+          defaultActiveTab={activeTab}
           onChange={onChange}
           color="primary"
         >
@@ -46,7 +46,7 @@ const Default = () => {
 
       <div className="max-w-md mt-5">
         <Tabs
-          activeTab={activeTab}
+          defaultActiveTab={activeTab}
           onChange={onChange}
           color="secondary"
         >

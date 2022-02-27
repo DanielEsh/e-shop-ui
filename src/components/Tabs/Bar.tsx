@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useRef, ReactNode, FC } from 'react'
+import { useContext, useEffect, useRef, ReactNode, FC } from 'react'
 import cn from 'classnames'
 import { focusIn, Focus } from '@/utils/focus-management'
 import { keyList, isKeyCode } from '@/utils/isKeyCode'
@@ -10,11 +10,9 @@ export type BarProps = {
 }
 
 export const Bar: FC<BarProps> = ({ children }) => {
-  const [boundingActiveTab, setBoundingActiveTab] = useState(null)
   const barRef = useRef<HTMLDivElement>(null)
-  const tabs = useRef<any>(null)
 
-  const { activeTab, color, direction } = useContext(TabsContext)
+  const { color, direction, activeTabIndicatorProperties } = useContext(TabsContext)
 
   const colorsList = {
     primary: 'bg-dark-500 ',
@@ -53,7 +51,6 @@ export const Bar: FC<BarProps> = ({ children }) => {
   }
 
   useEffect(() => {
-    tabs.current = barRef.current.querySelectorAll('[role="tab"]')
     window.addEventListener('keydown', onKeyDown)
 
     return () => {
@@ -61,20 +58,11 @@ export const Bar: FC<BarProps> = ({ children }) => {
     }
   }, [])
 
-  useEffect(() => {
-    setBoundingActiveTab({
-      width: tabs.current[activeTab].offsetWidth,
-      left: tabs.current[activeTab].offsetLeft,
-      top: tabs.current[activeTab].offsetTop,
-      height: tabs.current[activeTab].offsetHeight,
-    })
-  }, [activeTab])
-
   const styles = {
-    left: boundingActiveTab?.left,
-    width: boundingActiveTab?.width,
-    top: boundingActiveTab?.top,
-    height: boundingActiveTab?.height,
+    left: activeTabIndicatorProperties?.left,
+    width: activeTabIndicatorProperties?.width,
+    top: activeTabIndicatorProperties?.top,
+    height: activeTabIndicatorProperties?.height,
   }
 
   return (
@@ -82,7 +70,7 @@ export const Bar: FC<BarProps> = ({ children }) => {
       ref={barRef}
       className={classes}
     >
-      {boundingActiveTab && <Indicator styles={styles} />}
+      {activeTabIndicatorProperties && <Indicator styles={styles} />}
       {children}
     </div>
   )

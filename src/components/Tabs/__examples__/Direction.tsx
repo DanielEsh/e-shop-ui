@@ -12,7 +12,7 @@ const Direction = () => {
     <>
       <div className="max-w-md">
         <Tabs
-          activeTab={activeTab}
+          defaultActiveTab={activeTab}
           onChange={onChange}
           direction="horizontal"
         >
@@ -52,7 +52,7 @@ const Direction = () => {
       </div>
 
       <Tabs
-        activeTab={activeTab}
+        defaultActiveTab={activeTab}
         onChange={onChange}
         direction="vertical"
       >

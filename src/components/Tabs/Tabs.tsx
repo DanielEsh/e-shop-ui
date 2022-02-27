@@ -1,6 +1,7 @@
 import {
   ReactNode,
   forwardRef,
+  useState,
 } from 'react'
 import { TabsContext } from '@/components/Tabs/Context'
 import { Bar } from '@/components/Tabs/Bar'
@@ -10,26 +11,47 @@ import { Panel } from '@/components/Tabs/Panel'
 export type TabsProps = {
     children: ReactNode
     direction?: 'vertical' | 'horizontal'
-    activeTab: number | string
+    defaultActiveTab: number | string
     color?: 'primary' | 'secondary' | 'gray'
     onChange?: (index: number | string) => void
+}
+
+export type ActiveTabIndicatorPropertiesTabType = {
+  top: number
+  left: number
+  width: number
+  height: number
 }
 
 export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
   const {
     children,
-    activeTab,
+    defaultActiveTab,
     onChange,
     color = 'primary',
     direction = 'horizontal',
   } = props
 
+  const [activeTabIndicatorProperties, setActiveTabIndicatorProperties] = useState<ActiveTabIndicatorPropertiesTabType | null>(null)
+  const [activeTabValue, setActiveTabValue] = useState<string | number>(defaultActiveTab)
+
+  const onChangeIndicator = (val: ActiveTabIndicatorPropertiesTabType) => {
+    console.log('onChangeIndicator', val)
+    setActiveTabIndicatorProperties(val)
+  }
+
+  const onChangeActivaTab = (val: string | number) => {
+    setActiveTabValue(val)
+  }
+
   const context = {
-    activeTab,
+    activeTab: activeTabValue,
     onChange,
     color: color,
     direction: direction,
-    activeTabIndicatorProperties: null,
+    activeTabIndicatorProperties: activeTabIndicatorProperties,
+    onChangeIndicator,
+    onChangeActivaTab,
   }
 
   return (

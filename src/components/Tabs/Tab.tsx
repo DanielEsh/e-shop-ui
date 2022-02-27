@@ -1,6 +1,6 @@
 import { ReactNode, FC, useContext, useCallback, useRef, useEffect } from 'react'
 import cn from 'classnames'
-
+import { ActiveTabIndicatorPropertiesTabType } from '@/components/Tabs/Tabs'
 import { TabsContext } from '@/components/Tabs/Context'
 
 type TabProps = {
@@ -18,7 +18,7 @@ export const Tab: FC<TabProps> = (props) => {
 
   const tabRef = useRef<HTMLButtonElement>(null)
 
-  const { activeTab, activeTabIndicatorProperties, onChange, color } = useContext(TabsContext)
+  const { activeTab, onChangeIndicator, onChangeActivaTab, color } = useContext(TabsContext)
 
   const isActive = useCallback(() => {
     return value === activeTab
@@ -44,17 +44,19 @@ export const Tab: FC<TabProps> = (props) => {
   )
 
   const onClick = () => {
-    if (!disabled) onChange(value)
+    if (!disabled) onChangeActivaTab(value)
   }
 
   useEffect(() => {
     if (isActive()) {
-      console.log('SET', {
-        width: tabRef.current.offsetWidth,
-        left: tabRef.current.offsetLeft,
+      const value: ActiveTabIndicatorPropertiesTabType = {
         top: tabRef.current.offsetTop,
+        left: tabRef.current.offsetLeft,
+        width: tabRef.current.offsetWidth,
         height: tabRef.current.offsetHeight,
-      })
+      }
+
+      onChangeIndicator(value)
     }
   }, [activeTab])
 
