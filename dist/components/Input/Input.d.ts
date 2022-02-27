@@ -1,0 +1,22 @@
+import { ReactNode } from 'react';
+import './Input.css';
+export declare type InputProps = {
+    className?: string;
+    color?: 'primary' | 'secondary' | 'gray' | 'success' | 'error';
+    value?: string | number;
+    label?: string;
+    placeholder?: string;
+    disabled?: boolean;
+    readOnly?: boolean;
+    errorField?: string | number;
+    onClick?: () => void;
+    onChange?: (event: any) => void;
+    onFocus?: () => void;
+    onBlur?: () => void;
+    autoFocus?: boolean;
+    name?: string;
+    id?: string;
+    type?: string;
+    icon?: ReactNode;
+};
+export declare const Input: import("react").ForwardRefExoticComponent<InputProps & import("react").RefAttributes<HTMLInputElement>>;
