@@ -41,6 +41,7 @@ export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
 
   const onChangeActivaTab = (val: string | number) => {
     setActiveTabValue(val)
+    onChange(val)
   }
 
   const context = {

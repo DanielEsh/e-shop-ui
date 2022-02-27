@@ -1,10 +1,12 @@
 import { Tabs } from '@/components/Tabs'
+import { action } from '@storybook/addon-actions'
 
 const Default = () => {
   return (
     <div className="max-w-md">
       <Tabs
         defaultActiveTab={'1'}
+        onChange={action('onChange')}
       >
         <Tabs.Bar>
           <Tabs.Tab value="0">
