@@ -15,7 +15,7 @@ export const Bar: FC<BarProps> = ({ children }) => {
   const { color, direction, activeTabIndicatorProperties } = useContext(TabsContext)
 
   const colorsList = {
-    primary: 'bg-dark-500 ',
+    primary: 'bg-dark-500',
     secondary: 'bg-dark-500  dark:bg-light-500',
   }
 

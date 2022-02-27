@@ -34,12 +34,18 @@ export const Tab: FC<TabProps> = (props) => {
     secondary: 'text-black dark:text-white',
   }
 
+  const colorsDisabled = {
+    primary: 'text-white hover:text-white',
+    secondary: 'text-white hover:text-white dark:text-black dark:hover:text-black',
+  }
+
   const classes = cn(
     'flex items-center justify-center w-full py-2.5 transition duration-150 ease-out z-10',
     {
       [colorsActiveList[color]]: isActive(),
       [colorsList[color]]: !disabled,
       ['opacity-60 cursor-not-allowed hover:bg-transparent']: disabled,
+      [colorsDisabled[color]]: disabled,
     },
   )
 
