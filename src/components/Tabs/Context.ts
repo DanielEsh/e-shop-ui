@@ -1,4 +1,5 @@
 import { createContext } from 'react'
+import { ActiveTabIndicatorPropertiesTabType } from '@/components/Tabs/Tabs'
 
 export type TabsContextType = {
     activeTab: number | string
@@ -6,7 +7,7 @@ export type TabsContextType = {
     onChange: (index: number | string) => void
     direction: 'vertical' | 'horizontal'
     color: 'primary' | 'secondary' | 'gray'
-    onChangeIndicator: (val) => void
+    onChangeIndicator: (val: ActiveTabIndicatorPropertiesTabType) => void
     onChangeActivaTab: (val: string | number) => void
 }
 

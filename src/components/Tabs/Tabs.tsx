@@ -36,7 +36,6 @@ export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
   const [activeTabValue, setActiveTabValue] = useState<string | number>(defaultActiveTab)
 
   const onChangeIndicator = (val: ActiveTabIndicatorPropertiesTabType) => {
-    console.log('onChangeIndicator', val)
     setActiveTabIndicatorProperties(val)
   }
 
